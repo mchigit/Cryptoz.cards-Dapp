@@ -1,6 +1,7 @@
 <template>
+  <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <img class="logo-nav" src="assets/cryptokeeper_logo.svg" width="4%" />
+    <img class="logo-nav" src="./assets/cryptokeeper_logo.svg" width="4%" />
         <a class="navbar-brand" href="index.php">Cryptoz</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -21,8 +22,9 @@
           <span class="nav-item<?= (basename($_SERVER['PHP_SELF']) == 'help.php' ? ' active' : '') ?>">
             <a class="nav-link" href="help.php">Help</a>
           </span>
-          </div>
+        </div>
       </nav>
+      </div>
 </template>
 
 <script>
@@ -38,6 +40,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.logo-nav{
+  margin-right: 2%;
+}
+
 h1, h2 {
   font-weight: normal;
 }

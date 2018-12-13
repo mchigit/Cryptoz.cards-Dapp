@@ -1,6 +1,13 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div>
+        
+        <main role="main" class="container">
+        <div class="jumbotron">
+          <h1>Cryptoz.cards</h1>
+          <p class="lead">Cryptoz is an Ethereum blockchain based collectibles trade game.</p>
+          <p>The goal of the game is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 item is a limited edition and has a unique ID. Players can buy, sell, and exchange both their items and CZXP tokens with our shop or any ERC standards compliant wallet application.</p>
+        </div>
+      </main>
   </div>
 </template>
 
@@ -17,18 +24,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
