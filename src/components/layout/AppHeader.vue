@@ -2,28 +2,30 @@
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <img class="logo-nav" src="./assets/cryptokeeper_logo.svg" width="4%" />
-        <a class="navbar-brand" href="index.php">Cryptoz</a>
+        <router-link class="navbar-brand" to="/">Cryptoz</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item<?= (basename($_SERVER['PHP_SELF']) == 'shop.php' ? ' active' : '') ?>">
-              <a class="nav-link" href="shop.php">Shop</a>
+            <li>
+              <router-link to="/shop">Shop</router-link>
             </li>
-            <li class="nav-item<?= (basename($_SERVER['PHP_SELF']) == 'login.php' ? ' active' : '') ?>">
-              <a class="nav-link" href="login.php">My Crypt</a>
+            <li>
+              <router-link to="/crypt">My Crypt</router-link>
             </li>
-            <li class="nav-item<?= (basename($_SERVER['PHP_SELF']) == 'market.php' ? ' active' : '') ?>">
-              <a class="nav-link" href="market.php">Market</a>
+            <li>
+              <router-link to="/market">Market</router-link>
             </li>
           </ul>
           <span class="wallet-nav">ETH Wallet : <a href="https://etherscan.io/address/0x7cacD241269B40213a9f12dE1478AcBe5bc2e428" target="_blank">0x7cacD241269B40213a9f12dE1478AcBe5bc2e428</a></span>
-          <span class="nav-item<?= (basename($_SERVER['PHP_SELF']) == 'help.php' ? ' active' : '') ?>">
-            <a class="nav-link" href="help.php">Help</a>
+          <span>
+            <router-link to="/help">Help</router-link>
           </span>
         </div>
       </nav>
+      <p></p>
+      
       </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

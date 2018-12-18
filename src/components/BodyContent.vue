@@ -1,6 +1,5 @@
 <template>
   <div>
-        
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>Cryptoz.cards</h1>

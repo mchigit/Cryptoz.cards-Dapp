@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import BodyContent from '@/components/BodyContent.vue'
+import ShopContent from '@/components/ShopContent.vue'
+import CryptContent from '@/components/CryptContent.vue'
+import MarketContent from '@/components/MarketContent.vue'
+import HelpContent from '@/components/HelpContent.vue'
 
 Vue.use(Router)
 
@@ -10,6 +14,26 @@ export default new Router({
       path: '/',
       name: 'BodyContent',
       component: BodyContent
+    },
+    {
+      path: '/shop',
+      name: 'ShopContent',
+      component: ShopContent
+    },
+    {
+      path: '/crypt',
+      name: 'CryptContent',
+      component: CryptContent
+    },
+    {
+      path: '/market',
+      name: 'MarketContent',
+      component: MarketContent
+    },
+    {
+      path: '/help',
+      name: 'HelpContent',
+      component: HelpContent
     }
   ]
 })
