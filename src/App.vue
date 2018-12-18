@@ -22,5 +22,7 @@ export default {
 </script>
 
 <style>
-
+  .jumbotron{
+    margin-top:6em;
+  }
 </style>

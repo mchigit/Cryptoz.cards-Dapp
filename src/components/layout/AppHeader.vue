@@ -43,22 +43,25 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.logo-nav{
-  margin-right: 2%;
-}
+  .logo-nav{
+    margin-right: 1.6em;
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  .wallet-nav{
+    color: #fff;
+    margin-right: 150px;
+  }
+  li{
+    margin-right: 1.2em;
+  }
+  a{
+    padding:5px;
+  }
+  
+  a:hover{
+    color:#FFF;
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding:4px;
+  }
 </style>
