@@ -4,7 +4,7 @@
         <div class="jumbotron">
           <h1>Cryptoz.cards</h1>
           <p class="lead">Cryptoz is an Ethereum blockchain based collectibles trade game.</p>
-          <p>The goal of the game is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 item is a limited edition and has a unique ID. Players can buy, sell, and exchange both their items and CZXP tokens with our shop or any ERC standards compliant wallet application.</p>
+          <p>The goal of the game is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 item is a limited edition and has a unique ID. Players can buy, sell, and exchange both their Cryptoz items and CZXP tokens through any ERC standards compliant wallet application, markets and exchanges.</p>
         </div>
       </main>
   </div>

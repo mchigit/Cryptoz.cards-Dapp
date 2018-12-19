@@ -4,7 +4,18 @@
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>My Crypt</h1>
+          <p>This is where all your Cryptoz cards can be accessed. From here you can sort your cards, search your cards and sacrifice. Sacrificing is permanent. Not only in your wallet, but across the entire Cryptoz Universe. That unique item is gone forever.</p>
           
+          <p>Sort | Search</p>
+          
+          <!-- Loads cards here -->
+          <div v-if="ownsCards == 0">
+            <h2>You do not own any cards yet</h2>
+            <router-link to="/help">How do I get Cryptoz cards ?</router-link>
+          </div>
+          <div v-else>
+            Yay you own cards !
+          </div>
         </div>
       </main>
   </div>
@@ -15,7 +26,8 @@ export default {
   name: 'CryptContent',
   data () {
     return {
-      msg: 'Here we go, here we go'
+      msg: 'Here we go, here we go',
+      ownsCards : 1
     }
   }
 }
