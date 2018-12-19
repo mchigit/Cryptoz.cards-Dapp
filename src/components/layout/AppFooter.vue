@@ -14,7 +14,7 @@
 
           <!-- Content -->
           <img class="img-fluid dev-logo" src="./assets/cardinal.png" />
-          <p>Here you can use rows and columns here to organize your footer content.</p>
+          <p>Detecting blockchain network...loading</p>
 
         </div>
         <!-- Grid column -->
@@ -38,7 +38,7 @@
                 <a href="#!">Telegram Announcements</a>
               </li>
               <li>
-                <a href="#!">Link 4</a>
+                <a href="#!">Instagram</a>
               </li>
             </ul>
 

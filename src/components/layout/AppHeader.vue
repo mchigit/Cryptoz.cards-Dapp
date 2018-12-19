@@ -18,7 +18,8 @@
               <router-link to="/market">Market</router-link>
             </li>
           </ul>
-          <span class="wallet-nav">ETH Wallet : <a href="https://etherscan.io/address/0x7cacD241269B40213a9f12dE1478AcBe5bc2e428" target="_blank">0x7cacD241269B40213a9f12dE1478AcBe5bc2e428</a></span>
+          <button class="btn btn-danger" v-if="showLogin === 1" v-on:click="doLogin">Log in to MetaMask</button>
+          <span class="wallet-nav" v-else>ETH Wallet : <a href="https://etherscan.io/address/0x7cacD241269B40213a9f12dE1478AcBe5bc2e428" target="_blank">0x7cacD241269B40213a9f12dE1478AcBe5bc2e428</a></span>
           <span>
             <router-link to="/help">Help</router-link>
           </span>
@@ -34,7 +35,14 @@ export default {
   name: 'AppHeader',
   data () {
     return {
-      msg: 'This is the header'
+      msg: 'This is the header',
+      showLogin : 1
+    }
+  },
+  methods : {
+    doLogin : function () {
+      console.log('Call eth provider.enable()');
+      this.showLogin = 0
     }
   }
 }
