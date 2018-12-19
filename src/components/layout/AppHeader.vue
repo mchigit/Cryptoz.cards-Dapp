@@ -20,7 +20,7 @@
           </ul>
           <transition name="fade" mode="out-in">
           <button class="btn btn-danger" v-if="showLogin === 1" v-on:click="doLogin">Log in to MetaMask</button>
-            <span class="wallet-nav" v-else>ETH Wallet : <a href="https://etherscan.io/address/0x7cacD241269B40213a9f12dE1478AcBe5bc2e428" target="_blank">0x7cacD241269B40213a9f12dE1478AcBe5bc2e428</a></span>
+            <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}</a></span>
           </transition>
           <span>
             <router-link to="/help">Help</router-link>
@@ -38,13 +38,15 @@ export default {
   data () {
     return {
       msg: 'This is the header',
-      showLogin : 1
+      showLogin : 1,
+      wallet : ''
     }
   },
   methods : {
     doLogin : function () {
       console.log('Call eth provider.enable()');
-      this.showLogin = 0 //Hide button, show account
+      this.showLogin = 0; //Hide button, show account
+      this.wallet = '0x7cacD241269B40213a9f12dE1478AcBe5bc2e428';
     }
   }
 }
