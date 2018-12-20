@@ -15,7 +15,7 @@
               <router-link to="/crypt">My Crypt</router-link>
             </li>
             <li>
-              <router-link to="/market">Market</router-link>
+              <router-link to="/market">Markets</router-link>
             </li>
           </ul>
           <transition name="fade" mode="out-in">
