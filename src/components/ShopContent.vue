@@ -5,7 +5,7 @@
         <div class="jumbotron">
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost</p>
-          <p>Sort | Search</p>
+          <p>Sort | Search | Claim Free Cards</p>
           Buy Booster Card<br>
           Buy And Open Boost Card<br>
           

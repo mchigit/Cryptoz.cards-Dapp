@@ -12,8 +12,8 @@
             <router-link to="/help">How do I get Cryptoz cards ?</router-link>
           </div>
           <div v-else>
-            <p>Sort | Search</p>
-            Yay you own cards ! show them here
+            <p>Sort | Search | Transfer</p>
+            <OwnedCardContent></OwnedCardContent>
           </div>
         </div>
       </main>
@@ -21,8 +21,13 @@
 </template>
 
 <script>
+import OwnedCardContent from '@/components/OwnedCardContent.vue'
+
 export default {
   name: 'CryptContent',
+  components : {
+    OwnedCardContent
+  },
   data () {
     return {
       msg: 'Here we go, here we go',
@@ -30,6 +35,17 @@ export default {
     }
   }
 }
+
+/*
+  Ok we need to track the state of the Crypt
+  LoggedIn 1 or 0
+  ownsCards 1 or 0
+  Sorted By
+    Name
+    Date Type loaded
+    Limited Edition
+*/
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
