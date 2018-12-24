@@ -1,20 +1,21 @@
 <template>
   <div>
-        
-      This is my card
-      {{msg}}
+      This is card {{id}}
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'OwnedCardContent',
+  props: ['id'],
   data () {
     return {
-      msg: 'Here we go, here we go'
+    
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

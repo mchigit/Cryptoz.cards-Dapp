@@ -1,6 +1,5 @@
 <template>
   <div>
-        
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>My Crypt</h1>
@@ -13,7 +12,10 @@
           </div>
           <div v-else>
             <p>Sort | Search | Transfer</p>
-            <OwnedCardContent></OwnedCardContent>
+            <OwnedCardContent
+              v-for="card in allCards"
+              v-bind:id="card.id"
+            ></OwnedCardContent>
           </div>
         </div>
       </main>
@@ -31,7 +33,12 @@ export default {
   data () {
     return {
       msg: 'Here we go, here we go',
-      ownsCards : 1
+      ownsCards : 1,
+      allCards: [
+        {id:0},
+        {id:1},
+        {id:2}
+      ]
     }
   }
 }
