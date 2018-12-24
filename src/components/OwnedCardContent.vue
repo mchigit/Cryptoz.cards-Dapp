@@ -5,12 +5,12 @@
 	        <div class="flipper">
 		        <div class="front">
 			      <!-- front content -->
-			        <div id="" class="card-bg card-bg-common">
-                <img class="card-img" src="<?=$obj->svg ?>" />
-                <span class="card-edition <?=$white_bg?>">#1{{edition_total}}</span>
+			        <div id="" class="card-bg card-bg-1">
+                <img class="card-img" src="assets/jim.svg" />
+                <span class="card-edition">#1{{edition_total}}</span>
                 <div class="card-item-name text-center">{{card_name}}<br>{{card_set}}</div>
                 <div class="card-czxp text-left">{{unlock_czxp}}</div>
-                <div class="card-level">{{level}}</div>
+                <div class="card-level">{{card_level}}</div>
               </div>
             </div>
 		        <div class="back">
@@ -35,7 +35,7 @@
 
 export default {
   name: 'OwnedCardContent',
-  props: ['id'],
+  props: ['id','edition_total','card_name','card_set','unlock_czxp','card_level','card_cost','buy_czxp','transfer_czxp','sacrifice_czxp'],
   data () {
     return {
     
