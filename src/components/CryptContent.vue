@@ -35,7 +35,7 @@ export default {
       msg: 'Here we go, here we go',
       ownsCards : 1,
       allCards: [
-        {id:0},
+        {id:0, card_name: 'test1'},
         {id:1},
         {id:2}
       ]

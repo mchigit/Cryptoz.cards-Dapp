@@ -1,12 +1,12 @@
 <template>
   <div>
-          <div class="col">
+      <div class="col">
         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
 	        <div class="flipper">
 		        <div class="front">
 			      <!-- front content -->
-			        <div id="" class="card-bg card-bg-1">
-                <img class="card-img" src="assets/jim.svg" />
+			        <div id="1" class="card-bg card-bg-1">
+                <img class="card-img" src="jim.svg" />
                 <span class="card-edition">#1{{edition_total}}</span>
                 <div class="card-item-name text-center">{{card_name}}<br>{{card_set}}</div>
                 <div class="card-czxp text-left">{{unlock_czxp}}</div>
@@ -42,6 +42,8 @@ export default {
     }
   }
 }
+
+
 
 </script>
 
@@ -148,6 +150,65 @@ export default {
   top:100px;
   background-color: rgba(200,200,200,0.7);
   padding:20px;
+}
+
+/**  animation   **/
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+/** Card **/
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 286px;
+	height: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
 }
 
 </style>
