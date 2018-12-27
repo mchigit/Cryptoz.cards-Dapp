@@ -21,11 +21,13 @@
                 :cost="card.cost"
                 :cset="card.cset"
                 :edition_total="card.edition_total"
+                :level="card.card_level"
                 :unlock_czxp="card.unlock_czxp"
-                :card_level="card.card_level"
                 :buy_czxp="card.buy_czxp"
                 :transfer_czxp="card.transfer_czxp"
                 :sacrifice_czxp="card.sacrifice_czxp"
+                :url="card.graphic"
+                :card_class="card.bg"
               ></OwnedCardContent>
             </div>
           </div>
@@ -47,9 +49,14 @@ export default {
       msg: 'Here we go, here we go',
       ownsCards : 1,
       allCards: [
-        {id:0, name: 'Jim Zombie', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300'},
-        {id:1},
-        {id:2}
+        {id:0, name: 'Jim Zombie',graphic: './assets/jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
+        {id:1, name: 'Dorothy',graphic: 'assets/dorothy.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-1'},
+        {id:2, name: 'Green Dragon',graphic: 'assets/dragon_green.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-2'},
+        {id:3, name: 'Jim Zombie',graphic: 'assets/jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-3'},
+        {id:4, name: 'Dorothy',graphic: 'assets/dorothy.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-4'},
+        {id:5, name: 'Green Dragon',graphic: 'assets/dragon_green.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-5'},
+        {id:6, name: 'Green Dragon',graphic: 'assets/dragon_green.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
+        {id:7, name: 'Green Dragon',graphic: 'assets/dragon_green.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
       ]
     }
   }

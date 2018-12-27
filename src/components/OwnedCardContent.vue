@@ -5,12 +5,12 @@
 	        <div class="flipper">
 		        <div class="front">
 			      <!-- front content -->
-			        <div id="1" class="card-bg card-bg-6">
-                <img class="card-img" src="./assets/jim.svg" />
+			        <div id="1" :class="card_class">
+                <img class="card-img" src="./assets/angry_tree_green.svg" />
                 <span class="card-edition">#1{{edition_total}}</span>
                 <div class="card-item-name text-center">{{name}}<br>{{cset}}</div>
                 <div class="card-czxp text-left">{{unlock_czxp}}</div>
-                <div class="card-level">{{card_level}}</div>
+                <div class="card-level">{{level}}</div>
               </div>
             </div>
 		        <div class="back">
@@ -35,10 +35,10 @@
 
 export default {
   name: 'OwnedCardContent',
-  props: ['id','name','edition_total','cset','unlock_czxp','card_level','cost','buy_czxp','transfer_czxp','sacrifice_czxp'],
+  props: ['id','name','url','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class'],
   data () {
     return {
-    
+
     }
   }
 }
@@ -178,7 +178,7 @@ export default {
 	}
 
 .flip-container, .front, .back {
-	width: 286px;
+	width: 229px;
 	height: 480px;
 }
 
