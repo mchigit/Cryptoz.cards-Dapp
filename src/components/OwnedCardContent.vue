@@ -6,7 +6,7 @@
 		        <div class="front">
 			      <!-- front content -->
 			        <div id="1" :class="card_class">
-                <img class="card-img" src="./assets/angry_tree_green.svg" />
+                <img class="card-img" :src="'static/assets/' + url" />
                 <span class="card-edition">#1{{edition_total}}</span>
                 <div class="card-item-name text-center">{{name}}<br>{{cset}}</div>
                 <div class="card-czxp text-left">{{unlock_czxp}}</div>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+require.context("./assets/");
 
 export default {
   name: 'OwnedCardContent',
@@ -42,9 +43,6 @@ export default {
     }
   }
 }
-
-
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -89,7 +87,7 @@ export default {
 }
 
 .card-bg-back{
-  background-image: url(assets/cryptokeeper_card_back.png);
+  background-image: url(assets/cryptoz_card_back.svg);
   padding:20px;
 }
 
@@ -178,7 +176,7 @@ export default {
 	}
 
 .flip-container, .front, .back {
-	width: 229px;
+	width: 232px;
 	height: 480px;
 }
 
