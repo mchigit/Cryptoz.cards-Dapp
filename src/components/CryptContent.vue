@@ -10,21 +10,24 @@
             <h2>You do not own any cards yet</h2>
             <router-link to="/help">How do I get Cryptoz cards ?</router-link>
           </div>
+          
           <div v-else>
             <p>Sort | Search | Transfer</p>
-            <OwnedCardContent
-              v-for="card in allCards"
-              :id="card.id"
-              :name="card.name"
-              :cost="card.cost"
-              :cset="card.cset"
-              :edition_total="card.edition_total"
-              :unlock_czxp="card.unlock_czxp"
-              :card_level="card.card_level"
-              :buy_czxp="card.buy_czxp"
-              :transfer_czxp="card.transfer_czxp"
-              :sacrifice_czxp="card.sacrifice_czxp"
-            ></OwnedCardContent>
+            <div class="row">
+              <OwnedCardContent
+                v-for="card in allCards"
+                :id="card.id"
+                :name="card.name"
+                :cost="card.cost"
+                :cset="card.cset"
+                :edition_total="card.edition_total"
+                :unlock_czxp="card.unlock_czxp"
+                :card_level="card.card_level"
+                :buy_czxp="card.buy_czxp"
+                :transfer_czxp="card.transfer_czxp"
+                :sacrifice_czxp="card.sacrifice_czxp"
+              ></OwnedCardContent>
+            </div>
           </div>
         </div>
       </main>

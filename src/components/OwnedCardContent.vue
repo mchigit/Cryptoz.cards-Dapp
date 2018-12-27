@@ -5,7 +5,7 @@
 	        <div class="flipper">
 		        <div class="front">
 			      <!-- front content -->
-			        <div id="1" class="card-bg card-bg-1">
+			        <div id="1" class="card-bg card-bg-6">
                 <img class="card-img" src="./assets/jim.svg" />
                 <span class="card-edition">#1{{edition_total}}</span>
                 <div class="card-item-name text-center">{{name}}<br>{{cset}}</div>
