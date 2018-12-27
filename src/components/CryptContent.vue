@@ -14,7 +14,16 @@
             <p>Sort | Search | Transfer</p>
             <OwnedCardContent
               v-for="card in allCards"
-              v-bind:id="card.id"
+              :id="card.id"
+              :name="card.name"
+              :cost="card.cost"
+              :cset="card.cset"
+              :edition_total="card.edition_total"
+              :unlock_czxp="card.unlock_czxp"
+              :card_level="card.card_level"
+              :buy_czxp="card.buy_czxp"
+              :transfer_czxp="card.transfer_czxp"
+              :sacrifice_czxp="card.sacrifice_czxp"
             ></OwnedCardContent>
           </div>
         </div>
@@ -35,7 +44,7 @@ export default {
       msg: 'Here we go, here we go',
       ownsCards : 1,
       allCards: [
-        {id:0, card_name: 'test1'},
+        {id:0, name: 'Jim Zombie', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300'},
         {id:1},
         {id:2}
       ]

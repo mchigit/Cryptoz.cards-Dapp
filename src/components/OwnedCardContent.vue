@@ -6,9 +6,9 @@
 		        <div class="front">
 			      <!-- front content -->
 			        <div id="1" class="card-bg card-bg-1">
-                <img class="card-img" src="jim.svg" />
+                <img class="card-img" src="./assets/jim.svg" />
                 <span class="card-edition">#1{{edition_total}}</span>
-                <div class="card-item-name text-center">{{card_name}}<br>{{card_set}}</div>
+                <div class="card-item-name text-center">{{name}}<br>{{cset}}</div>
                 <div class="card-czxp text-left">{{unlock_czxp}}</div>
                 <div class="card-level">{{card_level}}</div>
               </div>
@@ -17,7 +17,7 @@
               <!-- back content -->
               <div class="card-bg card-bg-back">
 			          <div class="back-container">
-			            <div class="card-txt-black"><span class="font-weight-bold">Cost:</span> {{card_cost}}</div>
+			            <div class="card-txt-black"><span class="font-weight-bold">Cost:</span> {{cost}}</div>
 			            <br>
 			            <div class="card-txt-black"><span class="font-weight-bold">Buy CZXP:</span><br>{{buy_czxp}}</div>
 			            <div class="card-txt-black"><span class="font-weight-bold">Transfer CZXP:</span><br>{{transfer_czxp}}</div>
@@ -35,7 +35,7 @@
 
 export default {
   name: 'OwnedCardContent',
-  props: ['id','edition_total','card_name','card_set','unlock_czxp','card_level','card_cost','buy_czxp','transfer_czxp','sacrifice_czxp'],
+  props: ['id','name','edition_total','cset','unlock_czxp','card_level','cost','buy_czxp','transfer_czxp','sacrifice_czxp'],
   data () {
     return {
     
@@ -114,7 +114,7 @@ export default {
   position: relative;
   width: 100%;
   top: 49px;
-  color: #fff;
+  color: #000;
   font-weight: bold;
 }
 
