@@ -19,7 +19,7 @@
             </li>
           </ul>
           <transition name="fade" mode="out-in">
-          <button class="btn btn-danger" v-if="showLogin === 1" v-on:click="doLogin">Log in to MetaMask</button>
+          <button class="btn btn-danger" v-if="showLogin === 1" v-on:click="$emit('doLogin')">Log in to MetaMask</button>
             <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}</a></span>
           </transition>
           <span>
@@ -43,11 +43,7 @@ export default {
     }
   },
   methods : {
-    doLogin : function () {
-      console.log('Call eth provider.enable()');
-      this.showLogin = 0; //Hide button, show account
-      this.wallet = '0x7cacD241269B40213a9f12dE1478AcBe5bc2e428';
-    }
+
   }
 }
 

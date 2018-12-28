@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader/>
+    <AppHeader v-on:doLogin="onDoLogin" />
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -14,6 +14,7 @@ import AppHeader from './components/layout/AppHeader'
 import AppFooter from './components/layout/AppFooter'
 
 // Import our contract artifacts and turn them into usable abstractions.
+import { default as Web3} from 'web3';
 var contract = require("truffle-contract");
 import cryptoz_artifacts from './contracts/Cryptoz.json'
 import cryptoz_token_artifacts from './contracts/CzxpToken.json'
@@ -36,8 +37,43 @@ export default {
       var CzxpToken = contract(cryptoz_token_artifacts);
       Cryptoz.setProvider(web3.currentProvider);
       CzxpToken.setProvider(web3.currentProvider);
+    },
+    onDoLogin : function () {
+      // Modern dapp browsers...
+      console.log("Get ready to ask permission..");
+
+      if (window.ethereum) {
+          window.web3 = new Web3(ethereum);
+        
+          //Check what network we are on, "main"
+          web3.eth.net.getNetworkType()
+          .then(console.log);
+    
+          try {
+              // Request account access if needed
+              ethereum.enable();
+              // Acccounts now exposed
+              console.log("App.start being called...");
+              App.start();
+          } catch (error) {
+              // User denied account access...
+              console.log("User denied our app, that is sad");
+              //console.log(error);
+          }
+      }
+      // Legacy dapp browsers...
+      else if (window.web3) {
+          window.web3 = new Web3(web3.currentProvider);
+          // Acccounts always exposed
+          //web3.eth.sendTransaction({/* ... */});
+          App.start();
+      }
+      // Non-dapp browsers...
+      else {
+          console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+      }
     }
-  }
+  } //methods
 }
 </script>
 
