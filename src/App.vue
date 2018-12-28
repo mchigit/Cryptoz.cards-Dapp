@@ -4,7 +4,7 @@
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
-    <AppFooter/>
+    <AppFooter v-bind:network_name="network_name" />
   </div>
 </template>
 
@@ -28,6 +28,11 @@ export default {
   },
   mounted() {
     this.init()
+  },
+  data() {
+    return {
+      network_name : 'Detecting Ethereum network..Loading'
+    }
   },
   methods : {
     init :  function() {
@@ -72,9 +77,28 @@ export default {
       else {
           console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
       }
+    },
+    networkDetected :  function(val) {
+      console.log('hey theres a network !:' + val);
     }
   } //methods
 }
+
+window.addEventListener('load', async () => {
+    // Modern dapp browsers...
+    console.log("Get ready to ask permission..");
+
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        
+        //Check what network we are on, "main"
+        web3.eth.net.getNetworkType()
+        .then(console.log);
+    }else{
+      // There is no metamask
+      console.log('show metamask link');
+    }
+})
 </script>
 
 <style>

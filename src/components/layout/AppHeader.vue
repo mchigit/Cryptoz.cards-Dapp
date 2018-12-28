@@ -37,11 +37,10 @@ export default {
   name: 'AppHeader',
   data () {
     return {
-      msg: 'This is the header',
-      showLogin : 1,
-      wallet : ''
+      showLogin : 1
     }
   },
+  props : ['wallet'],
   methods : {
 
   }
