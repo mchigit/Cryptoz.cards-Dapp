@@ -15,7 +15,7 @@
             <p>Sort | Search | Transfer</p>
             <div class="row">
               <OwnedCardContent
-                v-for="card in allCards"
+                v-for="card in allCards" :key="card.id"
                 :id="card.id"
                 :name="card.name"
                 :cost="card.cost"

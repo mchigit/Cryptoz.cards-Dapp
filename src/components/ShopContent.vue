@@ -12,7 +12,7 @@
           </p>
           <div class="row">
               <OwnedCardContent
-                v-for="card in storeCards"
+                v-for="card in storeCards" :key="card.id"
                 :id="card.id"
                 :name="card.name"
                 :cost="card.cost"
