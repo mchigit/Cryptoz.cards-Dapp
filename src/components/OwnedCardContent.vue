@@ -32,8 +32,6 @@
 </template>
 
 <script>
-require.context("./assets/");
-
 export default {
   name: 'OwnedCardContent',
   props: ['id','name','url','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class'],
