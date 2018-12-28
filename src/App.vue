@@ -14,6 +14,7 @@ import AppHeader from './components/layout/AppHeader'
 import AppFooter from './components/layout/AppFooter'
 
 // Import our contract artifacts and turn them into usable abstractions.
+var contract = require("truffle-contract");
 import cryptoz_artifacts from './contracts/Cryptoz.json'
 import cryptoz_token_artifacts from './contracts/CzxpToken.json'
 
@@ -33,7 +34,6 @@ export default {
       // Cryptoz is our usable abstraction, which we'll use through the code below
       var Cryptoz   = contract(cryptoz_artifacts);
       var CzxpToken = contract(cryptoz_token_artifacts);
-      console.log(web3.currentProvider);
       Cryptoz.setProvider(web3.currentProvider);
       CzxpToken.setProvider(web3.currentProvider);
     }
