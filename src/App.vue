@@ -37,6 +37,13 @@ export default {
   methods : {
     init :  function() {
       console.log('Starting up the app..');
+      
+      if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        web3.eth.net.getNetworkType()
+          .then(this.networkDetected);
+      }
+      
       // Cryptoz is our usable abstraction, which we'll use through the code below
       var Cryptoz   = contract(cryptoz_artifacts);
       var CzxpToken = contract(cryptoz_token_artifacts);
@@ -79,26 +86,11 @@ export default {
       }
     },
     networkDetected :  function(val) {
-      console.log('hey theres a network !:' + val);
+      this.network_name = 'You are connected to Ethereum ' + val;
     }
   } //methods
 }
 
-window.addEventListener('load', async () => {
-    // Modern dapp browsers...
-    console.log("Get ready to ask permission..");
-
-    if (window.ethereum) {
-        window.web3 = new Web3(ethereum);
-        
-        //Check what network we are on, "main"
-        web3.eth.net.getNetworkType()
-        .then(console.log);
-    }else{
-      // There is no metamask
-      console.log('show metamask link');
-    }
-})
 </script>
 
 <style>
