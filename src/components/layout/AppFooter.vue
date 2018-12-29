@@ -97,14 +97,9 @@ export default {
   data () {
     return {
       // 0 - detecting, 1 - no metamask, 2- mm installed , show network
-      network_state: '1'
     }
   },
-  props : {
-    network_name : {
-      type : String
-    }
-  },
+  props : ['network_name','network_state'],
   methods : {
     
   }

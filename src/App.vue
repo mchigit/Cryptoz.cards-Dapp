@@ -4,7 +4,7 @@
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
-    <AppFooter v-bind:network_name="network_name" />
+    <AppFooter v-bind:network_name="network_name" v-bind:network_state="network_state" />
   </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
   },
   data() {
     return {
+      network_state : 1,
       network_name : 'Detecting Ethereum network..Loading'
     }
   },
@@ -42,6 +43,9 @@ export default {
         window.web3 = new Web3(ethereum);
         web3.eth.net.getNetworkType()
           .then(this.networkDetected);
+      }else{
+        this.network_state = 0; //no network detected
+        console.log('no network');
       }
       
       // Cryptoz is our usable abstraction, which we'll use through the code below
