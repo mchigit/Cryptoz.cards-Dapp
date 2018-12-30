@@ -109,8 +109,12 @@ export default {
     },
     handleUserChange : function(data) {
       console.log(data);
-      this.network_state = 2; //we are logged in
-      this.wallet = data.selectedAddress.toString();
+      if(data.selectedAddress){
+        this.network_state = 2; //we are logged in
+        this.wallet = data.selectedAddress.toString();
+      }else{
+        this.network_state = 1; // logged out
+      }
     },
     setSubscriptions : function() {
       console.log('Setting all subscriptions...');
