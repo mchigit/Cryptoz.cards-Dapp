@@ -18,10 +18,23 @@
               <router-link to="/market">Markets</router-link>
             </li>
           </ul>
+          
           <transition name="fade" mode="out-in">
-          <button class="btn btn-danger" v-if="showLogin === 1" v-on:click="$emit('doLogin')">Log in to MetaMask</button>
-            <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}</a></span>
+            
+            <p class="mm-header" v-if="network_state === 0">
+              Metamask is <strong>required</strong> to bridge Cryptoz on Ethereum
+              <a href="https://metamask.io/" target="_blank">
+                <img src="static/metamask_logo.png" width="40%" />
+              </a>
+            </p>
+            
+            <button class="btn btn-danger" v-else="network_state === 1" v-on:click="$emit('doLogin')">Connect with MetaMask</button>
+            
+            <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}</a>
+            </span>
+          
           </transition>
+          
           <span>
             <router-link to="/help">Help</router-link>
           </span>
@@ -40,7 +53,7 @@ export default {
       showLogin : 1
     }
   },
-  props : ['wallet'],
+  props : ['network_state','wallet'],
   methods : {
 
   }
@@ -50,6 +63,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .mm-header {
+    color: #fff;
+    text-align: right;
+    margin-right: 10px;
+    width: 23em;
+  }
+
   .logo-nav{
     margin-right: 1.6em;
   }

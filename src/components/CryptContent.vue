@@ -2,7 +2,7 @@
   <div>
         <main role="main" class="container">
         <div class="jumbotron">
-          <h1>My Crypt</h1>
+          <h1>My Cryptoz Wallet</h1>
           <p>This is where all your Cryptoz cards can be accessed. From here you can sort your cards, search your cards and sacrifice. Sacrificing is permanent. Not only in your wallet, but across the entire Cryptoz Universe. That unique item is gone forever.</p>
           
           <!-- Loads cards here -->
@@ -12,7 +12,11 @@
           </div>
           
           <div v-else>
-            <p>Sort | Search | Transfer</p>
+            <div class="row">
+              <div class="col"><strong>My CZXP Balance :</strong> {{czxp_balance}}</div>
+              <div class="col text-right">Sort | Search | Transfer</div>
+            </div>
+            <br>
             <div class="row">
               <OwnedCardContent
                 v-for="card in allCards" :key="card.id"
@@ -46,7 +50,7 @@ export default {
   },
   data () {
     return {
-      msg: 'Here we go, here we go',
+      czxp_balance : 0,
       ownsCards : 1,
       allCards: [
         {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},

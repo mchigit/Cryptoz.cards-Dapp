@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader v-on:doLogin="onDoLogin" />
+    <AppHeader v-on:doLogin="onDoLogin" v-bind:network_state="network_state" />
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      network_state : 1,
+      network_state : 1, // 0 - no mm, 1 = mm not logged in, 2= mm logged in
       network_name : 'Detecting Ethereum network..Loading'
     }
   },
@@ -42,9 +42,9 @@ export default {
       if (window.ethereum) {
         window.web3 = new Web3(ethereum);
         web3.eth.net.getNetworkType()
-          .then(this.networkDetected);
+          .then(this.networkDetected);// update
       }else{
-        this.network_state = 0; //no network detected
+        this.network_state = 0; //no mm detected
         console.log('no network');
       }
       
@@ -59,37 +59,41 @@ export default {
       console.log("Get ready to ask permission..");
 
       if (window.ethereum) {
-          window.web3 = new Web3(ethereum);
-        
-          //Check what network we are on, "main"
-          web3.eth.net.getNetworkType()
-          .then(console.log);
-    
+        //async () => {
           try {
               // Request account access if needed
+              //let result = await ethereum.enable();
               ethereum.enable();
               // Acccounts now exposed
-              console.log("App.start being called...");
-              App.start();
+              //console.log(result);
+              console.log("Get wallet being called...");
+              this.getWallet();
           } catch (error) {
               // User denied account access...
               console.log("User denied our app, that is sad");
-              //console.log(error);
+              console.log(error);
           }
+        //}
       }
       // Legacy dapp browsers...
       else if (window.web3) {
           window.web3 = new Web3(web3.currentProvider);
           // Acccounts always exposed
           //web3.eth.sendTransaction({/* ... */});
-          App.start();
+          console.log('in the legacy code of onDoLogin()');
       }
       // Non-dapp browsers...
       else {
           console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
       }
+      
+    },
+    getWallet : function() {
+      console.log('authorized.. now get wallet');
+      
     },
     networkDetected :  function(val) {
+      this.network_state = 1;
       this.network_name = 'You are connected to Ethereum ' + val;
     }
   } //methods
