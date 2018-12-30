@@ -32,7 +32,8 @@ export default {
   data() {
     return {
       network_state : 1, // 0 - no mm, 1 = mm not logged in, 2= mm logged in
-      network_name : 'Detecting Ethereum network..Loading'
+      network_name : 'Detecting Ethereum network..Loading',
+      eth_network_name : ''
     }
   },
   methods : {
@@ -43,6 +44,7 @@ export default {
         window.web3 = new Web3(ethereum);
         web3.eth.net.getNetworkType()
           .then(this.networkDetected);// update
+        this.subscribeToBlocks();
       }else{
         this.network_state = 0; //no mm detected
         console.log('no network');
@@ -94,7 +96,27 @@ export default {
     },
     networkDetected :  function(val) {
       this.network_state = 1;
+      this.eth_network_name = val;
       this.network_name = 'You are connected to Ethereum ' + val;
+    },
+    setName : function(block) {
+      //console.log('setName called...' + block.number);
+      this.network_name = 'You are connected to Ethereum ' + this.eth_network_name +' Block: '+ block.number.toString();
+    },
+    subscribeToBlocks : function() {
+      console.log('Listen for new blocks, subscription activated...');
+      
+      var subscription = web3.eth.subscribe('newBlockHeaders', function(error, result){
+        if (!error) {
+          //console.log("New block headers incoming..");
+          //console.log(result);
+          return;
+        }
+        //console.error(error);
+      })
+      //.on("data", function(blockHeader) {
+      .on("data", this.setName)
+      .on("error", console.error);
     }
   } //methods
 }
