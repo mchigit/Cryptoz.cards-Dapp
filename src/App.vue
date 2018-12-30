@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader v-on:doLogin="onDoLogin" v-bind:network_state="network_state" />
+    <AppHeader v-on:doLogin="onDoLogin" v-bind:network_state="network_state" v-bind:wallet="wallet" />
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       network_state : 1, // 0 - no mm, 1 = mm not logged in, 2= mm logged in
+      wallet : '',
       network_name : 'Detecting Ethereum network..Loading',
       eth_network_name : ''
     }
@@ -44,7 +45,7 @@ export default {
         window.web3 = new Web3(ethereum);
         web3.eth.net.getNetworkType()
           .then(this.networkDetected);// update
-        this.subscribeToBlocks();
+        this.setSubscriptions(); //Setup all the ethereum listeners
       }else{
         this.network_state = 0; //no mm detected
         console.log('no network');
@@ -92,7 +93,10 @@ export default {
     },
     getWallet : function() {
       console.log('authorized.. now get wallet');
-      
+      web3.eth.getBalance(this.wallet, this.updateBalance);
+    },
+    updateBalance : function(val) {
+      console.log(val);
     },
     networkDetected :  function(val) {
       this.network_state = 1;
@@ -103,8 +107,15 @@ export default {
       //console.log('setName called...' + block.number);
       this.network_name = 'You are connected to Ethereum ' + this.eth_network_name +' Block: '+ block.number.toString();
     },
-    subscribeToBlocks : function() {
-      console.log('Listen for new blocks, subscription activated...');
+    handleUserChange : function(data) {
+      console.log(data);
+      this.network_state = 2; //we are logged in
+      this.wallet = data.selectedAddress.toString();
+    },
+    setSubscriptions : function() {
+      console.log('Setting all subscriptions...');
+      
+      web3.currentProvider.publicConfigStore.on('update', this.handleUserChange);
       
       var subscription = web3.eth.subscribe('newBlockHeaders', function(error, result){
         if (!error) {
@@ -115,7 +126,7 @@ export default {
         //console.error(error);
       })
       //.on("data", function(blockHeader) {
-      .on("data", this.setName)
+      .on("data", this.setName) //pass the block number into our function
       .on("error", console.error);
     }
   } //methods

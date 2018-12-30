@@ -14,7 +14,7 @@
 
           <!-- Content -->
           <img class="img-fluid dev-logo" src="./assets/cardinal.png" />
-          <p v-if="network_state == 1">{{network_name}}</p>
+          <p v-if="network_state >= 1">{{network_name}}</p>
           <p v-else>
             Metamask is <strong>required</strong> to bridge Cryptoz on Ethereum
             <a href="https://metamask.io/" target="_blank">

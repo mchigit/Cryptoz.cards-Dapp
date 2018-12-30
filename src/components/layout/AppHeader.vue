@@ -28,7 +28,7 @@
               </a>
             </p>
             
-            <button class="btn btn-danger" v-else="network_state === 1" v-on:click="$emit('doLogin')">Connect with MetaMask</button>
+            <button class="btn btn-danger" v-else-if="network_state === 1" v-on:click="$emit('doLogin')">Connect with MetaMask</button>
             
             <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}</a>
             </span>
