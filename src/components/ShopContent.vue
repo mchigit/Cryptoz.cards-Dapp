@@ -5,6 +5,7 @@
         <div class="jumbotron">
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy a booster card, which will randomly mint an unlimited edition card</p>
+            <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
           <p>Sort | Search | Claim Free Cards</p>
           <p>
             <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card</button>
@@ -44,6 +45,7 @@ export default {
   },
   data () {
     return {
+      total_supply : 'Loading...',
       storeCards: [
         {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'}
       ]
@@ -64,11 +66,11 @@ export default {
       
       Cryptoz.deployed().then(function(instance) {
         return instance.getTotalTypes();
-      }).then(function(_total){
-        console.log(_total);
-        console.log(_total.toString());
-      })
+      }).then(this.setTotalSupply)
     
+    },
+    setTotalSupply: function(_total){
+      this.total_supply = _total.toString();
     }
   }
 }
