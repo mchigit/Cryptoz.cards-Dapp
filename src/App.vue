@@ -52,9 +52,10 @@ export default {
       }
       
       // Cryptoz is our usable abstraction, which we'll use through the code below
-      var Cryptoz   = contract(cryptoz_artifacts);
-      var CzxpToken = contract(cryptoz_token_artifacts);
+      window.Cryptoz   = contract(cryptoz_artifacts);
+      window.CzxpToken = contract(cryptoz_token_artifacts);
       Cryptoz.setProvider(web3.currentProvider);
+      console.log('Cryptoz is defined...');
       CzxpToken.setProvider(web3.currentProvider);
     },
     onDoLogin : function () {
@@ -108,10 +109,11 @@ export default {
       this.network_name = 'You are connected to Ethereum ' + this.eth_network_name +' Block: '+ block.number.toString();
     },
     handleUserChange : function(data) {
-      console.log(data);
+      //console.log(data);
       if(data.selectedAddress){
         this.network_state = 2; //we are logged in
         this.wallet = data.selectedAddress.toString();
+        window.account = data.selectedAddress; // global for components to grab at
       }else{
         this.network_state = 1; // logged out
       }

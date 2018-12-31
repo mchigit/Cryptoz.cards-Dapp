@@ -51,7 +51,7 @@ export default {
   },
   mounted () {
     console.log('The shop is mounted, call for the cards');
-    
+    this.setSubscriptions();
   },
   methods : {
     buyBooster : function() {
@@ -60,6 +60,16 @@ export default {
     buyOpenBooster : function() {
       console.log('Buy and open booster called..');
     },
+    setSubscriptions : function() {
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.getTotalTypes();
+      }).then(function(_total){
+        console.log(_total);
+        console.log(_total.toString());
+      })
+    
+    }
   }
 }
 </script>

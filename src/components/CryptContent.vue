@@ -48,9 +48,12 @@ export default {
   components : {
     OwnedCardContent
   },
+  mounted () {
+    this.setSubscriptions();
+  },
   data () {
     return {
-      czxp_balance : 0,
+      czxp_balance : 'Loading...',
       ownsCards : 1,
       allCards: [
         {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
@@ -62,6 +65,17 @@ export default {
         {id:6, name: 'Green Dragon',graphic: 'baby_cthulhu.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
         {id:7, name: 'Green Dragon',graphic: 'angry_tree_red.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
       ]
+    }
+  },
+  methods : {
+    setSubscriptions : function() {
+      CzxpToken.deployed().then(function(instance) {
+        return instance.balanceOf(account);
+      }).then(this.setCzxpBalance)
+    },
+    setCzxpBalance :  function(bal){
+      //console.log(bal.toString());
+      this.czxp_balance = bal.toString();
     }
   }
 }
