@@ -2,7 +2,7 @@
   <div>
         <main role="main" class="container">
         <div class="jumbotron">
-          <h1>My Cryptoz Wallet</h1>
+          <h1>Your Cryptoz Wallet</h1>
           <p>This is where all your Cryptoz cards can be accessed. From here you can sort your cards, search your cards and sacrifice. Sacrificing is permanent. Not only in your wallet, but across the entire Cryptoz Universe. That unique item is gone forever.</p>
           
           <!-- Loads cards here -->
@@ -13,8 +13,24 @@
           
           <div v-else>
             <div class="row">
-              <div class="col"><strong>My CZXP Balance :</strong> {{czxp_balance}}</div>
-              <div class="col text-right">Sort | Search | Transfer</div>
+              <div class="col">
+                <button class="btn btn-danger" v-on:click="openBooster">Open Booster Card
+                </button>
+              </div>
+              <div class="col">
+                <button class="btn btn-danger" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.01E
+                </button>
+              </div>
+                <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col"><strong>Your cryptoz:</strong> {{cards_owned}}
+              </div>
+              <div class="col text-right">
+                Sort | Search | Transfer
+              </div>
             </div>
             <br>
             <div class="row">
@@ -55,6 +71,7 @@ export default {
     return {
       czxp_balance : 'Loading...',
       ownsCards : 1,
+      cards_owned : 'Loading...',
       allCards: [
         {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
         {id:1, name: 'Dorothy',graphic: 'dorothy.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-1'},
@@ -72,10 +89,40 @@ export default {
       CzxpToken.deployed().then(function(instance) {
         return instance.balanceOf(account);
       }).then(this.setCzxpBalance)
+      
+      Cryptoz.deployed().then(function(instance) {
+        console.log("get cryptoz cards tokens balance...");
+        return instance.balanceOf(account);
+      }).then(this.setCryptozBalance)
+    },
+    buyAndOpenBooster : function() {
+      console.log('Buy and Open Booster card...');
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.buyBoosterCardAndOpen({from: account, value:10000000000000000});
+      //}).then(this.handleBuyBooster)
+      }).then(this.handleBuyBooster) //update boosters owned and total types
+      
+    },
+    handleBuyBooster : function(result) {
+      console.log('Handling buy booster');
+      this.setSubscriptions();
+    },
+    openBooster : function () {
+      Cryptoz.deployed().then(function(instance) {
+        return instance.openBoosterCard(0, {from: account});
+      }).then(function(res) {
+        console.log("OpenBoosterPack result:");
+        console.log(res);
+      })
     },
     setCzxpBalance :  function(bal){
       //console.log(bal.toString());
       this.czxp_balance = bal.toString();
+    },
+    setCryptozBalance : function(bal) {
+      //console.log(bal.toString());
+      this.cards_owned = bal.toString();
     }
   }
 }

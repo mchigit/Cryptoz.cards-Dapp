@@ -8,9 +8,12 @@
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
           <div class="row">
             <div class="col">
-              <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card</button>
+              <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card 0.01E</button>
             </div>
-            <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}</div>
+            <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}
+            </div>
+            <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
+            </div>
           </div>
           <br>
           <p>Sort | Search | Claim Free Cards</p>
@@ -51,6 +54,7 @@ export default {
     return {
       total_supply : 'Loading...',
       boosters_owned : 'Loading...',
+      czxp_balance : 'Loading...',
       storeCards: [
         {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'}
       ]
@@ -65,7 +69,7 @@ export default {
       console.log('Buy booster called..');
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyBoosterCard(1, {from: account, value:5000000000000000});
+        return instance.buyBoosterCard(1, {from: account, value:10000000000000000});
       //}).then(this.handleBuyBooster)
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
@@ -84,6 +88,10 @@ export default {
         return instance.boosterPacksOwned(account);
       }).then(this.setBoostersOwned)
       
+      CzxpToken.deployed().then(function(instance) {
+        return instance.balanceOf(account);
+      }).then(this.setCzxpBalance)
+      
     },
     setTotalSupply: function(_total){
       console.log('Updating total types...');
@@ -93,6 +101,10 @@ export default {
       console.log('Updating Boosters owned...');
       //console.log(_total);
       this.boosters_owned = _total.toString();
+    },
+    setCzxpBalance :  function(bal){
+      //console.log(bal.toString());
+      this.czxp_balance = bal.toString();
     }
   }
 }

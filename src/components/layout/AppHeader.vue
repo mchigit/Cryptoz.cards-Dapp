@@ -12,7 +12,7 @@
               <router-link to="/shop">Shop</router-link>
             </li>
             <li>
-              <router-link to="/crypt">My Crypt</router-link>
+              <router-link to="/crypt">Your Crypt</router-link>
             </li>
             <li>
               <router-link to="/market">Markets</router-link>
