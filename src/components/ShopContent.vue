@@ -6,11 +6,15 @@
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy a booster card, which will randomly mint an unlimited edition card</p>
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card</button>
+            </div>
+            <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}</div>
+          </div>
+          <br>
           <p>Sort | Search | Claim Free Cards</p>
-          <p>
-            <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card</button>
-            <button class="btn btn-danger" v-on:click="buyOpenBooster">Buy And Open Booster Card</button>
-          </p>
+          <br>
           <div class="row">
               <OwnedCardContent
                 v-for="card in storeCards" :key="card.id"
@@ -46,6 +50,7 @@ export default {
   data () {
     return {
       total_supply : 'Loading...',
+      boosters_owned : 'Loading...',
       storeCards: [
         {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'}
       ]
@@ -58,19 +63,25 @@ export default {
   methods : {
     buyBooster : function() {
       console.log('Buy booster called..');
-    },
-    buyOpenBooster : function() {
-      console.log('Buy and open booster called..');
+      
     },
     setSubscriptions : function() {
       
       Cryptoz.deployed().then(function(instance) {
         return instance.getTotalTypes();
       }).then(this.setTotalSupply)
-    
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.boosterPacksOwned(account);
+      }).then(this.setBoostersOwned)
+      
     },
     setTotalSupply: function(_total){
       this.total_supply = _total.toString();
+    },
+    setBoostersOwned : function(_total){
+      //console.log(_total);
+      this.boosters_owned = _total.toString();
     }
   }
 }
