@@ -26,7 +26,9 @@
             </div>
             <br>
             <div class="row">
-              <div class="col"><strong>Your cryptoz:</strong> {{cards_owned}}
+              <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}
+              </div>
+              <div class="col"><strong>Your Cryptoz:</strong> {{cards_owned}}
               </div>
               <div class="col text-right">
                 Sort | Search | Transfer
@@ -72,6 +74,7 @@ export default {
       czxp_balance : 'Loading...',
       ownsCards : 1,
       cards_owned : 'Loading...',
+      boosters_owned : 'Loading...',
       allCards: [
         {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
         {id:1, name: 'Dorothy',graphic: 'dorothy.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-1'},
@@ -94,6 +97,10 @@ export default {
         console.log("get cryptoz cards tokens balance...");
         return instance.balanceOf(account);
       }).then(this.setCryptozBalance)
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.boosterPacksOwned(account);
+      }).then(this.setBoostersOwned)
     },
     buyAndOpenBooster : function() {
       console.log('Buy and Open Booster card...');
@@ -111,10 +118,7 @@ export default {
     openBooster : function () {
       Cryptoz.deployed().then(function(instance) {
         return instance.openBoosterCard(0, {from: account});
-      }).then(function(res) {
-        console.log("OpenBoosterPack result:");
-        console.log(res);
-      })
+      }).then(this.setSubscriptions)
     },
     setCzxpBalance :  function(bal){
       //console.log(bal.toString());
@@ -123,7 +127,12 @@ export default {
     setCryptozBalance : function(bal) {
       //console.log(bal.toString());
       this.cards_owned = bal.toString();
-    }
+    },
+    setBoostersOwned : function(_total){
+      console.log('Updating Boosters owned...');
+      //console.log(_total);
+      this.boosters_owned = _total.toString();
+    },
   }
 }
 
