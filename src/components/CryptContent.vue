@@ -101,6 +101,10 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.boosterPacksOwned(account);
       }).then(this.setBoostersOwned)
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.tokensOfOwner(account)
+      }).then(this.handleGetAllCards)
     },
     buyAndOpenBooster : function() {
       console.log('Buy and Open Booster card...');
@@ -111,6 +115,42 @@ export default {
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
     },
+    handleGetAllCards : function(res) {
+      console.log('Handling got all cryptoz...');
+      //console.log(res);
+      
+      
+      
+      if(res.length > 0){
+        
+        var tokenIdList = [];
+        res.forEach(function(element){
+          tokenIdList.push(element.c[0]);
+        })
+        
+        Cryptoz.deployed().then(function(instance) {
+          //now lets loop call all the Cards this user has tokens for
+          for (var i = 0; i < tokenIdList.length; i++) {
+            instance.getCardByTokenId.call(tokenIdList[i]).then(function (elementReturned) {
+              console.log('A card !');
+              console.log(elementReturned[0].c[0] + ' ' + elementReturned[2].c[0]);
+              //$("#cards-owned").append("</p>");
+              //$("#cards-owned").append(elementReturned[0].c[0] +" " + elementReturned[1].c[0] +" "+ elementReturned[2].c[0]);
+              //$("#cards-owned").append("</p>");
+              //p = document.createElement('p')
+              //p.innerHTML = elementReturned
+              //document.body.appendChild(p)
+            })
+          }
+          
+        })
+        
+      }else{
+        $("#cards-owned").html("You dont own any cards yet, click here to get some");
+        console.log('no cards returned from handleGetAllCards()');
+      }
+    },
+    
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
       this.setSubscriptions();
