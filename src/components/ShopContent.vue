@@ -67,16 +67,12 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.buyBoosterCard(1, {from: account, value:5000000000000000});
       //}).then(this.handleBuyBooster)
-      }).then(console.log)
+      }).then(this.handleBuyBooster) //update boosters owned and total types
       
     },
-    handleBuyBooster : function(error,result) {
+    handleBuyBooster : function(result) {
       console.log('Handling buy booster');
-      if (error.message.includes("User denied transaction signature")) {
-        // handle the "error" as a rejection
-        console.log('Transaction rejected...');
-      }
-      console.log(result);
+      this.setSubscriptions();
     },
     setSubscriptions : function() {
       
@@ -90,9 +86,11 @@ export default {
       
     },
     setTotalSupply: function(_total){
+      console.log('Updating total types...');
       this.total_supply = _total.toString();
     },
     setBoostersOwned : function(_total){
+      console.log('Updating Boosters owned...');
       //console.log(_total);
       this.boosters_owned = _total.toString();
     }
