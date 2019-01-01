@@ -6,12 +6,6 @@
           <p>This is where all your Cryptoz cards can be accessed. From here you can sort your cards, search your cards and sacrifice. Sacrificing is permanent. Not only in your wallet, but across the entire Cryptoz Universe. That unique item is gone forever.</p>
           
           <!-- Loads cards here -->
-          <div v-if="ownsCards == 0">
-            <h2>You do not own any cards yet</h2>
-            <router-link to="/help">How do I get Cryptoz cards ?</router-link>
-          </div>
-          
-          <div v-else>
             <div class="row">
               <div class="col">
                 <button class="btn btn-danger" v-on:click="openBooster">Open Booster Card
@@ -30,12 +24,12 @@
               </div>
               <div class="col"><strong>Your Cryptoz:</strong> {{cards_owned}}
               </div>
-              <div class="col text-right">
+              <div class="col text-right"  v-if="ownsCards == 1">
                 Sort | Search | Transfer
               </div>
             </div>
             <br>
-            <div class="row">
+            <div class="row" v-if="ownsCards == 1">
               <OwnedCardContent
                 v-for="card in allCards" :key="card.id"
                 :id="card.id"
@@ -52,7 +46,7 @@
                 :card_class="card.bg"
               ></OwnedCardContent>
             </div>
-          </div>
+            <div v-else><h2>You do not own any Cryptoz<br><router-link to="/shop">To get Free Cryptoz or Buy one, visit the Shop</router-link></h2></div>
         </div>
       </main>
   </div>
@@ -72,7 +66,7 @@ export default {
   data () {
     return {
       czxp_balance : 'Loading...',
-      ownsCards : 1,
+      ownsCards : 0,
       cards_owned : 'Loading...',
       boosters_owned : 'Loading...',
       allCards: [
@@ -119,9 +113,10 @@ export default {
       console.log('Handling got all cryptoz...');
       //console.log(res);
       
-      
-      
       if(res.length > 0){
+        console.log('Got cards.. start render');
+        //first we update the view
+        this.ownsCards = 1;
         
         var tokenIdList = [];
         res.forEach(function(element){
@@ -146,7 +141,6 @@ export default {
         })
         
       }else{
-        $("#cards-owned").html("You dont own any cards yet, click here to get some");
         console.log('no cards returned from handleGetAllCards()');
       }
     },
