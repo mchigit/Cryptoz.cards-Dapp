@@ -43,7 +43,7 @@
                 :transfer_czxp="card.attributes.transfer_czxp"
                 :sacrifice_czxp="card.attributes.sacrifice_czxp"
                 :image="card.image"
-                :card_class="card.bg"
+                :card_class="card.attributes.rarity"
               ></OwnedCardContent>
             </div>
             <div v-else><h2>You do not own any Cryptoz<br><router-link to="/shop">To get Free Cryptoz or Buy one, visit the Shop</router-link></h2></div>
@@ -116,12 +116,15 @@ export default {
           tokenIdList.push(element.c[0]);
         })
         
+        //reset the view
+        this.allCards = [];
+        
         Cryptoz.deployed().then(function(instance) {
           //now lets loop call all the Cards this user has tokens for
           for (var i = 0; i < tokenIdList.length; i++) {
             instance.getCardByTokenId.call(tokenIdList[i]).then(function (elementReturned) {
-              console.log('A card !');
-              console.log(elementReturned[0].c[0] + ' ' + elementReturned[2].c[0]);
+              //console.log('A card !');
+              //console.log(elementReturned[0].c[0] + ' ' + elementReturned[2].c[0]);
               
               //make a call to get the json cardType objects, push on allCards[]
               
@@ -151,8 +154,28 @@ export default {
       }
     },
     handleGotCardData : function(res) {
-      console.log(res.data);
-      //Append the bg and edition #
+      //console.log(res.data);
+      //Append the bg
+      switch(res.data.attributes.rarity){
+        case "Common":
+          res.data.attributes.rarity = 'card-bg card-bg-6';
+          break;
+        case "Uncommon":
+          res.data.attributes.rarity = 'card-bg card-bg-5';
+          break;
+        case "Rare":
+          res.data.attributes.rarity = 'card-bg card-bg-4';
+          break;
+        case "Epic":
+          res.data.attributes.rarity = 'card-bg card-bg-3';
+          break;
+        case "Diamond":
+          res.data.attributes.rarity = 'card-bg card-bg-2';
+          break;
+        case "Platinum":
+          res.data.attributes.rarity = 'card-bg card-bg-1';
+          break;
+      }
       
       this.allCards.push(res.data);
     },
