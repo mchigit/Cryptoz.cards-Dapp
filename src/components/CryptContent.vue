@@ -34,15 +34,15 @@
                 v-for="card in allCards" :key="card.id"
                 :id="card.id"
                 :name="card.name"
-                :cost="card.cost"
-                :cset="card.cset"
-                :edition_total="card.edition_total"
-                :level="card.card_level"
-                :unlock_czxp="card.unlock_czxp"
-                :buy_czxp="card.buy_czxp"
-                :transfer_czxp="card.transfer_czxp"
-                :sacrifice_czxp="card.sacrifice_czxp"
-                :url="card.graphic"
+                :cost="card.attributes.cost"
+                :cset="card.attributes.card_set"
+                :edition_total="card.attributes.edition_total"
+                :level="card.attributes.card_level"
+                :unlock_czxp="card.attributes.unlock_czxp"
+                :buy_czxp="card.attributes.buy_czxp"
+                :transfer_czxp="card.attributes.transfer_czxp"
+                :sacrifice_czxp="card.attributes.sacrifice_czxp"
+                :image="card.image"
                 :card_class="card.bg"
               ></OwnedCardContent>
             </div>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
 
 export default {
@@ -69,16 +70,7 @@ export default {
       ownsCards : 0,
       cards_owned : 'Loading...',
       boosters_owned : 'Loading...',
-      allCards: [
-        {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
-        {id:1, name: 'Dorothy',graphic: 'dorothy.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-1'},
-        {id:2, name: 'Green Dragon',graphic: 'dragon_green.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-2'},
-        {id:3, name: 'Jim Zombie',graphic: 'black_crow.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-3'},
-        {id:4, name: 'Dorothy',graphic: 'bloody_flame_wraith.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-4'},
-        {id:5, name: 'Green Dragon',graphic: 'ash.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-5'},
-        {id:6, name: 'Green Dragon',graphic: 'baby_cthulhu.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
-        {id:7, name: 'Green Dragon',graphic: 'angry_tree_red.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'},
-      ]
+      allCards: []
     }
   },
   methods : {
@@ -115,6 +107,7 @@ export default {
       
       if(res.length > 0){
         console.log('Got cards.. start render');
+        var self= this;
         //first we update the view
         this.ownsCards = 1;
         
@@ -129,22 +122,40 @@ export default {
             instance.getCardByTokenId.call(tokenIdList[i]).then(function (elementReturned) {
               console.log('A card !');
               console.log(elementReturned[0].c[0] + ' ' + elementReturned[2].c[0]);
-              //$("#cards-owned").append("</p>");
-              //$("#cards-owned").append(elementReturned[0].c[0] +" " + elementReturned[1].c[0] +" "+ elementReturned[2].c[0]);
-              //$("#cards-owned").append("</p>");
-              //p = document.createElement('p')
-              //p.innerHTML = elementReturned
-              //document.body.appendChild(p)
+              
+              //make a call to get the json cardType objects, push on allCards[]
+              
+              axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + elementReturned[0].c[0])
+              .then(function(res){
+                //do the edition total
+                // #4  , #4 of 300
+                if(res.data.attributes.edition_total == 0) //unlimited
+                {
+                  res.data.attributes.edition_total = '#'+elementReturned[2].c[0];
+                }else{
+                  res.data.attributes.edition_total = '#'+elementReturned[2].c[0] +' of '+res.data.attributes.edition_total;
+                }
+                
+                self.handleGotCardData(res);
+              })
+              .catch(error => {
+                console.log(error);
+              })
+
             })
-          }
-          
+          }// end for loop
         })
         
       }else{
         console.log('no cards returned from handleGetAllCards()');
       }
     },
-    
+    handleGotCardData : function(res) {
+      console.log(res.data);
+      //Append the bg and edition #
+      
+      this.allCards.push(res.data);
+    },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
       this.setSubscriptions();

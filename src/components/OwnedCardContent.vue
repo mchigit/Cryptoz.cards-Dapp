@@ -6,8 +6,9 @@
 		        <div class="front">
 			      <!-- front content -->
 			        <div id="1" :class="card_class">
-                <img class="card-img" :src="'static/assets/' + url" />
-                <span class="card-edition">#1{{edition_total}}</span>
+                <!--img class="card-img" :src="'static/assets/' + url" /-->
+                <img class="card-img" :src="image" />
+                <span class="card-edition">{{edition_total}}</span>
                 <div class="card-item-name text-center">{{name}}<br>{{cset}}</div>
                 <div class="card-czxp text-left">{{unlock_czxp}}</div>
                 <div class="card-level">{{level}}</div>
@@ -34,7 +35,7 @@
 <script>
 export default {
   name: 'OwnedCardContent',
-  props: ['id','name','url','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class'],
+  props: ['id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class'],
   data () {
     return {
 
