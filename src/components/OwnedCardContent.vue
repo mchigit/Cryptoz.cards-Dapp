@@ -111,7 +111,7 @@ export default {
   position: relative;
   width: 100%;
   top: 49px;
-  color: #000;
+  color: #DDD;
   font-weight: bold;
 }
 

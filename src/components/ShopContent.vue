@@ -4,7 +4,7 @@
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>Shop</h1>
-          <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy a booster card, which will randomly mint an unlimited edition card</p>
+          <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy and open a booster card, which will randomly mint an unlimited edition card</p>
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
           <div class="row">
             <div class="col">
@@ -17,7 +17,25 @@
             </div>
           </div>
           <br>
-          <p>Sort | Search | Claim Free Cards</p>
+              <div>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort By
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('name')">Name</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('rarity')">Rarity</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('cost')">Cost</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_set')">Card Set</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('edition_total')">Edition Total</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_level')">Level</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('unlock_czxp')">Unlock CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('buy_czxp')">Buy CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('transfer_czxp')">Transfer CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('sacrifice_czxp')">Sacrifice CZXP</a>
+                  </div>
+                </div>
+              </div>
           <br>
           <div class="row">
               <OwnedCardContent
@@ -43,6 +61,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
 
 
@@ -97,13 +116,53 @@ export default {
       this.total_supply = _total.toString();
       
       //Lets get all the cards now
-        var self = this;
+      var self = this;
+      
+      //reset the view
+      this.storeCards = [];
+      
+      for (var i = 1; i < _total; i++) {
+            axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + i)
+              .then(this.handleGotCardData)
+      }
+        
+        /**
         Cryptoz.deployed().then(function(instance) {
           //now lets loop call all the Cards this user has tokens for
           for (var i = 1; i < _total; i++) {
             instance.allCardTypes.call(i).then(console.log)
           }
         })
+        **/
+    },
+    handleGotCardData : function(res) {
+      console.log(res.data);
+      //Append the bg
+      switch(res.data.attributes.rarity){
+        case "Common":
+          res.data.attributes.rarity = 'card-bg card-bg-6';
+          break;
+        case "Uncommon":
+          res.data.attributes.rarity = 'card-bg card-bg-5';
+          break;
+        case "Rare":
+          res.data.attributes.rarity = 'card-bg card-bg-4';
+          break;
+        case "Epic":
+          res.data.attributes.rarity = 'card-bg card-bg-3';
+          break;
+        case "Diamond":
+          res.data.attributes.rarity = 'card-bg card-bg-2';
+          break;
+        case "Platinum":
+          res.data.attributes.rarity = 'card-bg card-bg-1';
+          break;
+      }
+      
+      if(res.data.attributes.edition_total === 0){
+        res.data.attributes.edition_total = "Unlimited"
+      }
+      this.storeCards.push(res.data);
     },
     setBoostersOwned : function(_total){
       console.log('Updating Boosters owned...');
@@ -113,6 +172,12 @@ export default {
     setCzxpBalance :  function(bal){
       //console.log(bal.toString());
       this.czxp_balance = bal.toString();
+    },
+    sortByName : function(param) {
+      this.storeCards.sort(dynamicSort(param))
+    },
+    sortByAttr : function(param) {
+      this.storeCards.sort(sortAttributes(param))
     }
   }
 }
