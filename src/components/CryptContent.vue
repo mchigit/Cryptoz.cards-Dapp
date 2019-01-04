@@ -30,16 +30,16 @@
                     Sort By
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Name</a>
-                    <a class="dropdown-item" href="#">Rarity</a>
-                    <a class="dropdown-item" href="#">Cost</a>
-                    <a class="dropdown-item" href="#">Card Set</a>
-                    <a class="dropdown-item" href="#">Edition Total</a>
-                    <a class="dropdown-item" href="#">Level</a>
-                    <a class="dropdown-item" href="#">Unlock CZXP</a>
-                    <a class="dropdown-item" href="#">Buy CZXP</a>
-                    <a class="dropdown-item" href="#">Transfer CZXP</a>
-                    <a class="dropdown-item" href="#">Sacrifice CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('name')">Name</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('name')">Rarity</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.cost')">Cost</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.card_set')">Card Set</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.edition_total')">Edition Total</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.level')">Level</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.unlock_czxp')">Unlock CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.buy_czxp')">Buy CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.transfer_czxp')">Transfer CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.sacrifice_czxp')">Sacrifice CZXP</a>
                   </div>
                 </div>
               </div>
@@ -140,6 +140,7 @@ export default {
           for (var i = 0; i < tokenIdList.length; i++) {
             instance.getCardByTokenId.call(tokenIdList[i]).then(function (elementReturned) {
               //console.log('A card !');
+              //console.log(elementReturned);
               //console.log(elementReturned[0].c[0] + ' ' + elementReturned[2].c[0]);
               
               //make a call to get the json cardType objects, push on allCards[]
@@ -150,9 +151,9 @@ export default {
                 // #4  , #4 of 300
                 if(res.data.attributes.edition_total == 0) //unlimited
                 {
-                  res.data.attributes.edition_total = '#'+elementReturned[2].c[0];
+                  res.data.attributes.edition_total = '#'+elementReturned[1].c[0];
                 }else{
-                  res.data.attributes.edition_total = '#'+elementReturned[2].c[0] +' of '+res.data.attributes.edition_total;
+                  res.data.attributes.edition_total = '#'+elementReturned[1].c[0] +' of '+res.data.attributes.edition_total;
                 }
                 
                 self.handleGotCardData(res);
@@ -192,8 +193,6 @@ export default {
           res.data.attributes.rarity = 'card-bg card-bg-1';
           break;
       }
-      res.data.attributes.unlock_czxp = res.data.attributes.unlock_czxp.toLocaleString('de-DE');
-      
       
       this.allCards.push(res.data);
     },
@@ -219,8 +218,8 @@ export default {
       //console.log(_total);
       this.boosters_owned = _total.toString();
     },
-    sortByName : function() {
-      this.allCards.sort(dynamicSort("name"))
+    sortByName : function(param) {
+      this.allCards.sort(dynamicSort(param))
     }
   }
 }
