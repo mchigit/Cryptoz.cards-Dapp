@@ -31,15 +31,15 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#" v-on:click="sortByName('name')">Name</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('name')">Rarity</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.cost')">Cost</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.card_set')">Card Set</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.edition_total')">Edition Total</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.level')">Level</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.unlock_czxp')">Unlock CZXP</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.buy_czxp')">Buy CZXP</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.transfer_czxp')">Transfer CZXP</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('attributes.sacrifice_czxp')">Sacrifice CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('rarity')">Rarity</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('cost')">Cost</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_set')">Card Set</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('edition_total')">Edition Total</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_level')">Level</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('unlock_czxp')">Unlock CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('buy_czxp')">Buy CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('transfer_czxp')">Transfer CZXP</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('sacrifice_czxp')">Sacrifice CZXP</a>
                   </div>
                 </div>
               </div>
@@ -220,6 +220,9 @@ export default {
     },
     sortByName : function(param) {
       this.allCards.sort(dynamicSort(param))
+    },
+    sortByAttr : function(param) {
+      this.allCards.sort(sortAttributes(param))
     }
   }
 }

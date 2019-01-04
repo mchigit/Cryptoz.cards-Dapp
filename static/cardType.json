@@ -1,23 +1,26 @@
-{
 
-  id:0,
-  name: 'Jim Zombie',
-  svg: 'jim.svg',
-  card_set: 'We like to party set',
-  zombie_type : 1,
-  in_store: 0,
-  rarity : 6,
-  edition_total: '400',
-  cost: 0.002,
-  buy_czxp: '1,800',
-  transfer_czxp: '100',
-  sacrifice_czxp: '2300',
-  unlock_czxp : '1300300',
 
-  card_level: 80,
-  description : 'The original Pet Zombie'
-      
-}
+array (
+  'name' => 'Robot Emperor Zombie',
+  'image' => 'https://cryptoz.cards/card-gen/assets/robot_bug.svg',
+  'description' => 'If you see one. There are a 1000 more',
+  'external_url' => 'https://cryptoz.cards/view/19',
+  'attributes' =>
+  array (
+    'id' => '19',
+    'card_set' => 'Misfits 1',
+    'zombie_type' => 'Thing',
+    'in_store' => 'Booster',
+    'rarity' => 'Uncommon',
+    'edition_total' => 0,
+    'card_level' => 4,
+    'cost' => '0',
+    'buy_czxp' => '10',
+    'transfer_czxp' => '5',
+    'sacrifice_czxp' => '6',
+    'unlock_czxp' => '18',
+  ),
+)
 
 
   bg: 'card-bg card-bg-6'
