@@ -17,7 +17,8 @@
             </div>
           </div>
           <br>
-              <div>
+          <div class="row">
+              <div class="col">
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sort By
@@ -36,6 +37,15 @@
                   </div>
                 </div>
               </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" v-bind:checked="showUnlimited" v-on:click="doHideUnlimited">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Show Unlimited
+                  </label>
+                </div>
+              </div>
+            </div>
           <br>
           <div class="row">
               <OwnedCardContent
@@ -72,10 +82,12 @@ export default {
   },
   data () {
     return {
+      showUnlimited : 1,
       total_supply : 'Loading...',
       boosters_owned : 'Loading...',
       czxp_balance : 'Loading...',
-      storeCards: []
+      storeCards: [],
+      allCards : [] //We never mangle this
     }
   },
   mounted () {
@@ -83,6 +95,16 @@ export default {
     this.setSubscriptions();
   },
   methods : {
+    doHideUnlimited : function(){
+      console.log('Hide/show unlimited' + this.showUnlimited)
+      if(this.showUnlimited){
+        this.showUnlimited = 0  //hide
+        this.storeCards = this.allCards.filter(card => card.attributes.in_store == 'Store')
+      }else{
+        this.showUnlimited = 1  //show
+        this.storeCards = this.allCards
+      }
+    },
     buyBooster : function() {
       console.log('Buy booster called..');
       
@@ -136,7 +158,7 @@ export default {
         **/
     },
     handleGotCardData : function(res) {
-      console.log(res.data);
+      //console.log(res.data);
       //Append the bg
       switch(res.data.attributes.rarity){
         case "Common":
@@ -162,6 +184,7 @@ export default {
       if(res.data.attributes.edition_total === 0){
         res.data.attributes.edition_total = "Unlimited"
       }
+      this.allCards.push(res.data);
       this.storeCards.push(res.data);
     },
     setBoostersOwned : function(_total){

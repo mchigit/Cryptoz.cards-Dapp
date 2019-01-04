@@ -10,11 +10,11 @@ array (
     'id' => '19',
     'card_set' => 'Misfits 1',
     'zombie_type' => 'Thing',
-    'in_store' => 'Booster',
+    'in_store' => 'Booster',  //Store,Booster
     'rarity' => 'Uncommon',
-    'edition_total' => 0,
+    'edition_total' => 0,     // 0= unlimited, #total amount allowed
     'card_level' => 4,
-    'cost' => '0',
+    'cost' => '0',            // 0- can't buy, >0 - can buy
     'buy_czxp' => '10',
     'transfer_czxp' => '5',
     'sacrifice_czxp' => '6',
