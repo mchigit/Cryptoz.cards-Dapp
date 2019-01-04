@@ -25,7 +25,23 @@
               <div class="col"><strong>Your Cryptoz:</strong> {{cards_owned}}
               </div>
               <div class="col text-right"  v-if="ownsCards == 1">
-                <button class="btn btn-danger" v-on:click="sortByName">Sort By Name</button> | Search | Transfer
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort By
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Name</a>
+                    <a class="dropdown-item" href="#">Rarity</a>
+                    <a class="dropdown-item" href="#">Cost</a>
+                    <a class="dropdown-item" href="#">Card Set</a>
+                    <a class="dropdown-item" href="#">Edition Total</a>
+                    <a class="dropdown-item" href="#">Level</a>
+                    <a class="dropdown-item" href="#">Unlock CZXP</a>
+                    <a class="dropdown-item" href="#">Buy CZXP</a>
+                    <a class="dropdown-item" href="#">Transfer CZXP</a>
+                    <a class="dropdown-item" href="#">Sacrifice CZXP</a>
+                  </div>
+                </div>
               </div>
             </div>
             <br>
