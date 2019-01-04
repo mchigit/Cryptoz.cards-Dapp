@@ -8,7 +8,8 @@
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
           <div class="row">
             <div class="col">
-              <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card 0.01E</button>
+              <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card 0.002E
+              </button>
             </div>
             <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}
             </div>
@@ -67,7 +68,7 @@ export default {
       console.log('Buy booster called..');
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyBoosterCard(1, {from: account, value:2000000000000000});
+        return instance.buyBoosterCard({from: account, value:2000000000000000});
       //}).then(this.handleBuyBooster)
       }).then(this.handleBuyBooster) //update boosters owned and total types
       

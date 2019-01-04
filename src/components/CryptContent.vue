@@ -8,7 +8,9 @@
           <!-- Loads cards here -->
             <div class="row">
               <div class="col">
-                <button class="btn btn-danger" v-on:click="openBooster">Open Booster Card
+                <button class="btn btn-danger" v-if="boosters_owned > 0" v-on:click="openBooster">Open Booster Card
+                </button>
+                <button class="btn btn-danger" v-else v-on:click="openBooster" disabled>Open Booster Card
                 </button>
               </div>
               <div class="col">
