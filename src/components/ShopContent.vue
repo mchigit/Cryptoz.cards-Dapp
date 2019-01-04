@@ -95,6 +95,15 @@ export default {
     setTotalSupply: function(_total){
       console.log('Updating total types...');
       this.total_supply = _total.toString();
+      
+      //Lets get all the cards now
+        var self = this;
+        Cryptoz.deployed().then(function(instance) {
+          //now lets loop call all the Cards this user has tokens for
+          for (var i = 1; i < _total; i++) {
+            instance.allCardTypes.call(i).then(console.log)
+          }
+        })
     },
     setBoostersOwned : function(_total){
       console.log('Updating Boosters owned...');
