@@ -25,7 +25,7 @@
               <div class="col"><strong>Your Cryptoz:</strong> {{cards_owned}}
               </div>
               <div class="col text-right"  v-if="ownsCards == 1">
-                Sort | Search | Transfer
+                <button class="btn btn-danger" v-on:click="sortByName">Sort By Name</button> | Search | Transfer
               </div>
             </div>
             <br>
@@ -96,7 +96,7 @@ export default {
       console.log('Buy and Open Booster card...');
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyBoosterCardAndOpen({from: account, value:10000000000000000});
+        return instance.buyBoosterCardAndOpen({from: account, value:2000000000000000});
       //}).then(this.handleBuyBooster)
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
@@ -176,6 +176,8 @@ export default {
           res.data.attributes.rarity = 'card-bg card-bg-1';
           break;
       }
+      res.data.attributes.unlock_czxp = res.data.attributes.unlock_czxp.toLocaleString('de-DE');
+      
       
       this.allCards.push(res.data);
     },
@@ -190,7 +192,7 @@ export default {
     },
     setCzxpBalance :  function(bal){
       //console.log(bal.toString());
-      this.czxp_balance = bal.toString();
+      this.czxp_balance = bal.toLocaleString();
     },
     setCryptozBalance : function(bal) {
       //console.log(bal.toString());
@@ -201,6 +203,9 @@ export default {
       //console.log(_total);
       this.boosters_owned = _total.toString();
     },
+    sortByName : function() {
+      this.allCards.sort(dynamicSort("name"))
+    }
   }
 }
 

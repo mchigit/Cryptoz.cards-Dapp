@@ -23,16 +23,16 @@
                 v-for="card in storeCards" :key="card.id"
                 :id="card.id"
                 :name="card.name"
-                :cost="card.cost"
-                :cset="card.cset"
-                :edition_total="card.edition_total"
-                :level="card.card_level"
-                :unlock_czxp="card.unlock_czxp"
-                :buy_czxp="card.buy_czxp"
-                :transfer_czxp="card.transfer_czxp"
-                :sacrifice_czxp="card.sacrifice_czxp"
-                :url="card.graphic"
-                :card_class="card.bg"
+                :cost="card.attributes.cost"
+                :cset="card.attributes.card_set"
+                :edition_total="card.attributes.edition_total"
+                :level="card.attributes.card_level"
+                :unlock_czxp="card.attributes.unlock_czxp"
+                :buy_czxp="card.attributes.buy_czxp"
+                :transfer_czxp="card.attributes.transfer_czxp"
+                :sacrifice_czxp="card.attributes.sacrifice_czxp"
+                :image="card.image"
+                :card_class="card.attributes.rarity"
               ></OwnedCardContent>
           </div>
           
@@ -55,9 +55,7 @@ export default {
       total_supply : 'Loading...',
       boosters_owned : 'Loading...',
       czxp_balance : 'Loading...',
-      storeCards: [
-        {id:0, name: 'Jim Zombie',graphic: 'jim.svg', cost: 300, cset: 'We like to party set', edition_total: ' of 100',unlock_czxp : '1,300,300',card_level: 80, buy_czxp: '1,800',transfer_czxp: '100', sacrifice_czxp: '2,300',bg: 'card-bg card-bg-6'}
-      ]
+      storeCards: []
     }
   },
   mounted () {
@@ -69,7 +67,7 @@ export default {
       console.log('Buy booster called..');
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyBoosterCard(1, {from: account, value:10000000000000000});
+        return instance.buyBoosterCard(1, {from: account, value:2000000000000000});
       //}).then(this.handleBuyBooster)
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
