@@ -28,17 +28,46 @@
 		        </div>
           </div>
         </div>
+          <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" v-on:click="buyCard">
+            Buy Card {{cost}}E
+          </button>
+          <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" v-on:click="getCard">
+            Get Card {{id}}
+          </button>
       </div>
+      <br>
   </div>
 </template>
 
 <script>
 export default {
   name: 'OwnedCardContent',
-  props: ['id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class'],
+  props: ['id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
   data () {
     return {
 
+    }
+  },
+  methods : {
+    buyCard : function(){
+      console.log("Buying card:" + this.id);
+      var self = this;
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.buyCard(self.id, {from: account, value:(self.cost*1000000000000000000), gas:350000});
+      }).then(function(res) {
+        console.log(res)
+      })
+    },
+    getCard : function(){
+      console.log("Claiming card:" + this.id);
+      var self = this;
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.getFreeCard(self.id, {from: account, gas:338000});
+      }).then(function(res) {
+        console.log(res)
+      })
     }
   }
 }
@@ -176,7 +205,7 @@ export default {
 
 .flip-container, .front, .back {
 	width: 232px;
-	height: 480px;
+	height: 410px;
 }
 
 /* flip speed goes here */

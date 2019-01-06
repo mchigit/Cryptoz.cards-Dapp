@@ -28,6 +28,7 @@
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('rarity')">Rarity</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('cost')">Cost</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_set')">Card Set</a>
+                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('in_store')">In Store</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('edition_total')">Edition Total</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_level')">Level</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('unlock_czxp')">Unlock CZXP</a>
@@ -49,12 +50,13 @@
           <br>
           <div class="row">
               <OwnedCardContent
-                v-for="card in storeCards" :key="card.id"
-                :id="card.id"
+                v-for="card in storeCards" :key="card.attributes.id"
+                :id="card.attributes.id"
                 :name="card.name"
                 :cost="card.attributes.cost"
                 :cset="card.attributes.card_set"
                 :edition_total="card.attributes.edition_total"
+                :in_store="card.attributes.in_store"
                 :level="card.attributes.card_level"
                 :unlock_czxp="card.attributes.unlock_czxp"
                 :buy_czxp="card.attributes.buy_czxp"
