@@ -48,9 +48,9 @@
             </div>
             <br>
             <div class="row" v-if="ownsCards == 1">
-              <OwnedCardContent
-                v-for="card in allCards" :key="card.id"
-                :id="card.id"
+              <OwnedCardContent v-on:child-sent="handleChild"
+                v-for="card in allCards" :key="card.attributes.id"
+                :id="card.attributes.id"
                 :name="card.name"
                 :cost="card.attributes.cost"
                 :cset="card.attributes.card_set"
@@ -92,6 +92,9 @@ export default {
     }
   },
   methods : {
+    handleChild : function() {
+      console.log('CryptContent got child event..');
+    },
     setSubscriptions : function() {
       CzxpToken.deployed().then(function(instance) {
         return instance.balanceOf(account);

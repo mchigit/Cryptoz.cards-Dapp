@@ -161,6 +161,9 @@ export default {
       //.on("data", function(blockHeader) {
       .on("data", this.setName) //pass the block number into our function
       .on("error", console.error);
+    },
+    handleTransaction : function(val) {
+      console.log('Parent caught the transaction..' + val);
     }
   } //methods
 }

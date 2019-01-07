@@ -34,8 +34,18 @@
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" v-on:click="getCard">
             Get Card {{id}}
           </button>
+          <button class="btn btn-danger" v-else-if="$route.path == '/crypt'" v-on:click="sacrificeCard">
+            sacrifice {{id}}
+          </button>
       </div>
       <br>
+      <div v-if="showTransaction == 1" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Tx# {{transaction_number}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
   </div>
 </template>
 
@@ -45,7 +55,8 @@ export default {
   props: ['id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
   data () {
     return {
-
+      showTransaction : 0,
+      transaction_number : 0
     }
   },
   methods : {
@@ -54,9 +65,12 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyCard(self.id, {from: account, value:(self.cost*1000000000000000000), gas:350000});
+        return instance.buyCard(self.id, {from: account, value:(self.cost*1000000000000000000), gas:362000});
       }).then(function(res) {
-        console.log(res)
+        console.log(res);
+        self.showTransaction =1
+        self.transaction_number = res.tx
+        self.$emit('child-sent')
       })
     },
     getCard : function(){
@@ -64,9 +78,24 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.getFreeCard(self.id, {from: account, gas:338000});
+        return instance.getFreeCard(self.id, {from: account, gas:342000});
       }).then(function(res) {
         console.log(res)
+        self.showTransaction =1
+        self.transaction_number = res.tx
+        self.$emit('child-sent')
+      })
+    },
+    sacrificeCard : function() {
+      console.log("Sacrificing card:" + this.id);
+      var self = this;
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.sacrifice(self.id, {from:account, gas: 350000});
+      }).then(function(res){
+        console.log("sacrifice result:");
+        console.log(res);
+        self.$emit('child-sent')
       })
     }
   }
@@ -236,5 +265,12 @@ export default {
 .back {
 	transform: rotateY(180deg);
 }
+
+  .alert {
+    position: fixed;
+    z-index: 1000;
+    top: 28em;
+    left:36em;
+  }
 
 </style>

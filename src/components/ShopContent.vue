@@ -2,6 +2,7 @@
   <div>
         
         <main role="main" class="container">
+          
         <div class="jumbotron">
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy and open a booster card, which will randomly mint an unlimited edition card</p>
@@ -49,7 +50,7 @@
             </div>
           <br>
           <div class="row">
-              <OwnedCardContent
+              <OwnedCardContent v-on:child-sent="handleChild"
                 v-for="card in storeCards" :key="card.attributes.id"
                 :id="card.attributes.id"
                 :name="card.name"
@@ -66,7 +67,8 @@
                 :card_class="card.attributes.rarity"
               ></OwnedCardContent>
           </div>
-          
+
+
         </div>
       </main>
   </div>
@@ -88,6 +90,7 @@ export default {
       total_supply : 'Loading...',
       boosters_owned : 'Loading...',
       czxp_balance : 'Loading...',
+      transaction_number : '',
       storeCards: [],
       allCards : [] //We never mangle this
     }
@@ -97,6 +100,10 @@ export default {
     this.setSubscriptions();
   },
   methods : {
+    handleChild : function(){
+      console.log('Handle child sent...in Shop')
+      
+    },
     doHideUnlimited : function(){
       console.log('Hide/show unlimited' + this.showUnlimited)
       if(this.showUnlimited){
@@ -119,6 +126,8 @@ export default {
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
       this.setSubscriptions();
+      this.$emit('child-sent')
+      
     },
     setSubscriptions : function() {
       
@@ -130,10 +139,13 @@ export default {
         return instance.boosterPacksOwned(account);
       }).then(this.setBoostersOwned)
       
+      this.updateCZXPBalance()
+      
+    },
+    updateCZXPBalance :  function() {
       CzxpToken.deployed().then(function(instance) {
         return instance.balanceOf(account);
       }).then(this.setCzxpBalance)
-      
     },
     setTotalSupply: function(_total){
       console.log('Updating total types...');
@@ -210,5 +222,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
