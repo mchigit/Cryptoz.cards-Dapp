@@ -80,14 +80,24 @@ export default {
     OwnedCardContent
   },
   mounted () {
-    this.setSubscriptions();
+    //first check if the dapp is authed and logged in
+    console.log('cryptcontent mounted...')
+    
+    if(window.account === undefined){
+      this.$root.$on('userLoggedIn', () => {
+        console.log('userLoggedIn...cryptContent..run subscriptions');
+        this.setSubscriptions();
+      })
+    }else{
+      this.setSubscriptions();
+    }
   },
   data () {
     return {
-      czxp_balance : 'Loading...',
+      czxp_balance : 'Log in Metamask',
       ownsCards : 0,
-      cards_owned : 'Loading...',
-      boosters_owned : 'Loading...',
+      cards_owned : 'Log in Metamask',
+      boosters_owned : 'Log in Metamask',
       allCards: []
     }
   },

@@ -2,7 +2,7 @@
   <div id="app">
     <AppHeader v-on:doLogin="onDoLogin" v-bind:network_state="network_state" v-bind:wallet="wallet" />
     <transition name="component-fade" mode="out-in">
-      <router-view></router-view>
+      <router-view v-bind:wallet="wallet"></router-view>
     </transition>
     <AppFooter v-bind:network_name="network_name" v-bind:network_state="network_state" />
   </div>
@@ -82,8 +82,8 @@ export default {
       window.Cryptoz   = contract(cryptoz_artifacts);
       window.CzxpToken = contract(cryptoz_token_artifacts);
       Cryptoz.setProvider(web3.currentProvider);
-      console.log('Cryptoz is defined...');
       CzxpToken.setProvider(web3.currentProvider);
+      console.log('Cryptoz and czxp token contracts are defined...');
     },
     onDoLogin : function () {
       // Modern dapp browsers...
@@ -104,6 +104,10 @@ export default {
               console.log("User denied our app, that is sad");
               console.log(error);
           }
+          
+          //tell children components we are ready
+          
+          
         //}
       }
       // Legacy dapp browsers...
@@ -141,6 +145,7 @@ export default {
         this.network_state = 2; //we are logged in
         this.wallet = data.selectedAddress.toString();
         window.account = data.selectedAddress; // global for components to grab at
+        this.$root.$emit('userLoggedIn');
       }else{
         this.network_state = 1; // logged out
       }
