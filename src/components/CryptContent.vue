@@ -48,9 +48,10 @@
             </div>
             <br>
             <div class="row" v-if="ownsCards == 1">
-              <OwnedCardContent v-on:child-sent="handleChild"
-                v-for="card in allCards" :key="card.attributes.id"
-                :id="card.attributes.id"
+              <OwnedCardContent v-on:card-updated="handleCardUpdated"
+                v-for="card in allCards" :key="card.id"
+                :id="card.id"
+                :type_id="card.attributes.type_id"
                 :name="card.name"
                 :cost="card.attributes.cost"
                 :cset="card.attributes.card_set"
@@ -98,12 +99,14 @@ export default {
       ownsCards : 0,
       cards_owned : 'Log in Metamask',
       boosters_owned : 'Log in Metamask',
+      el : 0,
       allCards: []
     }
   },
   methods : {
-    handleChild : function() {
-      console.log('CryptContent got child event..');
+    handleCardUpdated : function() {
+      console.log('CryptContent got child event..re-render the view');
+      this.setSubscriptions();
     },
     setSubscriptions : function() {
       CzxpToken.deployed().then(function(instance) {
@@ -133,8 +136,11 @@ export default {
       
     },
     handleGetAllCards : function(res) {
-      console.log('Handling got all cryptoz...');
+      console.log('Handling tokensOfOwner...');
       //console.log(res);
+      
+      //reset the view to empty
+      this.allCards = []
       
       if(res.length > 0){
         console.log('Got cards.. start render');
@@ -142,48 +148,55 @@ export default {
         //first we update the view
         this.ownsCards = 1;
         
+        
+        //Place to track our token array data
         var tokenIdList = [];
-        res.forEach(function(element){
-          tokenIdList.push(element.c[0]);
-        })
-        
-        //reset the view
-        this.allCards = [];
-        
-        Cryptoz.deployed().then(function(instance) {
-          //now lets loop call all the Cards this user has tokens for
-          for (var i = 0; i < tokenIdList.length; i++) {
-            instance.getCardByTokenId.call(tokenIdList[i]).then(function (elementReturned) {
-              //console.log('A card !');
-              //console.log(elementReturned);
-              //console.log(elementReturned[0].c[0] + ' ' + elementReturned[2].c[0]);
-              
-              //make a call to get the json cardType objects, push on allCards[]
-              
-              axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + elementReturned[0].c[0])
-              .then(function(res){
-                //do the edition total
-                // #4  , #4 of 300
-                if(res.data.attributes.edition_total == 0) //unlimited
-                {
-                  res.data.attributes.edition_total = '#'+elementReturned[1].c[0];
-                }else{
-                  res.data.attributes.edition_total = '#'+elementReturned[1].c[0] +' of '+res.data.attributes.edition_total;
-                }
-                
-                self.handleGotCardData(res);
-              })
-              .catch(error => {
-                console.log(error);
-              })
 
-            })
-          }// end for loop
+        //Define a function to do all our handling and chain the data before passing back to our view
+        var getCard = function(tokenId){
+
+          Cryptoz.deployed().then(function(instance) {
+            return instance.getCardByTokenId.call(tokenId)
+          }).then(function(elementReturned) {
+            //console.log('A card !' + tokenId);
+            //console.log(elementReturned);
+            tokenIdList[tokenId] = elementReturned
+            return axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + elementReturned[0].c[0])
+          }).then(function(res){
+            //console.log('token id:' + tokenId);
+            //console.log('edition:' + tokenIdList[tokenId][1].c[0])
+            //console.log(res)
+            
+            //card token id
+            res.data.id = tokenId;
+            
+            //Edition total
+            // #4  , #4 of 300
+            if(res.data.attributes.edition_total == 0) //unlimited
+            {
+              res.data.attributes.edition_total = '#'+tokenIdList[tokenId][1].c[0];
+            }else{
+              res.data.attributes.edition_total = '#'+tokenIdList[tokenId][1].c[0] +' of '+res.data.attributes.edition_total;
+            }
+            
+            //pass the card data array to our view update handler
+            self.handleGotCardData(res);
+          })
+        }
+        
+        //Iterate through all our cards
+        res.forEach(function(element){
+          //tokenIdList.push(element.c[0]);
+          getCard(element.c[0])
         })
+        
         
       }else{
         console.log('no cards returned from handleGetAllCards()');
       }
+    },
+    getCurrentValue : function() {
+      return this.el;
     },
     handleGotCardData : function(res) {
       //console.log(res.data);

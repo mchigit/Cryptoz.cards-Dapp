@@ -51,8 +51,8 @@
           <br>
           <div class="row">
               <OwnedCardContent v-on:child-sent="handleChild"
-                v-for="card in storeCards" :key="card.attributes.id"
-                :id="card.attributes.id"
+                v-for="card in storeCards" :key="card.attributes.type_id"
+                :type_id="card.attributes.type_id"
                 :name="card.name"
                 :cost="card.attributes.cost"
                 :cset="card.attributes.card_set"

@@ -2,7 +2,7 @@
   <div id="app">
     <AppHeader v-on:doLogin="onDoLogin" v-bind:network_state="network_state" v-bind:wallet="wallet" />
     <transition name="component-fade" mode="out-in">
-      <router-view v-bind:wallet="wallet"></router-view>
+      <router-view></router-view>
     </transition>
     <AppFooter v-bind:network_name="network_name" v-bind:network_state="network_state" />
   </div>

@@ -32,7 +32,7 @@
             Buy Card {{cost}}E
           </button>
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" v-on:click="getCard">
-            Get Card {{id}}
+            Get Card {{type_id}}
           </button>
           <button class="btn btn-danger" v-else-if="$route.path == '/crypt'" v-on:click="sacrificeCard">
             sacrifice {{id}}
@@ -52,7 +52,7 @@
 <script>
 export default {
   name: 'OwnedCardContent',
-  props: ['id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
+  props: ['id','type_id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
   data () {
     return {
       showTransaction : 0,
@@ -61,11 +61,11 @@ export default {
   },
   methods : {
     buyCard : function(){
-      console.log("Buying card:" + this.id);
+      console.log("Buying card:" + this.type_id);
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyCard(self.id, {from: account, value:(self.cost*1000000000000000000), gas:362000});
+        return instance.buyCard(self.type_id, {from: account, value:(self.cost*1000000000000000000), gas:362000});
       }).then(function(res) {
         console.log(res);
         self.showTransaction =1
@@ -74,11 +74,11 @@ export default {
       })
     },
     getCard : function(){
-      console.log("Claiming card:" + this.id);
+      console.log("Claiming card:" + this.type_id);
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.getFreeCard(self.id, {from: account, gas:342000});
+        return instance.getFreeCard(self.type_id, {from: account, gas:342000});
       }).then(function(res) {
         console.log(res)
         self.showTransaction =1
@@ -95,7 +95,7 @@ export default {
       }).then(function(res){
         console.log("sacrifice result:");
         console.log(res);
-        self.$emit('child-sent')
+        self.$emit('card-updated')
       })
     }
   }
