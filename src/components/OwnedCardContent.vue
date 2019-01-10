@@ -35,8 +35,13 @@
             Get Card {{type_id}}
           </button>
           <button class="btn btn-danger" v-else-if="$route.path == '/crypt'" v-on:click="sacrificeCard">
-            sacrifice {{id}}
+            Sacrifice {{id}}
           </button>
+          <div class="float-right">
+          <button class="btn btn-danger btn-gift" if="$route.path == '/crypt'" v-on:click="transferCard">
+            <img src="static/baseline_card_giftcard_white_24dp.png" />
+          </button>
+          </div>
       </div>
       <br>
       <div v-if="showTransaction == 1" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -97,6 +102,9 @@ export default {
         console.log(res);
         self.$emit('card-updated')
       })
+    },
+    transferCard : function() {
+      console.log('Transfer card called..' + this.id);
     }
   }
 }
@@ -271,6 +279,10 @@ export default {
     z-index: 1000;
     top: 28em;
     left:36em;
+  }
+  
+  .btn-gift{
+    color:#fff;
   }
 
 </style>

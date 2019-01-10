@@ -137,7 +137,7 @@ export default {
     },
     handleGetAllCards : function(res) {
       console.log('Handling tokensOfOwner...');
-      //console.log(res);
+      console.log(res);
       
       //reset the view to empty
       this.allCards = []
