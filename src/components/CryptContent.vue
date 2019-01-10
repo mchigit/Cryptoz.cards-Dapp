@@ -84,14 +84,19 @@ export default {
     //first check if the dapp is authed and logged in
     console.log('cryptcontent mounted...')
     
-    if(window.account === undefined){
       this.$root.$on('userLoggedIn', () => {
+        console.log('hey userLoggedIn event in Crypt!')
+        console.log(window.account)
         console.log('userLoggedIn...cryptContent..run subscriptions');
+        //this.$root.$off('userLoggedIn')
         this.setSubscriptions();
       })
-    }else{
-      this.setSubscriptions();
+
+    //if the user has logged, start it up
+    if(window.account !== undefined){
+      this.setSubscriptions()
     }
+      
   },
   data () {
     return {
@@ -199,7 +204,7 @@ export default {
       return this.el;
     },
     handleGotCardData : function(res) {
-      //console.log(res.data);
+      console.log(res.data);
       //Append the bg
       switch(res.data.attributes.rarity){
         case "Common":

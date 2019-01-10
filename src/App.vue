@@ -128,7 +128,7 @@ export default {
       web3.eth.getBalance(this.wallet, this.updateBalance);
     },
     updateBalance : function(val) {
-      console.log(val);
+      console.log('ETH balance:'+val);
     },
     networkDetected :  function(val) {
       this.network_state = 1;
@@ -140,19 +140,32 @@ export default {
       this.network_name = 'You are connected to Ethereum ' + this.eth_network_name +' Block: '+ block.number.toString();
     },
     handleUserChange : function(data) {
-      //console.log(data);
-      if(data.selectedAddress){
+      //console.log('handleUserChange:' + data.networkVersion);
+      
+      //If user account has changed.. then update
+      if(data.selectedAddress !== window.account){
+        console.log(data.selectedAddress +' not the same as '+window.account)
         this.network_state = 2; //we are logged in
         this.wallet = data.selectedAddress.toString();
         window.account = data.selectedAddress; // global for components to grab at
         this.$root.$emit('userLoggedIn');
-      }else{
-        this.network_state = 1; // logged out
       }
+      
+      //if network has changed, handle it
+      if(data.networkVersion !== window.networkVersion){
+        console.log(data.networkVersion +' not the same as '+window.networkVersion)
+        //make sure we are on a network that has our contacts
+        //1 = main,
+        
+        
+        window.networkVersion = data.networkVersion
+      }
+      
     },
     setSubscriptions : function() {
       console.log('Setting all subscriptions...');
       
+      //This fires every time MetaMask is opened
       web3.currentProvider.publicConfigStore.on('update', this.handleUserChange);
       
       var subscription = web3.eth.subscribe('newBlockHeaders', function(error, result){
