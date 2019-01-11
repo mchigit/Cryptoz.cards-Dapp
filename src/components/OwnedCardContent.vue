@@ -34,13 +34,15 @@
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" v-on:click="getCard">
             Get Card {{type_id}}
           </button>
-          <button class="btn btn-danger" v-else-if="$route.path == '/crypt'" v-on:click="sacrificeCard">
-            Sacrifice {{id}}
-          </button>
-          <div class="float-right">
-          <button class="btn btn-danger btn-gift" if="$route.path == '/crypt'" v-on:click="transferCard">
-            <img src="static/baseline_card_giftcard_white_24dp.png" />
-          </button>
+          <div v-else-if="$route.path == '/crypt'">
+            <button class="btn btn-danger" v-on:click="sacrificeCard">
+              Sacrifice {{id}}
+            </button>
+            <div class="float-right">
+              <button class="btn btn-danger btn-gift" v-on:click="transferCard">
+                <img src="static/baseline_card_giftcard_white_24dp.png" />
+              </button>
+            </div>
           </div>
       </div>
       <br>

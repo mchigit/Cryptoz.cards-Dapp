@@ -140,7 +140,7 @@ export default {
       this.network_name = 'You are connected to Ethereum ' + this.eth_network_name +' Block: '+ block.number.toString();
     },
     handleUserChange : function(data) {
-      //console.log('handleUserChange:' + data.networkVersion);
+      console.log('handleUserChange:' + data.networkVersion);
       
       //If user account has changed.. then update
       if(data.selectedAddress !== window.account){

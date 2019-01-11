@@ -97,7 +97,20 @@ export default {
   },
   mounted () {
     console.log('The shop is mounted, call for the cards');
-    this.setSubscriptions();
+       
+       this.$root.$on('userLoggedIn', () => {
+        console.log('hey userLoggedIn event in Crypt!')
+        console.log(window.account)
+        console.log('userLoggedIn...cryptContent..run subscriptions');
+        //this.$root.$off('userLoggedIn')
+        this.setSubscriptions();
+      })
+
+    //if the user has logged, start it up
+    if(window.account !== undefined){
+      this.setSubscriptions()
+    }
+      
   },
   methods : {
     handleChild : function(){
@@ -130,6 +143,12 @@ export default {
       
     },
     setSubscriptions : function() {
+      
+      if(Cryptoz == undefined){
+        console.log('No Cryptoz-contract in shop..')
+      }else{
+        console.log('YES Cryptoz-contract in shop..')
+      }
       
       Cryptoz.deployed().then(function(instance) {
         return instance.getTotalTypes();
