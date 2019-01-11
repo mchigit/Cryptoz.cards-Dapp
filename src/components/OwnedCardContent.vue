@@ -1,5 +1,28 @@
 <template>
   <div>
+
+<!-- Modal -->
+<div class="modal fade" v-bind:id="'modal'+id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Gift {{id}} to another wallet</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Enter the wallet address to send this card to:
+        <input type="text" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
       <div class="col">
         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
 	        <div class="flipper">
@@ -39,7 +62,7 @@
               Sacrifice {{id}}
             </button>
             <div class="float-right">
-              <button class="btn btn-danger btn-gift" v-on:click="transferCard">
+              <button class="btn btn-danger btn-gift" data-toggle="modal"  v-bind:data-target="'#modal'+id">
                 <img src="static/baseline_card_giftcard_white_24dp.png" />
               </button>
             </div>
