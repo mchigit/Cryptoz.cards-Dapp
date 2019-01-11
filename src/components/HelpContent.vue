@@ -52,6 +52,36 @@
       </div>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingFour">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseFour" role="button" aria-expanded="false" aria-controls="collapseFour">
+          How many types of Cryptoz are available ?
+        </a>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+        The Shop will show you the current total number of Cryptoz available at the current time. We continue to load new sets containing approx 10-20 cards every month until we reach a hard limit of a total of 5000 types. The Ethereum contracts do not allow us or anyone to edit or overwrite a card types definition once they have been loaded.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingFive">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseFive" role="button" aria-expanded="false" aria-controls="collapseFive">
+          What is the difference between Unlimited and the Limited edition card types ?
+        </a>
+      </h5>
+    </div>
+    <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
+      <div class="card-body">
+        An Unlimited edition card type
+      </div>
+    </div>
+  </div>
+  
+  
 </div>
       </div>
     </main>
