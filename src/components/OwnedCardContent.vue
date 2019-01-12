@@ -13,11 +13,11 @@
       </div>
       <div class="modal-body">
         Enter the wallet address to send this card to:
-        <input type="text" />
+        <input id="" class="form-control" type="text" placeholder="valid ethereum wallet address" />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" v-on:click="transferCard">Gift this card</button>
       </div>
     </div>
   </div>
