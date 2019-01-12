@@ -148,6 +148,7 @@ export default {
         this.network_state = 2; //we are logged in
         this.wallet = data.selectedAddress.toString();
         window.account = data.selectedAddress; // global for components to grab at
+        web3.eth.defaultAccount = web3.eth.accounts[0]
         this.$root.$emit('userLoggedIn');
       }
       

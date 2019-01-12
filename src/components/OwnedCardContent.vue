@@ -12,12 +12,12 @@
         </button>
       </div>
       <div class="modal-body">
-        Enter the wallet address to send this card to:
-        <input id="" class="form-control" type="text" placeholder="valid ethereum wallet address" />
+        Enter a valid Ethereum wallet address to send this card to:
+        <input id="toWallet" class="form-control" type="text" v:bind:value="newWallet" required />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" v-on:click="transferCard">Gift this card</button>
+        <button type="button" class="btn btn-danger" v-on:click="transferCard">Confirm Transfer</button>
       </div>
     </div>
   </div>
@@ -86,7 +86,8 @@ export default {
   data () {
     return {
       showTransaction : 0,
-      transaction_number : 0
+      transaction_number : 0,
+      newWallet : ''
     }
   },
   methods : {
@@ -130,6 +131,26 @@ export default {
     },
     transferCard : function() {
       console.log('Transfer card called..' + this.id);
+      
+      
+      var toWallet = document.getElementById('toWallet').value
+      
+      console.log('to ' + toWallet)
+      console.log('from ' + window.account)
+      
+      var self = this
+      var acct = window.account
+      
+      
+      
+      Cryptoz.deployed().then(function(instance) {
+        console.log(window.account+' '+toWallet+' '+self.id)
+        return instance.transferFrom(window.account, toWallet, self.id, {gas: 350000});
+      }).then(function(res){
+        console.log("tranfer result:");
+        console.log(res);
+        self.$emit('card-updated')
+      })
     }
   }
 }
