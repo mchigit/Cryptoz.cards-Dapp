@@ -145,7 +145,7 @@ export default {
       
       Cryptoz.deployed().then(function(instance) {
         console.log(window.account+' '+toWallet+' '+self.id)
-        return instance.transferFrom(window.account, toWallet, self.id, {gas: 350000});
+        return instance.transferFrom(window.account, toWallet, self.id, {from:account, gas: 350000});
       }).then(function(res){
         console.log("tranfer result:");
         console.log(res);
