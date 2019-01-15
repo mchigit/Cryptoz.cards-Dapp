@@ -6,6 +6,9 @@
         <div class="jumbotron">
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy and open a booster card, which will randomly mint an unlimited edition card</p>
+          <p>
+            To Claim a FREE card Or buy a Limited edition card, you will need the required minimun balance of CZXP tokens
+          </p>
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
           <div class="row">
             <div class="col">
