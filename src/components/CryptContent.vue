@@ -142,7 +142,7 @@ export default {
     },
     handleGetAllCards : function(res) {
       console.log('Handling tokensOfOwner...');
-      console.log(res);
+      //console.log(res);
       
       //reset the view to empty
       this.allCards = []
@@ -204,7 +204,7 @@ export default {
       return this.el;
     },
     handleGotCardData : function(res) {
-      console.log(res.data);
+      //console.log(res.data);
       //Append the bg
       switch(res.data.attributes.rarity){
         case "Common":

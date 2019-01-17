@@ -84,6 +84,68 @@ export default {
       Cryptoz.setProvider(web3.currentProvider);
       CzxpToken.setProvider(web3.currentProvider);
       console.log('Cryptoz and czxp token contracts are defined...');
+      
+      //Set some Log watches
+      console.log('Setting Log event watches..');
+      
+      
+      var cardOpenedEvent;
+      var cardPurchasedEvent;
+      var cardTransferEvent;
+      var boostCardPurchasedEvent;
+      var sacrificeCardEvent;
+      var czxpGainedEvent;
+      
+      Cryptoz.deployed().then(function(instance) {
+        
+        cardOpenedEvent = instance.LogPackOpened();
+        cardPurchasedEvent = instance.LogCardPurchased();
+        cardTransferEvent = instance.Transfer();
+        czxpGainedEvent = instance.CZXPGained();
+        sacrificeCardEvent = instance.SacrificeCardEvent();
+        
+        cardOpenedEvent.watch(function(error, result){
+          if(!error){
+            console.log("cardOpenedEvent result:");
+            console.log(result);
+
+          }else{
+            console.log("cardOpenedEvent error:" . error);
+          }
+        });
+      
+        cardPurchasedEvent.watch(function(error, result){
+          if(!error){
+            console.log("cardPurchasedEvent result:");
+            console.log(result);
+
+          }else{
+            console.log("cardPurchasedEvent error:" . error);
+          }
+        });
+        
+        cardTransferEvent.watch(function(error, result){
+          if(!error){
+            console.log("cardTransferEvent result:");
+            console.log(result);
+            
+          }else{
+            console.log("cardTransferEvent error:" . error);
+          }
+        });
+    
+        sacrificeCardEvent.watch(function(error, result){
+          if(!error){
+            console.log("sacrificeCardEvent result:");
+            console.log(result);
+            
+          }else{
+            console.log("sacrificeCardEvent error:" . error);
+          }
+        });
+        
+      })
+      
     },
     onDoLogin : function () {
       // Modern dapp browsers...
@@ -106,7 +168,6 @@ export default {
           }
           
           //tell children components we are ready
-          
           
         //}
       }
@@ -158,7 +219,6 @@ export default {
         //make sure we are on a network that has our contacts
         //1 = main,
         
-        
         window.networkVersion = data.networkVersion
       }
       
@@ -180,6 +240,7 @@ export default {
       //.on("data", function(blockHeader) {
       .on("data", this.setName) //pass the block number into our function
       .on("error", console.error);
+      
     },
     handleTransaction : function(val) {
       console.log('Parent caught the transaction..' + val);
