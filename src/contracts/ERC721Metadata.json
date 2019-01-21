@@ -405,8 +405,8 @@
           }
         ],
         "contractDependencies": [
-          3052,
-          2227
+          2227,
+          3052
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, optional enumeration extension\n@dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -694,8 +694,8 @@
           }
         ],
         "contractDependencies": [
-          3052,
-          2227
+          2227,
+          3052
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, optional metadata extension\n@dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -966,10 +966,10 @@
           }
         ],
         "contractDependencies": [
+          2227,
           2903,
           2923,
-          3052,
-          2227
+          3052
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, full implementation interface\n@dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -1051,8 +1051,8 @@
           }
         ],
         "contractDependencies": [
-          3052,
-          2227
+          2227,
+          3052
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, optional enumeration extension\n@dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -1340,8 +1340,8 @@
           }
         ],
         "contractDependencies": [
-          3052,
-          2227
+          2227,
+          3052
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, optional metadata extension\n@dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -1612,10 +1612,10 @@
           }
         ],
         "contractDependencies": [
+          2227,
           2903,
           2923,
-          3052,
-          2227
+          3052
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, full implementation interface\n@dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -1643,5 +1643,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-01-20T21:22:54.808Z"
+  "updatedAt": "2019-01-21T01:18:04.002Z"
 }

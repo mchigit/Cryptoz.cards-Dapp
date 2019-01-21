@@ -1127,17 +1127,17 @@
           }
         ],
         "contractDependencies": [
-          2903,
-          2923,
-          2930,
-          3052,
-          3600,
           1264,
           2047,
           2198,
           2227,
           2278,
-          2458
+          2458,
+          2903,
+          2923,
+          2930,
+          3052,
+          3600
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -12459,17 +12459,17 @@
           }
         ],
         "contractDependencies": [
-          2903,
-          2923,
-          2930,
-          3052,
-          3600,
           1264,
           2047,
           2198,
           2227,
           2278,
-          2458
+          2458,
+          2903,
+          2923,
+          2930,
+          3052,
+          3600
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -23742,6 +23742,12 @@
     "version": "0.4.24+commit.e67f0147.Emscripten.clang"
   },
   "networks": {
+    "4": {
+      "events": {},
+      "links": {},
+      "address": "0x6dbc959610c45ea308d469924708cd88532dafed",
+      "transactionHash": "0xfcb06bb940522e488edb382384be51bddf65a900595457bb73b2b5cde18c5b89"
+    },
     "4447": {
       "events": {},
       "links": {},
@@ -23750,5 +23756,5 @@
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-01-20T21:33:27.249Z"
+  "updatedAt": "2019-01-21T04:55:02.415Z"
 }
