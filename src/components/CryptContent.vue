@@ -170,10 +170,19 @@ export default {
           }).then(function(res){
             //console.log('token id:' + tokenId);
             //console.log('edition:' + tokenIdList[tokenId][1].c[0])
-            //console.log(res)
+            console.log(res)
             
             //card token id
             res.data.id = tokenId;
+            
+            var newAttr = [];
+            //format the attributes to match our JS objects
+            res.data.attributes.forEach(function(element){
+              newAttr[element.trait_type] = element.value;
+            })
+            
+            //Overwrite our JSON reponse with vue friendly card binding data
+            res.data.attributes = newAttr;
             
             //Edition total
             // #4  , #4 of 300
@@ -230,7 +239,8 @@ export default {
       this.allCards.push(res.data);
     },
     handleBuyBooster : function(result) {
-      console.log('Handling buy booster');
+      console.log('Handling buy booster...');
+      console.log(result)
       this.setSubscriptions();
     },
     openBooster : function () {

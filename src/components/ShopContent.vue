@@ -195,6 +195,16 @@ export default {
     },
     handleGotCardData : function(res) {
       //console.log(res.data);
+      
+      var newAttr = [];
+      //format the attributes to match our JS objects
+      res.data.attributes.forEach(function(element){
+        newAttr[element.trait_type] = element.value;
+      })
+            
+      //Overwrite our JSON reponse with vue friendly card binding data
+      res.data.attributes = newAttr;
+      
       //Append the bg
       switch(res.data.attributes.rarity){
         case "Common":

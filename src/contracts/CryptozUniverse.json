@@ -212,14 +212,14 @@
     "absolutePath": "/home/rprice/Downloads/cryptoz.cards/contracts/CryptozUniverse.sol",
     "exportedSymbols": {
       "CryptozUniverse": [
-        2198
+        2209
       ]
     },
-    "id": 2199,
+    "id": 2210,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2049,
+        "id": 2060,
         "literals": [
           "solidity",
           "^",
@@ -232,9 +232,9 @@
       {
         "absolutePath": "/home/rprice/Downloads/cryptoz.cards/contracts/CZXPToken.sol",
         "file": "./CZXPToken.sol",
-        "id": 2050,
+        "id": 2061,
         "nodeType": "ImportDirective",
-        "scope": 2199,
+        "scope": 2210,
         "sourceUnit": 389,
         "src": "446:25:3",
         "symbolAliases": [],
@@ -243,10 +243,10 @@
       {
         "absolutePath": "/home/rprice/Downloads/cryptoz.cards/node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol",
         "file": "./../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol",
-        "id": 2051,
+        "id": 2062,
         "nodeType": "ImportDirective",
-        "scope": 2199,
-        "sourceUnit": 2459,
+        "scope": 2210,
+        "sourceUnit": 2470,
         "src": "472:81:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -254,10 +254,10 @@
       {
         "absolutePath": "/home/rprice/Downloads/cryptoz.cards/node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol",
         "file": "./../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol",
-        "id": 2052,
+        "id": 2063,
         "nodeType": "ImportDirective",
-        "scope": 2199,
-        "sourceUnit": 2373,
+        "scope": 2210,
+        "sourceUnit": 2384,
         "src": "554:77:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -268,53 +268,53 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 2053,
+              "id": 2064,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2458,
+              "referencedDeclaration": 2469,
               "src": "661:7:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$2458",
+                "typeIdentifier": "t_contract$_Ownable_$2469",
                 "typeString": "contract Ownable"
               }
             },
-            "id": 2054,
+            "id": 2065,
             "nodeType": "InheritanceSpecifier",
             "src": "661:7:3"
           }
         ],
         "contractDependencies": [
-          2458
+          2469
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2198,
+        "id": 2209,
         "linearizedBaseContracts": [
-          2198,
-          2458
+          2209,
+          2469
         ],
         "name": "CryptozUniverse",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 2057,
+            "id": 2068,
             "libraryName": {
               "contractScope": null,
-              "id": 2055,
+              "id": 2066,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2372,
+              "referencedDeclaration": 2383,
               "src": "681:8:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$2372",
+                "typeIdentifier": "t_contract$_SafeMath_$2383",
                 "typeString": "library SafeMath"
               }
             },
             "nodeType": "UsingForDirective",
             "src": "675:27:3",
             "typeName": {
-              "id": 2056,
+              "id": 2067,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "694:7:3",
@@ -326,14 +326,14 @@
           },
           {
             "canonicalName": "CryptozUniverse.cardType",
-            "id": 2076,
+            "id": 2087,
             "members": [
               {
                 "constant": false,
-                "id": 2059,
+                "id": 2070,
                 "name": "cardTypeId",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "746:17:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -342,7 +342,7 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 2058,
+                  "id": 2069,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
                   "src": "746:6:3",
@@ -356,10 +356,10 @@
               },
               {
                 "constant": false,
-                "id": 2061,
+                "id": 2072,
                 "name": "name",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "773:11:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -368,7 +368,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2060,
+                  "id": 2071,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "773:6:3",
@@ -382,10 +382,10 @@
               },
               {
                 "constant": false,
-                "id": 2063,
+                "id": 2074,
                 "name": "set",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "794:10:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -394,7 +394,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2062,
+                  "id": 2073,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "794:6:3",
@@ -408,10 +408,10 @@
               },
               {
                 "constant": false,
-                "id": 2065,
+                "id": 2076,
                 "name": "weiCost",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1025:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -420,7 +420,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2064,
+                  "id": 2075,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1025:7:3",
@@ -434,10 +434,10 @@
               },
               {
                 "constant": false,
-                "id": 2067,
+                "id": 2078,
                 "name": "buyCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1050:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -446,7 +446,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2066,
+                  "id": 2077,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1050:7:3",
@@ -460,10 +460,10 @@
               },
               {
                 "constant": false,
-                "id": 2069,
+                "id": 2080,
                 "name": "transferCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1075:20:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -472,7 +472,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2068,
+                  "id": 2079,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1075:7:3",
@@ -486,10 +486,10 @@
               },
               {
                 "constant": false,
-                "id": 2071,
+                "id": 2082,
                 "name": "sacrificeCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1105:21:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -498,7 +498,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2070,
+                  "id": 2081,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1105:7:3",
@@ -512,10 +512,10 @@
               },
               {
                 "constant": false,
-                "id": 2073,
+                "id": 2084,
                 "name": "unlockCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1136:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -524,7 +524,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2072,
+                  "id": 2083,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1136:7:3",
@@ -538,10 +538,10 @@
               },
               {
                 "constant": false,
-                "id": 2075,
+                "id": 2086,
                 "name": "cardLevel",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1164:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -550,7 +550,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2074,
+                  "id": 2085,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "1164:5:3",
@@ -565,20 +565,20 @@
             ],
             "name": "cardType",
             "nodeType": "StructDefinition",
-            "scope": 2198,
+            "scope": 2209,
             "src": "721:465:3",
             "visibility": "public"
           },
           {
             "canonicalName": "CryptozUniverse.Card",
-            "id": 2083,
+            "id": 2094,
             "members": [
               {
                 "constant": false,
-                "id": 2078,
+                "id": 2089,
                 "name": "cardTypeId",
                 "nodeType": "VariableDeclaration",
-                "scope": 2083,
+                "scope": 2094,
                 "src": "1213:17:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -587,7 +587,7 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 2077,
+                  "id": 2088,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
                   "src": "1213:6:3",
@@ -601,10 +601,10 @@
               },
               {
                 "constant": false,
-                "id": 2080,
+                "id": 2091,
                 "name": "editionNumber",
                 "nodeType": "VariableDeclaration",
-                "scope": 2083,
+                "scope": 2094,
                 "src": "1240:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -613,7 +613,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2079,
+                  "id": 2090,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "1240:4:3",
@@ -627,10 +627,10 @@
               },
               {
                 "constant": false,
-                "id": 2082,
+                "id": 2093,
                 "name": "transferCount",
                 "nodeType": "VariableDeclaration",
-                "scope": 2083,
+                "scope": 2094,
                 "src": "1268:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -639,7 +639,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2081,
+                  "id": 2092,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "1268:4:3",
@@ -654,16 +654,16 @@
             ],
             "name": "Card",
             "nodeType": "StructDefinition",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1192:101:3",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 2086,
+            "id": 2097,
             "name": "baseTokenURI",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1299:51:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -672,7 +672,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 2084,
+              "id": 2095,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "1299:6:3",
@@ -684,7 +684,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "68747470733a2f2f63727970746f7a2e63617264732f646174612f",
-              "id": 2085,
+              "id": 2096,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -703,10 +703,10 @@
           },
           {
             "constant": false,
-            "id": 2090,
+            "id": 2101,
             "name": "cardAssetType",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1418:39:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -715,9 +715,9 @@
               "typeString": "mapping(uint256 => uint8)"
             },
             "typeName": {
-              "id": 2089,
+              "id": 2100,
               "keyType": {
-                "id": 2087,
+                "id": 2098,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1426:7:3",
@@ -733,7 +733,7 @@
                 "typeString": "mapping(uint256 => uint8)"
               },
               "valueType": {
-                "id": 2088,
+                "id": 2099,
                 "name": "uint8",
                 "nodeType": "ElementaryTypeName",
                 "src": "1437:5:3",
@@ -748,10 +748,10 @@
           },
           {
             "constant": false,
-            "id": 2094,
+            "id": 2105,
             "name": "storeBoosterBonus",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1463:43:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -760,9 +760,9 @@
               "typeString": "mapping(uint256 => uint8)"
             },
             "typeName": {
-              "id": 2093,
+              "id": 2104,
               "keyType": {
-                "id": 2091,
+                "id": 2102,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1471:7:3",
@@ -778,7 +778,7 @@
                 "typeString": "mapping(uint256 => uint8)"
               },
               "valueType": {
-                "id": 2092,
+                "id": 2103,
                 "name": "uint8",
                 "nodeType": "ElementaryTypeName",
                 "src": "1482:5:3",
@@ -793,10 +793,10 @@
           },
           {
             "constant": false,
-            "id": 2098,
+            "id": 2109,
             "name": "rarity",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1512:32:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -805,9 +805,9 @@
               "typeString": "mapping(uint256 => uint8)"
             },
             "typeName": {
-              "id": 2097,
+              "id": 2108,
               "keyType": {
-                "id": 2095,
+                "id": 2106,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1520:7:3",
@@ -823,7 +823,7 @@
                 "typeString": "mapping(uint256 => uint8)"
               },
               "valueType": {
-                "id": 2096,
+                "id": 2107,
                 "name": "uint8",
                 "nodeType": "ElementaryTypeName",
                 "src": "1531:5:3",
@@ -838,10 +838,10 @@
           },
           {
             "constant": false,
-            "id": 2102,
+            "id": 2113,
             "name": "totalAvailable",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1550:41:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -850,9 +850,9 @@
               "typeString": "mapping(uint256 => uint16)"
             },
             "typeName": {
-              "id": 2101,
+              "id": 2112,
               "keyType": {
-                "id": 2099,
+                "id": 2110,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1558:7:3",
@@ -868,7 +868,7 @@
                 "typeString": "mapping(uint256 => uint16)"
               },
               "valueType": {
-                "id": 2100,
+                "id": 2111,
                 "name": "uint16",
                 "nodeType": "ElementaryTypeName",
                 "src": "1569:6:3",
@@ -883,36 +883,36 @@
           },
           {
             "constant": false,
-            "id": 2105,
+            "id": 2116,
             "name": "Cards",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1642:21:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_Card_$2083_storage_$dyn_storage",
+              "typeIdentifier": "t_array$_t_struct$_Card_$2094_storage_$dyn_storage",
               "typeString": "struct CryptozUniverse.Card[]"
             },
             "typeName": {
               "baseType": {
                 "contractScope": null,
-                "id": 2103,
+                "id": 2114,
                 "name": "Card",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 2083,
+                "referencedDeclaration": 2094,
                 "src": "1642:4:3",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Card_$2083_storage_ptr",
+                  "typeIdentifier": "t_struct$_Card_$2094_storage_ptr",
                   "typeString": "struct CryptozUniverse.Card"
                 }
               },
-              "id": 2104,
+              "id": 2115,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "1642:6:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_Card_$2083_storage_$dyn_storage_ptr",
+                "typeIdentifier": "t_array$_t_struct$_Card_$2094_storage_$dyn_storage_ptr",
                 "typeString": "struct CryptozUniverse.Card[]"
               }
             },
@@ -921,21 +921,21 @@
           },
           {
             "constant": false,
-            "id": 2109,
+            "id": 2120,
             "name": "allCardTypes",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1670:47:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2076_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2087_storage_$",
               "typeString": "mapping(uint32 => struct CryptozUniverse.cardType)"
             },
             "typeName": {
-              "id": 2108,
+              "id": 2119,
               "keyType": {
-                "id": 2106,
+                "id": 2117,
                 "name": "uint32",
                 "nodeType": "ElementaryTypeName",
                 "src": "1678:6:3",
@@ -947,18 +947,18 @@
               "nodeType": "Mapping",
               "src": "1670:27:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2076_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2087_storage_$",
                 "typeString": "mapping(uint32 => struct CryptozUniverse.cardType)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 2107,
+                "id": 2118,
                 "name": "cardType",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 2076,
+                "referencedDeclaration": 2087,
                 "src": "1688:8:3",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_cardType_$2076_storage_ptr",
+                  "typeIdentifier": "t_struct$_cardType_$2087_storage_ptr",
                   "typeString": "struct CryptozUniverse.cardType"
                 }
               }
@@ -968,10 +968,10 @@
           },
           {
             "constant": false,
-            "id": 2112,
+            "id": 2123,
             "name": "cardTypesIds",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1759:29:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -981,7 +981,7 @@
             },
             "typeName": {
               "baseType": {
-                "id": 2110,
+                "id": 2121,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1759:7:3",
@@ -990,7 +990,7 @@
                   "typeString": "uint256"
                 }
               },
-              "id": 2111,
+              "id": 2122,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "1759:9:3",
@@ -1004,10 +1004,10 @@
           },
           {
             "constant": false,
-            "id": 2116,
+            "id": 2127,
             "name": "cardTypeToEdition",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1888:52:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1016,9 +1016,9 @@
               "typeString": "mapping(uint256 => uint256)"
             },
             "typeName": {
-              "id": 2115,
+              "id": 2126,
               "keyType": {
-                "id": 2113,
+                "id": 2124,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1896:7:3",
@@ -1034,7 +1034,7 @@
                 "typeString": "mapping(uint256 => uint256)"
               },
               "valueType": {
-                "id": 2114,
+                "id": 2125,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1907:7:3",
@@ -1050,20 +1050,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 2122,
+            "id": 2133,
             "name": "CZXPGained",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 2121,
+              "id": 2132,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2118,
+                  "id": 2129,
                   "indexed": true,
                   "name": "beneficiary",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2122,
+                  "scope": 2133,
                   "src": "1978:27:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1072,7 +1072,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2117,
+                    "id": 2128,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1978:7:3",
@@ -1086,11 +1086,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 2120,
+                  "id": 2131,
                   "indexed": false,
                   "name": "czxpAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2122,
+                  "scope": 2133,
                   "src": "2007:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1099,7 +1099,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2119,
+                    "id": 2130,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2007:7:3",
@@ -1118,10 +1118,10 @@
           },
           {
             "constant": false,
-            "id": 2124,
+            "id": 2135,
             "name": "CzxpContractAddress_",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "2059:37:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1130,7 +1130,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 2123,
+              "id": 2134,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "2059:7:3",
@@ -1144,7 +1144,7 @@
           },
           {
             "body": {
-              "id": 2130,
+              "id": 2141,
               "nodeType": "Block",
               "src": "2176:25:3",
               "statements": [
@@ -1154,21 +1154,21 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 2127,
+                      "id": 2138,
                       "name": "revert",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3639,
-                        3640
+                        3650,
+                        3651
                       ],
-                      "referencedDeclaration": 3639,
+                      "referencedDeclaration": 3650,
                       "src": "2186:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_revert_pure$__$returns$__$",
                         "typeString": "function () pure"
                       }
                     },
-                    "id": 2128,
+                    "id": 2139,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1182,14 +1182,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2129,
+                  "id": 2140,
                   "nodeType": "ExpressionStatement",
                   "src": "2186:8:3"
                 }
               ]
             },
             "documentation": "Not much going on here so exit.",
-            "id": 2131,
+            "id": 2142,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -1197,19 +1197,19 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2125,
+              "id": 2136,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2167:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2126,
+              "id": 2137,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2176:0:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2159:42:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1217,7 +1217,7 @@
           },
           {
             "body": {
-              "id": 2139,
+              "id": 2150,
               "nodeType": "Block",
               "src": "2281:45:3",
               "statements": [
@@ -1226,18 +1226,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 2136,
+                      "id": 2147,
                       "name": "cardTypesIds",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2112,
+                      "referencedDeclaration": 2123,
                       "src": "2299:12:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_array$_t_uint256_$dyn_storage",
                         "typeString": "uint256[] storage ref"
                       }
                     },
-                    "id": 2137,
+                    "id": 2148,
                     "isConstant": false,
                     "isLValue": true,
                     "isPure": false,
@@ -1251,15 +1251,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2135,
-                  "id": 2138,
+                  "functionReturnParameters": 2146,
+                  "id": 2149,
                   "nodeType": "Return",
                   "src": "2292:26:3"
                 }
               ]
             },
             "documentation": "     ",
-            "id": 2140,
+            "id": 2151,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -1267,22 +1267,22 @@
             "name": "getTotalTypes",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2132,
+              "id": 2143,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2253:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2135,
+              "id": 2146,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2134,
+                  "id": 2145,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2140,
+                  "scope": 2151,
                   "src": "2276:4:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1291,7 +1291,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2133,
+                    "id": 2144,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2276:4:3",
@@ -1306,7 +1306,7 @@
               ],
               "src": "2275:6:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2231:95:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -1314,7 +1314,7 @@
           },
           {
             "body": {
-              "id": 2155,
+              "id": 2166,
               "nodeType": "Block",
               "src": "2490:115:3",
               "statements": [
@@ -1324,11 +1324,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 2151,
+                        "id": 2162,
                         "name": "_beneficiary",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2142,
+                        "referencedDeclaration": 2153,
                         "src": "2573:12:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1337,11 +1337,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 2152,
+                        "id": 2163,
                         "name": "czxpReward",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2144,
+                        "referencedDeclaration": 2155,
                         "src": "2587:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1365,11 +1365,11 @@
                         "arguments": [
                           {
                             "argumentTypes": null,
-                            "id": 2148,
+                            "id": 2159,
                             "name": "CzxpContractAddress_",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2124,
+                            "referencedDeclaration": 2135,
                             "src": "2541:20:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -1384,7 +1384,7 @@
                               "typeString": "address"
                             }
                           ],
-                          "id": 2147,
+                          "id": 2158,
                           "name": "CzxpToken",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -1395,7 +1395,7 @@
                             "typeString": "type(contract CzxpToken)"
                           }
                         },
-                        "id": 2149,
+                        "id": 2160,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1409,7 +1409,7 @@
                           "typeString": "contract CzxpToken"
                         }
                       },
-                      "id": 2150,
+                      "id": 2161,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1423,7 +1423,7 @@
                         "typeString": "function (address,uint256) external"
                       }
                     },
-                    "id": 2153,
+                    "id": 2164,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1437,14 +1437,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2154,
+                  "id": 2165,
                   "nodeType": "ExpressionStatement",
                   "src": "2531:67:3"
                 }
               ]
             },
             "documentation": " Internal function called from Cryptoz once all the checks are done",
-            "id": 2156,
+            "id": 2167,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -1452,15 +1452,15 @@
             "name": "awardCzxp",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2145,
+              "id": 2156,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2142,
+                  "id": 2153,
                   "name": "_beneficiary",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2156,
+                  "scope": 2167,
                   "src": "2442:20:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1469,7 +1469,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2141,
+                    "id": 2152,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2442:7:3",
@@ -1483,10 +1483,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2144,
+                  "id": 2155,
                   "name": "czxpReward",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2156,
+                  "scope": 2167,
                   "src": "2464:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1495,7 +1495,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2143,
+                    "id": 2154,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2464:4:3",
@@ -1512,12 +1512,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2146,
+              "id": 2157,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2490:0:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2423:182:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1525,7 +1525,7 @@
           },
           {
             "body": {
-              "id": 2181,
+              "id": 2192,
               "nodeType": "Block",
               "src": "2763:86:3",
               "statements": [
@@ -1539,7 +1539,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 2178,
+                        "id": 2189,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1559,7 +1559,7 @@
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
                                       },
-                                      "id": 2172,
+                                      "id": 2183,
                                       "isConstant": false,
                                       "isLValue": false,
                                       "isPure": false,
@@ -1568,18 +1568,18 @@
                                         "argumentTypes": null,
                                         "expression": {
                                           "argumentTypes": null,
-                                          "id": 2169,
+                                          "id": 2180,
                                           "name": "block",
                                           "nodeType": "Identifier",
                                           "overloadedDeclarations": [],
-                                          "referencedDeclaration": 3624,
+                                          "referencedDeclaration": 3635,
                                           "src": "2811:5:3",
                                           "typeDescriptions": {
                                             "typeIdentifier": "t_magic_block",
                                             "typeString": "block"
                                           }
                                         },
-                                        "id": 2170,
+                                        "id": 2181,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": false,
@@ -1598,7 +1598,7 @@
                                       "rightExpression": {
                                         "argumentTypes": null,
                                         "hexValue": "31",
-                                        "id": 2171,
+                                        "id": 2182,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": true,
@@ -1629,18 +1629,18 @@
                                     ],
                                     "expression": {
                                       "argumentTypes": null,
-                                      "id": 2167,
+                                      "id": 2178,
                                       "name": "block",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 3624,
+                                      "referencedDeclaration": 3635,
                                       "src": "2795:5:3",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_magic_block",
                                         "typeString": "block"
                                       }
                                     },
-                                    "id": 2168,
+                                    "id": 2179,
                                     "isConstant": false,
                                     "isLValue": false,
                                     "isPure": false,
@@ -1654,7 +1654,7 @@
                                       "typeString": "function (uint256) view returns (bytes32)"
                                     }
                                   },
-                                  "id": 2173,
+                                  "id": 2184,
                                   "isConstant": false,
                                   "isLValue": false,
                                   "isPure": false,
@@ -1670,11 +1670,11 @@
                                 },
                                 {
                                   "argumentTypes": null,
-                                  "id": 2174,
+                                  "id": 2185,
                                   "name": "seed",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 2158,
+                                  "referencedDeclaration": 2169,
                                   "src": "2828:4:3",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
@@ -1693,18 +1693,18 @@
                                     "typeString": "uint256"
                                   }
                                 ],
-                                "id": 2166,
+                                "id": 2177,
                                 "name": "keccak256",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 3628,
+                                "referencedDeclaration": 3639,
                                 "src": "2785:9:3",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
                                   "typeString": "function () pure returns (bytes32)"
                                 }
                               },
-                              "id": 2175,
+                              "id": 2186,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1726,7 +1726,7 @@
                                 "typeString": "bytes32"
                               }
                             ],
-                            "id": 2165,
+                            "id": 2176,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -1739,7 +1739,7 @@
                             },
                             "typeName": "uint"
                           },
-                          "id": 2176,
+                          "id": 2187,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1757,11 +1757,11 @@
                         "operator": "%",
                         "rightExpression": {
                           "argumentTypes": null,
-                          "id": 2177,
+                          "id": 2188,
                           "name": "range",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2160,
+                          "referencedDeclaration": 2171,
                           "src": "2836:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -1775,7 +1775,7 @@
                         }
                       }
                     ],
-                    "id": 2179,
+                    "id": 2190,
                     "isConstant": false,
                     "isInlineArray": false,
                     "isLValue": false,
@@ -1788,15 +1788,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2164,
-                  "id": 2180,
+                  "functionReturnParameters": 2175,
+                  "id": 2191,
                   "nodeType": "Return",
                   "src": "2773:69:3"
                 }
               ]
             },
             "documentation": "Random as it gets for now. Return a val between 1-100",
-            "id": 2182,
+            "id": 2193,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -1804,15 +1804,15 @@
             "name": "selectRandom",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2161,
+              "id": 2172,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2158,
+                  "id": 2169,
                   "name": "seed",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2182,
+                  "scope": 2193,
                   "src": "2710:9:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1821,7 +1821,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2157,
+                    "id": 2168,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2710:4:3",
@@ -1835,10 +1835,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2160,
+                  "id": 2171,
                   "name": "range",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2182,
+                  "scope": 2193,
                   "src": "2721:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1847,7 +1847,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2159,
+                    "id": 2170,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2721:7:3",
@@ -1864,15 +1864,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2164,
+              "id": 2175,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2163,
+                  "id": 2174,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2182,
+                  "scope": 2193,
                   "src": "2758:4:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1881,7 +1881,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2162,
+                    "id": 2173,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2758:4:3",
@@ -1896,7 +1896,7 @@
               ],
               "src": "2757:6:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2688:161:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -1904,7 +1904,7 @@
           },
           {
             "body": {
-              "id": 2196,
+              "id": 2207,
               "nodeType": "Block",
               "src": "3604:48:3",
               "statements": [
@@ -1916,18 +1916,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 2192,
+                          "id": 2203,
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3661,
+                          "referencedDeclaration": 3672,
                           "src": "3632:4:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_CryptozUniverse_$2198",
+                            "typeIdentifier": "t_contract$_CryptozUniverse_$2209",
                             "typeString": "contract CryptozUniverse"
                           }
                         },
-                        "id": 2193,
+                        "id": 2204,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1953,18 +1953,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 2187,
+                          "id": 2198,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3634,
+                          "referencedDeclaration": 3645,
                           "src": "3612:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 2190,
+                        "id": 2201,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1978,7 +1978,7 @@
                           "typeString": "address"
                         }
                       },
-                      "id": 2191,
+                      "id": 2202,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1992,7 +1992,7 @@
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 2194,
+                    "id": 2205,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2006,28 +2006,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2195,
+                  "id": 2206,
                   "nodeType": "ExpressionStatement",
                   "src": "3612:33:3"
                 }
               ]
             },
             "documentation": "Withdraw balance to wallet*",
-            "id": 2197,
+            "id": 2208,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 2185,
+                "id": 2196,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 2184,
+                  "id": 2195,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 2406,
+                  "referencedDeclaration": 2417,
                   "src": "3594:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2041,26 +2041,26 @@
             "name": "withdraw",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2183,
+              "id": 2194,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "3584:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2186,
+              "id": 2197,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "3604:0:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "3567:85:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2199,
+        "scope": 2210,
         "src": "633:3021:3"
       }
     ],
@@ -2070,14 +2070,14 @@
     "absolutePath": "/home/rprice/Downloads/cryptoz.cards/contracts/CryptozUniverse.sol",
     "exportedSymbols": {
       "CryptozUniverse": [
-        2198
+        2209
       ]
     },
-    "id": 2199,
+    "id": 2210,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2049,
+        "id": 2060,
         "literals": [
           "solidity",
           "^",
@@ -2090,9 +2090,9 @@
       {
         "absolutePath": "/home/rprice/Downloads/cryptoz.cards/contracts/CZXPToken.sol",
         "file": "./CZXPToken.sol",
-        "id": 2050,
+        "id": 2061,
         "nodeType": "ImportDirective",
-        "scope": 2199,
+        "scope": 2210,
         "sourceUnit": 389,
         "src": "446:25:3",
         "symbolAliases": [],
@@ -2101,10 +2101,10 @@
       {
         "absolutePath": "/home/rprice/Downloads/cryptoz.cards/node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol",
         "file": "./../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol",
-        "id": 2051,
+        "id": 2062,
         "nodeType": "ImportDirective",
-        "scope": 2199,
-        "sourceUnit": 2459,
+        "scope": 2210,
+        "sourceUnit": 2470,
         "src": "472:81:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2112,10 +2112,10 @@
       {
         "absolutePath": "/home/rprice/Downloads/cryptoz.cards/node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol",
         "file": "./../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol",
-        "id": 2052,
+        "id": 2063,
         "nodeType": "ImportDirective",
-        "scope": 2199,
-        "sourceUnit": 2373,
+        "scope": 2210,
+        "sourceUnit": 2384,
         "src": "554:77:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2126,53 +2126,53 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 2053,
+              "id": 2064,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2458,
+              "referencedDeclaration": 2469,
               "src": "661:7:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$2458",
+                "typeIdentifier": "t_contract$_Ownable_$2469",
                 "typeString": "contract Ownable"
               }
             },
-            "id": 2054,
+            "id": 2065,
             "nodeType": "InheritanceSpecifier",
             "src": "661:7:3"
           }
         ],
         "contractDependencies": [
-          2458
+          2469
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 2198,
+        "id": 2209,
         "linearizedBaseContracts": [
-          2198,
-          2458
+          2209,
+          2469
         ],
         "name": "CryptozUniverse",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 2057,
+            "id": 2068,
             "libraryName": {
               "contractScope": null,
-              "id": 2055,
+              "id": 2066,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2372,
+              "referencedDeclaration": 2383,
               "src": "681:8:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$2372",
+                "typeIdentifier": "t_contract$_SafeMath_$2383",
                 "typeString": "library SafeMath"
               }
             },
             "nodeType": "UsingForDirective",
             "src": "675:27:3",
             "typeName": {
-              "id": 2056,
+              "id": 2067,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "694:7:3",
@@ -2184,14 +2184,14 @@
           },
           {
             "canonicalName": "CryptozUniverse.cardType",
-            "id": 2076,
+            "id": 2087,
             "members": [
               {
                 "constant": false,
-                "id": 2059,
+                "id": 2070,
                 "name": "cardTypeId",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "746:17:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2200,7 +2200,7 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 2058,
+                  "id": 2069,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
                   "src": "746:6:3",
@@ -2214,10 +2214,10 @@
               },
               {
                 "constant": false,
-                "id": 2061,
+                "id": 2072,
                 "name": "name",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "773:11:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2226,7 +2226,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2060,
+                  "id": 2071,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "773:6:3",
@@ -2240,10 +2240,10 @@
               },
               {
                 "constant": false,
-                "id": 2063,
+                "id": 2074,
                 "name": "set",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "794:10:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2252,7 +2252,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2062,
+                  "id": 2073,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "794:6:3",
@@ -2266,10 +2266,10 @@
               },
               {
                 "constant": false,
-                "id": 2065,
+                "id": 2076,
                 "name": "weiCost",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1025:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2278,7 +2278,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2064,
+                  "id": 2075,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1025:7:3",
@@ -2292,10 +2292,10 @@
               },
               {
                 "constant": false,
-                "id": 2067,
+                "id": 2078,
                 "name": "buyCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1050:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2304,7 +2304,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2066,
+                  "id": 2077,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1050:7:3",
@@ -2318,10 +2318,10 @@
               },
               {
                 "constant": false,
-                "id": 2069,
+                "id": 2080,
                 "name": "transferCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1075:20:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2330,7 +2330,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2068,
+                  "id": 2079,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1075:7:3",
@@ -2344,10 +2344,10 @@
               },
               {
                 "constant": false,
-                "id": 2071,
+                "id": 2082,
                 "name": "sacrificeCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1105:21:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2356,7 +2356,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2070,
+                  "id": 2081,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1105:7:3",
@@ -2370,10 +2370,10 @@
               },
               {
                 "constant": false,
-                "id": 2073,
+                "id": 2084,
                 "name": "unlockCzxp",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1136:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2382,7 +2382,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2072,
+                  "id": 2083,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "1136:7:3",
@@ -2396,10 +2396,10 @@
               },
               {
                 "constant": false,
-                "id": 2075,
+                "id": 2086,
                 "name": "cardLevel",
                 "nodeType": "VariableDeclaration",
-                "scope": 2076,
+                "scope": 2087,
                 "src": "1164:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2408,7 +2408,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2074,
+                  "id": 2085,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "1164:5:3",
@@ -2423,20 +2423,20 @@
             ],
             "name": "cardType",
             "nodeType": "StructDefinition",
-            "scope": 2198,
+            "scope": 2209,
             "src": "721:465:3",
             "visibility": "public"
           },
           {
             "canonicalName": "CryptozUniverse.Card",
-            "id": 2083,
+            "id": 2094,
             "members": [
               {
                 "constant": false,
-                "id": 2078,
+                "id": 2089,
                 "name": "cardTypeId",
                 "nodeType": "VariableDeclaration",
-                "scope": 2083,
+                "scope": 2094,
                 "src": "1213:17:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2445,7 +2445,7 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 2077,
+                  "id": 2088,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
                   "src": "1213:6:3",
@@ -2459,10 +2459,10 @@
               },
               {
                 "constant": false,
-                "id": 2080,
+                "id": 2091,
                 "name": "editionNumber",
                 "nodeType": "VariableDeclaration",
-                "scope": 2083,
+                "scope": 2094,
                 "src": "1240:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2471,7 +2471,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2079,
+                  "id": 2090,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "1240:4:3",
@@ -2485,10 +2485,10 @@
               },
               {
                 "constant": false,
-                "id": 2082,
+                "id": 2093,
                 "name": "transferCount",
                 "nodeType": "VariableDeclaration",
-                "scope": 2083,
+                "scope": 2094,
                 "src": "1268:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2497,7 +2497,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2081,
+                  "id": 2092,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "1268:4:3",
@@ -2512,16 +2512,16 @@
             ],
             "name": "Card",
             "nodeType": "StructDefinition",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1192:101:3",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 2086,
+            "id": 2097,
             "name": "baseTokenURI",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1299:51:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2530,7 +2530,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 2084,
+              "id": 2095,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "1299:6:3",
@@ -2542,7 +2542,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "68747470733a2f2f63727970746f7a2e63617264732f646174612f",
-              "id": 2085,
+              "id": 2096,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -2561,10 +2561,10 @@
           },
           {
             "constant": false,
-            "id": 2090,
+            "id": 2101,
             "name": "cardAssetType",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1418:39:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2573,9 +2573,9 @@
               "typeString": "mapping(uint256 => uint8)"
             },
             "typeName": {
-              "id": 2089,
+              "id": 2100,
               "keyType": {
-                "id": 2087,
+                "id": 2098,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1426:7:3",
@@ -2591,7 +2591,7 @@
                 "typeString": "mapping(uint256 => uint8)"
               },
               "valueType": {
-                "id": 2088,
+                "id": 2099,
                 "name": "uint8",
                 "nodeType": "ElementaryTypeName",
                 "src": "1437:5:3",
@@ -2606,10 +2606,10 @@
           },
           {
             "constant": false,
-            "id": 2094,
+            "id": 2105,
             "name": "storeBoosterBonus",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1463:43:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2618,9 +2618,9 @@
               "typeString": "mapping(uint256 => uint8)"
             },
             "typeName": {
-              "id": 2093,
+              "id": 2104,
               "keyType": {
-                "id": 2091,
+                "id": 2102,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1471:7:3",
@@ -2636,7 +2636,7 @@
                 "typeString": "mapping(uint256 => uint8)"
               },
               "valueType": {
-                "id": 2092,
+                "id": 2103,
                 "name": "uint8",
                 "nodeType": "ElementaryTypeName",
                 "src": "1482:5:3",
@@ -2651,10 +2651,10 @@
           },
           {
             "constant": false,
-            "id": 2098,
+            "id": 2109,
             "name": "rarity",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1512:32:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2663,9 +2663,9 @@
               "typeString": "mapping(uint256 => uint8)"
             },
             "typeName": {
-              "id": 2097,
+              "id": 2108,
               "keyType": {
-                "id": 2095,
+                "id": 2106,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1520:7:3",
@@ -2681,7 +2681,7 @@
                 "typeString": "mapping(uint256 => uint8)"
               },
               "valueType": {
-                "id": 2096,
+                "id": 2107,
                 "name": "uint8",
                 "nodeType": "ElementaryTypeName",
                 "src": "1531:5:3",
@@ -2696,10 +2696,10 @@
           },
           {
             "constant": false,
-            "id": 2102,
+            "id": 2113,
             "name": "totalAvailable",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1550:41:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2708,9 +2708,9 @@
               "typeString": "mapping(uint256 => uint16)"
             },
             "typeName": {
-              "id": 2101,
+              "id": 2112,
               "keyType": {
-                "id": 2099,
+                "id": 2110,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1558:7:3",
@@ -2726,7 +2726,7 @@
                 "typeString": "mapping(uint256 => uint16)"
               },
               "valueType": {
-                "id": 2100,
+                "id": 2111,
                 "name": "uint16",
                 "nodeType": "ElementaryTypeName",
                 "src": "1569:6:3",
@@ -2741,36 +2741,36 @@
           },
           {
             "constant": false,
-            "id": 2105,
+            "id": 2116,
             "name": "Cards",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1642:21:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_Card_$2083_storage_$dyn_storage",
+              "typeIdentifier": "t_array$_t_struct$_Card_$2094_storage_$dyn_storage",
               "typeString": "struct CryptozUniverse.Card[]"
             },
             "typeName": {
               "baseType": {
                 "contractScope": null,
-                "id": 2103,
+                "id": 2114,
                 "name": "Card",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 2083,
+                "referencedDeclaration": 2094,
                 "src": "1642:4:3",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Card_$2083_storage_ptr",
+                  "typeIdentifier": "t_struct$_Card_$2094_storage_ptr",
                   "typeString": "struct CryptozUniverse.Card"
                 }
               },
-              "id": 2104,
+              "id": 2115,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "1642:6:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_Card_$2083_storage_$dyn_storage_ptr",
+                "typeIdentifier": "t_array$_t_struct$_Card_$2094_storage_$dyn_storage_ptr",
                 "typeString": "struct CryptozUniverse.Card[]"
               }
             },
@@ -2779,21 +2779,21 @@
           },
           {
             "constant": false,
-            "id": 2109,
+            "id": 2120,
             "name": "allCardTypes",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1670:47:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2076_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2087_storage_$",
               "typeString": "mapping(uint32 => struct CryptozUniverse.cardType)"
             },
             "typeName": {
-              "id": 2108,
+              "id": 2119,
               "keyType": {
-                "id": 2106,
+                "id": 2117,
                 "name": "uint32",
                 "nodeType": "ElementaryTypeName",
                 "src": "1678:6:3",
@@ -2805,18 +2805,18 @@
               "nodeType": "Mapping",
               "src": "1670:27:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2076_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint32_$_t_struct$_cardType_$2087_storage_$",
                 "typeString": "mapping(uint32 => struct CryptozUniverse.cardType)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 2107,
+                "id": 2118,
                 "name": "cardType",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 2076,
+                "referencedDeclaration": 2087,
                 "src": "1688:8:3",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_cardType_$2076_storage_ptr",
+                  "typeIdentifier": "t_struct$_cardType_$2087_storage_ptr",
                   "typeString": "struct CryptozUniverse.cardType"
                 }
               }
@@ -2826,10 +2826,10 @@
           },
           {
             "constant": false,
-            "id": 2112,
+            "id": 2123,
             "name": "cardTypesIds",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1759:29:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2839,7 +2839,7 @@
             },
             "typeName": {
               "baseType": {
-                "id": 2110,
+                "id": 2121,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1759:7:3",
@@ -2848,7 +2848,7 @@
                   "typeString": "uint256"
                 }
               },
-              "id": 2111,
+              "id": 2122,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "1759:9:3",
@@ -2862,10 +2862,10 @@
           },
           {
             "constant": false,
-            "id": 2116,
+            "id": 2127,
             "name": "cardTypeToEdition",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "1888:52:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2874,9 +2874,9 @@
               "typeString": "mapping(uint256 => uint256)"
             },
             "typeName": {
-              "id": 2115,
+              "id": 2126,
               "keyType": {
-                "id": 2113,
+                "id": 2124,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1896:7:3",
@@ -2892,7 +2892,7 @@
                 "typeString": "mapping(uint256 => uint256)"
               },
               "valueType": {
-                "id": 2114,
+                "id": 2125,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "1907:7:3",
@@ -2908,20 +2908,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 2122,
+            "id": 2133,
             "name": "CZXPGained",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 2121,
+              "id": 2132,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2118,
+                  "id": 2129,
                   "indexed": true,
                   "name": "beneficiary",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2122,
+                  "scope": 2133,
                   "src": "1978:27:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2930,7 +2930,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2117,
+                    "id": 2128,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1978:7:3",
@@ -2944,11 +2944,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 2120,
+                  "id": 2131,
                   "indexed": false,
                   "name": "czxpAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2122,
+                  "scope": 2133,
                   "src": "2007:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2957,7 +2957,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2119,
+                    "id": 2130,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2007:7:3",
@@ -2976,10 +2976,10 @@
           },
           {
             "constant": false,
-            "id": 2124,
+            "id": 2135,
             "name": "CzxpContractAddress_",
             "nodeType": "VariableDeclaration",
-            "scope": 2198,
+            "scope": 2209,
             "src": "2059:37:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2988,7 +2988,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 2123,
+              "id": 2134,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "2059:7:3",
@@ -3002,7 +3002,7 @@
           },
           {
             "body": {
-              "id": 2130,
+              "id": 2141,
               "nodeType": "Block",
               "src": "2176:25:3",
               "statements": [
@@ -3012,21 +3012,21 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 2127,
+                      "id": 2138,
                       "name": "revert",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3639,
-                        3640
+                        3650,
+                        3651
                       ],
-                      "referencedDeclaration": 3639,
+                      "referencedDeclaration": 3650,
                       "src": "2186:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_revert_pure$__$returns$__$",
                         "typeString": "function () pure"
                       }
                     },
-                    "id": 2128,
+                    "id": 2139,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3040,14 +3040,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2129,
+                  "id": 2140,
                   "nodeType": "ExpressionStatement",
                   "src": "2186:8:3"
                 }
               ]
             },
             "documentation": "Not much going on here so exit.",
-            "id": 2131,
+            "id": 2142,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -3055,19 +3055,19 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2125,
+              "id": 2136,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2167:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2126,
+              "id": 2137,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2176:0:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2159:42:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -3075,7 +3075,7 @@
           },
           {
             "body": {
-              "id": 2139,
+              "id": 2150,
               "nodeType": "Block",
               "src": "2281:45:3",
               "statements": [
@@ -3084,18 +3084,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 2136,
+                      "id": 2147,
                       "name": "cardTypesIds",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2112,
+                      "referencedDeclaration": 2123,
                       "src": "2299:12:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_array$_t_uint256_$dyn_storage",
                         "typeString": "uint256[] storage ref"
                       }
                     },
-                    "id": 2137,
+                    "id": 2148,
                     "isConstant": false,
                     "isLValue": true,
                     "isPure": false,
@@ -3109,15 +3109,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2135,
-                  "id": 2138,
+                  "functionReturnParameters": 2146,
+                  "id": 2149,
                   "nodeType": "Return",
                   "src": "2292:26:3"
                 }
               ]
             },
             "documentation": "     ",
-            "id": 2140,
+            "id": 2151,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -3125,22 +3125,22 @@
             "name": "getTotalTypes",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2132,
+              "id": 2143,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2253:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2135,
+              "id": 2146,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2134,
+                  "id": 2145,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2140,
+                  "scope": 2151,
                   "src": "2276:4:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3149,7 +3149,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2133,
+                    "id": 2144,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2276:4:3",
@@ -3164,7 +3164,7 @@
               ],
               "src": "2275:6:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2231:95:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -3172,7 +3172,7 @@
           },
           {
             "body": {
-              "id": 2155,
+              "id": 2166,
               "nodeType": "Block",
               "src": "2490:115:3",
               "statements": [
@@ -3182,11 +3182,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 2151,
+                        "id": 2162,
                         "name": "_beneficiary",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2142,
+                        "referencedDeclaration": 2153,
                         "src": "2573:12:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -3195,11 +3195,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 2152,
+                        "id": 2163,
                         "name": "czxpReward",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2144,
+                        "referencedDeclaration": 2155,
                         "src": "2587:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -3223,11 +3223,11 @@
                         "arguments": [
                           {
                             "argumentTypes": null,
-                            "id": 2148,
+                            "id": 2159,
                             "name": "CzxpContractAddress_",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2124,
+                            "referencedDeclaration": 2135,
                             "src": "2541:20:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -3242,7 +3242,7 @@
                               "typeString": "address"
                             }
                           ],
-                          "id": 2147,
+                          "id": 2158,
                           "name": "CzxpToken",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -3253,7 +3253,7 @@
                             "typeString": "type(contract CzxpToken)"
                           }
                         },
-                        "id": 2149,
+                        "id": 2160,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3267,7 +3267,7 @@
                           "typeString": "contract CzxpToken"
                         }
                       },
-                      "id": 2150,
+                      "id": 2161,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3281,7 +3281,7 @@
                         "typeString": "function (address,uint256) external"
                       }
                     },
-                    "id": 2153,
+                    "id": 2164,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3295,14 +3295,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2154,
+                  "id": 2165,
                   "nodeType": "ExpressionStatement",
                   "src": "2531:67:3"
                 }
               ]
             },
             "documentation": " Internal function called from Cryptoz once all the checks are done",
-            "id": 2156,
+            "id": 2167,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -3310,15 +3310,15 @@
             "name": "awardCzxp",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2145,
+              "id": 2156,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2142,
+                  "id": 2153,
                   "name": "_beneficiary",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2156,
+                  "scope": 2167,
                   "src": "2442:20:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3327,7 +3327,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2141,
+                    "id": 2152,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2442:7:3",
@@ -3341,10 +3341,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2144,
+                  "id": 2155,
                   "name": "czxpReward",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2156,
+                  "scope": 2167,
                   "src": "2464:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3353,7 +3353,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2143,
+                    "id": 2154,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2464:4:3",
@@ -3370,12 +3370,12 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2146,
+              "id": 2157,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2490:0:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2423:182:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -3383,7 +3383,7 @@
           },
           {
             "body": {
-              "id": 2181,
+              "id": 2192,
               "nodeType": "Block",
               "src": "2763:86:3",
               "statements": [
@@ -3397,7 +3397,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 2178,
+                        "id": 2189,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3417,7 +3417,7 @@
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
                                       },
-                                      "id": 2172,
+                                      "id": 2183,
                                       "isConstant": false,
                                       "isLValue": false,
                                       "isPure": false,
@@ -3426,18 +3426,18 @@
                                         "argumentTypes": null,
                                         "expression": {
                                           "argumentTypes": null,
-                                          "id": 2169,
+                                          "id": 2180,
                                           "name": "block",
                                           "nodeType": "Identifier",
                                           "overloadedDeclarations": [],
-                                          "referencedDeclaration": 3624,
+                                          "referencedDeclaration": 3635,
                                           "src": "2811:5:3",
                                           "typeDescriptions": {
                                             "typeIdentifier": "t_magic_block",
                                             "typeString": "block"
                                           }
                                         },
-                                        "id": 2170,
+                                        "id": 2181,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": false,
@@ -3456,7 +3456,7 @@
                                       "rightExpression": {
                                         "argumentTypes": null,
                                         "hexValue": "31",
-                                        "id": 2171,
+                                        "id": 2182,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": true,
@@ -3487,18 +3487,18 @@
                                     ],
                                     "expression": {
                                       "argumentTypes": null,
-                                      "id": 2167,
+                                      "id": 2178,
                                       "name": "block",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 3624,
+                                      "referencedDeclaration": 3635,
                                       "src": "2795:5:3",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_magic_block",
                                         "typeString": "block"
                                       }
                                     },
-                                    "id": 2168,
+                                    "id": 2179,
                                     "isConstant": false,
                                     "isLValue": false,
                                     "isPure": false,
@@ -3512,7 +3512,7 @@
                                       "typeString": "function (uint256) view returns (bytes32)"
                                     }
                                   },
-                                  "id": 2173,
+                                  "id": 2184,
                                   "isConstant": false,
                                   "isLValue": false,
                                   "isPure": false,
@@ -3528,11 +3528,11 @@
                                 },
                                 {
                                   "argumentTypes": null,
-                                  "id": 2174,
+                                  "id": 2185,
                                   "name": "seed",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 2158,
+                                  "referencedDeclaration": 2169,
                                   "src": "2828:4:3",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
@@ -3551,18 +3551,18 @@
                                     "typeString": "uint256"
                                   }
                                 ],
-                                "id": 2166,
+                                "id": 2177,
                                 "name": "keccak256",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 3628,
+                                "referencedDeclaration": 3639,
                                 "src": "2785:9:3",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
                                   "typeString": "function () pure returns (bytes32)"
                                 }
                               },
-                              "id": 2175,
+                              "id": 2186,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -3584,7 +3584,7 @@
                                 "typeString": "bytes32"
                               }
                             ],
-                            "id": 2165,
+                            "id": 2176,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -3597,7 +3597,7 @@
                             },
                             "typeName": "uint"
                           },
-                          "id": 2176,
+                          "id": 2187,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3615,11 +3615,11 @@
                         "operator": "%",
                         "rightExpression": {
                           "argumentTypes": null,
-                          "id": 2177,
+                          "id": 2188,
                           "name": "range",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2160,
+                          "referencedDeclaration": 2171,
                           "src": "2836:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -3633,7 +3633,7 @@
                         }
                       }
                     ],
-                    "id": 2179,
+                    "id": 2190,
                     "isConstant": false,
                     "isInlineArray": false,
                     "isLValue": false,
@@ -3646,15 +3646,15 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 2164,
-                  "id": 2180,
+                  "functionReturnParameters": 2175,
+                  "id": 2191,
                   "nodeType": "Return",
                   "src": "2773:69:3"
                 }
               ]
             },
             "documentation": "Random as it gets for now. Return a val between 1-100",
-            "id": 2182,
+            "id": 2193,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -3662,15 +3662,15 @@
             "name": "selectRandom",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2161,
+              "id": 2172,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2158,
+                  "id": 2169,
                   "name": "seed",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2182,
+                  "scope": 2193,
                   "src": "2710:9:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3679,7 +3679,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2157,
+                    "id": 2168,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2710:4:3",
@@ -3693,10 +3693,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2160,
+                  "id": 2171,
                   "name": "range",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2182,
+                  "scope": 2193,
                   "src": "2721:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3705,7 +3705,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2159,
+                    "id": 2170,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2721:7:3",
@@ -3722,15 +3722,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2164,
+              "id": 2175,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2163,
+                  "id": 2174,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2182,
+                  "scope": 2193,
                   "src": "2758:4:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3739,7 +3739,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2162,
+                    "id": 2173,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2758:4:3",
@@ -3754,7 +3754,7 @@
               ],
               "src": "2757:6:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "2688:161:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -3762,7 +3762,7 @@
           },
           {
             "body": {
-              "id": 2196,
+              "id": 2207,
               "nodeType": "Block",
               "src": "3604:48:3",
               "statements": [
@@ -3774,18 +3774,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 2192,
+                          "id": 2203,
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3661,
+                          "referencedDeclaration": 3672,
                           "src": "3632:4:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_CryptozUniverse_$2198",
+                            "typeIdentifier": "t_contract$_CryptozUniverse_$2209",
                             "typeString": "contract CryptozUniverse"
                           }
                         },
-                        "id": 2193,
+                        "id": 2204,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3811,18 +3811,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 2187,
+                          "id": 2198,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3634,
+                          "referencedDeclaration": 3645,
                           "src": "3612:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 2190,
+                        "id": 2201,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3836,7 +3836,7 @@
                           "typeString": "address"
                         }
                       },
-                      "id": 2191,
+                      "id": 2202,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3850,7 +3850,7 @@
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 2194,
+                    "id": 2205,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3864,28 +3864,28 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2195,
+                  "id": 2206,
                   "nodeType": "ExpressionStatement",
                   "src": "3612:33:3"
                 }
               ]
             },
             "documentation": "Withdraw balance to wallet*",
-            "id": 2197,
+            "id": 2208,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 2185,
+                "id": 2196,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 2184,
+                  "id": 2195,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 2406,
+                  "referencedDeclaration": 2417,
                   "src": "3594:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -3899,26 +3899,26 @@
             "name": "withdraw",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2183,
+              "id": 2194,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "3584:2:3"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2186,
+              "id": 2197,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "3604:0:3"
             },
-            "scope": 2198,
+            "scope": 2209,
             "src": "3567:85:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2199,
+        "scope": 2210,
         "src": "633:3021:3"
       }
     ],
@@ -3930,5 +3930,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-01-21T01:18:03.977Z"
+  "updatedAt": "2019-01-27T15:53:49.927Z"
 }
