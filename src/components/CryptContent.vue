@@ -170,7 +170,7 @@ export default {
           }).then(function(res){
             //console.log('token id:' + tokenId);
             //console.log('edition:' + tokenIdList[tokenId][1].c[0])
-            console.log(res)
+            //console.log(res)
             
             //card token id
             res.data.id = tokenId;

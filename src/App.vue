@@ -42,9 +42,10 @@ window.sortAttributes = function sortAttributes(property) {
 
 // Import our contract artifacts and turn them into usable abstractions.
 import { default as Web3} from 'web3';
+import axios from 'axios';
 var contract = require("truffle-contract");
-import cryptoz_artifacts from './contracts/Cryptoz.json'
-import cryptoz_token_artifacts from './contracts/CzxpToken.json'
+import cryptoz_artifacts from './contracts/Cryptoz.json';
+import cryptoz_token_artifacts from './contracts/CzxpToken.json';
 
 export default {
   name: 'App',
@@ -91,6 +92,7 @@ export default {
       
       var cardOpenedEvent;
       var cardPurchasedEvent;
+      var cardCreatedEvent;
       var cardTransferEvent;
       var boostCardPurchasedEvent;
       var sacrificeCardEvent;
@@ -100,6 +102,7 @@ export default {
         
         cardOpenedEvent = instance.LogPackOpened();
         cardPurchasedEvent = instance.LogCardPurchased();
+        cardCreatedEvent = instance.LogCardCreated();
         cardTransferEvent = instance.Transfer();
         czxpGainedEvent = instance.CZXPGained();
         sacrificeCardEvent = instance.SacrificeCardEvent();
@@ -121,6 +124,29 @@ export default {
 
           }else{
             console.log("cardPurchasedEvent error:" . error);
+          }
+        });
+        
+        cardCreatedEvent.watch(function(error, result){
+          if(!error){
+            console.log("cardCreatedEvent result:");
+            //console.log(result);
+            
+            //Lets update our token tracking table
+            if(result.event == "LogCardCreated")
+            {
+              //console.log(result.args.cardTokenId.c[0]);
+              //console.log(result.args.cardTypeId.c[0]);
+              //console.log(result.args.editionNumber.c[0]);
+              console.log('Updating tokens table...');
+              //Send to the service
+              var dataString = 'token_id=' + result.args.cardTokenId.c[0] + '&edition_number=' + result.args.editionNumber.c[0] + '&transfer_count=1&card_type_id=' + result.args.cardTypeId.c[0];
+              var res = axios.get('https://cryptoz.cards/services/setTokenData.php?' + dataString);
+              //console.log('axios result:' + dataString)
+              //console.log(res);
+            }
+          }else{
+            console.log("cardCreatedEvent error:" . error);
           }
         });
         
