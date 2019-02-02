@@ -140,7 +140,7 @@ export default {
               //console.log(result.args.editionNumber.c[0]);
               console.log('Updating tokens table...');
               //Send to the service
-              var dataString = 'token_id=' + result.args.cardTokenId.c[0] + '&edition_number=' + result.args.editionNumber.c[0] + '&transfer_count=1&card_type_id=' + result.args.cardTypeId.c[0];
+              var dataString = 'token_id=' + result.args.cardTokenId.c[0] + '&edition_number=' + result.args.editionNumber.c[0] + '&transfer_count=1&card_type_id=' + result.args.cardTypeId.c[0] + '&owner=' + account;
               var res = axios.get('https://cryptoz.cards/services/setTokenData.php?' + dataString);
               //console.log('axios result:' + dataString)
               //console.log(res);
