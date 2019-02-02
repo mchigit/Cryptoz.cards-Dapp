@@ -163,14 +163,14 @@ export default {
           Cryptoz.deployed().then(function(instance) {
             return instance.getCardByTokenId.call(tokenId)
           }).then(function(elementReturned) {
-            //console.log('A card !' + tokenId);
-            //console.log(elementReturned);
+            console.log('A card !' + tokenId);
+            console.log(elementReturned);
             tokenIdList[tokenId] = elementReturned
             return axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + elementReturned[0].c[0])
           }).then(function(res){
             //console.log('token id:' + tokenId);
             //console.log('edition:' + tokenIdList[tokenId][1].c[0])
-            //console.log(res)
+            console.log(res)
             
             //card token id
             res.data.id = tokenId;
