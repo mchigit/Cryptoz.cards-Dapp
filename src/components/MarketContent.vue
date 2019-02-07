@@ -8,7 +8,7 @@
           
           <div class="row">
             <div class="col-6">
-              <h3>Cryptoz Cards<br>erc-721 tokens are supported on the following markets</h3>
+              <h3>Cryptoz Cards<br>erc-721 tokens are supported on the following auction marketplaces</h3>
               
               <a href="https://opensea.io/" target="_blank">
                 <div class="market-btn">
@@ -23,7 +23,7 @@
             </div>
             
             <div class="col-6">
-              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="static/czxp.png" />) <br>erc-20 tokens are supported on the following markets</h3>
+              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="static/czxp.png" />) <br>erc-20 tokens are supported on the following token exchanges</h3>
               
               <a href="https://idex.market/eth/czxp" target="_blank">
                 <div class="market-btn">
@@ -81,13 +81,21 @@ export default {
     margin-right:0.2em;
   }
   .market-btn:hover{
+    color:#000;
     background-color:#ccc;
     padding:5px;
     height:130px;
     text-decoration:none;
+    border:1px solid black;
   }
   .market-btn{
+    color:#000;
     padding:5px;
     text-decoration:none;
+    height:130px;
+    border:1px solid white;
+  }
+  h3{
+    margin-bottom:1em;
   }
 </style>
