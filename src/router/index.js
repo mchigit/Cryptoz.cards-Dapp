@@ -5,6 +5,7 @@ import ShopContent from '@/components/ShopContent.vue'
 import CryptContent from '@/components/CryptContent.vue'
 import MarketContent from '@/components/MarketContent.vue'
 import HelpContent from '@/components/HelpContent.vue'
+import TokenContent from '@/components/TokenContent.vue'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/help',
       name: 'HelpContent',
       component: HelpContent
+    },
+    {
+      path: '/view',
+      name: 'TokenContent',
+      component: TokenContent
     }
   ],
   scrollBehavior() {

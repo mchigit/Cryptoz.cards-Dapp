@@ -17,6 +17,9 @@
             <li>
               <router-link to="/market">Markets</router-link>
             </li>
+            <li>
+              <router-link to="/view">View</router-link>
+            </li>
           </ul>
           
           <transition name="fade" mode="out-in">
@@ -63,6 +66,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .router-link-active {
+    color:#ffffff;
+  }
+  
   .mm-header {
     color: #fff;
     text-align: right;

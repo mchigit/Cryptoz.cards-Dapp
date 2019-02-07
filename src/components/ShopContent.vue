@@ -12,7 +12,7 @@
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
           <div class="row">
             <div class="col">
-              <button class="btn btn-danger" v-on:click="buyBooster">Buy Booster Card 0.002E
+              <button class="btn btn-danger" v-on:click="buyBooster" v-bind:disabled="buyBoostBtnOn == 0">Buy Booster Card 0.002E
               </button>
             </div>
             <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}
@@ -90,11 +90,12 @@ export default {
   data () {
     return {
       showUnlimited : 1,
-      total_supply : 'Loading...',
-      boosters_owned : 'Loading...',
-      czxp_balance : 'Loading...',
+      total_supply : 'Log in Metamask',
+      boosters_owned : 'Log in Metamask',
+      czxp_balance : 'Log in Metamask',
       transaction_number : '',
       storeCards: [],
+      buyBoostBtnOn: 0,
       allCards : [] //We never mangle this
     }
   },
@@ -102,15 +103,16 @@ export default {
     console.log('The shop is mounted, call for the cards');
        
        this.$root.$on('userLoggedIn', () => {
-        console.log('hey userLoggedIn event in Crypt!')
+        console.log('hey userLoggedIn event in Shop!')
         console.log(window.account)
-        console.log('userLoggedIn...cryptContent..run subscriptions');
-        //this.$root.$off('userLoggedIn')
+        console.log('userLoggedIn...shopContent..run subscriptions');
+        this.$root.$off('userLoggedIn');
         this.setSubscriptions();
       })
 
     //if the user has logged, start it up
-    if(window.account !== undefined){
+    if(window.account !== "undefined"){
+      console.log('USer is logged in already... start up store');
       this.setSubscriptions()
     }
       
@@ -146,6 +148,8 @@ export default {
       
     },
     setSubscriptions : function() {
+      
+      this.buyBoostBtnOn = 1;
       
       if(Cryptoz == undefined){
         console.log('No Cryptoz-contract in shop..')

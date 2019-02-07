@@ -133,7 +133,7 @@ export default {
             //console.log(result);
             
             //Lets update our token tracking table
-            if(result.event == "LogCardCreated")
+            if(result.event == "LogCardCreated" && account != "undefined")
             {
               //console.log(result.args.cardTokenId.c[0]);
               //console.log(result.args.cardTypeId.c[0]);
@@ -228,9 +228,10 @@ export default {
     },
     handleUserChange : function(data) {
       console.log('handleUserChange:' + data.networkVersion);
+      console.log(data);
       
       //If user account has changed.. then update
-      if(data.selectedAddress !== window.account){
+      if(data.selectedAddress != "undefined" || window.account == ''){
         console.log(data.selectedAddress +' not the same as '+window.account)
         this.network_state = 2; //we are logged in
         this.wallet = data.selectedAddress.toString();

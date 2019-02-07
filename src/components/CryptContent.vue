@@ -14,7 +14,7 @@
                 </button>
               </div>
               <div class="col">
-                <button class="btn btn-danger" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.01E
+                <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.01E
                 </button>
               </div>
                 <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
@@ -88,7 +88,8 @@ export default {
         console.log('hey userLoggedIn event in Crypt!')
         console.log(window.account)
         console.log('userLoggedIn...cryptContent..run subscriptions');
-        //this.$root.$off('userLoggedIn')
+        this.$root.$off('userLoggedIn')
+        //enable the button
         this.setSubscriptions();
       })
 
@@ -105,6 +106,7 @@ export default {
       cards_owned : 'Log in Metamask',
       boosters_owned : 'Log in Metamask',
       el : 0,
+      buyOpenBtnOn : 0,
       allCards: []
     }
   },
@@ -130,6 +132,8 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.tokensOfOwner(account)
       }).then(this.handleGetAllCards)
+      
+      this.buyOpenBtnOn = 1;
     },
     buyAndOpenBooster : function() {
       console.log('Buy and Open Booster card...');

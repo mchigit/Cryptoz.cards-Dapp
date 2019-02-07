@@ -4,14 +4,47 @@
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>Markets</h1>
-          <p>Cryptoz are supported on the following markets</p>
-          
-          <a href="https://opensea.io/" target="_blank">
-            <img class="opensea-logo" src="https://opensea.io/static/images/logos/opensea-logo.png" align="absmiddle" /> <span class="opensea-header">OpenSea</span>
-          </a>
           <br>
-          <p>The world’s largest digital marketplace for crypto collectibles.<br> Buy, sell, and discover exclusive digital assets.
-          </p>
+          
+          <div class="row">
+            <div class="col-6">
+              <h3>Cryptoz Cards<br>erc-721 tokens are supported on the following markets</h3>
+              
+              <a href="https://opensea.io/" target="_blank">
+                <div class="market-btn">
+                  <img class="opensea-logo" src="https://opensea.io/static/images/logos/opensea-logo.png" align="absmiddle" /> <span class="opensea-header">OpenSea</span>
+                  <br>
+                  <p>
+                    The world’s largest digital marketplace for crypto collectibles.<br> Buy, sell, and discover exclusive digital assets.
+                  </p>
+                </div>
+              </a>
+              
+            </div>
+            
+            <div class="col-6">
+              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="static/czxp.png" />) <br>erc-20 tokens are supported on the following markets</h3>
+              
+              <a href="https://idex.market/eth/czxp" target="_blank">
+                <div class="market-btn">
+                  <img class="idex-logo" src="https://idex.market/assets/IDEX_sf-color.svg" align="absmiddle" />
+                  <br>
+                  <p>
+                    Decentralized Ethereum Asset Exchange
+                  </p>
+                </div>
+              </a>
+            
+            </div>
+            
+          </div>
+          
+          
+          
+          
+          
+          
+          
             
         </div>
       </main>
@@ -38,5 +71,23 @@ export default {
   .opensea-logo {
     width : 10%;
     margin-bottom : 10px;
+  }
+  .idex-logo {
+    width : 30%;
+    margin-bottom : 10px;
+  }
+  .czxp-logo {
+    width:7%;
+    margin-right:0.2em;
+  }
+  .market-btn:hover{
+    background-color:#ccc;
+    padding:5px;
+    height:130px;
+    text-decoration:none;
+  }
+  .market-btn{
+    padding:5px;
+    text-decoration:none;
   }
 </style>
