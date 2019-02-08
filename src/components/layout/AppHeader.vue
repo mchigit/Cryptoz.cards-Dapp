@@ -18,7 +18,7 @@
               <router-link to="/market">Markets</router-link>
             </li>
             <li>
-              <router-link to="/view">View</router-link>
+              <router-link to="/view?token_id=2">View</router-link>
             </li>
           </ul>
           
