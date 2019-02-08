@@ -20,6 +20,16 @@
                 </div>
               </a>
               
+              <a href="https://rarebits.io/" target="_blank">
+                <div class="market-btn">
+                  <img class="rb-logo" src="https://lever-client-logos.s3.amazonaws.com/b5195801-463f-4953-9cee-332ab2414511-1526322100422.png" align="absmiddle" />
+                  <br>
+                  <p>
+                    Buy, sell, and discover unique crypto assets<br>Zero Fees.
+                  </p>
+                </div>
+              </a>
+              
             </div>
             
             <div class="col-6">
@@ -72,6 +82,10 @@ export default {
     width : 10%;
     margin-bottom : 10px;
   }
+  .rb-logo{
+    width:39%;
+    margin-bottom : 10px;
+  }
   .idex-logo {
     width : 30%;
     margin-bottom : 10px;
@@ -94,6 +108,7 @@ export default {
     text-decoration:none;
     height:130px;
     border:1px solid white;
+    margin-bottom:5px;
   }
   h3{
     margin-bottom:1em;
