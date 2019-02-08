@@ -21,6 +21,38 @@
                   :card_class="card.attributes.rarity"
                 ></OwnedCardContent>
         </div>
+        <div class="col-2 text-right font-weight-bold">
+          Owner:<br>
+          Cryptoz Token #:<br>
+          Times Transferred:<br>
+          Card Name:<br>
+          Card Set:<br>
+          Zombie Type:<br>
+          Rarity:<br>
+          Total Available:<br>
+          Cost:<br>
+          Buy CZXP:<br>
+          Transfer CZXP:<br>
+          Sacrifice CZXP:<br>
+          Unlock CZXP:<br>
+          Level:
+        </div>
+        <div class="col-2">
+          <a v-bind:href="owner_url" target="_blank">{{owner}}</a><br>
+          {{token_id}}<br>
+          00000<br>
+          {{card.name}}<br>
+          {{card.attributes.card_set}}<br>
+          {{card.attributes.zombie_type}}<br>
+          {{card.attributes.rarity}}<br>
+          {{card.attributes.edition_total}}<br>
+          {{card.attributes.cost}} E<br>
+          {{card.attributes.buy_czxp}}<br>
+          {{card.attributes.transfer_czxp}}<br>
+          {{card.attributes.sacrifice_czxp}}<br>
+          {{card.attributes.unlock_czxp}}<br>
+          {{card.attributes.card_level}}
+        </div>
       </div>
     </div>
     </main>
@@ -41,27 +73,35 @@
         owner: 'Loading..',
         token_id : '',
         card : '',
+        owner_url: '',
         etherscan_token_id : 'https://etherscan.com/contract/token/'
       }
     },
     mounted () {
+      this.token_id = this.$route.params.token_id;
+      console.log('from string..' + this.$route.params.token_id);
+      console.log();
       this.startSubscriptions();
     },
     methods: {
       startSubscriptions : function() {
-        console.log(this.$route.query.token_id);
-        this.token_id = this.$route.query.token_id;
+        //console.log(this.$route.query.token_id);
+        //this.token_id = this.$route.query.token_id;
         
         var self = this;
         var contract;
         
         Cryptoz.deployed().then(function(instance) {
           contract = instance;
-          return instance.ownerOf(1, {from: account, gas:342000});
+          return instance.ownerOf(self.token_id, {from: account});
         }).then(function(res){
-          console.log(res);
-          return contract.getCardByTokenId(1, {from: account, gas:342000});
+          //console.log('owner is:');
+          //console.log(res);
+          self.owner = res;
+          self.owner_url = 'https://etherscan.io/address/' + res;
+          return contract.getCardByTokenId(self.token_id, {from: account});
         }).then(function(res){
+          console.log('cardBytoken:');
           console.log(res);
         })
         

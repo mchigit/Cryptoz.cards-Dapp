@@ -37,7 +37,7 @@ export default new Router({
       component: HelpContent
     },
     {
-      path: '/view',
+      path: '/view/:token_id',
       name: 'TokenContent',
       component: TokenContent
     }
