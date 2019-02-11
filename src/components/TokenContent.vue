@@ -24,6 +24,7 @@
         <div class="col-2 text-right font-weight-bold">
           Owner:<br>
           Cryptoz Token #:<br>
+          Editon #:<br>
           Times Transferred:<br>
           Card Name:<br>
           Description:<br>
@@ -41,7 +42,8 @@
         <div class="col-4">
           <a v-bind:href="owner_url" target="_blank">{{owner}}</a><br>
           {{token_id}}<br>
-          00000<br>
+          {{edition_number}}<br>
+          {{times_transferred}}<br>
           {{card.name}}<br>
           {{card.description}}<br>
           {{card.attributes.card_set}}<br>
@@ -74,9 +76,24 @@
       return {
         owner: 'Loading..',
         token_id : '',
-        card : '',
+        card : {"name" : "Loading...","description":"Loading..."              ,"attributes":{
+                  "rarity":"Loading...",
+                  "edition_total":"Loading...",
+                  "cost":"Loading...",
+                  "card_set":"Loading...",
+                  "zombie_type":"Loading...",
+                  "buy_czxp":"Loading...",
+                  "transfer_czxp":"Loading...",
+                  "sacrifice_czxp":"Loading...",
+                  "unlock_czxp":"Loading...",
+                  "card_level":"Loading...",
+              }
+          
+        },
         owner_url: '',
         rarity : '',
+        times_transferred : 'Loading..',
+        edition_number :"Loading...",
         etherscan_token_id : 'https://etherscan.com/contract/token/'
       }
     },
@@ -85,8 +102,7 @@
       this.token_id = this.$route.params.token_id;
       console.log('from string..' + this.$route.params.token_id);
       console.log();
-      setTimeout(this.startSubscriptions, 3000)
-      //this.startSubscriptions();
+      setTimeout(this.startSubscriptions, 2000)
     },
     methods: {
       startSubscriptions : function() {
@@ -101,27 +117,33 @@
           contract = instance;
           return instance.ownerOf(self.token_id, {from: account});
         }).then(function(res){
-          //console.log('owner is:');
-          //console.log(res);
+          console.log('owner is:');
+          console.log(res);
           self.owner = res;
           self.owner_url = 'https://etherscan.io/address/' + res;
           return contract.getCardByTokenId(self.token_id, {from: account});
-        }).then(function(res){
-          console.log('cardBytoken:');
-          console.log(res);
+        }).then(function(elementReturned){
+          console.log('cardBytoken:'); // 3 parts - type_id, edition_number, transfer_count
+          console.log(elementReturned);
+          console.log(elementReturned[0].c[0]);
+          
+          self.edition_number = elementReturned[1].c[0];
+          self.times_transferred = elementReturned[2].c[0];
+          
+          self.getCardData(elementReturned[0].c[0]);
         })
         
-        this.getCardData();
-      },
-      getCardData : function() {
         
-        axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + this.token_id)
+      },
+      getCardData : function(card_id) {
+        
+        axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + card_id)
                 .then(this.handleGotCardData)
         
       },
       handleGotCardData : function(res) {
           
-          console.log(res.data);
+          //console.log(res.data);
           
           var newAttr = [];
           //format the attributes to match our JS objects
