@@ -26,6 +26,7 @@
           Cryptoz Token #:<br>
           Times Transferred:<br>
           Card Name:<br>
+          Description:<br>
           Card Set:<br>
           Zombie Type:<br>
           Rarity:<br>
@@ -37,16 +38,17 @@
           Unlock CZXP:<br>
           Level:
         </div>
-        <div class="col-2">
+        <div class="col-4">
           <a v-bind:href="owner_url" target="_blank">{{owner}}</a><br>
           {{token_id}}<br>
           00000<br>
           {{card.name}}<br>
+          {{card.description}}<br>
           {{card.attributes.card_set}}<br>
           {{card.attributes.zombie_type}}<br>
-          {{card.attributes.rarity}}<br>
+          {{rarity}}<br>
           {{card.attributes.edition_total}}<br>
-          {{card.attributes.cost}} E<br>
+          {{card.attributes.cost}}<br>
           {{card.attributes.buy_czxp}}<br>
           {{card.attributes.transfer_czxp}}<br>
           {{card.attributes.sacrifice_czxp}}<br>
@@ -74,17 +76,21 @@
         token_id : '',
         card : '',
         owner_url: '',
+        rarity : '',
         etherscan_token_id : 'https://etherscan.com/contract/token/'
       }
     },
-    mounted () {
+    mounted() {
+      console.log('Are we getting vars from App.vue ?...' + this.$parent.account);
       this.token_id = this.$route.params.token_id;
       console.log('from string..' + this.$route.params.token_id);
       console.log();
-      this.startSubscriptions();
+      setTimeout(this.startSubscriptions, 3000)
+      //this.startSubscriptions();
     },
     methods: {
       startSubscriptions : function() {
+        console.log('subscriptions in tokenContent...');
         //console.log(this.$route.query.token_id);
         //this.token_id = this.$route.query.token_id;
         
@@ -122,9 +128,12 @@
           res.data.attributes.forEach(function(element){
             newAttr[element.trait_type] = element.value;
           })
-                
+          
           //Overwrite our JSON reponse with vue friendly card binding data
           res.data.attributes = newAttr;
+          
+          //Get the human label for rarity
+          this.rarity = res.data.attributes.rarity;
           
           //Append the bg
           switch(res.data.attributes.rarity){
@@ -149,7 +158,8 @@
           }
           
           if(res.data.attributes.edition_total === 0){
-            res.data.attributes.edition_total = "Unlimited"
+            res.data.attributes.edition_total = "Unlimited";
+            res.data.attributes.cost = "Booster Only";
           }
           
           this.card = res.data;
