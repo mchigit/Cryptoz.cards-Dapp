@@ -141,14 +141,12 @@ export default {
       var self = this
       var acct = window.account
       
-      
-      
       Cryptoz.deployed().then(function(instance) {
         console.log(window.account+' '+toWallet+' '+self.id)
         return instance.transferFrom(window.account, toWallet, self.id, {from:account, gas: 350000});
       }).then(function(res){
-        console.log("tranfer result:");
-        console.log(res);
+        //console.log("tranfer result:");
+        //console.log(res);
         self.$emit('card-updated')
       })
     }

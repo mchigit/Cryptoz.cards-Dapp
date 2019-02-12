@@ -2,7 +2,19 @@
   <div>
     <main role="main" class="container">
       <div class="jumbotron">
-      <div class="row">
+        <div v-if="load_state == -1" class="row">
+          <div class="col">
+            <h2>Loading....please wait</h2>
+          </div>
+        </div>
+        <div v-else-if="load_state == 0" class="row">
+          <div class="col">
+            <h2>Cryptoz Token #{{token_id}} does not exist on this chain</h2>
+            <p>If you would like to see a token:</p>
+            <button class="btn btn-primary" v-on:click="go_genesis">View The CryptoKeeper - our #0 Genesis token</button>
+          </div>
+        </div>
+        <div v-else class="row">
         <div class="col-4 text-right">
                 <OwnedCardContent
                   :key="card.id"
@@ -24,14 +36,13 @@
         <div class="col-2 text-right font-weight-bold">
           Owner:<br>
           Cryptoz Token #:<br>
-          Editon #:<br>
+          Editon:<br>
           Times Transferred:<br>
           Card Name:<br>
           Description:<br>
           Card Set:<br>
           Zombie Type:<br>
           Rarity:<br>
-          Total Available:<br>
           Cost:<br>
           Buy CZXP:<br>
           Transfer CZXP:<br>
@@ -42,14 +53,13 @@
         <div class="col-4">
           <a v-bind:href="owner_url" target="_blank">{{owner}}</a><br>
           {{token_id}}<br>
-          {{edition_number}}<br>
+          {{card.attributes.edition_total}}<br>
           {{times_transferred}}<br>
           {{card.name}}<br>
           {{card.description}}<br>
           {{card.attributes.card_set}}<br>
           {{card.attributes.zombie_type}}<br>
           {{rarity}}<br>
-          {{card.attributes.edition_total}}<br>
           {{card.attributes.cost}}<br>
           {{card.attributes.buy_czxp}}<br>
           {{card.attributes.transfer_czxp}}<br>
@@ -74,9 +84,12 @@
     },
     data () {
       return {
+        load_state : -1, //This is the loading state, -1 = loading state,0 - token doesn't exist, 1 = token is valid
         owner: 'Loading..',
         token_id : '',
-        card : {"name" : "Loading...","description":"Loading..."              ,"attributes":{
+        card : {"name" : "Loading...",
+              "description":"Loading...",
+              "attributes":{
                   "rarity":"Loading...",
                   "edition_total":"Loading...",
                   "cost":"Loading...",
@@ -88,7 +101,6 @@
                   "unlock_czxp":"Loading...",
                   "card_level":"Loading...",
               }
-          
         },
         owner_url: '',
         rarity : '',
@@ -107,25 +119,40 @@
     methods: {
       startSubscriptions : function() {
         console.log('subscriptions in tokenContent...');
-        //console.log(this.$route.query.token_id);
-        //this.token_id = this.$route.query.token_id;
         
         var self = this;
         var contract;
         
         Cryptoz.deployed().then(function(instance) {
           contract = instance;
-          return instance.ownerOf(self.token_id, {from: account});
+          return instance.exists(self.token_id, {from: account});
         }).then(function(res){
+          //console.log(res);
+          //Does the token exist ?
+          if(res){
+            self.load_state = 1;
+            return contract.ownerOf(self.token_id, {from: account});
+          }else{
+            self.load_state = 0; //and we stop here
+          }
+           return 0;
+        }).then(function(res){
+          if(res == 0){
+            return 0;
+          }
           console.log('owner is:');
-          console.log(res);
+          //console.log(res);
           self.owner = res;
           self.owner_url = 'https://etherscan.io/address/' + res;
           return contract.getCardByTokenId(self.token_id, {from: account});
         }).then(function(elementReturned){
-          console.log('cardBytoken:'); // 3 parts - type_id, edition_number, transfer_count
-          console.log(elementReturned);
-          console.log(elementReturned[0].c[0]);
+          //console.log('cardBytoken:'); // 3 parts - type_id, edition_number, transfer_count
+          //console.log(elementReturned);
+          //console.log(elementReturned[0].c[0]);
+          if(elementReturned ==0)
+          {
+            return 0
+          }
           
           self.edition_number = elementReturned[1].c[0];
           self.times_transferred = elementReturned[2].c[0];
@@ -153,6 +180,15 @@
           
           //Overwrite our JSON reponse with vue friendly card binding data
           res.data.attributes = newAttr;
+          
+          //Set human readable edition number and total
+          if(res.data.attributes.edition_total == 0) //unlimited
+            {
+              res.data.attributes.edition_total = '#'+ this.edition_number;
+            }else{
+              res.data.attributes.edition_total = '#'+ this.edition_number +' of '+res.data.attributes.edition_total;
+            }
+          
           
           //Get the human label for rarity
           this.rarity = res.data.attributes.rarity;
@@ -185,6 +221,10 @@
           }
           
           this.card = res.data;
+      },
+      go_genesis : function(){
+        this.token_id = 0;
+        this.startSubscriptions();
       }
     }
   }

@@ -18,7 +18,7 @@
               <router-link to="/market">Markets</router-link>
             </li>
             <li>
-              <router-link to="/view/0">View</router-link>
+              <router-link to="/view/1">View</router-link>
             </li>
           </ul>
           
