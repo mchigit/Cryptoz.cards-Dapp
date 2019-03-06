@@ -165,7 +165,7 @@ export default {
         var getCard = function(tokenId){
 
           Cryptoz.deployed().then(function(instance) {
-            return instance.getCardByTokenId.call(tokenId)
+            return instance.getOwnedCard.call(tokenId)
           }).then(function(elementReturned) {
             console.log('A card !' + tokenId);
             console.log(elementReturned);

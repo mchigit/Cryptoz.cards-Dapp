@@ -22,6 +22,11 @@
             </li>
           </ul>
           
+          <div class="bonusClass" v-on:click="GetBonus">
+            Bonus Available
+          </div>
+          
+          
           <transition name="fade" mode="out-in">
             
             <p class="mm-header" v-if="network_state === 0">
@@ -33,7 +38,7 @@
             
             <button class="btn btn-danger" v-else-if="network_state === 1" v-on:click="$emit('doLogin')">Connect with MetaMask</button>
             
-            <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}</a>
+            <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}
             </span>
           
           </transition>
@@ -57,9 +62,39 @@ export default {
     }
   },
   props : ['network_state','wallet'],
-  methods : {
+  mounted () {
+    //first check if the dapp is authed and logged in
+    console.log('AppHeader mounted...')
+    
+      this.$root.$on('userLoggedIn', () => {
+        console.log('hey userLoggedIn event in Header!')
+        //console.log(window.account)
+        console.log('userLoggedIn...AppHeader..run subscriptions');
+        //this.$root.$off('userLoggedIn')
+        //enable the button
+        this.setSubscriptions();
+      })
 
-  }
+    //if the user has logged, start it up
+    if(window.account !== undefined){
+      this.setSubscriptions()
+    }
+      
+  },
+  methods : {
+    setSubscriptions : function() {
+      //Lets do a check for the Daily bonus'
+      
+    },
+    GetBonus : function() {
+      console.log('GetBonus called...');
+      Cryptoz.deployed().then(function(instance) {
+        return instance.getBonusBoosters({from: account,gas:362000});
+      }).then(function(res) {
+        console.log(res);
+      })
+    }
+  },
 }
 
 </script>
@@ -83,7 +118,7 @@ export default {
 
   .wallet-nav{
     color: #fff;
-    margin-right: 150px;
+    margin-right: 10px;
   }
   li{
     margin-right: 1.2em;
@@ -104,5 +139,9 @@ export default {
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+  .bonusClass{
+    color:#00FF00;
+    margin-right: 3.2em;
   }
 </style>

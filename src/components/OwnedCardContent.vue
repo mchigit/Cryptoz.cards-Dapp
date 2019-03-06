@@ -2,7 +2,7 @@
   <div>
 
 <!-- Modal -->
-<div class="modal fade" v-bind:id="'modal'+id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -62,7 +62,7 @@
               Sacrifice {{id}}
             </button>
             <div class="float-right">
-              <button class="btn btn-danger btn-gift" data-toggle="modal"  v-bind:data-target="'#modal'+id">
+              <button class="btn btn-danger btn-gift" data-toggle="modal"  data-target="#modal">
                 <img src="static/baseline_card_giftcard_white_24dp.png" />
               </button>
             </div>
@@ -147,6 +147,7 @@ export default {
       }).then(function(res){
         //console.log("tranfer result:");
         //console.log(res);
+        document.getElementById("transferModal").modal(toggle);
         self.$emit('card-updated')
       })
     }
