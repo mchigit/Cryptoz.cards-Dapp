@@ -125,13 +125,15 @@
         
         Cryptoz.deployed().then(function(instance) {
           contract = instance;
-          return instance.exists(self.token_id, {from: account});
+          return instance.exists.call(self.token_id);
+          //return instance.exists(self.token_id, {from: account});
         }).then(function(res){
           //console.log(res);
           //Does the token exist ?
           if(res){
             self.load_state = 1;
-            return contract.ownerOf(self.token_id, {from: account});
+            return contract.ownerOf.call(self.token_id);
+            //return contract.ownerOf(self.token_id, {from: account});
           }else{
             self.load_state = 0; //and we stop here
           }
@@ -144,7 +146,8 @@
           //console.log(res);
           self.owner = res;
           self.owner_url = 'https://etherscan.io/address/' + res;
-          return contract.getCardByTokenId(self.token_id, {from: account});
+          return contract.getOwnedCard.call(self.token_id);
+          //return contract.getCardByTokenId(self.token_id, {from: account});
         }).then(function(elementReturned){
           //console.log('cardBytoken:'); // 3 parts - type_id, edition_number, transfer_count
           //console.log(elementReturned);

@@ -100,10 +100,10 @@ export default {
     }
   },
   mounted () {
-    console.log('The shop is mounted, call for the cards');
-       
-       this.$root.$on('userLoggedIn', () => {
-        console.log('hey userLoggedIn event in Shop!')
+    console.log('The shop is mounted, call for the cards, if we have a contract..');
+
+      this.$root.$on('userLoggedIn', () => {
+        console.log('hey userLoggedIn event in Shop! it is' . window.account)
         console.log(window.account)
         console.log('userLoggedIn...shopContent..run subscriptions');
         this.$root.$off('userLoggedIn');
@@ -111,8 +111,8 @@ export default {
       })
 
     //if the user has logged, start it up
-    if(window.account !== "undefined"){
-      console.log('USer is logged in already... start up store');
+    if(typeof(window.account) !== "undefined"){
+      console.log('User is logged in already... start up SHOP content for:' . window.account);
       this.setSubscriptions()
     }
       
@@ -149,7 +149,7 @@ export default {
     },
     setSubscriptions : function() {
       
-      this.buyBoostBtnOn = 1;
+      //this.buyBoostBtnOn = 1;
       
       if(Cryptoz == undefined){
         console.log('No Cryptoz-contract in shop..')

@@ -21,7 +21,7 @@
           <li>The <a href="https://metamask.io/" target="_blank">Metamask</a> Chrome browser extension, connected to your Ethereum wallet
           <li>A balance of Ether coins ( the money of Ethereum )</li>
         </ul>
-        <p>You may then Log in with Metamask and <router-link to="/shop">Shop</router-link> for Booster cards, buy limited edition cards and claim Free limited editions cards. You may then browse the contents of <router-link to="/crypt">Your Crypt</router-link>, sacrifice cards from your Crypt or gift them to other Ethereum accounts. If you would like to <router-link to="/market">auction</router-link> your Cryptoz for profits, you may list them on OpenSea or other <router-link to="/market">supported marketplaces</router-link>. You can also trade and sell your CZXP or supported Ethereum token exchanges.</p>
+        <p>You may then Log in with Metamask and <router-link to="/shop">Shop</router-link> for Booster cards, buy limited edition cards and claim Free limited editions cards. You may then browse the contents of <router-link to="/crypt">Your Crypt</router-link>, sacrifice cards from your Crypt or gift them to other Ethereum accounts. If you would like to <router-link to="/market">auction</router-link> your Cryptoz for profits, you may list them on OpenSea or other <router-link to="/market">supported marketplaces</router-link>. You can also trade and sell your CZXP on supported Ethereum token exchanges.</p>
       </div>
     </div>
   </div>

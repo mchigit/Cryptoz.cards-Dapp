@@ -76,7 +76,7 @@ export default {
       })
 
     //if the user has logged, start it up
-    if(window.account !== undefined){
+    if(typeof(window.account) !== undefined){
       this.setSubscriptions()
     }
       

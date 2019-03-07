@@ -17,7 +17,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" v-on:click="transferCard">Confirm Transfer</button>
+        <button type="button" class="btn btn-danger" :disabled="confirmTransferBtnDisabled == 1" v-on:click="transferCard">Confirm Transfer</button>
       </div>
     </div>
   </div>
@@ -87,7 +87,8 @@ export default {
     return {
       showTransaction : 0,
       transaction_number : 0,
-      newWallet : ''
+      newWallet : '',
+      confirmTransferBtnDisabled : 0,
     }
   },
   methods : {
@@ -132,6 +133,8 @@ export default {
     transferCard : function() {
       console.log('Transfer card called..' + this.id);
       
+      //Disable the button so they dont mash it up
+      this.confirmTransferBtnDisabled = 1;
       
       //var toWallet = document.getElementById('toWallet').value
       
@@ -147,7 +150,11 @@ export default {
       }).then(function(res){
         //console.log("tranfer result:");
         //console.log(res);
-        document.getElementById("transferModal").modal(toggle);
+        var modalName = 'transfer-modal-' + self.id;
+        console.log('closing modal' + modalName);
+        
+        document.getElementById(modalName).modal({show:false});
+        self.confirmTransferBtnDisabled = 0;
         self.$emit('card-updated')
       })
     }

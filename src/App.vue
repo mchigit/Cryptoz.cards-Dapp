@@ -231,7 +231,7 @@ export default {
       console.log(data);
       
       //If user account has changed.. then update
-      if(data.selectedAddress != "undefined" || window.account == ''){
+      if(typeof(data.selectedAddress) !== "undefined"){
         console.log(data.selectedAddress +' not the same as '+window.account)
         this.network_state = 2; //we are logged in
         this.wallet = data.selectedAddress.toString();
