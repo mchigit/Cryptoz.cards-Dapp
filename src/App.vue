@@ -133,7 +133,7 @@ export default {
             //console.log(result);
             
             //Lets update our token tracking table
-            if(result.event == "LogCardCreated" && account != "undefined")
+            if(result.event == "LogCardCreated" && typeof(window.account) !== "undefined")
             {
               //console.log(result.args.cardTokenId.c[0]);
               //console.log(result.args.cardTypeId.c[0]);

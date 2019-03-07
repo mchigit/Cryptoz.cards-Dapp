@@ -101,19 +101,25 @@ export default {
   },
   mounted () {
     console.log('The shop is mounted, call for the cards, if we have a contract..');
+    
+    if(typeof(Cryptoz) !== "undefined"){
+      this.setSubscriptions();
+    }else{
+      console.log('no Cryptoz in shop !!!!!!!!!!');
+    }
 
       this.$root.$on('userLoggedIn', () => {
         console.log('hey userLoggedIn event in Shop! it is' . window.account)
         console.log(window.account)
-        console.log('userLoggedIn...shopContent..run subscriptions');
+        console.log('userLoggedIn...shopContent, set logged in state');
+        this.setLoggedInState();
         this.$root.$off('userLoggedIn');
-        this.setSubscriptions();
       })
 
     //if the user has logged, start it up
     if(typeof(window.account) !== "undefined"){
       console.log('User is logged in already... start up SHOP content for:' . window.account);
-      this.setSubscriptions()
+      this.setLoggedInState();
     }
       
   },
@@ -148,24 +154,21 @@ export default {
       
     },
     setSubscriptions : function() {
-      
-      //this.buyBoostBtnOn = 1;
-      
-      if(Cryptoz == undefined){
-        console.log('No Cryptoz-contract in shop..')
-      }else{
-        console.log('YES Cryptoz-contract in shop..')
-      }
-      
+      console.log("Subscriptions ready in shop.. get all the card types..");
+
       Cryptoz.deployed().then(function(instance) {
-        return instance.getTotalTypes();
+        return instance.getTotalTypes.call();
       }).then(this.setTotalSupply)
       
+    },
+    setLoggedInState : function() {
       Cryptoz.deployed().then(function(instance) {
         return instance.boosterPacksOwned(account);
       }).then(this.setBoostersOwned)
       
-      this.updateCZXPBalance()
+      this.updateCZXPBalance();
+      
+      this.buyBoostBtnOn = 1;
       
     },
     updateCZXPBalance :  function() {
