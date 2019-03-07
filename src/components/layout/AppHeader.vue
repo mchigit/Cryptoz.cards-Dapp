@@ -22,8 +22,14 @@
             </li>
           </ul>
           
-          <div class="bonusClass" v-on:click="GetBonus">
-            Bonus Available
+          <div class="bonusClass" v-if="bonusReady == 1" v-on:click="GetBonus">
+            Claim FREE Boosters !
+          </div>
+          <div class="bonusClassNo" v-else-if="bonusReady == 0">
+            Next Booster Bonus:<strong> 2 hours 10 mins</strong>
+          </div>
+          <div class="bonusClassLogIn" v-else>
+            Log in to claim <strong>FREE</strong> Daily boosters -->
           </div>
           
           
@@ -58,7 +64,8 @@ export default {
   name: 'AppHeader',
   data () {
     return {
-      showLogin : 1
+      showLogin : 1,
+      bonusReady : 0,
     }
   },
   props : ['network_state','wallet'],
@@ -142,6 +149,16 @@ export default {
   }
   .bonusClass{
     color:#00FF00;
+    margin-right: 3.2em;
+  }
+  
+  .bonusClassNo{
+    color:#f7162c;
+    margin-right: 3.2em;
+  }
+  
+  .bonusClassLogIn{
+    color:#ffff00;
     margin-right: 3.2em;
   }
 </style>
