@@ -23,7 +23,7 @@
           </ul>
           
           <div class="bonusClass" v-if="bonusReady == 1" v-on:click="GetBonus">
-            Claim FREE Boosters !
+            Claim 2 FREE Boosters !
           </div>
           <div class="bonusClassNo" v-else-if="bonusReady == 0">
             Next Booster Bonus:<strong> 2 hours 10 mins</strong>
@@ -42,7 +42,7 @@
               </a>
             </p>
             
-            <button class="btn btn-danger" v-else-if="network_state === 1" v-on:click="$emit('doLogin')">Connect with MetaMask</button>
+            <button class="btn btn-danger" v-else-if="network_state === 1" v-on:click="$emit('doLogin')">Log in with MetaMask</button>
             
             <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}
             </span>
@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       showLogin : 1,
-      bonusReady : 0,
+      bonusReady : 2,
     }
   },
   props : ['network_state','wallet'],
@@ -91,6 +91,14 @@ export default {
   methods : {
     setSubscriptions : function() {
       //Lets do a check for the Daily bonus'
+      console.log('Check if the bonus is available for this playa..');
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.getTimeToDailyBonus(account);
+      }).then(function(res) {
+        console.log('Time to next bonus is:');
+        console.log(res.c[0]);
+      })
       
     },
     GetBonus : function() {
