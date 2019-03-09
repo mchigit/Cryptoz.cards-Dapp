@@ -26,7 +26,7 @@
             Claim 2 FREE Boosters !
           </div>
           <div class="bonusClassNo" v-else-if="bonusReady == 0">
-            Next Booster Bonus:<strong> 2 hours 10 mins</strong>
+            Your Next Bonus:<br><strong> {{timeToBonus}}</strong>
           </div>
           <div class="bonusClassLogIn" v-else>
             Log in to claim <strong>FREE</strong> Daily boosters -->
@@ -66,6 +66,7 @@ export default {
     return {
       showLogin : 1,
       bonusReady : 2,
+      timeToBonus : 0
     }
   },
   props : ['network_state','wallet'],
@@ -93,11 +94,23 @@ export default {
       //Lets do a check for the Daily bonus'
       console.log('Check if the bonus is available for this playa..');
       
+      var self = this
+      
       Cryptoz.deployed().then(function(instance) {
         return instance.getTimeToDailyBonus(account);
       }).then(function(res) {
         console.log('Time to next bonus is:');
-        console.log(res.c[0]);
+        console.log(res.c[0]*1000);
+        var timeToBonusInMilli = res.c[0]*1000;
+        var now = new Date();
+        console.log('now is ' + now.getTime());
+        
+        if(now.getTime() >= timeToBonusInMilli){
+          self.bonusReady = 1; //Claim bonus state
+        }else{
+          self.bonusReady = 0; //countdown to bonus state
+          self.timeToBonus = self.GetTimeString(res.c[0]*1000);
+        }
       })
       
     },
@@ -106,9 +119,29 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.getBonusBoosters({from: account,gas:362000});
       }).then(function(res) {
+        console.log('getBonusBoosters called result should be T/F :');
         console.log(res);
       })
-    }
+    },
+    GetTimeString: function(_timeStamp) {
+      
+        var t     = new Date(_timeStamp),
+        hours     = t.getHours(),
+        min       = t.getMinutes() + '',
+        pm        = false,
+        months    = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+      if(hours > 11){
+        hours = hours - 12;
+        pm = true;
+      }
+
+      if(hours == 0) hours = 12;
+      if(min.length == 1) min = '0' + min;
+
+      //return months[t.getMonth()] + ' ' + t.getDate() + ', ' + t.getFullYear() + ' ' + hours + ':' + min + ' ' + (pm ? 'pm' : 'am');
+      return months[t.getMonth()] + ' ' + t.getDate() + ' at ' + hours + ':' + min + ' ' + (pm ? 'pm' : 'am');
+    },
   },
 }
 
