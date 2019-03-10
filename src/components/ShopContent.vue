@@ -118,7 +118,7 @@ export default {
 
     //if the user has logged, start it up
     if(typeof(window.account) !== "undefined"){
-      console.log('User is logged in already... start up SHOP content for:' . window.account);
+      //console.log('User is logged in already... start up SHOP content for:' . window.account);
       this.setLoggedInState();
     }
       
@@ -149,7 +149,7 @@ export default {
     },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
-      this.setSubscriptions();
+      this.setLoggedInState();
       this.$emit('child-sent')
       
     },
@@ -243,11 +243,11 @@ export default {
     setBoostersOwned : function(_total){
       console.log('Updating Boosters owned...');
       //console.log(_total);
-      this.boosters_owned = _total.toString();
+      this.boosters_owned = parseInt(_total).toLocaleString();
     },
     setCzxpBalance :  function(bal){
-      //console.log(bal.toString());
-      this.czxp_balance = bal.toString();
+      console.log(bal.toLocaleString());
+      this.czxp_balance = parseInt(bal).toLocaleString();
     },
     sortByName : function(param) {
       this.storeCards.sort(dynamicSort(param))

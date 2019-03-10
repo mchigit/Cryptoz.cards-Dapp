@@ -99,11 +99,11 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.getTimeToDailyBonus(account);
       }).then(function(res) {
-        console.log('Time to next bonus is:');
-        console.log(res.c[0]*1000);
+        //console.log('Time to next bonus is:');
+        //console.log(res.c[0]*1000);
         var timeToBonusInMilli = res.c[0]*1000;
         var now = new Date();
-        console.log('now is ' + now.getTime());
+        //console.log('now is ' + now.getTime());
         
         if(now.getTime() >= timeToBonusInMilli){
           self.bonusReady = 1; //Claim bonus state
@@ -116,11 +116,15 @@ export default {
     },
     GetBonus : function() {
       console.log('GetBonus called...');
+      var self = this;
       Cryptoz.deployed().then(function(instance) {
         return instance.getBonusBoosters({from: account,gas:362000});
       }).then(function(res) {
         console.log('getBonusBoosters called result should be T/F :');
         console.log(res);
+        if(res = 'true'){
+          self.setSubscriptions();// refresh the clock
+        }
       })
     },
     GetTimeString: function(_timeStamp) {

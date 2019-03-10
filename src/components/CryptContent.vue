@@ -254,16 +254,16 @@ export default {
     },
     setCzxpBalance :  function(bal){
       //console.log(bal.toString());
-      this.czxp_balance = bal.toLocaleString();
+      this.czxp_balance = parseInt(bal).toLocaleString();
     },
     setCryptozBalance : function(bal) {
       //console.log(bal.toString());
-      this.cards_owned = bal.toString();
+      this.cards_owned = parseInt(bal).toLocaleString();
     },
     setBoostersOwned : function(_total){
       console.log('Updating Boosters owned...');
       //console.log(_total);
-      this.boosters_owned = _total.toString();
+      this.boosters_owned = parseInt(_total).toLocaleString();
     },
     sortByName : function(param) {
       this.allCards.sort(dynamicSort(param))
