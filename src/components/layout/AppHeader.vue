@@ -118,7 +118,7 @@ export default {
       console.log('GetBonus called...');
       var self = this;
       Cryptoz.deployed().then(function(instance) {
-        return instance.getBonusBoosters({from: account,gas:362000});
+        return instance.getBonusBoosters({from: window.account, gas:362000});
       }).then(function(res) {
         console.log('getBonusBoosters called result should be T/F :');
         console.log(res);

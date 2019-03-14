@@ -109,11 +109,11 @@ export default {
     }
 
       this.$root.$on('userLoggedIn', () => {
-        console.log('hey userLoggedIn event in Shop! it is' . window.account)
-        console.log(window.account)
-        console.log('userLoggedIn...shopContent, set logged in state');
+        //console.log('hey userLoggedIn event in Shop! it is' + window.account)
+        //console.log(window.account)
+        //console.log('userLoggedIn...shopContent, set logged in state');
         this.setLoggedInState();
-        this.$root.$off('userLoggedIn');
+        //this.$root.$off('userLoggedIn');
       })
 
     //if the user has logged, start it up
@@ -149,8 +149,9 @@ export default {
     },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
+      //this.setLoggedInState();
+      //this.$emit('child-sent')
       this.setLoggedInState();
-      this.$emit('child-sent')
       
     },
     setSubscriptions : function() {

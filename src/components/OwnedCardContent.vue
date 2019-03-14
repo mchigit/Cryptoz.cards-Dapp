@@ -97,7 +97,7 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyCard(self.type_id, {from: account, value:(self.cost*1000000000000000000), gas:362000});
+        return instance.buyCard(self.type_id, {from: account, value:(self.cost*1000000000000000000), gas:285585});
       }).then(function(res) {
         console.log(res);
         self.showTransaction =1
