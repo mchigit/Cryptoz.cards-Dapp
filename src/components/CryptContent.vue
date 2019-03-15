@@ -211,6 +211,7 @@ export default {
         
       }else{
         console.log('no cards returned from handleGetAllCards()');
+        this.ownsCards = 0; //set the message to buy or get Cryptoz
       }
     },
     getCurrentValue : function() {

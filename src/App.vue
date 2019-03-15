@@ -232,12 +232,16 @@ export default {
       
       //If user account has changed.. then update
       if(typeof(data.selectedAddress) !== "undefined"){
-        console.log(data.selectedAddress +' not the same as '+window.account)
-        this.network_state = 2; //we are logged in
-        this.wallet = data.selectedAddress.toString();
-        window.account = data.selectedAddress; // global for components to grab at
-        web3.eth.defaultAccount = web3.eth.accounts[0]
-        this.$root.$emit('userLoggedIn');
+        if(data.selectedAddress !== window.account){
+          console.log(data.selectedAddress +' not the same as '+window.account)
+          this.network_state = 2; //we are logged in
+          this.wallet = data.selectedAddress.toString();
+          window.account = data.selectedAddress; // global for components to grab at
+          web3.eth.defaultAccount = web3.eth.accounts[0]
+          this.$root.$emit('userLoggedIn');
+        }else{
+          console.log(data.selectedAddress +' IS the same as '+window.account)
+        }
       }
       
       //if network has changed, handle it
