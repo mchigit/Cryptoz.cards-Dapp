@@ -97,7 +97,7 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyCard(self.type_id, {from: account, value:(self.cost*1000000000000000000), gas:285585});
+        return instance.buyCard(self.type_id, {from: account, value:(self.cost*1000000000000000000)});
       }).then(function(res) {
         console.log(res);
         self.showTransaction =1
@@ -110,7 +110,7 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.getFreeCard(self.type_id, {from: account, gas:342000});
+        return instance.getFreeCard(self.type_id, {from: account});
       }).then(function(res) {
         console.log(res)
         self.showTransaction =1
@@ -123,7 +123,7 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.sacrifice(self.id, {from:account, gas: 350000});
+        return instance.sacrifice(self.id, {from:account});
       }).then(function(res){
         console.log("sacrifice result:");
         console.log(res);
@@ -146,7 +146,7 @@ export default {
       
       Cryptoz.deployed().then(function(instance) {
         console.log(window.account+' '+self.newWallet+' '+self.id)
-        return instance.transferFrom(window.account, self.newWallet, self.id, {from:account, gas: 300000});
+        return instance.transferFrom(window.account, self.newWallet, self.id, {from:account});
       }).then(function(res){
         //console.log("tranfer result:");
         //console.log(res);
