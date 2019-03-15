@@ -228,7 +228,7 @@ export default {
     },
     handleUserChange : function(data) {
       console.log('handleUserChange:' + data.networkVersion);
-      console.log(data);
+      //console.log(data);
       
       //If user account has changed.. then update
       if(typeof(data.selectedAddress) !== "undefined"){
