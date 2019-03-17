@@ -12,11 +12,11 @@
         </button>
       </div>
       <div class="modal-body">
-        Minimum = , Maximum =
+        Minimum = 0 , Maximum = 1,649,267,441,667,000
         <input id="wager" class="form-control" type="text" v-on:input="wagerAmount = $event.target.value" value="0" required />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="confirmOpenBtnDisabled = 0">Cancel</button>
         <button type="button" class="btn btn-danger" :disabled="confirmOpenBtnDisabled == 1" v-on:click="openBooster">Open Booster</button>
       </div>
     </div>
@@ -131,6 +131,7 @@ export default {
       el : 0,
       buyOpenBtnOn : 0,
       confirmOpenBtnDisabled : 0,
+      wagerAmount : 0,
       allCards: []
     }
   },
@@ -273,8 +274,15 @@ export default {
       this.setSubscriptions();
     },
     openBooster : function () {
+      
+      console.log('Wagering..' + this.wagerAmount);
+      
+      var self = this;
+      
+      this.confirmOpenBtnDisabled = 1;
+      
       Cryptoz.deployed().then(function(instance) {
-        return instance.openBoosterCard(0, {from: account});
+        return instance.openBoosterCard(self.wagerAmount, {from: account});
       }).then(this.setSubscriptions)
     },
     setCzxpBalance :  function(bal){
