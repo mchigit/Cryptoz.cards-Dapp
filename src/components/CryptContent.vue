@@ -1,5 +1,28 @@
 <template>
   <div>
+    
+<!-- Open Booster Modal -->
+<div class="modal fade" id="openBoosterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Enter a CZXP wager amount to increase the odds of pulling a rare or epic card:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Minimum = , Maximum =
+        <input id="wager" class="form-control" type="text" v-on:input="wagerAmount = $event.target.value" value="0" required />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" :disabled="confirmOpenBtnDisabled == 1" v-on:click="openBooster">Open Booster</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>Your Cryptoz Wallet</h1>
@@ -8,9 +31,9 @@
           <!-- Loads cards here -->
             <div class="row">
               <div class="col">
-                <button class="btn btn-danger" v-if="boosters_owned > 0" v-on:click="openBooster">Open Booster Card
+                <button class="btn btn-danger" v-if="boosters_owned > 0" data-toggle="modal" data-target="#openBoosterModal">Open Booster Card
                 </button>
-                <button class="btn btn-danger" v-else v-on:click="openBooster" disabled>Open Booster Card
+                <button class="btn btn-danger" v-else disabled>Open Booster Card
                 </button>
               </div>
               <div class="col">
@@ -107,6 +130,7 @@ export default {
       boosters_owned : 'Log in Metamask',
       el : 0,
       buyOpenBtnOn : 0,
+      confirmOpenBtnDisabled : 0,
       allCards: []
     }
   },
