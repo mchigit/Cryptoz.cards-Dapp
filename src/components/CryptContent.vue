@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Minimum = 0 , Maximum = 1,649,267,441,667,000
+        Minimum = 0 Or 2,000,000,000 , Maximum = 1,649,267,441,667,000
         <input id="wager" class="form-control" type="text" v-on:input="wagerAmount = $event.target.value" value="0" required />
       </div>
       <div class="modal-footer">
