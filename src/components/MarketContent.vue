@@ -1,8 +1,6 @@
 <template>
   <div>
-        
-        <main role="main" class="container">
-        <div class="jumbotron">
+    <div class="jumbotron">
           <h1>Markets</h1>
           <br>
           
@@ -57,7 +55,6 @@
           
             
         </div>
-      </main>
   </div>
 </template>
 
@@ -112,5 +109,10 @@ export default {
   }
   h3{
     margin-bottom:1em;
+  }
+  
+  .jumbotron {
+    margin: auto;
+    width: 95%;
   }
 </style>
