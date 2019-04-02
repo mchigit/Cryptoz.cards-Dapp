@@ -1,8 +1,8 @@
 <template>
   <div>
     
-<!-- Open Booster Modal -->
-<div class="modal fade" id="openBoosterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Open Booster Modal -->
+    <div class="modal fade" id="openBoosterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -23,8 +23,7 @@
   </div>
 </div>
     
-        <main role="main" class="container">
-        <div class="jumbotron">
+    <div class="jumbotron">
           <h1>Your Cryptoz Wallet</h1>
           <p>This is where all your Cryptoz cards can be accessed. From here you can sort your cards, search your cards and sacrifice. Sacrificing is permanent. Not only in your wallet, but across the entire Cryptoz Universe. That unique item is gone forever.</p>
           
@@ -90,7 +89,6 @@
             </div>
             <div v-else><h2>You do not own any Cryptoz<br><router-link to="/shop">To get Free Cryptoz or Buy one, visit the Shop</router-link></h2></div>
         </div>
-      </main>
   </div>
 </template>
 
@@ -321,5 +319,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .jumbotron {
+    margin: auto;
+    width: 95%;
+  }
 </style>

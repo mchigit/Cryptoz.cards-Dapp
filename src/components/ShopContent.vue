@@ -1,9 +1,8 @@
 <template>
   <div>
+    <!--main role="main" class="container"-->
+      <div class="jumbotron">
         
-        <main role="main" class="container">
-          
-        <div class="jumbotron">
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy and open a booster card, which will randomly mint an unlimited edition card</p>
           <p>
@@ -72,8 +71,9 @@
           </div>
 
 
-        </div>
-      </main>
+        
+      </div>
+    <!--/main-->
   </div>
 </template>
 
@@ -262,4 +262,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .jumbotron {
+    margin-top: 2em;
+    margin: auto;
+    width: 95%;
+  }
 </style>

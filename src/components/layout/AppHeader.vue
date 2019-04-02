@@ -199,7 +199,7 @@ export default {
   
   .bonusClassNo{
     color:#f7162c;
-    margin-right: 3.2em;
+    margin-right: 2.2em;
   }
   
   .bonusClassLogIn{
