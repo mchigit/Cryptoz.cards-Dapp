@@ -172,18 +172,20 @@ export default {
     color: #fff;
     margin-right: 10px;
   }
+  
   li{
     margin-right: 1.2em;
   }
   a{
-    padding:5px;
+    
+    padding: 2px;
   }
   
   a:hover{
     color:#FFF;
     text-decoration: none;
     border: 1px solid #fff;
-    padding:4px;
+    padding:1px;
   }
   
   .fade-enter-active, .fade-leave-active {
@@ -194,7 +196,7 @@ export default {
   }
   .bonusClass{
     color:#00FF00;
-    margin-right: 3.2em;
+    margin-right: 1.8em;
   }
   
   .bonusClassNo{

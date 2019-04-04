@@ -44,6 +44,26 @@
     </div>
   </div>
         <div class="card">
+    <div class="card-header" role="tab" id="headingTwohalf">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTwohalf" role="button" aria-expanded="false" aria-controls="collapseTwo">
+          What are sponsor affiliates ?
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwohalf" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        <p>The Cryptoz universe will reward sponsors who have been associated to an affiliate. You may sponsor any number of affiliate players. This affiliation is permanent and cannot be unmade. You may only have 1 sponsor, but may have any number of affiliates. There is a number of affiliate player actions that will generate a 20% CZXP reward for their sponsor.</p>
+        <ul>
+          <li>Buy Booster Cards</li>
+          <li>Buy and Open a Booster Card</li>
+          <li>Buy a limited edition card</li>
+          <li>Grabbing a Free limited edition card</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+        <div class="card">
     <div class="card-header" role="tab" id="headingThree">
       <h5 class="mb-0">
         <a class="collapsed" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
