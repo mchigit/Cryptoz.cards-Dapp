@@ -169,7 +169,7 @@ export default {
     },
     handleGetAllCards : function(res) {
       console.log('Handling tokensOfOwner...');
-      //console.log(res);
+      console.log(res);
       
       //reset the view to empty
       this.allCards = []
@@ -227,6 +227,7 @@ export default {
         
         //Iterate through all our cards
         res.forEach(function(element){
+          //console.log(element.c[0]);
           //tokenIdList.push(element.c[0]);
           getCard(element.c[0])
         })

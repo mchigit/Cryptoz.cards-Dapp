@@ -1,5 +1,29 @@
 <template>
   <div>
+    
+    <!-- Buy booster cards Modal -->
+<div class="modal fade" id="buyBoostersPanel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Booster cards will never be sold in the shop</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Enter the number of booster credits you would like to purchase:
+        <input id="toWallet" class="form-control" type="text" v-on:input="totalCreditsToBuy = $event.target.value" required />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" :disabled="confirmBoosterBuyBtnDisabled == 1" v-on:click="buyBoosters">Buy Credits</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
     <!--main role="main" class="container"-->
       <div class="jumbotron">
         
@@ -9,9 +33,12 @@
             To Claim a FREE card Or buy a Limited edition card, you will need the required minimun balance of CZXP tokens
           </p>
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
+            
+            <p>There are a total of <strong>{{total_czxp_supply}} Cryptoz eXPerience tokens</strong> in the Universe</p>
+            
           <div class="row">
             <div class="col">
-              <button class="btn btn-danger" v-on:click="buyBooster" v-bind:disabled="buyBoostBtnOn == 0">Buy Booster Card 0.002E
+              <button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
               </button>
             </div>
             <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}
@@ -96,6 +123,9 @@ export default {
       transaction_number : '',
       storeCards: [],
       buyBoostBtnOn: 0,
+      confirmBoosterBuyBtnDisabled: 0,
+      totalCreditsToBuy : '',
+      total_czxp_supply : 0,
       allCards : [] //We never mangle this
     }
   },
@@ -138,11 +168,12 @@ export default {
         this.storeCards = this.allCards
       }
     },
-    buyBooster : function() {
-      console.log('Buy booster called..');
-      
+    buyBoosters : function() {
+      console.log('Buy boosters called..');
+      var self = this;
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyBoosterCard({from: account, value:2000000000000000});
+        var totalBoostersCost = 2000000000000000 * parseInt(self.totalCreditsToBuy);
+        return instance.buyBoosterCard(parseInt(self.totalCreditsToBuy), {from: account, value:totalBoostersCost});
       //}).then(this.handleBuyBooster)
       }).then(this.handleBuyBooster) //update boosters owned and total types
       

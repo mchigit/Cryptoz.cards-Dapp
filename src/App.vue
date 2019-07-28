@@ -103,7 +103,7 @@ export default {
         cardOpenedEvent = instance.LogPackOpened();
         cardPurchasedEvent = instance.LogCardPurchased();
         cardCreatedEvent = instance.LogCardCreated();
-        cardTransferEvent = instance.Transfer();
+        cardTransferEvent = instance.TokenTransfer();
         czxpGainedEvent = instance.CZXPGained();
         sacrificeCardEvent = instance.SacrificeCardEvent();
         
