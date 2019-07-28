@@ -34,7 +34,7 @@
           </p>
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
             
-            <p>There are a total of <strong>{{total_czxp_supply}} Cryptoz eXPerience tokens</strong> in the Universe</p>
+            <p>There are a total of <img class="czxp-supply-logo" src="static/czxp.png" /> <strong>{{total_czxp_supply}} Cryptoz eXPerience tokens</strong> in the Universe</p>
             
           <div class="row">
             <div class="col">
@@ -158,6 +158,13 @@ export default {
       console.log('Handle child sent...in Shop')
       
     },
+    setCZXPSupply : function() {
+      console.log('Buy setCZXPSupply called..');
+      var self = this;
+      CzxpToken.deployed().then(function(instance) {
+        return instance.totalSupply.call({from: account});
+      }).then(this.handleSetCZXPSupply) //update boosters owned and total types
+    },
     doHideUnlimited : function(){
       console.log('Hide/show unlimited' + this.showUnlimited)
       if(this.showUnlimited){
@@ -178,6 +185,10 @@ export default {
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
     },
+    handleSetCZXPSupply :  function(_totalSupply) {
+      console.log('Handling set czxp supply');
+      this.total_czxp_supply = parseInt(_totalSupply).toLocaleString();
+    },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
       //this.setLoggedInState();
@@ -191,6 +202,10 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.getTotalTypes.call();
       }).then(this.setTotalSupply)
+      
+      CzxpToken.deployed().then(function(instance) {
+        return instance.totalSupply.call();
+      }).then(this.handleSetCZXPSupply) //update boosters owned and total types
       
     },
     setLoggedInState : function() {
@@ -296,5 +311,8 @@ export default {
   .jumbotron {
     margin: auto;
     width: 95%;
+  },
+  .czxp-supply-logo {
+    width:3%;
   }
 </style>
