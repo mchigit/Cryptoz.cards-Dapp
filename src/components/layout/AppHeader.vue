@@ -44,7 +44,9 @@
             
             <button class="btn btn-danger" v-else-if="network_state === 1" v-on:click="$emit('doLogin')">Log in with MetaMask</button>
             
-            <span class="wallet-nav" v-else><strong>ETH Wallet :</strong> {{wallet}}
+            <span class="wallet-nav" v-else>
+              <strong>ETH Wallet :</strong> {{wallet}}
+              <span class="wallet-balance"> E: {{wallet_balance}} </span>
             </span>
           
           </transition>
@@ -69,7 +71,7 @@ export default {
       timeToBonus : 0
     }
   },
-  props : ['network_state','wallet'],
+  props : ['network_state','wallet', 'wallet_balance'],
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
@@ -169,7 +171,7 @@ export default {
   }
 
   .wallet-nav{
-    color: #fff;
+    color: #d48b15;
     margin-right: 10px;
   }
   

@@ -39,7 +39,7 @@
           <li>Click on Deposit</li>
           <li>Buy on Coinbase</li>
         </ul>
-        Follow the sign up on Coinbase, purchase some Ether. As of this writing, the transaction cost by Ethereum to interact with Cryptoz will cost approx $0.05 to $1.50 per transaction, depending on how fast you would like the transactions confirmed and what exactly you are trying to do.
+        Follow the sign up on Coinbase, purchase some Ether. As of this writing, the transaction(gas) cost by Ethereum to interact with Cryptoz will cost approx $0.05 to $1.50 USD per transaction, depending on how fast you would like the transactions confirmed and what exactly you are trying to do. This fee is not charged by Cryptoz, but by the Ethereum platform to execute code for people on this massive worldscale computer
       </div>
     </div>
   </div>
@@ -55,10 +55,10 @@
       <div class="card-body">
         <p>The Cryptoz universe will reward sponsors who have been associated to an affiliate. You may sponsor any number of affiliate players. This affiliation is permanent and cannot be unmade. You may only have 1 sponsor, but may have any number of affiliates. There is a number of affiliate player actions that will generate a 20% CZXP reward for their sponsor.</p>
         <ul>
-          <li>Buy Booster Cards</li>
+          <li>Buy Booster Credits</li>
           <li>Buy and Open a Booster Card</li>
           <li>Buy a limited edition card</li>
-          <li>Grabbing a Free limited edition card</li>
+          <li>Minting a Free limited edition card from the Shop</li>
         </ul>
       </div>
     </div>
@@ -93,7 +93,7 @@
     </div>
     <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
       <div class="card-body">
-        The <router-link to="/shop">Shop</router-link> will show you the current total number of Cryptoz available at the current time. We continue to load new sets containing approx 10-20 cards every month until we reach a hard limit of a total of 5000 types. The Ethereum contracts do not allow us or anyone to edit or overwrite a card types definition once they have been loaded.
+        The <router-link to="/shop">Shop</router-link> will show you the current total number of Cryptoz types available at the current time. We continue to load new sets containing approx 10-20 cards every month until we reach the hard limit of a total of 5000 types. The Ethereum contracts do not allow us or anyone to edit or overwrite a card types definition once they have been loaded.
       </div>
     </div>
   </div>
@@ -122,20 +122,21 @@
     <div class="card-header" role="tab" id="headingSix">
       <h5 class="mb-0">
         <a class="collapsed" data-toggle="collapse" href="#collapseSix" role="button" aria-expanded="false" aria-controls="collapseSix">
-          How can I get more CZXP tokens ?
+          How can I get more <img class="czxp-logo" src="static/czxp.png" /> CZXP tokens ?
         </a>
       </h5>
     </div>
     <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix" data-parent="#accordion">
       <div class="card-body">
-        There are multiple ways in which you will gain CZXP - CryptoZ eXPerience tokens:
+        There are multiple ways in which you can get CZXP - CryptoZ eXPerience tokens:
         <ul>
-          <li>120 CZXP - Buy a Booster Card</li>
-          <li>Check back of card - Buy a Limited edition Cryptoz card</li>
-          <li>Check back of card - Claim a FREE Limited Edition Cryptoz Card</li>
-          <li>Check back of card - Sacrifice a Cryptoz card</li>
-          <li>Buy or exchange them on a supported ERC20 token exchange</li>
+          <li>Buy Booster Credit(s) - 120 CZXP per</li>
+          <li>Buy a Limited edition Cryptoz card - Check back of card for amount</li>
+          <li>Claim a FREE Limited Edition Cryptoz Card - Check back of card for amount</li>
+          <li>Sacrifice a Cryptoz card - Check back of card for amount</li>
+          <li>Buy or exchange them on <router-link to="/market">supported ERC20 token exchanges</router-link></li>
           <li>Request them from other players</li>
+          <li>Receive 20% of the amount earned by your affiliates purchase actions</li>
         </ul>
       </div>
     </div>
@@ -159,5 +160,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .czxp-logo {
+    width:4%;
+    margin-right:0.2em;
+  }
 </style>

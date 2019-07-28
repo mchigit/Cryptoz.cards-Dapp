@@ -61,6 +61,7 @@ export default {
     return {
       network_state : 1, // 0 - no mm, 1 = mm not logged in, 2= mm logged in
       wallet : '',
+      wallet_balance : '',
       network_name : 'Detecting Ethereum network..Loading',
       eth_network_name : ''
     }
@@ -180,13 +181,10 @@ export default {
       if (window.ethereum) {
         //async () => {
           try {
+              console.log('Ask for permission from metamask');
               // Request account access if needed
               //let result = await ethereum.enable();
               ethereum.enable();
-              // Acccounts now exposed
-              //console.log(result);
-              console.log("Get wallet being called...");
-              this.getWallet();
           } catch (error) {
               // User denied account access...
               console.log("User denied our app, that is sad");
@@ -199,10 +197,10 @@ export default {
       }
       // Legacy dapp browsers...
       else if (window.web3) {
+          console.log('in the legacy code of onDoLogin()');
           window.web3 = new Web3(web3.currentProvider);
           // Acccounts always exposed
           //web3.eth.sendTransaction({/* ... */});
-          console.log('in the legacy code of onDoLogin()');
       }
       // Non-dapp browsers...
       else {
@@ -211,11 +209,13 @@ export default {
       
     },
     getWallet : function() {
-      console.log('authorized.. now get wallet');
-      web3.eth.getBalance(this.wallet, this.updateBalance);
+      console.log('authorized.. now get wallet' + window.account);
+      console.log(window.account);
+      web3.eth.getBalance(window.account).then(this.updateBalance);
     },
     updateBalance : function(val) {
       console.log('ETH balance:'+val);
+      this.wallet_balance = val.toLocaleString();
     },
     networkDetected :  function(val) {
       this.network_state = 1;
@@ -235,9 +235,10 @@ export default {
         if(data.selectedAddress !== window.account){
           console.log(data.selectedAddress +' not the same as '+window.account)
           this.network_state = 2; //we are logged in
-          this.wallet = data.selectedAddress.toString();
+          this.wallet = data.selectedAddress.substr(0,5) + '...' + data.selectedAddress.substr(35,5);
           window.account = data.selectedAddress; // global for components to grab at
-          web3.eth.defaultAccount = web3.eth.accounts[0]
+          web3.eth.defaultAccount = web3.eth.accounts[0];
+          this.getWallet();
           this.$root.$emit('userLoggedIn');
         }else{
           console.log(data.selectedAddress +' IS the same as '+window.account)

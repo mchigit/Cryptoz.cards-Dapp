@@ -32,16 +32,15 @@
           <p>
             To Claim a FREE card Or buy a Limited edition card, you will need the required minimun balance of CZXP tokens
           </p>
+          <p>Total supply <img class="czxp-logo" src="static/czxp.png" /> <strong>{{total_czxp_supply}} CZXP tokens</strong></p>
             <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
-            
-            <p>There are a total of <img class="czxp-supply-logo" src="static/czxp.png" /> <strong>{{total_czxp_supply}} Cryptoz eXPerience tokens</strong> in the Universe</p>
             
           <div class="row">
             <div class="col">
               <button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
               </button>
             </div>
-            <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}
+            <div class="col"><strong>Your Booster credits :</strong> {{boosters_owned}}
             </div>
             <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
             </div>
@@ -125,7 +124,7 @@ export default {
       buyBoostBtnOn: 0,
       confirmBoosterBuyBtnDisabled: 0,
       totalCreditsToBuy : '',
-      total_czxp_supply : 0,
+      total_czxp_supply : 'Log in for total ',
       allCards : [] //We never mangle this
     }
   },
@@ -311,8 +310,8 @@ export default {
   .jumbotron {
     margin: auto;
     width: 95%;
-  },
-  .czxp-supply-logo {
-    width:3%;
+  }
+  .czxp-logo {
+    width : 3%;
   }
 </style>
