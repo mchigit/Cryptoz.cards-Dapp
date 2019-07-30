@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <!-- Buy booster cards Modal -->
+    <!-- Buy booster cards Modal
 <div class="modal fade" id="buyBoostersPanel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -22,6 +22,19 @@
     </div>
   </div>
 </div>
+-->
+
+
+
+  <b-modal id="buy-boosters-modal" title="Buy Booster Credits @ 0.002E each">
+        <h5 class="modal-title">Booster cards will never be sold in the shop</h5>
+        Enter the number of booster credits you would like to purchase:
+        <div class="col-xs-2">
+          <input id="toWallet" class="form-control" type="text" v-on:input="totalCreditsToBuy = $event.target.value" required />
+        </div>
+        <b-button class="mt-3" variant="secondary" block @click="$bvModal.hide('buy-boosters-modal')">Cancel</b-button>
+        <b-button class="mt-2" variant="danger" block @click="buyBoosters" :disabled="confirmBoosterBuyBtnDisabled == 1">Buy Credits</b-button>
+  </b-modal>
     
     
     <!--main role="main" class="container"-->
@@ -37,8 +50,9 @@
             
           <div class="row">
             <div class="col">
-              <button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
-              </button>
+              <!--button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
+              </button-->
+              <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
             </div>
             <div class="col"><strong>Your Booster credits :</strong> {{boosters_owned}}
             </div>
@@ -192,6 +206,8 @@ export default {
       console.log('Handling buy booster');
       //this.setLoggedInState();
       //this.$emit('child-sent')
+      //this.$refs['buy-boosters-modal'].hide();
+      this.$bvModal.hide('buy-boosters-modal')
       this.setLoggedInState();
       
     },

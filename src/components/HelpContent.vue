@@ -154,6 +154,8 @@ export default {
     return {
       msg: 'Here we go, here we go'
     }
+  },
+  methods : {
   }
 }
 </script>

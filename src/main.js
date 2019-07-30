@@ -3,8 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+//import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 Vue.config.productionTip = false
 

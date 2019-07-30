@@ -237,7 +237,7 @@ export default {
           this.network_state = 2; //we are logged in
           this.wallet = data.selectedAddress.substr(0,5) + '...' + data.selectedAddress.substr(35,5);
           window.account = data.selectedAddress; // global for components to grab at
-          web3.eth.defaultAccount = web3.eth.accounts[0];
+          //web3.eth.defaultAccount = web3.eth.accounts[0];
           this.getWallet();
           this.$root.$emit('userLoggedIn');
         }else{
