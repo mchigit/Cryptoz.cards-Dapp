@@ -68,7 +68,7 @@ export default {
     return {
       showLogin : 1,
       bonusReady : 2,
-      timeToBonus : 0
+      timeToBonus : 0,
     }
   },
   props : ['network_state','wallet', 'wallet_balance'],

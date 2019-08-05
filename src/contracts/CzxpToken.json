@@ -9835,10 +9835,16 @@
       "links": {},
       "address": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
       "transactionHash": "0x9c196ee526e3c1cd77742d8afd9821df02d476a99a7a4a602ac0b5430d76a4d5"
+    },
+    "1564842359862": {
+      "events": {},
+      "links": {},
+      "address": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
+      "transactionHash": "0x9c196ee526e3c1cd77742d8afd9821df02d476a99a7a4a602ac0b5430d76a4d5"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-28T22:05:13.719Z",
+  "updatedAt": "2019-08-05T02:00:05.107Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

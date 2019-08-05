@@ -41,7 +41,7 @@ window.sortAttributes = function sortAttributes(property) {
 
 
 // Import our contract artifacts and turn them into usable abstractions.
-import { default as Web3} from 'web3';
+
 import axios from 'axios';
 var contract = require("truffle-contract");
 import cryptoz_artifacts from './contracts/Cryptoz.json';
@@ -61,7 +61,7 @@ export default {
     return {
       network_state : 1, // 0 - no mm, 1 = mm not logged in, 2= mm logged in
       wallet : '',
-      wallet_balance : '',
+      wallet_balance : 0,
       network_name : 'Detecting Ethereum network..Loading',
       eth_network_name : ''
     }
@@ -177,7 +177,7 @@ export default {
     onDoLogin : function () {
       // Modern dapp browsers...
       console.log("Get ready to ask permission..");
-
+/**
       if (window.ethereum) {
         //async () => {
           try {
@@ -200,13 +200,12 @@ export default {
           console.log('in the legacy code of onDoLogin()');
           window.web3 = new Web3(web3.currentProvider);
           // Acccounts always exposed
-          //web3.eth.sendTransaction({/* ... */});
       }
       // Non-dapp browsers...
       else {
           console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
       }
-      
+**/
     },
     getWallet : function() {
       console.log('authorized.. now get wallet' + window.account);

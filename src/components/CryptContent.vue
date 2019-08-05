@@ -36,7 +36,7 @@
                 </button>
               </div>
               <div class="col">
-                <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.01E
+                <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
                 </button>
               </div>
                 <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
