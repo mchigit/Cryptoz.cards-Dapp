@@ -22,6 +22,12 @@
             </li>
           </ul>
           
+          
+              <p>Metamask: {{ web3.isInjected }}</p>
+              <p>Network: {{ web3.networkId }}</p>
+              <p>Account: {{ web3.coinbase }}</p>
+              <p>Balance: {{ web3.balance }}</p>
+          
           <div class="bonusClass" v-if="bonusReady == 1" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
           </div>
@@ -64,6 +70,15 @@
 <script>
 export default {
   name: 'AppHeader',
+  beforeCreate () { //Initialize the app
+    console.log('registerWeb3 Action dispatched from App.vue')
+    this.$store.dispatch('registerWeb3')
+  },
+  computed: {
+    web3 () {
+      return this.$store.state.web3
+    }
+  },
   data () {
     return {
       showLogin : 1,
@@ -75,7 +90,7 @@ export default {
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
-    
+/**
       this.$root.$on('userLoggedIn', () => {
         console.log('hey userLoggedIn event in Header!')
         //console.log(window.account)
@@ -89,7 +104,7 @@ export default {
     if(typeof(window.account) !== undefined){
       this.setSubscriptions()
     }
-      
+**/
   },
   methods : {
     setSubscriptions : function() {

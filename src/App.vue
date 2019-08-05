@@ -55,7 +55,7 @@ export default {
     AppFooter
   },
   mounted() {
-    this.init()
+    //this.init()
   },
   data() {
     return {
