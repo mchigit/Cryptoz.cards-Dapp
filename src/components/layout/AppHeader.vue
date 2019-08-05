@@ -23,10 +23,10 @@
           </ul>
           
           
-              <p>Metamask: {{ web3.isInjected }}</p>
+              <!--p>Metamask: {{ web3.isInjected }}</p>
               <p>Network: {{ web3.networkId }}</p>
               <p>Account: {{ web3.coinbase }}</p>
-              <p>Balance: {{ web3.balance }}</p>
+              <p>Balance: {{ web3.balance }}</p-->
           
           <div class="bonusClass" v-if="bonusReady == 1" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
@@ -77,6 +77,9 @@ export default {
   computed: {
     web3 () {
       return this.$store.state.web3
+    },
+    wallet () {
+      return this.web3.balance;
     }
   },
   data () {
@@ -86,7 +89,7 @@ export default {
       timeToBonus : 0,
     }
   },
-  props : ['network_state','wallet', 'wallet_balance'],
+  props : ['network_state', 'wallet_balance'],
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
