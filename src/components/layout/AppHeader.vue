@@ -22,12 +22,6 @@
             </li>
           </ul>
           
-          
-              <!--p>Metamask: {{ web3.isInjected }}</p>
-              <p>Network: {{ web3.networkId }}</p>
-              <p>Account: {{ web3.coinbase }}</p>
-              <p>Balance: {{ web3.balance }}</p-->
-          
           <div class="bonusClass" v-if="bonusReady == 1" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
           </div>
@@ -48,7 +42,7 @@
               </a>
             </p>
             
-            <button class="btn btn-danger" v-else-if="web3.isInjected == true" v-on:click="$emit('doLogin')">Log in with MetaMask</button>
+            <button class="btn btn-danger" v-else-if="web3.isInjected == true" v-on:click="requestPermission()">Log in with MetaMask</button>
             
             <span class="wallet-nav" v-else>
               {{coinbase}}
@@ -69,6 +63,7 @@
 
 <script>
 import {mapState} from 'vuex'
+import getPermission from '../../util/getPermission'
 
 export default {
   name: 'AppHeader',
@@ -85,7 +80,7 @@ export default {
       return this.$store.state.web3
     },
     wallet () {
-      return this.web3.balance;
+      return window.web3.fromWei(this.web3.balance, 'ether');
     },
     coinbase() {
       return this.web3.coinbase;
@@ -103,7 +98,7 @@ export default {
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
-    console.log(this.wallet.toString(10));
+    console.log(this.wallet);
 /**
       this.$root.$on('userLoggedIn', () => {
         console.log('hey userLoggedIn event in Header!')
@@ -121,6 +116,11 @@ export default {
 **/
   },
   methods : {
+    requestPermission : function() {
+      console.log("Log in to Metamask button called...");
+      getPermission();
+      
+    },
     setSubscriptions : function() {
       //Lets do a check for the Daily bonus'
       console.log('Check if the bonus is available for this playa..');
