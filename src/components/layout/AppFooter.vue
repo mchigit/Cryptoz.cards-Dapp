@@ -100,8 +100,6 @@ export default {
   computed: mapState({
     isInjected: state => state.web3.isInjected,
     network: state => NETWORKS[state.web3.networkId],
-    coinbase: state => state.web3.coinbase,
-    balance: state => state.web3.balance
   }),
   data () {
     return {

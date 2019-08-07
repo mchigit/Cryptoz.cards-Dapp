@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <AppHeader v-on:doLogin="onDoLogin" v-bind:network_state="network_state" v-bind:wallet="wallet" />
+    <AppHeader v-on:doLogin="onDoLogin" />
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
-    <AppFooter v-bind:network_name="network_name" v-bind:network_state="network_state" />
+    <AppFooter />
   </div>
 </template>
 
@@ -59,7 +59,6 @@ export default {
   },
   data() {
     return {
-      network_state : 1, // 0 - no mm, 1 = mm not logged in, 2= mm logged in
       wallet : '',
       wallet_balance : 0,
       network_name : 'Detecting Ethereum network..Loading',
@@ -177,6 +176,7 @@ export default {
     onDoLogin : function () {
       // Modern dapp browsers...
       console.log("Get ready to ask permission..");
+      
 /**
       if (window.ethereum) {
         //async () => {
@@ -207,52 +207,9 @@ export default {
       }
 **/
     },
-    getWallet : function() {
-      console.log('authorized.. now get wallet' + window.account);
-      console.log(window.account);
-      web3.eth.getBalance(window.account).then(this.updateBalance);
-    },
-    updateBalance : function(val) {
-      console.log('ETH balance:'+val);
-      this.wallet_balance = val.toLocaleString();
-    },
-    networkDetected :  function(val) {
-      this.network_state = 1;
-      this.eth_network_name = val;
-      this.network_name = 'You are connected to Ethereum ' + val;
-    },
     setName : function(block) {
       //console.log('setName called...' + block.number);
       this.network_name = 'You are connected to Ethereum ' + this.eth_network_name +' Block: '+ block.number.toString();
-    },
-    handleUserChange : function(data) {
-      console.log('handleUserChange:' + data.networkVersion);
-      //console.log(data);
-      
-      //If user account has changed.. then update
-      if(typeof(data.selectedAddress) !== "undefined"){
-        if(data.selectedAddress !== window.account){
-          console.log(data.selectedAddress +' not the same as '+window.account)
-          this.network_state = 2; //we are logged in
-          this.wallet = data.selectedAddress.substr(0,5) + '...' + data.selectedAddress.substr(35,5);
-          window.account = data.selectedAddress; // global for components to grab at
-          //web3.eth.defaultAccount = web3.eth.accounts[0];
-          this.getWallet();
-          this.$root.$emit('userLoggedIn');
-        }else{
-          console.log(data.selectedAddress +' IS the same as '+window.account)
-        }
-      }
-      
-      //if network has changed, handle it
-      if(data.networkVersion !== window.networkVersion){
-        console.log(data.networkVersion +' not the same as '+window.networkVersion)
-        //make sure we are on a network that has our contacts
-        //1 = main,
-        
-        window.networkVersion = data.networkVersion
-      }
-      
     },
     setSubscriptions : function() {
       console.log('Setting all subscriptions...');

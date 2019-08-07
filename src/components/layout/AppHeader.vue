@@ -41,18 +41,18 @@
           
           <transition name="fade" mode="out-in">
             
-            <p class="mm-header" v-if="network_state === 0">
+            <p class="mm-header" v-if="web3.isInjected == false ">
               Metamask is <strong>required</strong> to bridge Cryptoz on Ethereum
               <a href="https://metamask.io/" target="_blank">
                 <img src="static/metamask_logo.png" width="40%" />
               </a>
             </p>
             
-            <button class="btn btn-danger" v-else-if="network_state === 1" v-on:click="$emit('doLogin')">Log in with MetaMask</button>
+            <button class="btn btn-danger" v-else-if="web3.isInjected == true" v-on:click="$emit('doLogin')">Log in with MetaMask</button>
             
             <span class="wallet-nav" v-else>
-              <strong>ETH Wallet :</strong> {{wallet}}
-              <span class="wallet-balance"> E: {{wallet_balance}} </span>
+              {{coinbase}}
+              <span class="wallet-balance"> E: {{wallet}} </span>
             </span>
           
           </transition>
@@ -68,8 +68,14 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: 'AppHeader',
+    computed: mapState({
+    isInjected: state => state.web3.isInjected,
+    network: state => NETWORKS[state.web3.networkId],
+  }),
   beforeCreate () { //Initialize the app
     console.log('registerWeb3 Action dispatched from App.vue')
     this.$store.dispatch('registerWeb3')
@@ -80,7 +86,11 @@ export default {
     },
     wallet () {
       return this.web3.balance;
-    }
+    },
+    coinbase() {
+      return this.web3.coinbase;
+    },
+    
   },
   data () {
     return {
@@ -89,10 +99,11 @@ export default {
       timeToBonus : 0,
     }
   },
-  props : ['network_state', 'wallet_balance'],
+  props : [],
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
+    console.log(this.wallet.toString(10));
 /**
       this.$root.$on('userLoggedIn', () => {
         console.log('hey userLoggedIn event in Header!')
