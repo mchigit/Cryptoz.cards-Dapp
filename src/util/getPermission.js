@@ -1,8 +1,12 @@
 import Web3 from 'web3'
 import {store} from '../store/'
 
-let getPermission = async () => {
+let getPermission = function() {
+    
+    
     console.log('inside async..');
+      
+      
       // Modern dapp browsers...
       if (window.ethereum) {
           console.log('inside window.ethereum...');
@@ -10,13 +14,15 @@ let getPermission = async () => {
           try {
               console.log('..inside try...');
               // Request account access if needed
-              await ethereum.enable();
+              console.log(ethereum);
+              ethereum.enable();
               // Acccounts now exposed
               //web3.eth.sendTransaction({/* ... */});
               console.log('DONE Permissions');
           } catch (error) {
               // User denied account access...
               console.log('USer denied us :(');
+              console.log(error)
           }
       }
       // Legacy dapp browsers...

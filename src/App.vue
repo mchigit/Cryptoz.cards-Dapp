@@ -56,6 +56,10 @@ export default {
   },
   mounted() {
     //this.init()
+    window.Cryptoz   = contract(cryptoz_artifacts);
+    window.CzxpToken = contract(cryptoz_token_artifacts);
+    Cryptoz.setProvider(web3.currentProvider);
+    CzxpToken.setProvider(web3.currentProvider);
   },
   data() {
     return {
@@ -68,7 +72,7 @@ export default {
   methods : {
     init :  function() {
       console.log('Starting up the app..');
-      
+  /**
       if (window.ethereum) {
         window.web3 = new Web3(ethereum);
         web3.eth.net.getNetworkType()
@@ -78,7 +82,7 @@ export default {
         this.network_state = 0; //no mm detected
         console.log('no network');
       }
-      
+  **/
       // Cryptoz is our usable abstraction, which we'll use through the code below
       window.Cryptoz   = contract(cryptoz_artifacts);
       window.CzxpToken = contract(cryptoz_token_artifacts);

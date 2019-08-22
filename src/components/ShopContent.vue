@@ -132,25 +132,25 @@ export default {
   data () {
     return {
       showUnlimited : 1,
-      total_supply : 'Log in Metamask',
-      boosters_owned : 'Log in Metamask',
-      czxp_balance : 'Log in Metamask',
+      total_supply : '(Connect Metamask)',
+      boosters_owned : '(Connect Metamask)',
+      czxp_balance : '(Connect Metamask)',
       transaction_number : '',
       storeCards: [],
       buyBoostBtnOn: 0,
       confirmBoosterBuyBtnDisabled: 0,
       totalCreditsToBuy : '',
-      total_czxp_supply : 'Log in for total ',
+      total_czxp_supply : 'Connect Metamask',
       allCards : [] //We never mangle this
     }
   },
   mounted () {
     console.log('The shop is mounted, call for the cards, if we have a contract..');
     
-    if(typeof(Cryptoz) !== "undefined"){
+    if(typeof Cryptoz  !== "undefined"){
       this.setSubscriptions();
     }else{
-      console.log('no Cryptoz in shop !!!!!!!!!!');
+      console.log('Cryptoz constract not defined !!!!!!!!!!');
     }
 
       this.$root.$on('userLoggedIn', () => {

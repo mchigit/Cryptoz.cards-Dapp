@@ -80,7 +80,7 @@ export default {
       return this.$store.state.web3
     },
     wallet () {
-      return window.web3.fromWei(this.web3.balance, 'ether');
+      return window.web3.fromWei(this.$store.state.balance, 'ether');
     },
     coinbase() {
       return this.web3.coinbase;
@@ -118,7 +118,16 @@ export default {
   methods : {
     requestPermission : function() {
       console.log("Log in to Metamask button called...");
-      ethereum.enable();
+      
+      var connect_me = new Promise(function(resolve, reject){
+        ethereum.enable()
+      })
+      
+      connect_me.then(function(err,result){
+        console.log('running the enable promise');
+        console.log(err);
+        console.log(result);
+      })
       
       //getPermission();
       
