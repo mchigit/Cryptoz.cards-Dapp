@@ -5,16 +5,16 @@
           <h1>Cryptoz.cards</h1>
           <p class="lead">Cryptoz is an Ethereum blockchain based collectibles trade game.</p>
           <p>
-            The goal of the game is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 Cryptoz card is a unique token on the Ethereum blockchain. Players can buy, sell, and exchange both their Cryptoz items and CZXP tokens through any ERC standards compliant wallet application, markets and exchanges.
+            The goal of the game is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 Cryptoz card is a unique token on the Ethereum blockchain. Players can buy, sell, and exchange both their Cryptoz cards and CZXP tokens through any ERC standards compliant wallet application, markets, game engines and exchanges.
             </p>
           <p>
             Ethereum token trading and collecting is an exciting and new opportunity for classic and modern collectors alike. What makes this platform unique compared to other online digital asset based games or systems are:
-            <ul>
-              <li>The entire Cryptoz Platform is run on a set of contracts that run independantly of the creators, there is no OFF switch, Cryptoz live forever on Ethereum</li>
-              <li>The developers can not tamper or change the Card types once they are loaded. i.e: no re-minting rare cards</li>
-              <li>The cards are truly unique, owned and transferable between wallets manaully or on automated marketplace platforms</li>
-            </ul>
           </p>
+          <ul>
+            <li>The entire Cryptoz Platform is run on a set of contracts that run independantly of the creators, there is no OFF switch, Cryptoz live forever on Ethereum</li>
+            <li>The developers can not tamper or change the Card types once they are loaded. i.e: no re-minting rare cards</li>
+            <li>The cards are truly unique, owned and transferable between wallets manaully or on automated marketplace platforms</li>
+          </ul>
       </div>
       </main>
   </div>

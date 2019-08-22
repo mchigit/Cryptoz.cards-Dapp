@@ -29,7 +29,7 @@
             Your Next Bonus:<br><strong> {{timeToBonus}}</strong>
           </div>
           <div class="bonusClassLogIn" v-else>
-            Log in to claim <strong>FREE</strong> Daily boosters -->
+            Connect to claim <strong>FREE</strong> Daily boosters -->
           </div>
           
           
@@ -42,7 +42,7 @@
               </a>
             </p>
             
-            <button class="btn btn-danger" v-else-if="web3.isInjected == true" v-on:click="requestPermission()">Log in with MetaMask</button>
+            <button class="btn btn-success" v-else-if="web3.isInjected == true" v-on:click="requestPermission()">Connect with MetaMask</button>
             
             <span class="wallet-nav" v-else>
               {{coinbase}}
@@ -118,7 +118,9 @@ export default {
   methods : {
     requestPermission : function() {
       console.log("Log in to Metamask button called...");
-      getPermission();
+      ethereum.enable();
+      
+      //getPermission();
       
     },
     setSubscriptions : function() {

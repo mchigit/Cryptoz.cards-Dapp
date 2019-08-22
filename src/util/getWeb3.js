@@ -33,6 +33,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
           reject(new Error('Unable to retrieve network ID'))
         } else {
           // Assign the networkId property to our result and resolve promise
+          networkId = (networkId < 6000) ? networkId : '0'; //assign zero if internal network
           result = Object.assign({}, result, {networkId})
           resolve(result)
         }
