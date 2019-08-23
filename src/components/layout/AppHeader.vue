@@ -35,14 +35,14 @@
           
           <transition name="fade" mode="out-in">
             
-            <p class="mm-header" v-if="web3.isInjected == false ">
+            <p class="mm-header" v-if="web3.isInjected == false">
               Metamask is <strong>required</strong> to bridge Cryptoz on Ethereum
               <a href="https://metamask.io/" target="_blank">
                 <img src="static/metamask_logo.png" width="40%" />
               </a>
             </p>
             
-            <button class="btn btn-success" v-else-if="web3.isInjected == true" v-on:click="requestPermission()">Connect with MetaMask</button>
+            <button class="btn btn-success" v-else-if="web3.isInjected == true && coinbase == undefined" v-on:click="requestPermission()">Connect with MetaMask</button>
             
             <span class="wallet-nav" v-else>
               {{coinbase}}
@@ -98,48 +98,18 @@ export default {
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
-    console.log(this.wallet);
-/**
-      this.$root.$on('userLoggedIn', () => {
-        console.log('hey userLoggedIn event in Header!')
-        //console.log(window.account)
-        console.log('userLoggedIn...AppHeader..run subscriptions');
-        //this.$root.$off('userLoggedIn')
-        //enable the button
-        this.setSubscriptions();
-      })
-
-    //if the user has logged, start it up
-    if(typeof(window.account) !== undefined){
-      this.setSubscriptions()
-    }
-**/
+    //console.log(this.wallet);
+    this.setSubscriptions();
   },
   methods : {
-    requestPermission : function() {
-      console.log("Log in to Metamask button called...");
-      
-      var connect_me = new Promise(function(resolve, reject){
-        ethereum.enable()
-      })
-      
-      connect_me.then(function(err,result){
-        console.log('running the enable promise');
-        console.log(err);
-        console.log(result);
-      })
-      
-      //getPermission();
-      
-    },
     setSubscriptions : function() {
       //Lets do a check for the Daily bonus'
       console.log('Check if the bonus is available for this playa..');
-      
+      console.log(this.coinbase);
       var self = this
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.getTimeToDailyBonus(account);
+        return instance.getTimeToDailyBonus(self.coinbase);
       }).then(function(res) {
         //console.log('Time to next bonus is:');
         //console.log(res.c[0]*1000);
