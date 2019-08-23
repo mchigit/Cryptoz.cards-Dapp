@@ -45,8 +45,9 @@
             <button class="btn btn-success" v-else-if="web3.isInjected == true && coinbase == undefined" v-on:click="requestPermission()">Connect with MetaMask</button>
             
             <span class="wallet-nav" v-else>
-              {{coinbase}}
-              <span class="wallet-balance"> E: {{wallet}} </span>
+              <img src="static/metamask-face.png" width="8%" />
+              {{coinbase.substr(0,6) + '...' + coinbase.substr(38)}}
+              <span class="wallet-balance"><img src="static/ethereum-symbol.png" width="10%" />  {{wallet}} </span>
             </span>
           
           </transition>
@@ -182,7 +183,7 @@ export default {
 
   .wallet-nav{
     color: #d48b15;
-    margin-right: 10px;
+    width:23em;
   }
   
   li{
@@ -213,11 +214,15 @@ export default {
   
   .bonusClassNo{
     color:#f7162c;
-    margin-right: 2.2em;
+    margin-right: 5.2em;
   }
   
   .bonusClassLogIn{
     color:#ffff00;
     margin-right: 3.2em;
+  }
+  .wallet-balance{
+    color:lightgreen;
+    margin: 0 4em 0 6em;
   }
 </style>
