@@ -65,7 +65,7 @@ import getPermission from '../../util/getPermission'
 
 export default {
   name: 'AppHeader',
-    computed: mapState({
+  computed: mapState({
     isInjected: state => state.web3.isInjected,
     network: state => NETWORKS[state.web3.networkId],
   }),
@@ -95,18 +95,27 @@ export default {
       timeToBonus : 0,
     }
   },
-  props : [],
+  watch: {
+    coinbase(newValue, oldValue) {
+      console.log(`Updating from ${oldValue} to ${newValue}`);
+
+      // new wallet.. check their bonus
+      if (newValue !== oldValue) {
+        this.setSubscriptions();
+      }
+    },
+  },
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
-    this.setSubscriptions();
+    //this.setSubscriptions(); TOO EARLY FOR THIS :(
   },
   methods : {
     setSubscriptions : function() {
       //Lets do a check for the Daily bonus'
       console.log('Check if the bonus is available for this playa..');
-      console.log(this.coinbase);
-      console.log(this.balance);
+      //console.log(this.coinbase);
+      //console.log(this.balance);
       
       var self = this
       
