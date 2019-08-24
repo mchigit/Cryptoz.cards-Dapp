@@ -51,7 +51,7 @@
 		        </div>
           </div>
         </div>
-          <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" v-on:click="buyCard">
+          <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" v-bind:disabled="balance <= cost" v-on:click="buyCard">
             Buy Card {{cost}}E
           </button>
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" v-on:click="getCard">
@@ -83,6 +83,20 @@
 export default {
   name: 'OwnedCardContent',
   props: ['id','type_id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
+    computed: {
+    web3 () {
+      return this.$store.state.web3
+    },
+    wallet () {
+      return parseFloat(web3.fromWei(this.$store.state.web3.balance), 'ether');
+    },
+    balance(){
+      return this.$store.state.web3.balance;
+    },
+    coinbase() {
+      return this.$store.state.web3.coinbase;
+    },
+  },
   data () {
     return {
       showTransaction : 0,
@@ -97,7 +111,7 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyCard(self.type_id, {from: account, value:(self.cost*1000000000000000000)});
+        return instance.buyCard(self.type_id, {from: self.coinbase, value:(self.cost*1000000000000000000)});
       }).then(function(res) {
         console.log(res);
         self.showTransaction =1
@@ -110,7 +124,7 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.getFreeCard(self.type_id, {from: account});
+        return instance.getFreeCard(self.type_id, {from: self.coinbase});
       }).then(function(res) {
         console.log(res)
         self.showTransaction =1
@@ -139,14 +153,14 @@ export default {
       //var toWallet = document.getElementById('toWallet').value
       
       console.log('to ' + this.newWallet)
-      console.log('from ' + window.account)
+      console.log('from ' + this.coinbase)
       
       var self = this
       var acct = window.account
       
       Cryptoz.deployed().then(function(instance) {
         console.log(window.account+' '+self.newWallet+' '+self.id)
-        return instance.transferFrom(window.account, self.newWallet, self.id, {from:account});
+        return instance.transferFrom(self.coinbase, self.newWallet, self.id, {from:account});
       }).then(function(res){
         //console.log("tranfer result:");
         //console.log(res);

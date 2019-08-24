@@ -207,8 +207,7 @@ export default {
       var self = this;
       Cryptoz.deployed().then(function(instance) {
         var totalBoostersCost = 2000000000000000 * parseInt(self.totalCreditsToBuy);
-        return instance.buyBoosterCard(parseInt(self.totalCreditsToBuy), {from: coinbase, value:totalBoostersCost});
-      //}).then(this.handleBuyBooster)
+        return instance.buyBoosterCard(parseInt(self.totalCreditsToBuy), {from: self.coinbase, value:totalBoostersCost});
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
     },
@@ -218,9 +217,6 @@ export default {
     },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
-      //this.setLoggedInState();
-      //this.$emit('child-sent')
-      //this.$refs['buy-boosters-modal'].hide();
       this.$bvModal.hide('buy-boosters-modal')
       this.setLoggedInState();
       
