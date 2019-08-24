@@ -54,7 +54,7 @@
             <div class="col">
               <!--button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
               </button-->
-              <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0 || balance == 0" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
+              <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0 || balance < 2000000000000000" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
             </div>
             <div class="col"><strong>Your Booster credits :</strong> {{boosters_owned}}
             </div>

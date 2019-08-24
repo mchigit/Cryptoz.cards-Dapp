@@ -115,8 +115,8 @@ export default {
       }).then(function(res) {
         console.log(res);
         self.showTransaction =1
-        self.transaction_number = res.tx
-        self.$emit('child-sent')
+        //self.transaction_number = res.tx
+        //self.$emit('child-sent')
       })
     },
     getCard : function(){
@@ -128,8 +128,8 @@ export default {
       }).then(function(res) {
         console.log(res)
         self.showTransaction =1
-        self.transaction_number = res.tx
-        self.$emit('child-sent')
+        //self.transaction_number = res.tx
+        //self.$emit('child-sent')
       })
     },
     sacrificeCard : function() {

@@ -36,7 +36,7 @@
                 </button>
               </div>
               <div class="col">
-                <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
+                <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0 || balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
                 </button>
               </div>
                 <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
@@ -101,24 +101,33 @@ export default {
   components : {
     OwnedCardContent
   },
-  mounted () {
-    //first check if the dapp is authed and logged in
-    console.log('cryptcontent mounted...')
+  computed: {
+    web3 () {
+      return this.$store.state.web3
+    },
+    wallet () {
+      return parseFloat(web3.fromWei(this.$store.state.web3.balance), 'ether');
+    },
+    balance(){
+      return this.$store.state.web3.balance;
+    },
+    coinbase() {
+      return this.$store.state.web3.coinbase;
+    },
     
-      this.$root.$on('userLoggedIn', () => {
-        console.log('hey userLoggedIn event in Crypt!')
-        console.log(window.account)
-        console.log('userLoggedIn...cryptContent..run subscriptions');
-        this.$root.$off('userLoggedIn')
-        //enable the button
-        this.setSubscriptions();
-      })
+  },
+  watch: {
+    coinbase(newValue, oldValue) {
+      console.log(`Updating from ${oldValue} to ${newValue}`);
 
-    //if the user has logged, start it up
-    if(typeof(window.account) !== "undefined"){
-      this.setSubscriptions()
-    }
-      
+      // new wallet.. reset their boosters and czxp balance
+      if (newValue !== oldValue) {
+        this.setSubscriptions();
+      }
+    },
+  },
+  mounted () {
+    this.setSubscriptions();
   },
   data () {
     return {
@@ -139,30 +148,32 @@ export default {
       this.setSubscriptions();
     },
     setSubscriptions : function() {
+      var self = this;
+      
       CzxpToken.deployed().then(function(instance) {
-        return instance.balanceOf(account);
+        return instance.balanceOf(self.coinbase);
       }).then(this.setCzxpBalance)
       
       Cryptoz.deployed().then(function(instance) {
         console.log("get cryptoz cards tokens balance...");
-        return instance.balanceOf(account);
+        return instance.balanceOf(self.coinbase);
       }).then(this.setCryptozBalance)
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.boosterPacksOwned(account);
+        return instance.boosterPacksOwned(self.coinbase);
       }).then(this.setBoostersOwned)
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.tokensOfOwner(account)
+        return instance.tokensOfOwner(self.coinbase)
       }).then(this.handleGetAllCards)
       
       this.buyOpenBtnOn = 1;
     },
     buyAndOpenBooster : function() {
       console.log('Buy and Open Booster card...');
-      
+      var self = this;
       Cryptoz.deployed().then(function(instance) {
-        return instance.buyBoosterCardAndOpen({from: account, value:2000000000000000});
+        return instance.buyBoosterCardAndOpen({from: self.coinbase, value:2000000000000000});
       //}).then(this.handleBuyBooster)
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
@@ -281,7 +292,7 @@ export default {
       this.confirmOpenBtnDisabled = 1;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.openBoosterCard(self.wagerAmount, {from: account});
+        return instance.openBoosterCard(self.wagerAmount, {from: self.coinbase});
       }).then(this.setSubscriptions)
     },
     setCzxpBalance :  function(bal){
