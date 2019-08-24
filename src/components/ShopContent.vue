@@ -148,7 +148,7 @@ export default {
       storeCards: [],
       buyBoostBtnOn: 0,
       confirmBoosterBuyBtnDisabled: 0,
-      totalCreditsToBuy : '',
+      totalCreditsToBuy : 1,
       total_czxp_supply : '(Connect Metamask)',
       total_cryptoz_supply : '(Connect Metamask)',
       allCards : [] //We never mangle this
