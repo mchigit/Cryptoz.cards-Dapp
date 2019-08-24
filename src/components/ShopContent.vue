@@ -1,31 +1,6 @@
 <template>
   <div>
     
-    <!-- Buy booster cards Modal
-<div class="modal fade" id="buyBoostersPanel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Booster cards will never be sold in the shop</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Enter the number of booster credits you would like to purchase:
-        <input id="toWallet" class="form-control" type="text" v-on:input="totalCreditsToBuy = $event.target.value" required />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" :disabled="confirmBoosterBuyBtnDisabled == 1" v-on:click="buyBoosters">Buy Credits</button>
-      </div>
-    </div>
-  </div>
-</div>
--->
-
-
-
   <b-modal id="buy-boosters-modal" title="Buy Booster Credits @ 0.002E each">
         <h5 class="modal-title">Booster cards will never be sold in the shop</h5>
         Enter the number of booster credits you would like to purchase:
@@ -41,15 +16,24 @@
     
     <!--main role="main" class="container"-->
       <div class="jumbotron">
-        
+        <p>
+          <b-row>
+            <b-col>
+              <p><img class="czxp-logo" src="static/czxp.png" /> <strong>{{total_czxp_supply}} CZXP tokens</strong> in the Universe</p>
+            </b-col>
+            <b-col>
+              <p><strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
+            </b-col>
+            <b-col>
+              <p><strong>{{total_supply}} Cryptoz Cards</strong> in the Universe</p>
+            </b-col>
+          </b-row>
+        </p>
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy and open a booster card, which will randomly mint an unlimited edition card</p>
           <p>
             To Claim a FREE card Or buy a Limited edition card, you will need the required minimun balance of CZXP tokens
           </p>
-          <p>Total supply <img class="czxp-logo" src="static/czxp.png" /> <strong>{{total_czxp_supply}} CZXP tokens</strong></p>
-            <p>There are a total of <strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
-            
           <div class="row">
             <div class="col">
               <!--button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
@@ -340,6 +324,6 @@ export default {
     width: 95%;
   }
   .czxp-logo {
-    width : 3%;
+    width : 9%;
   }
 </style>

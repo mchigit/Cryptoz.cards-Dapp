@@ -2,7 +2,7 @@
   <div>
     
     <!-- Open Booster Modal -->
-    <div class="modal fade" id="openBoosterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <b-modal id="open-booster-modal">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,12 +16,12 @@
         <input id="wager" class="form-control" type="text" v-on:input="wagerAmount = $event.target.value" value="0" required />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="confirmOpenBtnDisabled = 0">Cancel</button>
-        <button type="button" class="btn btn-danger" :disabled="confirmOpenBtnDisabled == 1" v-on:click="openBooster">Open Booster</button>
+        <b-button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="confirmOpenBtnDisabled = 0">Cancel</b-button>
+        <b-button type="button" class="btn btn-danger" :disabled="confirmOpenBtnDisabled == 1" v-on:click="openBooster">Open Booster</b-button>
       </div>
     </div>
   </div>
-</div>
+</b-modal>
     
     <div class="jumbotron">
           <h1>Your Cryptoz Wallet</h1>
@@ -30,10 +30,8 @@
           <!-- Loads cards here -->
             <div class="row">
               <div class="col">
-                <button class="btn btn-danger" v-if="boosters_owned > 0" data-toggle="modal" data-target="#openBoosterModal">Open Booster Card
-                </button>
-                <button class="btn btn-danger" v-else disabled>Open Booster Card
-                </button>
+                <b-button class="btn btn-danger" v-bind:disabled="boosters_owned < 1" v-b-modal.open-booster-modal>Open Booster Card
+                </b-button>
               </div>
               <div class="col">
                 <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0 || balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
@@ -280,7 +278,8 @@ export default {
     },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster...');
-      console.log(result)
+      console.log(result);
+      this.$bvModal.hide('open-booster-modal')
       this.setSubscriptions();
     },
     openBooster : function () {
