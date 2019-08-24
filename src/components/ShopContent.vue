@@ -25,7 +25,7 @@
               <p><strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
             </b-col>
             <b-col>
-              <p><strong>{{total_supply}} Cryptoz Cards</strong> in the Universe</p>
+              <p><strong>{{total_cryptoz_supply}} Cryptoz Cards</strong> in the Universe</p>
             </b-col>
           </b-row>
         </p>
@@ -149,7 +149,8 @@ export default {
       buyBoostBtnOn: 0,
       confirmBoosterBuyBtnDisabled: 0,
       totalCreditsToBuy : '',
-      total_czxp_supply : 'Connect Metamask',
+      total_czxp_supply : '(Connect Metamask)',
+      total_cryptoz_supply : '(Connect Metamask)',
       allCards : [] //We never mangle this
     }
   },
@@ -169,11 +170,18 @@ export default {
       console.log('Handle child sent...in Shop')
       
     },
+    setCryptozSupply : function() {
+      console.log('Buy setCryptozSupply called..');
+      var self = this;
+      Cryptoz.deployed().then(function(instance) {
+        return instance.totalSupply.call();
+      }).then(this.handleSetCryptozSupply)
+    },
     setCZXPSupply : function() {
       console.log('Buy setCZXPSupply called..');
       var self = this;
       CzxpToken.deployed().then(function(instance) {
-        return instance.totalSupply.call({from: account});
+        return instance.totalSupply.call();
       }).then(this.handleSetCZXPSupply) //update boosters owned and total types
     },
     doHideUnlimited : function(){
@@ -199,6 +207,10 @@ export default {
       console.log('Handling set czxp supply');
       this.total_czxp_supply = parseInt(_totalSupply).toLocaleString();
     },
+    handleSetCryptozSupply :  function(_totalSupply) {
+      console.log('Handling set czxp supply');
+      this.total_cryptoz_supply = parseInt(_totalSupply).toLocaleString();
+    },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
       this.$bvModal.hide('buy-boosters-modal')
@@ -215,6 +227,10 @@ export default {
       CzxpToken.deployed().then(function(instance) {
         return instance.totalSupply.call();
       }).then(this.handleSetCZXPSupply) //update boosters owned and total types
+      
+      Cryptoz.deployed().then(function(instance) {
+        return instance.totalSupply.call();
+      }).then(this.handleSetCryptozSupply)
       
     },
     setLoggedInState : function() {
