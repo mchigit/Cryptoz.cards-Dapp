@@ -22,14 +22,11 @@
             </li>
           </ul>
           
-          <div class="bonusClass" v-if="bonusReady == 1" v-on:click="GetBonus">
+          <div class="bonusClass" v-if="coinbase != null && bonusReady == 1" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
           </div>
-          <div class="bonusClassNo" v-else-if="bonusReady == 0">
+          <div class="bonusClassNo" v-else-if="coinbase != null && bonusReady == 0">
             Your Next Bonus:<br><strong> {{timeToBonus}}</strong>
-          </div>
-          <div class="bonusClassLogIn" v-else>
-            Connect to claim <strong>FREE</strong> Daily boosters -->
           </div>
           
           
@@ -81,10 +78,13 @@ export default {
       return this.$store.state.web3
     },
     wallet () {
-      return window.web3.fromWei(this.$store.state.balance, 'ether');
+      return parseFloat(web3.fromWei(this.$store.state.web3.balance), 'ether');
+    },
+    balance(){
+      return this.$store.state.web3.balance;
     },
     coinbase() {
-      return this.web3.coinbase;
+      return this.$store.state.web3.coinbase;
     },
     
   },
@@ -99,7 +99,6 @@ export default {
   mounted () {
     //first check if the dapp is authed and logged in
     console.log('AppHeader mounted...')
-    //console.log(this.wallet);
     this.setSubscriptions();
   },
   methods : {
@@ -107,6 +106,8 @@ export default {
       //Lets do a check for the Daily bonus'
       console.log('Check if the bonus is available for this playa..');
       console.log(this.coinbase);
+      console.log(this.balance);
+      
       var self = this
       
       Cryptoz.deployed().then(function(instance) {
@@ -126,6 +127,9 @@ export default {
         }
       })
       
+    },
+    requestPermission : function() {
+      console.log('Connect to metamask button clicked');
     },
     GetBonus : function() {
       console.log('GetBonus called...');
@@ -183,7 +187,8 @@ export default {
 
   .wallet-nav{
     color: #d48b15;
-    width:23em;
+    width:27em;
+    margin-left: 2em;
   }
   
   li{
@@ -209,12 +214,12 @@ export default {
   }
   .bonusClass{
     color:#00FF00;
-    margin-right: 1.8em;
+    margin-right: 0.8em;
   }
   
   .bonusClassNo{
     color:#f7162c;
-    margin-right: 5.2em;
+    margin-right: 1.2em;
   }
   
   .bonusClassLogIn{
@@ -223,6 +228,6 @@ export default {
   }
   .wallet-balance{
     color:lightgreen;
-    margin: 0 4em 0 6em;
+    margin: 0 4em 0 4em;
   }
 </style>

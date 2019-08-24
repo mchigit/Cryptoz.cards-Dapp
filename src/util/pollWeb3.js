@@ -15,7 +15,7 @@ let pollWeb3 = function (state) {
           } else {
             store.dispatch('pollWeb3', {
               coinbase: newCoinbase,
-              balance: parseInt(newBalance, 10)
+              balance: newBalance
             })
           }
         })
@@ -23,7 +23,7 @@ let pollWeb3 = function (state) {
         web3.eth.getBalance(store.state.web3.coinbase, (err, polledBalance) => {
           if (err) {
             console.log(err)
-          } else if (parseInt(polledBalance, 10) !== store.state.web3.balance) {
+          } else if (polledBalance !== store.state.web3.balance) {
             store.dispatch('pollWeb3', {
               coinbase: store.state.web3.coinbase,
               balance: polledBalance
