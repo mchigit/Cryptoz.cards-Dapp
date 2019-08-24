@@ -137,7 +137,7 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
-        return instance.sacrifice(self.id, {from:account});
+        return instance.sacrifice(self.id, {from:self.coinbase});
       }).then(function(res){
         console.log("sacrifice result:");
         console.log(res);
