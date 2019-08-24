@@ -54,7 +54,7 @@
             <div class="col">
               <!--button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
               </button-->
-              <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
+              <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0 || balance == 0" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
             </div>
             <div class="col"><strong>Your Booster credits :</strong> {{boosters_owned}}
             </div>
@@ -129,6 +129,31 @@ export default {
   components : {
     OwnedCardContent
   },
+  computed: {
+    web3 () {
+      return this.$store.state.web3
+    },
+    wallet () {
+      return parseFloat(web3.fromWei(this.$store.state.web3.balance), 'ether');
+    },
+    balance(){
+      return this.$store.state.web3.balance;
+    },
+    coinbase() {
+      return this.$store.state.web3.coinbase;
+    },
+    
+  },
+  watch: {
+    coinbase(newValue, oldValue) {
+      console.log(`Updating from ${oldValue} to ${newValue}`);
+
+      // new wallet.. reset their boosters and czxp balance
+      if (newValue !== oldValue) {
+        this.setLoggedInState();
+      }
+    },
+  },
   data () {
     return {
       showUnlimited : 1,
@@ -149,22 +174,9 @@ export default {
     
     if(typeof Cryptoz  !== "undefined"){
       this.setSubscriptions();
+      this.setLoggedInState();
     }else{
       console.log('Cryptoz constract not defined !!!!!!!!!!');
-    }
-
-      this.$root.$on('userLoggedIn', () => {
-        //console.log('hey userLoggedIn event in Shop! it is' + window.account)
-        //console.log(window.account)
-        //console.log('userLoggedIn...shopContent, set logged in state');
-        this.setLoggedInState();
-        //this.$root.$off('userLoggedIn');
-      })
-
-    //if the user has logged, start it up
-    if(typeof(window.account) !== "undefined"){
-      //console.log('User is logged in already... start up SHOP content for:' . window.account);
-      this.setLoggedInState();
     }
       
   },
@@ -195,7 +207,7 @@ export default {
       var self = this;
       Cryptoz.deployed().then(function(instance) {
         var totalBoostersCost = 2000000000000000 * parseInt(self.totalCreditsToBuy);
-        return instance.buyBoosterCard(parseInt(self.totalCreditsToBuy), {from: account, value:totalBoostersCost});
+        return instance.buyBoosterCard(parseInt(self.totalCreditsToBuy), {from: coinbase, value:totalBoostersCost});
       //}).then(this.handleBuyBooster)
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
@@ -226,8 +238,9 @@ export default {
       
     },
     setLoggedInState : function() {
+      var self = this
       Cryptoz.deployed().then(function(instance) {
-        return instance.boosterPacksOwned(account);
+        return instance.boosterPacksOwned(self.coinbase);
       }).then(this.setBoostersOwned)
       
       this.updateCZXPBalance();
@@ -236,8 +249,9 @@ export default {
       
     },
     updateCZXPBalance :  function() {
+      var self = this
       CzxpToken.deployed().then(function(instance) {
-        return instance.balanceOf(account);
+        return instance.balanceOf(self.coinbase);
       }).then(this.setCzxpBalance)
     },
     setTotalSupply: function(_total){
