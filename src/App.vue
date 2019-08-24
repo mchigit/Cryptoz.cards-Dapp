@@ -54,7 +54,7 @@ export default {
     AppHeader,
     AppFooter
   },
-  mounted() {
+  beforeCreate() {
     //this.init()
     window.Cryptoz   = contract(cryptoz_artifacts);
     window.CzxpToken = contract(cryptoz_token_artifacts);
