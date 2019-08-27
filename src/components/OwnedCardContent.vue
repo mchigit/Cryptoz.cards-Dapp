@@ -158,7 +158,7 @@ export default {
       var self = this
       
       Cryptoz.deployed().then(function(instance) {
-        console.log(window.account+' '+self.newWallet+' '+self.id)
+        console.log(self.coinbase+' '+self.newWallet+' '+self.id)
         return instance.transferFrom(self.coinbase, self.newWallet, self.id, {from:self.coinbase});
       }).then(function(res){
         //console.log("tranfer result:");
@@ -166,9 +166,12 @@ export default {
         var modalName = 'transfer-modal-' + self.id;
         console.log('closing modal' + modalName);
         
-        document.getElementById(modalName).modal({show:false});
+        self.$bvModal.hide('transfer-modal-' + self.id)
+        //self.$emit('card-updated')
         self.confirmTransferBtnDisabled = 0;
-        self.$emit('card-updated')
+        
+        //Send a mutation for the state change to the crypt
+        self.$store.dispatch('updateCrypt')
       })
     }
   }

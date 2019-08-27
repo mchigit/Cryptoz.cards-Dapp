@@ -26,6 +26,9 @@ export const store = new Vuex.Store({
     //console.log('pollWeb3Instance mutation being executed', payload)
     state.web3.coinbase = payload.coinbase
     state.web3.balance = payload.balance
+  },
+  updateCryptContent (state) {
+    state.cryptContent += 1;
   }
  },
  actions: {
@@ -41,6 +44,9 @@ export const store = new Vuex.Store({
     pollWeb3 ({commit}, payload) {
       //console.log('pollWeb3 action being executed')
       commit('pollWeb3Instance', payload)
+    },
+    updateCrypt ({commit}) {
+      commit('updateCryptContent')
     }
  }
 })

@@ -112,7 +112,9 @@ export default {
     coinbase() {
       return this.$store.state.web3.coinbase;
     },
-    
+    cryptContent() {
+      return this.$store.state.cryptContent;
+    }
   },
   watch: {
     coinbase(newValue, oldValue) {
@@ -123,6 +125,14 @@ export default {
         this.setSubscriptions();
       }
     },
+    cryptContent(newValue, oldValue) {
+      console.log(`Updating CryptContent from ${oldValue} to ${newValue}`);
+      
+      // stale crypt contents, refresh now
+      if (newValue !== oldValue) {
+        this.setSubscriptions();
+      }
+    }
   },
   mounted () {
     this.setSubscriptions();
