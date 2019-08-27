@@ -2,7 +2,7 @@
   <div>
 
 <!-- Transfer card Modal -->
-<div class="modal fade" :id="'transfer-modal-'+id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<b-modal class="modal fade" :id="'transfer-modal-'+id">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-</div>
+</b-modal>
     
       <div class="col">
         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
@@ -62,9 +62,9 @@
               Sacrifice {{id}}
             </button>
             <div class="float-right">
-              <button class="btn btn-danger btn-gift" data-toggle="modal"  :data-target="'#transfer-modal-'+id">
+              <b-button class="btn btn-danger btn-gift" v-b-modal="'transfer-modal-'+id">
                 <img src="static/baseline_card_giftcard_white_24dp.png" />
-              </button>
+              </b-button>
             </div>
           </div>
       </div>
@@ -156,11 +156,10 @@ export default {
       console.log('from ' + this.coinbase)
       
       var self = this
-      var acct = window.account
       
       Cryptoz.deployed().then(function(instance) {
         console.log(window.account+' '+self.newWallet+' '+self.id)
-        return instance.transferFrom(self.coinbase, self.newWallet, self.id, {from:account});
+        return instance.transferFrom(self.coinbase, self.newWallet, self.id, {from:self.coinbase});
       }).then(function(res){
         //console.log("tranfer result:");
         //console.log(res);
