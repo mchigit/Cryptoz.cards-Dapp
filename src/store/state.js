@@ -8,6 +8,7 @@ let state = {
  error: null
  },
  contractInstance: null,
- cryptContent:0
+ cryptContent:0,
+ boostersOwned:0
 }
 export default state

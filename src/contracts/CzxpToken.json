@@ -9450,10 +9450,16 @@
       "links": {},
       "address": "0x19B1Bac2ccDcdd59796E39c15ff820359a1Ef0b5",
       "transactionHash": "0x90ad65de6fba9fc3aff993aa8db10640a25f03ab48ebe1a427bafb016028e890"
+    },
+    "1567044848342": {
+      "events": {},
+      "links": {},
+      "address": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
+      "transactionHash": "0x9c196ee526e3c1cd77742d8afd9821df02d476a99a7a4a602ac0b5430d76a4d5"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-08-22T03:38:06.992Z",
+  "updatedAt": "2019-08-29T02:14:52.550Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {
