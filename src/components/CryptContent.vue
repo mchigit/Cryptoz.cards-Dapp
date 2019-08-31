@@ -2,26 +2,25 @@
   <div>
     
   <!-- Open Booster Modal -->
-  <b-modal id="open-booster-modal">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Enter a CZXP wager amount to increase the odds of pulling a rare or epic card:</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+  <b-modal
+    id="open-booster-modal"
+    title="Enter a CZXP wager amount to increase the odds of pulling a rare or epic card:"
+    ok-variant="danger"
+    ok-title="Open Booster"
+    hide-footer
+  >
+      
         Minimum = 0 Or 2,000,000,000 , Maximum = 1,649,267,441,667,000
         <input id="wager" class="form-control" type="text" v-on:input="wagerAmount = $event.target.value" value="0" required />
-      </div>
-      <div class="modal-footer">
-        <b-button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="confirmOpenBtnDisabled = 0">Cancel</b-button>
-        <b-button type="button" class="btn btn-danger" :disabled="confirmOpenBtnDisabled == 1" v-on:click="openBooster">Open Booster</b-button>
-      </div>
-    </div>
-  </div>
-</b-modal>
+    <b-row>
+      <b-col>
+        <b-button class="mt-3" variant="danger" block @click="openBooster">Open Booster</b-button>
+      </b-col>
+      <b-col>
+        <b-button class="mt-3" block @click="$bvModal.hide('open-booster-modal')">Cancel</b-button>
+      </b-col>
+    </b-row>
+  </b-modal>
     
     <div class="jumbotron">
           <h1>Your Cryptoz Wallet</h1>
