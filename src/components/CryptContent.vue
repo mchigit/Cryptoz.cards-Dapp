@@ -40,7 +40,7 @@
             </div>
             <br>
             
-            <OwnerBalance></OwnerBalance>
+            <OwnerBalances></OwnerBalances>
             
             <div class="row">
               <div class="col text-right"  v-if="ownsCards == 1">
@@ -90,13 +90,13 @@
 <script>
 import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
-import OwnerBalance from '@/components/OwnerBalance.vue'
+import OwnerBalances from '@/components/OwnerBalances.vue'
 
 export default {
   name: 'CryptContent',
   components : {
     OwnedCardContent,
-    OwnerBalance
+    OwnerBalances
   },
   computed: {
     web3 () {

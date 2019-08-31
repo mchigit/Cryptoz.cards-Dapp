@@ -40,11 +40,11 @@
               </button-->
               <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0 || balance < 2000000000000000" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
             </div>
-            <div class="col"><strong>Your Booster credits :</strong> {{boosters_owned}}
-            </div>
-            <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
-            </div>
           </div>
+          <br>
+          
+          <OwnerBalances></OwnerBalances>
+          
           <br>
           <div class="row">
               <div class="col">
@@ -106,12 +106,13 @@
 <script>
 import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
-
+import OwnerBalances from '@/components/OwnerBalances.vue'
 
 export default {
   name: 'ShopContent',
   components : {
-    OwnedCardContent
+    OwnedCardContent,
+    OwnerBalances
   },
   computed: {
     web3 () {
