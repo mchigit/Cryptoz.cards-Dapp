@@ -273,6 +273,7 @@ export default {
       console.log('Handling buy booster...');
       console.log(result);
       this.$bvModal.hide('open-booster-modal')
+      this.$store.dispatch('updateOwnerBalances')
       this.setSubscriptions();
     },
     openBooster : function () {

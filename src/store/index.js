@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import state from './state'
 import getWeb3 from '../util/getWeb3'
 import pollWeb3 from '../util/pollWeb3'
-import getBalances from '../util/getBalances'
+//import getBalances from '../util/getBalances'
 
 
 Vue.use(Vuex)
@@ -67,13 +67,8 @@ export const store = new Vuex.Store({
       commit('updateCryptContent')
     },
     updateOwnerBalances ({commit}) {
-      console.log('updateOwnerBalances action being executed')
-      getBalances.then(result => {
-        console.log('updateBalances commit')
-        commit('updateBalances')
-      }).catch(e => {
-        console.log('error in action updateOwnerBalances', e)
-      })
+      console.log('updateBalances action called')
+      commit('updateBalances')
     },
     updateCZXPBalance ({commit}, payload){
       commit('updateCZXPBalance', payload)

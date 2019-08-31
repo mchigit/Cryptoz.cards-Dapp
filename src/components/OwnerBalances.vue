@@ -45,10 +45,8 @@
         }
       },
     },
-    beforeCreate () { //Initialize the component
-      console.log('updateOwnerBalances Action dispatched from OwnerBalances.vue')
-      //this.setSubscriptions();
-      //this.$store.dispatch('updateOwnerBalances');
+    mounted () { //Initialize the component
+    
     },
     data () {
       return {
