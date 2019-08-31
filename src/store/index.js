@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import state from './state'
 import getWeb3 from '../util/getWeb3'
 import pollWeb3 from '../util/pollWeb3'
+import getBalances from '../util/getBalances'
 
 
 Vue.use(Vuex)
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
     web3Copy.isInjected = result.injectedWeb3
     web3Copy.web3Instance = result.web3
     state.web3 = web3Copy
+    state.czxpBalance = result.czxpBalance
+    state.cardsOwned = result.cardsOwned
+    state.boostersOwned = result.boostersOwned
     pollWeb3()
   },
   pollWeb3Instance (state, payload) {
@@ -30,8 +34,8 @@ export const store = new Vuex.Store({
   updateCryptContent (state) {
     state.cryptContent += 1;
   },
-  updateBalances (state) {
-    console.log('mutate ownerbalances');
+  updateBalances (state, payload) {
+    console.log('mutate ownerbalances', payload);
     state.ownerBalances += 1;
   },
   updateCZXPBalance (state, payload) {
@@ -64,7 +68,12 @@ export const store = new Vuex.Store({
     },
     updateOwnerBalances ({commit}) {
       console.log('updateOwnerBalances action being executed')
-      commit('updateBalances')
+      getBalances.then(result => {
+        console.log('updateBalances commit')
+        commit('updateBalances')
+      }).catch(e => {
+        console.log('error in action updateOwnerBalances', e)
+      })
     },
     updateCZXPBalance ({commit}, payload){
       commit('updateCZXPBalance', payload)

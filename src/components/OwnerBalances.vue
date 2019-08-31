@@ -45,9 +45,10 @@
         }
       },
     },
-    mounted () { //Initialize the component
-      console.log('getOwnerBalances Action dispatched from OwnerBalances.vue')
-      this.setSubscriptions();
+    beforeCreate () { //Initialize the component
+      console.log('updateOwnerBalances Action dispatched from OwnerBalances.vue')
+      //this.setSubscriptions();
+      //this.$store.dispatch('updateOwnerBalances');
     },
     data () {
       return {

@@ -1,8 +1,8 @@
 <template>
   <div>
     
-    <!-- Open Booster Modal -->
-    <b-modal id="open-booster-modal">
+  <!-- Open Booster Modal -->
+  <b-modal id="open-booster-modal">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

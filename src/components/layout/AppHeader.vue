@@ -70,7 +70,7 @@ export default {
     network: state => NETWORKS[state.web3.networkId],
   }),
   beforeCreate () { //Initialize the app
-    console.log('registerWeb3 Action dispatched from App.vue')
+    console.log('registerWeb3 Action dispatched from AppHeader.vue')
     this.$store.dispatch('registerWeb3')
   },
   computed: {

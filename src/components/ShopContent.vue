@@ -131,11 +131,19 @@ export default {
   },
   watch: {
     coinbase(newValue, oldValue) {
-      console.log(`Updating from ${oldValue} to ${newValue}`);
+      console.log(`Updating coinbase from ${oldValue} to ${newValue}`);
 
       // new wallet.. reset their boosters and czxp balance
       if (newValue !== oldValue) {
-        this.setLoggedInState();
+        
+      }
+    },
+    balance(newValue, oldValue) {
+      console.log(`Updating balance from ${oldValue} to ${newValue}`);
+
+      // new wallet.. reset their boosters and czxp balance
+      if (newValue >= 2000000000000000) {
+        this.buyBoostBtnOn = 1;
       }
     },
   },
@@ -143,8 +151,6 @@ export default {
     return {
       showUnlimited : 1,
       total_supply : '(Connect Metamask)',
-      boosters_owned : '(Connect Metamask)',
-      czxp_balance : '(Connect Metamask)',
       transaction_number : '',
       storeCards: [],
       buyBoostBtnOn: 0,
@@ -160,7 +166,6 @@ export default {
     
     if(typeof Cryptoz  !== "undefined"){
       this.setSubscriptions();
-      this.setLoggedInState();
     }else{
       console.log('Cryptoz constract not defined !!!!!!!!!!');
     }
@@ -205,19 +210,17 @@ export default {
       
     },
     handleSetCZXPSupply :  function(_totalSupply) {
-      console.log('Handling set czxp supply');
+      console.log('Handling set Total czxp supply');
       this.total_czxp_supply = parseInt(_totalSupply).toLocaleString();
     },
     handleSetCryptozSupply :  function(_totalSupply) {
-      console.log('Handling set czxp supply');
+      console.log('Handling set Total cryptoz supply');
       this.total_cryptoz_supply = parseInt(_totalSupply).toLocaleString();
     },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
       this.$bvModal.hide('buy-boosters-modal')
       this.$store.dispatch('updateOwnerBalances')
-      this.setLoggedInState();
-      
     },
     setSubscriptions : function() {
       console.log("Subscriptions ready in shop.. get all the card types..");
@@ -235,23 +238,6 @@ export default {
       }).then(this.handleSetCryptozSupply)
       
     },
-    setLoggedInState : function() {
-      var self = this
-      Cryptoz.deployed().then(function(instance) {
-        return instance.boosterPacksOwned(self.coinbase);
-      }).then(this.setBoostersOwned)
-      
-      this.updateCZXPBalance();
-      
-      this.buyBoostBtnOn = 1;
-      
-    },
-    updateCZXPBalance :  function() {
-      var self = this
-      CzxpToken.deployed().then(function(instance) {
-        return instance.balanceOf(self.coinbase);
-      }).then(this.setCzxpBalance)
-    },
     setTotalSupply: function(_total){
       console.log('Updating total types...');
       this.total_supply = _total.toString();
@@ -266,15 +252,6 @@ export default {
             axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + i)
               .then(this.handleGotCardData)
       }
-        
-        /**
-        Cryptoz.deployed().then(function(instance) {
-          //now lets loop call all the Cards this user has tokens for
-          for (var i = 1; i < _total; i++) {
-            instance.allCardTypes.call(i).then(console.log)
-          }
-        })
-        **/
     },
     handleGotCardData : function(res) {
       //console.log(res.data);

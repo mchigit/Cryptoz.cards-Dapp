@@ -11,6 +11,7 @@ import Web3 from 'web3'
 let getWeb3 = new Promise(function (resolve, reject) {
   // Check for injected web3 (mist/metamask)
   var web3js = window.web3
+  
   if (typeof web3js !== 'undefined') {
     var web3 = new Web3(web3js.currentProvider)
     resolve({
@@ -63,6 +64,48 @@ let getWeb3 = new Promise(function (resolve, reject) {
           result = Object.assign({}, result, { balance })
           resolve(result)
         }
+      })
+    })
+  })
+  .then(result => {
+    return new Promise(function (resolve, reject) {
+      
+      CzxpToken.deployed().then(function(instance) {
+        console.log('get czxp balance in js...');
+        return instance.balanceOf(result.coinbase);
+      }).then(res => {
+        console.log(res);
+        var czxpBalance = parseInt(res).toLocaleString()
+        result = Object.assign({}, result, {czxpBalance})
+        resolve(result)
+      })
+    })
+  })
+  .then(result => {
+    return new Promise(function (resolve, reject) {
+      
+    Cryptoz.deployed().then(function(instance) {
+      console.log("get cryptoz cards tokens balance...");
+      return instance.balanceOf(result.coinbase);
+    }).then(res => {
+      console.log(res);
+      var cardsOwned = parseInt(res).toLocaleString()
+      result = Object.assign({}, result, {cardsOwned})
+      resolve(result)
+      })
+    })
+  })
+  .then(result => {
+    return new Promise(function (resolve, reject) {
+      
+    Cryptoz.deployed().then(function(instance) {
+      console.log("get cryptoz cards tokens balance...");
+      return instance.boosterPacksOwned(result.coinbase);
+    }).then(res => {
+      console.log(res);
+      var boostersOwned = parseInt(res).toLocaleString()
+      result = Object.assign({}, result, {boostersOwned})
+      resolve(result)
       })
     })
   })

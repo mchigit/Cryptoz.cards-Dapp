@@ -32,7 +32,7 @@ let pollWeb3 = function (state) {
         })
       }
     }
-  }, 500)
+  }, 5000)
 }
 
 export default pollWeb3
