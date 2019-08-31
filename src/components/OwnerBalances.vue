@@ -14,12 +14,13 @@
   
 </template>
 <script>
-
+  import {ownerBalances} from 'vuex'
+  
   export default {
     name: 'OwnerBalances',
     computed: {
       ownerBalances() {
-        return this.$store.state.web3.ownerBalances;
+        return this.$store.state.ownerBalances;
       },
       boosters_owned(){
         return this.$store.state.boostersOwned;
