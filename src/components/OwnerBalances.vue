@@ -31,9 +31,18 @@
         return this.$store.state.web3.coinbase;
       },
     },
+    watch: {
+      ownerBalances(newValue, oldValue) {
+        console.log(`Updating ownerBalances from ${oldValue} to ${newValue}`);
+  
+        // new balances.. reset their boosters, cards and czxp balance
+        if (newValue !== oldValue) {
+          this.setSubscriptions();
+        }
+      },
+    },
     mounted () { //Initialize the component
       console.log('getOwnerBalances Action dispatched from OwnerBalances.vue')
-      //this.$store.dispatch('getOwnerBalances')
       this.setSubscriptions();
     },
     data () {
@@ -69,7 +78,7 @@
         this.$store.dispatch('updateCardsOwned', parseInt(bal).toLocaleString())
       },
       setBoostersOwned : function(_total){
-        console.log('Updating Boosters owned...');
+        //console.log('Updating Boosters owned...');
         //console.log(_total);
         //this.boosters_owned = parseInt(_total).toLocaleString();
         this.$store.dispatch('updateBoostersOwned', parseInt(_total).toLocaleString())

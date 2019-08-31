@@ -156,20 +156,7 @@ export default {
     },
     setSubscriptions : function() {
       var self = this;
-      
-      CzxpToken.deployed().then(function(instance) {
-        return instance.balanceOf(self.coinbase);
-      }).then(this.setCzxpBalance)
-      
-      Cryptoz.deployed().then(function(instance) {
-        console.log("get cryptoz cards tokens balance...");
-        return instance.balanceOf(self.coinbase);
-      }).then(this.setCryptozBalance)
-      
-      Cryptoz.deployed().then(function(instance) {
-        return instance.boosterPacksOwned(self.coinbase);
-      }).then(this.setBoostersOwned)
-      
+
       Cryptoz.deployed().then(function(instance) {
         return instance.tokensOfOwner(self.coinbase)
       }).then(this.handleGetAllCards)
@@ -256,9 +243,6 @@ export default {
         this.ownsCards = 0; //set the message to buy or get Cryptoz
       }
     },
-    getCurrentValue : function() {
-      return this.el;
-    },
     handleGotCardData : function(res) {
       //console.log(res.data);
       //Append the bg
@@ -301,20 +285,11 @@ export default {
       
       Cryptoz.deployed().then(function(instance) {
         return instance.openBoosterCard(self.wagerAmount, {from: self.coinbase});
-      }).then(this.setSubscriptions)
+      }).then(this.handleBoosterOpened)
     },
-    setCzxpBalance :  function(bal){
-      //console.log(bal.toString());
-      this.czxp_balance = parseInt(bal).toLocaleString();
-    },
-    setCryptozBalance : function(bal) {
-      //console.log(bal.toString());
-      this.cards_owned = parseInt(bal).toLocaleString();
-    },
-    setBoostersOwned : function(_total){
-      console.log('Updating Boosters owned...');
-      //console.log(_total);
-      this.boosters_owned = parseInt(_total).toLocaleString();
+    handleBoosterOpened : function(res) {
+      this.$store.dispatch('updateOwnerBalances')
+      this.setSubscriptions();
     },
     sortByName : function(param) {
       this.allCards.sort(dynamicSort(param))

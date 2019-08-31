@@ -30,6 +30,9 @@ export const store = new Vuex.Store({
   updateCryptContent (state) {
     state.cryptContent += 1;
   },
+  updateOwnerBalances (state) {
+    state.ownerBalances += 1;
+  },
   updateCZXPBalance (state, payload) {
     console.log("updateCZXPBalance state.." ,payload);
     state.czxpBalance = payload
@@ -58,6 +61,9 @@ export const store = new Vuex.Store({
     updateCrypt ({commit}) {
       commit('updateCryptContent')
     },
+    updateOwnerBalances ({commit}) {
+      commit('updateOwnerBalances')
+    },
     updateCZXPBalance ({commit}, payload){
       commit('updateCZXPBalance', payload)
     },
@@ -66,6 +72,6 @@ export const store = new Vuex.Store({
     },
     updateBoostersOwned ({commit}, payload){
       commit('updateBoostersOwned', payload)
-    }
+    },
  }
 })
