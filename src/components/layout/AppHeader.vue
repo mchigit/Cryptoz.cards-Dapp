@@ -224,6 +224,16 @@ export default {
   .bonusClass{
     color:#00FF00;
     margin-right: 0.8em;
+    cursor: pointer;
+    padding:1px;
+    border: 1px solid transparent;
+  }
+  .bonusClass:hover{
+    color:#00FF00;
+    margin-right: 0.8em;
+    cursor: pointer;
+    padding:1px;
+    border: 1px solid #fff;
   }
   
   .bonusClassNo{
