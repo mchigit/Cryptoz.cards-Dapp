@@ -281,7 +281,7 @@ export default {
       
       var self = this;
       
-      this.confirmOpenBtnDisabled = 1;
+      this.$bvModal.hide('open-booster-modal')
       
       Cryptoz.deployed().then(function(instance) {
         return instance.openBoosterCard(self.wagerAmount, {from: self.coinbase});

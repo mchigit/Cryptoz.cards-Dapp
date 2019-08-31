@@ -1,16 +1,28 @@
 <template>
   <div>
     
-  <b-modal id="buy-boosters-modal" title="Buy Booster Credits @ 0.002E each">
+  <b-modal
+    id="buy-boosters-modal"
+    title="Buy Booster Credits @ 0.002E each"
+    hide-footer
+    >
         <h5 class="modal-title">Booster cards will never be sold in the shop</h5>
         Enter the number of booster credits you would like to purchase:
-        <b-row>
+      <b-row>
           <b-col cols="4">
             <input id="toWallet" class="form-control" type="text" v-on:input="totalCreditsToBuy = $event.target.value" value="1" required />
           </b-col>
-        </b-row>
-        <b-button class="mt-3" variant="secondary" block @click="$bvModal.hide('buy-boosters-modal')">Cancel</b-button>
-        <b-button class="mt-2" variant="danger" block @click="buyBoosters" :disabled="confirmBoosterBuyBtnDisabled == 1">Buy Credits</b-button>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-button class="mt-3" variant="danger" block @click="buyBoosters">Buy Credits
+          </b-button>
+        </b-col>
+        <b-col>
+          <b-button class="mt-3" variant="secondary" block @click="$bvModal.hide('buy-boosters-modal')">Cancel
+          </b-button>
+        </b-col>
+      </b-row>
   </b-modal>
     
     
@@ -202,6 +214,7 @@ export default {
     },
     buyBoosters : function() {
       console.log('Buy boosters called..');
+      this.$bvModal.hide('buy-boosters-modal')
       var self = this;
       Cryptoz.deployed().then(function(instance) {
         var totalBoostersCost = 2000000000000000 * parseInt(self.totalCreditsToBuy);
@@ -219,7 +232,6 @@ export default {
     },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
-      this.$bvModal.hide('buy-boosters-modal')
       this.$store.dispatch('updateOwnerBalances')
     },
     setSubscriptions : function() {
