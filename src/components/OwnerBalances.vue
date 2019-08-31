@@ -18,6 +18,9 @@
   export default {
     name: 'OwnerBalances',
     computed: {
+      ownerBalances() {
+        return this.$store.state.web3.ownerBalances;
+      },
       boosters_owned(){
         return this.$store.state.boostersOwned;
       },
@@ -68,17 +71,17 @@
         }).then(this.setBoostersOwned)
       },
       setCzxpBalance :  function(bal){
-        //console.log(bal.toString());
+        console.log('setCzxpBalance:',bal);
         //this.czxp_balance = parseInt(bal).toLocaleString();
         this.$store.dispatch('updateCZXPBalance', parseInt(bal).toLocaleString())
       },
       setCryptozBalance : function(bal) {
-        //console.log(bal.toString());
+        console.log('setCryptozBalance:',bal);
         //this.cards_owned = parseInt(bal).toLocaleString();
         this.$store.dispatch('updateCardsOwned', parseInt(bal).toLocaleString())
       },
       setBoostersOwned : function(_total){
-        //console.log('Updating Boosters owned...');
+        console.log('setBoostersOwned:',_total);
         //console.log(_total);
         //this.boosters_owned = parseInt(_total).toLocaleString();
         this.$store.dispatch('updateBoostersOwned', parseInt(_total).toLocaleString())

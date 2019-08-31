@@ -215,6 +215,7 @@ export default {
     handleBuyBooster : function(result) {
       console.log('Handling buy booster');
       this.$bvModal.hide('buy-boosters-modal')
+      this.$store.dispatch('updateOwnerBalances')
       this.setLoggedInState();
       
     },
