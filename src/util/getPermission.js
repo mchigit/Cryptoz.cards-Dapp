@@ -7,6 +7,7 @@ window.addEventListener('load', async () => {
             await ethereum.enable();
             // Acccounts now exposed
             console.log('!!!!! WE ARE IN');
+            this.$store.dispatch('registerWeb3')
         } catch (error) {
             // User denied account access...
         }

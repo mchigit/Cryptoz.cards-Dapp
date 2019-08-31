@@ -37,15 +37,12 @@
                 <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0 || balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
                 </button>
               </div>
-                <div class="col"><strong>Your CZXP Balance :</strong> {{czxp_balance}}
-                </div>
             </div>
             <br>
+            
+            <OwnerBalance></OwnerBalance>
+            
             <div class="row">
-              <div class="col"><strong>Your Boosters :</strong> {{boosters_owned}}
-              </div>
-              <div class="col"><strong>Your Cryptoz:</strong> {{cards_owned}}
-              </div>
               <div class="col text-right"  v-if="ownsCards == 1">
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -93,11 +90,13 @@
 <script>
 import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
+import OwnerBalance from '@/components/OwnerBalance.vue'
 
 export default {
   name: 'CryptContent',
   components : {
-    OwnedCardContent
+    OwnedCardContent,
+    OwnerBalance
   },
   computed: {
     web3 () {

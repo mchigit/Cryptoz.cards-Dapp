@@ -97,8 +97,7 @@ export default {
   },
   watch: {
     coinbase(newValue, oldValue) {
-      console.log(`Updating from ${oldValue} to ${newValue}`);
-
+      console.log(`Updating coinbase in header from ${oldValue} to ${newValue}`);
       // new wallet.. check their bonus
       if (newValue !== oldValue) {
         this.setSubscriptions();
@@ -149,6 +148,7 @@ export default {
         console.log('getBonusBoosters called result should be T/F :');
         console.log(res);
         if(res = 'true'){
+          
           self.setSubscriptions();// refresh the clock
         }
       })
