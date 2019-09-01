@@ -115,8 +115,7 @@ export default {
       }).then(function(res) {
         console.log(res);
         self.showTransaction =1
-        //self.transaction_number = res.tx
-        //self.$emit('child-sent')
+        self.$store.dispatch('updateOwnerBalances')
       })
     },
     getCard : function(){
@@ -128,8 +127,7 @@ export default {
       }).then(function(res) {
         console.log(res)
         self.showTransaction =1
-        //self.transaction_number = res.tx
-        //self.$emit('child-sent')
+        self.$store.dispatch('updateOwnerBalances')
       })
     },
     sacrificeCard : function() {
@@ -141,7 +139,9 @@ export default {
       }).then(function(res){
         console.log("sacrifice result:");
         console.log(res);
-        self.$emit('card-updated')
+        self.$store.dispatch('updateOwnerBalances')
+        //Send a mutation for the state change to the crypt
+        self.$store.dispatch('updateCrypt')
       })
     },
     transferCard : function() {
