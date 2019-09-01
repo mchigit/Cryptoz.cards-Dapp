@@ -98,8 +98,9 @@ export default {
   watch: {
     coinbase(newValue, oldValue) {
       console.log(`Updating coinbase in header from ${oldValue} to ${newValue}`);
-      // new wallet.. check their bonus
+      // new wallet.. check their bonus and tell Owner balances to update
       if (newValue !== oldValue) {
+        this.$store.dispatch('updateOwnerBalances')
         this.setSubscriptions();
       }
     },
@@ -148,7 +149,7 @@ export default {
         console.log('getBonusBoosters called result should be T/F :');
         console.log(res);
         if(res = 'true'){
-          
+          self.$store.dispatch('updateOwnerBalances')
           self.setSubscriptions();// refresh the clock
         }
       })
