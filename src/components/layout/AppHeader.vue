@@ -222,6 +222,7 @@ export default {
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
+/**
   .bonusClass{
     color:#00FF00;
     margin-right: 0.8em;
@@ -229,12 +230,14 @@ export default {
     padding:1px;
     border: 1px solid transparent;
   }
+**/
   .bonusClass:hover{
     color:#00FF00;
     margin-right: 0.8em;
     cursor: pointer;
     padding:1px;
     border: 1px solid #fff;
+    animation: none;
   }
   
   .bonusClassNo{
@@ -249,5 +252,35 @@ export default {
   .wallet-balance{
     color:lightgreen;
     margin: 0 4em 0 4em;
+  }
+  
+  .bonusClass {
+    animation: shake 3.82s infinite cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    color:#00FF00;
+    margin-right: 0.8em;
+    cursor: pointer;
+    padding:1px;
+    border: 1px solid transparent;
+  }
+
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
   }
 </style>

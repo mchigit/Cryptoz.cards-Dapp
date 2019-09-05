@@ -179,7 +179,7 @@ export default {
     if(typeof Cryptoz  !== "undefined"){
       this.setSubscriptions();
     }else{
-      console.log('Cryptoz constract not defined !!!!!!!!!!');
+      console.log('Cryptoz contract not defined !!!!!!!!!!');
     }
       
   },
