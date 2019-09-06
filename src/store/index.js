@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import state from './state'
 import getWeb3 from '../util/getWeb3'
 import pollWeb3 from '../util/pollWeb3'
-//import getBalances from '../util/getBalances'
+import watchEvents from '../util/watchEvents'
 
 
 Vue.use(Vuex)
@@ -25,6 +25,7 @@ export const store = new Vuex.Store({
     state.cardsOwned = result.cardsOwned
     state.boostersOwned = result.boostersOwned
     pollWeb3()
+    watchEvents()
   },
   pollWeb3Instance (state, payload) {
     //console.log('pollWeb3Instance mutation being executed', payload)

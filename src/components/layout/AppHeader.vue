@@ -53,6 +53,7 @@
           <b-nav-item>
             <router-link to="/help">Help</router-link>
           </b-nav-item>
+          
         </b-collapse>
       
     </b-navbar>
@@ -239,7 +240,6 @@ export default {
   
   .bonusClassNo{
     color:#f7162c;
-    margin-right: 1.2em;
   }
   
   .bonusClassLogIn{

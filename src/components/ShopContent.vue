@@ -151,7 +151,7 @@ export default {
       }
     },
     balance(newValue, oldValue) {
-      console.log(`Updating balance from ${oldValue} to ${newValue}`);
+      //console.log(`Updating balance from ${oldValue} to ${newValue}`);
 
       // new wallet.. reset their boosters and czxp balance
       if (newValue >= 2000000000000000) {
