@@ -222,6 +222,7 @@ export default {
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
     },
+    // DONT DELETE !! THESE ARE SUPPLY TOTALS
     handleSetCZXPSupply :  function(_totalSupply) {
       console.log('Handling set Total czxp supply');
       this.total_czxp_supply = parseInt(_totalSupply).toLocaleString();
@@ -231,7 +232,7 @@ export default {
       this.total_cryptoz_supply = parseInt(_totalSupply).toLocaleString();
     },
     handleBuyBooster : function(result) {
-      console.log('Handling buy booster');
+      console.log('Handling buy booster', result);
       this.$store.dispatch('updateOwnerBalances')
     },
     setSubscriptions : function() {

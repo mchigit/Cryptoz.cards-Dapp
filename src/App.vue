@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader v-on:doLogin="onDoLogin" />
+    <AppHeader class="headerComponent" v-on:doLogin="onDoLogin" />
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -233,6 +233,9 @@ export default {
 </script>
 
 <style>
+  .headerComponent{
+    margin-bottom:2em;
+  }
   .jumbotron{
     margin-top:6em;
   }

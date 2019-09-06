@@ -1,26 +1,27 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <img class="logo-nav" src="./assets/cryptokeeper_logo.svg" width="4%" />
+    <b-navbar toggleable="lg" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <img class="logo-nav" src="./assets/cryptokeeper_logo.svg" />
+        
         <router-link class="navbar-brand" to="/">Cryptoz</router-link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li>
+        
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item>
               <router-link to="/shop">Shop</router-link>
-            </li>
-            <li>
+            </b-nav-item>
+            <b-nav-item>
               <router-link to="/crypt">Your Crypt</router-link>
-            </li>
-            <li>
+            </b-nav-item>
+            <b-nav-item>
               <router-link to="/market">Markets</router-link>
-            </li>
-            <li>
+            </b-nav-item>
+            <b-nav-item>
               <router-link to="/view/1">View</router-link>
-            </li>
-          </ul>
+            </b-nav-item>
+          </b-navbar-nav>
           
           <div class="bonusClass" v-if="coinbase != null && bonusReady == 1" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
@@ -49,11 +50,12 @@
           
           </transition>
           
-          <span>
+          <b-nav-item>
             <router-link to="/help">Help</router-link>
-          </span>
-        </div>
-      </nav>
+          </b-nav-item>
+        </b-collapse>
+      
+    </b-navbar>
       <p></p>
       
       </div>
@@ -142,6 +144,8 @@ export default {
     },
     GetBonus : function() {
       console.log('GetBonus called...');
+      //change state to pending
+      
       var self = this;
       Cryptoz.deployed().then(function(instance) {
         return instance.getBonusBoosters({from: self.coinbase, gas:362000});
@@ -193,6 +197,7 @@ export default {
 
   .logo-nav{
     margin-right: 1.6em;
+    width:2em;
   }
 
   .wallet-nav{
@@ -222,15 +227,7 @@ export default {
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
-/**
-  .bonusClass{
-    color:#00FF00;
-    margin-right: 0.8em;
-    cursor: pointer;
-    padding:1px;
-    border: 1px solid transparent;
-  }
-**/
+
   .bonusClass:hover{
     color:#00FF00;
     margin-right: 0.8em;
