@@ -204,6 +204,7 @@ export default {
     },
     getAllTypes: function(){
       //Lets get all the cards now
+      console.log('Get all the cards...')
       var self = this;
       
       //reset the view

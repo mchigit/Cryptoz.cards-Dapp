@@ -23,7 +23,7 @@ let watchEvents = function (state) {
     var czxpEvents = instance.allEvents({fromBlock: 'latest'});
     
     czxpEvents.watch(function(error, event){
-      console.log('From WatchEvents.js...');
+      //console.log('From WatchEvents.js...');
       if (!error){
         //console.log(event);
         //IF event affects our wallet, dispatch
@@ -44,7 +44,7 @@ let watchEvents = function (state) {
     var cryptozEvents = instance.allEvents({fromBlock: 'latest'});
     
     cryptozEvents.watch(function(error, event){
-      console.log('From WatchEvents.js...');
+      //console.log('From WatchEvents.js...');
       if (!error){
         //console.log(event);
         //IF event affects our wallet, dispatch
