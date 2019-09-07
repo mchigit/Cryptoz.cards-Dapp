@@ -2,13 +2,13 @@
   
   <b-row>
     <b-col>
-      <p><img class="czxp-logo" src="static/czxp.png" /> <strong>{{total_czxp_supply}} CZXP tokens</strong> in the Universe</p>
+      <p><img class="czxp-logo" src="static/czxp.png" /> <strong>{{totalCzxpSupply}} CZXP tokens</strong> in the Universe</p>
     </b-col>
     <b-col>
-      <p><strong>{{total_types_supply}} Cryptoz Types</strong> in the Universe</p>
+      <p><strong>{{totalCryptozTypes}} Cryptoz Types</strong> in the Universe</p>
     </b-col>
     <b-col>
-      <p><strong>{{total_cryptoz_supply}} Cryptoz Cards</strong> in the Universe</p>
+      <p><strong>{{totalCryptozSupply}} Cryptoz Cards</strong> in the Universe</p>
     </b-col>
   </b-row>
   
@@ -22,14 +22,14 @@
       universeBalances() {
         return this.$store.state.universeBalances;
       },
-      boosters_owned(){
-        return this.$store.state.boostersOwned;
+      totalCzxpSupply(){
+        return this.$store.state.totalCzxpSupply;
       },
-      cards_owned(){
-        return this.$store.state.cardsOwned;
+      totalCryptozSupply(){
+        return this.$store.state.totalCryptozSupply;
       },
-      czxp_balance(){
-        return this.$store.state.czxpBalance;
+      totalCryptozTypes(){
+        return this.$store.state.totalCryptozTypes;
       },
       coinbase() {
         return this.$store.state.web3.coinbase;
@@ -67,19 +67,14 @@
         
       },
       handleTotalTypes: function(_total){
-        console.log('Updating total types...');
-        this.total_types_supply = parseInt(_total).toLocaleString();
-        //Update our state
-        this.$store.dispatch('updateTypesTotal')
+        this.$store.dispatch('updateTypesTotal', parseInt(_total).toLocaleString())
       },
       // DONT DELETE !! THESE ARE SUPPLY TOTALS
       handleSetCZXPSupply :  function(_totalSupply) {
-        console.log('Handling set Total czxp supply');
-        this.total_czxp_supply = parseInt(_totalSupply).toLocaleString();
+        this.$store.dispatch('updateCZXPTotal', parseInt(_totalSupply).toLocaleString())
       },
       handleSetCryptozSupply :  function(_totalSupply) {
-        console.log('Handling set Total cryptoz supply');
-        this.total_cryptoz_supply = parseInt(_totalSupply).toLocaleString();
+        this.$store.dispatch('updateCryptozTotal', parseInt(_totalSupply).toLocaleString())
       },
     }
   }

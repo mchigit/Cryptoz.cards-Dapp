@@ -81,7 +81,7 @@
             </div>
           <br>
           <div class="row">
-              <OwnedCardContent v-on:child-sent="handleChild"
+              <OwnedCardContent
                 v-for="card in storeCards" :key="card.attributes.type_id"
                 :type_id="card.attributes.type_id"
                 :name="card.name"

@@ -167,7 +167,6 @@ export default {
         console.log('closing modal' + modalName);
         
         self.$bvModal.hide('transfer-modal-' + self.id)
-        //self.$emit('card-updated')
         self.confirmTransferBtnDisabled = 0;
         
         //Send a mutation for the state change to the crypt

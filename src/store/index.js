@@ -55,6 +55,12 @@ export const store = new Vuex.Store({
   },
   updateTypesTotal(state, payload) {
     state.totalCryptozTypes = payload
+  },
+  updateCZXPTotal(state, payload) {
+    state.totalCzxpSupply = payload
+  },
+  updateCryptozTotal(state, payload) {
+    state.totalCryptozSupply = payload
   }
  },
  actions: {
@@ -93,6 +99,12 @@ export const store = new Vuex.Store({
     },
     updateTypesTotal({commit}, payload){
       commit('updateTypesTotal', payload)
+    },
+    updateCZXPTotal({commit}, payload){
+      commit('updateCZXPTotal', payload)
+    },
+    updateCryptozTotal({commit}, payload){
+      commit('updateCryptozTotal', payload)
     }
  }
 })
