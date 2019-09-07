@@ -23,6 +23,9 @@
   </b-modal>
     
     <div class="jumbotron">
+      
+      <UniverseBalances></UniverseBalances>
+      
           <h1>Your Cryptoz Wallet</h1>
           <p>This is where all your Cryptoz cards can be accessed. From here you can sort your cards, search your cards and sacrifice. Sacrificing is permanent. Not only in your wallet, but across the entire Cryptoz Universe. That unique item is gone forever.</p>
           
@@ -89,12 +92,14 @@
 <script>
 import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
+import UniverseBalances from '@/components/UniverseBalances.vue'
 import OwnerBalances from '@/components/OwnerBalances.vue'
 
 export default {
   name: 'CryptContent',
   components : {
     OwnedCardContent,
+    UniverseBalances,
     OwnerBalances
   },
   computed: {

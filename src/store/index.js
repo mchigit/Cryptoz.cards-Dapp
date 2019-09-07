@@ -36,8 +36,12 @@ export const store = new Vuex.Store({
     state.cryptContent += 1;
   },
   updateBalances (state, payload) {
-    console.log('mutate ownerbalances', payload);
+    //console.log('mutate ownerbalances', payload);
     state.ownerBalances += 1;
+  },
+  updateUniverseBalances(state, payload) {
+    console.log('mutate updateUniverseBalances');
+    state.universeBalances += 1;
   },
   updateCZXPBalance (state, payload) {
     console.log("updateCZXPBalance state.." ,payload);
@@ -48,6 +52,9 @@ export const store = new Vuex.Store({
   },
   updateBoostersOwned (state, payload) {
     state.boostersOwned = payload
+  },
+  updateTypesTotal(state, payload) {
+    state.totalCryptozTypes = payload
   }
  },
  actions: {
@@ -68,8 +75,12 @@ export const store = new Vuex.Store({
       commit('updateCryptContent')
     },
     updateOwnerBalances ({commit}) {
-      console.log('updateBalances action called')
+      //console.log('updateBalances action called')
       commit('updateBalances')
+    },
+    updateUniverseBalances({commit}){
+      console.log('updateUniverseBalances action called')
+      commit('updateUniverseBalances')
     },
     updateCZXPBalance ({commit}, payload){
       commit('updateCZXPBalance', payload)
@@ -80,5 +91,8 @@ export const store = new Vuex.Store({
     updateBoostersOwned ({commit}, payload){
       commit('updateBoostersOwned', payload)
     },
+    updateTypesTotal({commit}, payload){
+      commit('updateTypesTotal', payload)
+    }
  }
 })

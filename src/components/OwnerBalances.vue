@@ -71,17 +71,17 @@
         }).then(this.setBoostersOwned)
       },
       setCzxpBalance :  function(bal){
-        console.log('setCzxpBalance:',bal);
+        //console.log('setCzxpBalance:',bal);
         //this.czxp_balance = parseInt(bal).toLocaleString();
         this.$store.dispatch('updateCZXPBalance', parseInt(bal).toLocaleString())
       },
       setCryptozBalance : function(bal) {
-        console.log('setCryptozBalance:',bal);
+        //console.log('setCryptozBalance:',bal);
         //this.cards_owned = parseInt(bal).toLocaleString();
         this.$store.dispatch('updateCardsOwned', parseInt(bal).toLocaleString())
       },
       setBoostersOwned : function(_total){
-        console.log('setBoostersOwned:',_total);
+        //console.log('setBoostersOwned:',_total);
         //console.log(_total);
         //this.boosters_owned = parseInt(_total).toLocaleString();
         this.$store.dispatch('updateBoostersOwned', parseInt(_total).toLocaleString())

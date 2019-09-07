@@ -29,17 +29,8 @@
     <!--main role="main" class="container"-->
       <div class="jumbotron">
         <p>
-          <b-row>
-            <b-col>
-              <p><img class="czxp-logo" src="static/czxp.png" /> <strong>{{total_czxp_supply}} CZXP tokens</strong> in the Universe</p>
-            </b-col>
-            <b-col>
-              <p><strong>{{total_supply}} Cryptoz Types</strong> in the Universe</p>
-            </b-col>
-            <b-col>
-              <p><strong>{{total_cryptoz_supply}} Cryptoz Cards</strong> in the Universe</p>
-            </b-col>
-          </b-row>
+          
+        <UniverseBalances></UniverseBalances>
         </p>
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy and open a booster card, which will randomly mint an unlimited edition card</p>
@@ -118,12 +109,14 @@
 <script>
 import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
+import UniverseBalances from '@/components/UniverseBalances.vue'
 import OwnerBalances from '@/components/OwnerBalances.vue'
 
 export default {
   name: 'ShopContent',
   components : {
     OwnedCardContent,
+    UniverseBalances,
     OwnerBalances
   },
   computed: {
@@ -139,17 +132,11 @@ export default {
     coinbase() {
       return this.$store.state.web3.coinbase;
     },
-    
+    totalCyptozTypes() {
+      return this.$store.state.totalCryptozTypes;
+    }
   },
   watch: {
-    coinbase(newValue, oldValue) {
-      console.log(`Updating coinbase from ${oldValue} to ${newValue}`);
-
-      // new wallet.. reset their boosters and czxp balance
-      if (newValue !== oldValue) {
-        
-      }
-    },
     balance(newValue, oldValue) {
       //console.log(`Updating balance from ${oldValue} to ${newValue}`);
 
@@ -158,50 +145,34 @@ export default {
         this.buyBoostBtnOn = 1;
       }
     },
+    totalCyptozTypes(newValue, oldValue) {
+      if (newValue !== oldValue && newValue > 0) {
+          this.getAllTypes();
+      }
+    }
   },
   data () {
     return {
       showUnlimited : 1,
-      total_supply : '(Connect Metamask)',
       transaction_number : '',
       storeCards: [],
       buyBoostBtnOn: 0,
       confirmBoosterBuyBtnDisabled: 0,
       totalCreditsToBuy : 1,
-      total_czxp_supply : '(Connect Metamask)',
-      total_cryptoz_supply : '(Connect Metamask)',
       allCards : [] //We never mangle this
     }
   },
   mounted () {
-    console.log('The shop is mounted, call for the cards, if we have a contract..');
+    // console.log('The shop is mounted, call for the cards, if we have a contract..');
     
-    if(typeof Cryptoz  !== "undefined"){
-      this.setSubscriptions();
-    }else{
-      console.log('Cryptoz contract not defined !!!!!!!!!!');
-    }
+    // if(typeof Cryptoz  !== "undefined"){
+    //   this.getAllTypes();
+    // }else{
+    //   console.log('Cryptoz contract not defined !!!!!!!!!!');
+    // }
       
   },
   methods : {
-    handleChild : function(){
-      console.log('Handle child sent...in Shop')
-      
-    },
-    setCryptozSupply : function() {
-      console.log('Buy setCryptozSupply called..');
-      var self = this;
-      Cryptoz.deployed().then(function(instance) {
-        return instance.totalSupply.call();
-      }).then(this.handleSetCryptozSupply)
-    },
-    setCZXPSupply : function() {
-      console.log('Buy setCZXPSupply called..');
-      var self = this;
-      CzxpToken.deployed().then(function(instance) {
-        return instance.totalSupply.call();
-      }).then(this.handleSetCZXPSupply) //update boosters owned and total types
-    },
     doHideUnlimited : function(){
       console.log('Hide/show unlimited' + this.showUnlimited)
       if(this.showUnlimited){
@@ -214,7 +185,11 @@ export default {
     },
     buyBoosters : function() {
       console.log('Buy boosters called..');
+      //Hide the modal
       this.$bvModal.hide('buy-boosters-modal')
+      //Change buy button to pending.. or show some pending state
+      //TODO
+      //pass to metamask
       var self = this;
       Cryptoz.deployed().then(function(instance) {
         var totalBoostersCost = 2000000000000000 * parseInt(self.totalCreditsToBuy);
@@ -222,46 +197,19 @@ export default {
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
     },
-    // DONT DELETE !! THESE ARE SUPPLY TOTALS
-    handleSetCZXPSupply :  function(_totalSupply) {
-      console.log('Handling set Total czxp supply');
-      this.total_czxp_supply = parseInt(_totalSupply).toLocaleString();
-    },
-    handleSetCryptozSupply :  function(_totalSupply) {
-      console.log('Handling set Total cryptoz supply');
-      this.total_cryptoz_supply = parseInt(_totalSupply).toLocaleString();
-    },
     handleBuyBooster : function(result) {
-      console.log('Handling buy booster', result);
-      this.$store.dispatch('updateOwnerBalances')
+        console.log('Handling buy booster', result);
+        //change from pending to ready
+        //TODO
     },
-    setSubscriptions : function() {
-      console.log("Subscriptions ready in shop.. get all the card types..");
-
-      Cryptoz.deployed().then(function(instance) {
-        return instance.getTotalTypes.call();
-      }).then(this.setTotalSupply)
-      
-      CzxpToken.deployed().then(function(instance) {
-        return instance.totalSupply.call();
-      }).then(this.handleSetCZXPSupply) //update boosters owned and total types
-      
-      Cryptoz.deployed().then(function(instance) {
-        return instance.totalSupply.call();
-      }).then(this.handleSetCryptozSupply)
-      
-    },
-    setTotalSupply: function(_total){
-      console.log('Updating total types...');
-      this.total_supply = _total.toString();
-      
+    getAllTypes: function(){
       //Lets get all the cards now
       var self = this;
       
       //reset the view
       this.storeCards = [];
       
-      for (var i = 1; i < _total; i++) {
+      for (var i = 1; i < this.totalCyptozTypes; i++) {
             axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + i)
               .then(this.handleGotCardData)
       }
@@ -306,15 +254,6 @@ export default {
       this.allCards.push(res.data);
       this.storeCards.push(res.data);
     },
-    setBoostersOwned : function(_total){
-      console.log('Updating Boosters owned...');
-      //console.log(_total);
-      this.boosters_owned = parseInt(_total).toLocaleString();
-    },
-    setCzxpBalance :  function(bal){
-      console.log(bal.toLocaleString());
-      this.czxp_balance = parseInt(bal).toLocaleString();
-    },
     sortByName : function(param) {
       this.storeCards.sort(dynamicSort(param))
     },
@@ -330,8 +269,5 @@ export default {
   .jumbotron {
     margin: auto;
     width: 95%;
-  }
-  .czxp-logo {
-    width : 9%;
   }
 </style>

@@ -104,6 +104,7 @@ export default {
       // new wallet.. check their bonus and tell Owner balances to update
       if (newValue !== oldValue) {
         this.$store.dispatch('updateOwnerBalances')
+        this.$store.dispatch('updateUniverseBalances')
         this.setSubscriptions();
       }
     },
