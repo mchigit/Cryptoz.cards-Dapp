@@ -163,13 +163,13 @@ export default {
     }
   },
   mounted () {
-    // console.log('The shop is mounted, call for the cards, if we have a contract..');
+    console.log('The shop is mounted, call for the cards, if we have a contract..');
     
-    // if(typeof Cryptoz  !== "undefined"){
-    //   this.getAllTypes();
-    // }else{
-    //   console.log('Cryptoz contract not defined !!!!!!!!!!');
-    // }
+    if(typeof Cryptoz  !== "undefined"){
+      this.getAllTypes();
+    }else{
+      console.log('Cryptoz contract not defined !!!!!!!!!!');
+    }
       
   },
   methods : {
