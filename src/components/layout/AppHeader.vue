@@ -204,7 +204,7 @@ export default {
 
   .wallet-nav{
     color: #d48b15;
-    width:27em;
+    width:22em;
     margin-left: 2em;
   }
   
@@ -249,7 +249,7 @@ export default {
   }
   .wallet-balance{
     color:lightgreen;
-    margin: 0 4em 0 4em;
+    margin: 0 4em 0 1em;
   }
   
   .bonusClass {
