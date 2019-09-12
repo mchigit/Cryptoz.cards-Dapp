@@ -42,7 +42,11 @@
               <!--button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
               </button-->
               <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0 || balance < 2000000000000000" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
-              <span v-if="showSpinner==1"><img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong></span>
+              <transition name="fade">
+                <span v-if="showSpinner==1">
+                  <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
+                </span>
+              </transition>
             </div>
           </div>
           <br>
@@ -155,9 +159,12 @@ export default {
       }
     },
     currentEvent(newValue,oldValue) {
-      //console.log('SHOP currentEvent:',newValue.blockHash)
-      if (this.pendingTransaction == newValue.blockHash) {
+      console.log('SHOP currentEvent:',newValue)
+      if(newValue !== oldValue && typeof newValue !== "undefined"){
+        if (this.pendingTransaction == newValue.blockHash) {
+          this.showSpinner = 0;
           this.transactionStatus = 'Confirmed ! balance updated';
+        }
       }
     }
   },
@@ -198,10 +205,14 @@ export default {
     },
     buyBoosters : function() {
       console.log('Buy boosters called..');
+      
       //Hide the modal
       this.$bvModal.hide('buy-boosters-modal')
+      
       //Change buy button to pending.. or show some pending state
       this.showSpinner = 1;
+      this.transactionStatus = 'Pending confirmation...';
+      
       //pass to metamask
       var self = this;
       Cryptoz.deployed().then(function(instance) {
@@ -287,5 +298,11 @@ export default {
   }
   .spinner {
     width: 2em;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .10s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>
