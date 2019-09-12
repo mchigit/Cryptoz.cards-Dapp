@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader class="headerComponent" v-on:doLogin="onDoLogin" />
+    <AppHeader class="headerComponent" />
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -12,6 +12,7 @@
 import BodyContent from './components/BodyContent'
 import AppHeader from './components/layout/AppHeader'
 import AppFooter from './components/layout/AppFooter'
+import {mapState} from 'vuex'
 
 window.dynamicSort = function dynamicSort(property) {
     var sortOrder = 1;
@@ -60,6 +61,8 @@ export default {
     window.CzxpToken = contract(cryptoz_token_artifacts);
     Cryptoz.setProvider(web3.currentProvider);
     CzxpToken.setProvider(web3.currentProvider);
+    //console.log('registerWeb3 Action dispatched from App.vue')
+    //this.$store.dispatch('registerWeb3')
   },
   data() {
     return {
@@ -166,40 +169,6 @@ export default {
         
       })
       
-    },
-    onDoLogin : function () {
-      // Modern dapp browsers...
-      console.log("Get ready to ask permission..");
-      
-/**
-      if (window.ethereum) {
-        //async () => {
-          try {
-              console.log('Ask for permission from metamask');
-              // Request account access if needed
-              //let result = await ethereum.enable();
-              ethereum.enable();
-          } catch (error) {
-              // User denied account access...
-              console.log("User denied our app, that is sad");
-              console.log(error);
-          }
-          
-          //tell children components we are ready
-          
-        //}
-      }
-      // Legacy dapp browsers...
-      else if (window.web3) {
-          console.log('in the legacy code of onDoLogin()');
-          window.web3 = new Web3(web3.currentProvider);
-          // Acccounts always exposed
-      }
-      // Non-dapp browsers...
-      else {
-          console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-      }
-**/
     },
     setName : function(block) {
       //console.log('setName called...' + block.number);

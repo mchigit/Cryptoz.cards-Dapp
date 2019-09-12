@@ -7,6 +7,8 @@ import watchEvents from '../util/watchEvents'
 
 
 Vue.use(Vuex)
+
+
 export const store = new Vuex.Store({
  strict: true,
  state,
@@ -42,6 +44,7 @@ export const store = new Vuex.Store({
   updateUniverseBalances(state, payload) {
     console.log('mutate updateUniverseBalances');
     state.universeBalances += 1;
+    state.lastChainEvent = payload;
   },
   updateCZXPBalance (state, payload) {
     console.log("updateCZXPBalance state.." ,payload);
@@ -65,9 +68,9 @@ export const store = new Vuex.Store({
  },
  actions: {
    registerWeb3 ({commit}) {
-      console.log('registerWeb3 Action being executed')
+      console.log('registerWeb3 Action being executed', commit)
       getWeb3.then(result => {
-        console.log('committing result to registerWeb3Instance mutation')
+        console.log('committing result to registerWeb3Instance mutation', result)
         commit('registerWeb3Instance', result)
       }).catch(e => {
         console.log('error in action registerWeb3', e)
@@ -80,13 +83,13 @@ export const store = new Vuex.Store({
     updateCrypt ({commit}) {
       commit('updateCryptContent')
     },
-    updateOwnerBalances ({commit}) {
+    updateOwnerBalances ({commit}, payload) {
       //console.log('updateBalances action called')
-      commit('updateBalances')
+      commit('updateBalances', payload)
     },
-    updateUniverseBalances({commit}){
+    updateUniverseBalances({commit}, payload){
       console.log('updateUniverseBalances action called')
-      commit('updateUniverseBalances')
+      commit('updateUniverseBalances', payload)
     },
     updateCZXPBalance ({commit}, payload){
       commit('updateCZXPBalance', payload)

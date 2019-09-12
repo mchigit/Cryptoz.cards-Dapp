@@ -73,8 +73,8 @@ export default {
     network: state => NETWORKS[state.web3.networkId],
   }),
   beforeCreate () { //Initialize the app
-    console.log('registerWeb3 Action dispatched from AppHeader.vue')
-    this.$store.dispatch('registerWeb3')
+    // console.log('registerWeb3 Action dispatched from AppHeader.vue')
+    // this.$store.dispatch('registerWeb3')
   },
   computed: {
     web3 () {
@@ -111,7 +111,7 @@ export default {
   },
   mounted () {
     //first check if the dapp is authed and logged in
-    console.log('AppHeader mounted...')
+    //console.log('AppHeader mounted...')
     //this.setSubscriptions(); TOO EARLY FOR THIS :(
   },
   methods : {

@@ -11,8 +11,9 @@ import Web3 from 'web3'
 let getWeb3 = new Promise(function (resolve, reject) {
   // Check for injected web3 (mist/metamask)
   var web3js = window.web3
-  
+  console.log('Inside getWeb3 in the js file....');
   if (typeof web3js !== 'undefined') {
+      console.log('Inside getWeb3 in the js file..2..');
     var web3 = new Web3(web3js.currentProvider)
     resolve({
       injectedWeb3: web3.isConnected(),
@@ -21,7 +22,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
       }
     })
   } else {
-     //web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545')) GANACHE FALLBACK
+     web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545')) //GANACHE FALLBACK
     reject(new Error('Unable to connect to Metamask'))
   }
 })
@@ -48,6 +49,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
         if (err) {
           reject(new Error('Unable to retrieve coinbase'))
         } else {
+          console.log('coinbase from getWeb3:', coinbase)
           result = Object.assign({}, result, { coinbase })
           resolve(result)
         }
@@ -69,7 +71,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
   })
   .then(result => {
     return new Promise(function (resolve, reject) {
-      
+        console.log('Inside getWeb3 in the js file..3..');
       CzxpToken.deployed().then(function(instance) {
         console.log('get czxp balance in js...');
         return instance.balanceOf(result.coinbase);
@@ -83,7 +85,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
   })
   .then(result => {
     return new Promise(function (resolve, reject) {
-      
+        console.log('Inside getWeb3 in the js file..4..');
     Cryptoz.deployed().then(function(instance) {
       console.log("get cryptoz cards tokens balance...");
       return instance.balanceOf(result.coinbase);
@@ -97,7 +99,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
   })
   .then(result => {
     return new Promise(function (resolve, reject) {
-      
+        console.log('Inside getWeb3 in the js file..5..');
     Cryptoz.deployed().then(function(instance) {
       console.log("get cryptoz cards tokens balance...");
       return instance.boosterPacksOwned(result.coinbase);

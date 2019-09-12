@@ -5,19 +5,6 @@ let watchEvents = function (state) {
   let web3 = window.web3
   web3 = new Web3(web3.currentProvider)
   
-/**
-  // can be 'latest' or 'pending'
-  var filter = web3.eth.filter(filterString);
-  // OR object are log filter options
-  var filter = web3.eth.filter(options);
-  // watch for changes
-  filter.watch(function(error, result){
-   if (!error)
-     console.log(result);
-  });
-**/
-  
-  
   //This is all about CZXP tokens.. deal with events to this
   CzxpToken.deployed().then(function(instance) {
     var czxpEvents = instance.allEvents({fromBlock: 'latest'});
@@ -25,13 +12,13 @@ let watchEvents = function (state) {
     czxpEvents.watch(function(error, event){
       //console.log('From WatchEvents.js...');
       if (!error){
-        //console.log(event);
+        console.log('czxpEvents events captured!', event);
         //IF event affects our wallet, dispatch
         if(event.args.to == store.state.web3.coinbase){
-          store.dispatch('updateOwnerBalances');
+          store.dispatch('updateOwnerBalances', event);
         }
         //Otherwise a czxp event ALWAYS updates the universe balance
-          store.dispatch('updateUniverseBalances');
+          store.dispatch('updateUniverseBalances', event);
       }else{
         console.log("ERROR in watchEvents.js czxpEvents : ", error);
       }
@@ -46,13 +33,13 @@ let watchEvents = function (state) {
     cryptozEvents.watch(function(error, event){
       //console.log('From WatchEvents.js...');
       if (!error){
-        //console.log(event);
+        console.log('Cryptoz events captured! : ', event);
         //IF event affects our wallet, dispatch
         if(event.args.to == store.state.web3.coinbase){
-          store.dispatch('updateOwnerBalances');
+          store.dispatch('updateOwnerBalances', event);
         }
-        //Otherwise a czxp event ALWAYS updates the universe balance
-          store.dispatch('updateUniverseBalances');
+          //Otherwise a czxp event ALWAYS updates the universe balance
+          store.dispatch('updateUniverseBalances', event);
       }else{
         console.log("ERROR in watchEvents.js : ", error);
       }

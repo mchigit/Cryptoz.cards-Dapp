@@ -22,6 +22,10 @@ let state = {
 //universe balances
  totalCzxpSupply:0,
  totalCryptozSupply:0,
- totalCryptozTypes:0
+ totalCryptozTypes:0,
+ 
+//blockchain events [objects]
+ lastChainEvent:''
 }
+
 export default state

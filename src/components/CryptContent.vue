@@ -138,7 +138,10 @@ export default {
     }
   },
   mounted () {
-    this.setSubscriptions();
+    if(this.coinbase !== null){
+      console.log('Crypt is mounted..')
+      this.setSubscriptions();
+    }
   },
   data () {
     return {

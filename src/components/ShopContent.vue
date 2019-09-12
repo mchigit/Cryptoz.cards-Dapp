@@ -35,13 +35,14 @@
           <h1>Shop</h1>
           <p>The Shop is a place to mint limited edition Cryptoz Cards. Some cards are free, some have a cost. You may also buy and open a booster card, which will randomly mint an unlimited edition card</p>
           <p>
-            To Claim a FREE card Or buy a Limited edition card, you will need the required minimun balance of CZXP tokens
+            To Claim a FREE card Or buy a Limited edition card, you will need the required minimum balance of CZXP tokens
           </p>
           <div class="row">
             <div class="col">
               <!--button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0" data-toggle="modal" data-target="#buyBoostersPanel">Buy Booster Credits @ 0.002E
               </button-->
               <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0 || balance < 2000000000000000" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
+              <span v-if="showSpinner==1"><img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong></span>
             </div>
           </div>
           <br>
@@ -134,6 +135,9 @@ export default {
     },
     totalCyptozTypes() {
       return this.$store.state.totalCryptozTypes;
+    },
+    currentEvent() {
+      return this.$store.state.lastChainEvent;
     }
   },
   watch: {
@@ -149,10 +153,19 @@ export default {
       if (newValue !== oldValue && newValue > 0) {
           this.getAllTypes();
       }
+    },
+    currentEvent(newValue,oldValue) {
+      //console.log('SHOP currentEvent:',newValue.blockHash)
+      if (this.pendingTransaction == newValue.blockHash) {
+          this.transactionStatus = 'Confirmed ! balance updated';
+      }
     }
   },
   data () {
     return {
+      pendingTransaction:0,
+      showSpinner:0,
+      transactionStatus: 'Pending confirmation...',
       showUnlimited : 1,
       transaction_number : '',
       storeCards: [],
@@ -188,7 +201,7 @@ export default {
       //Hide the modal
       this.$bvModal.hide('buy-boosters-modal')
       //Change buy button to pending.. or show some pending state
-      //TODO
+      this.showSpinner = 1;
       //pass to metamask
       var self = this;
       Cryptoz.deployed().then(function(instance) {
@@ -200,7 +213,8 @@ export default {
     handleBuyBooster : function(result) {
         console.log('Handling buy booster', result);
         //change from pending to ready
-        //TODO
+        this.pendingTransaction = result.receipt.blockHash;
+        this.transactionStatus = 'Broadcast to chain...';
     },
     getAllTypes: function(){
       //Lets get all the cards now
@@ -270,5 +284,8 @@ export default {
   .jumbotron {
     margin: auto;
     width: 95%;
+  }
+  .spinner {
+    width: 2em;
   }
 </style>

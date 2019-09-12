@@ -10,7 +10,6 @@ Vue.use(BootstrapVue)
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-//import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 Vue.config.productionTip = false
 
