@@ -23,10 +23,15 @@
             </b-nav-item>
           </b-navbar-nav>
           
-          <div class="bonusClass" v-if="coinbase != null && bonusReady == 1" v-on:click="GetBonus">
+          <div class="bonusClass" v-if="coinbase != null && bonusReady == 1  && showSpinner == 0" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
           </div>
-          <div class="bonusClassNo" v-else-if="coinbase != null && bonusReady == 0">
+          <div v-else-if="showSpinner==1">
+            <transition-group>
+              <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
+              </transition-group>
+          </div>
+          <div class="bonusClassNo" v-else-if="coinbase != null && bonusReady == 0 && showSpinner == 0">
             Your Next Bonus:<br><strong> {{timeToBonus}}</strong>
           </div>
           
@@ -89,10 +94,15 @@ export default {
     coinbase() {
       return this.$store.state.web3.coinbase;
     },
-    
+    currentEvent() {
+      return this.$store.state.lastChainEvent;
+    }
   },
   data () {
     return {
+      pendingTransaction:0,
+      showSpinner:0,
+      transactionStatus: 'Pending confirmation...',
       showLogin : 1,
       bonusReady : 2,
       timeToBonus : 0,
@@ -108,6 +118,15 @@ export default {
         this.setSubscriptions();
       }
     },
+    currentEvent(newValue,oldValue) {
+      console.log('SHOP currentEvent:',newValue)
+      if(newValue !== oldValue && typeof newValue !== "undefined"){
+        if (this.pendingTransaction == newValue.blockHash) {
+          this.showSpinner = 0;
+          this.transactionStatus = 'Confirmed ! balance updated';
+        }
+      }
+    }
   },
   mounted () {
     //first check if the dapp is authed and logged in
@@ -146,15 +165,21 @@ export default {
     },
     GetBonus : function() {
       console.log('GetBonus called...');
+      
       //change state to pending
+      this.showSpinner = 1;
+      this.transactionStatus = 'Pending confirmation...';
       
       var self = this;
       Cryptoz.deployed().then(function(instance) {
         return instance.getBonusBoosters({from: self.coinbase, gas:362000});
-      }).then(function(res) {
-        console.log('getBonusBoosters called result should be T/F :');
-        console.log(res);
-        if(res = 'true'){
+      }).then(function(result) {
+        console.log('getBonusBoosters called result should be T/F :', result);
+        //change from pending to ready
+        self.pendingTransaction = result.receipt.blockHash;
+        self.transactionStatus = 'Broadcast to chain...';
+        
+        if(result = 'true'){
           self.$store.dispatch('updateOwnerBalances')
           self.setSubscriptions();// refresh the clock
         }
@@ -280,5 +305,8 @@ export default {
     40%, 60% {
       transform: translate3d(4px, 0, 0);
     }
+  }
+  .spinner {
+    width: 2em;
   }
 </style>
