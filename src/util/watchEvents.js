@@ -12,7 +12,7 @@ let watchEvents = function (state) {
     czxpEvents.watch(function(error, event){
       //console.log('From WatchEvents.js...');
       if (!error){
-        //console.log('czxpEvents events captured!', event);
+        console.log('czxpEvents events captured!', event);
         //IF event affects our wallet, dispatch
         if(event.args.to == store.state.web3.coinbase){
           store.dispatch('updateOwnerBalances', event);
@@ -33,7 +33,7 @@ let watchEvents = function (state) {
     cryptozEvents.watch(function(error, event){
       //console.log('From WatchEvents.js...');
       if (!error){
-        //console.log('Cryptoz events captured! : ', event);
+        console.log('Cryptoz events captured! : ', event);
         //IF event affects our wallet, dispatch
         if(event.args.to == store.state.web3.coinbase){
           store.dispatch('updateOwnerBalances', event);

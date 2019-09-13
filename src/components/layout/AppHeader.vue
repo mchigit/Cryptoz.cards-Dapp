@@ -27,9 +27,10 @@
             Claim 2 FREE Boosters !
           </div>
           <div v-else-if="showSpinner==1">
-            <transition-group>
-              <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
-              </transition-group>
+              <img src="static/spinner.gif" class="spinner" />
+              <transition>
+                <span class="spinner-text-style">{{transactionStatus}}</span>
+              </transition>
           </div>
           <div class="bonusClassNo" v-else-if="coinbase != null && bonusReady == 0 && showSpinner == 0">
             Your Next Bonus:<br><strong> {{timeToBonus}}</strong>
@@ -308,5 +309,8 @@ export default {
   }
   .spinner {
     width: 2em;
+  }
+  .spinner-text-style{
+    color: #fff;
   }
 </style>
