@@ -51,7 +51,7 @@
             <span class="wallet-nav" v-else>
               <img src="static/metamask-face.png" width="8%" />
               {{coinbase.substr(0,6) + '...' + coinbase.substr(38)}}
-              <span class="wallet-balance"><img src="static/ethereum-symbol.png" width="10%" />  {{wallet}} </span>
+              <span class="wallet-balance"><img src="static/ethereum-symbol.png" width="10%" />  {{wallet.toFixed(3)}} </span>
             </span>
           
           </transition>
