@@ -221,8 +221,13 @@ export default {
       }).then(this.handleBuyBooster) //update boosters owned and total types
       
     },
-    handleBuyBooster : function(result) {
-        console.log('Handling buy booster', result);
+    handleBuyBooster : function(error,result) {
+        console.log('Handling buy booster', error, result);
+        if(error)
+        {
+          console.log('USER REJECTED!!');
+          this.showSpinner = 0;
+        }
         //change from pending to ready
         this.pendingTransaction = result.receipt.blockHash;
         this.transactionStatus = 'Broadcast to chain...';

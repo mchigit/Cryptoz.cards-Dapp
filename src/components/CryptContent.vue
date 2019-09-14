@@ -34,6 +34,11 @@
               <div class="col">
                 <b-button class="btn btn-danger" v-bind:disabled="boosters_owned < 1" v-b-modal.open-booster-modal>Open Booster Card
                 </b-button>
+                <transition name="fade">
+                  <span v-if="showSpinner==1">
+                    <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
+                  </span>
+                </transition>
               </div>
               <div class="col">
                 <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0 || balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
@@ -135,6 +140,16 @@ export default {
       if (newValue !== oldValue) {
         this.setSubscriptions();
       }
+    },
+    currentEvent(newValue,oldValue) {
+      console.log('SHOP currentEvent:',newValue)
+      if(newValue !== oldValue && typeof newValue !== "undefined"){
+        if (this.pendingTransaction == newValue.blockHash) {
+          this.showSpinner = 0;
+          this.transactionStatus = 'Confirmed ! balance updated';
+          this.setSubscriptions();
+        }
+      }
     }
   },
   mounted () {
@@ -145,6 +160,9 @@ export default {
   },
   data () {
     return {
+      pendingTransaction:0,
+      showSpinner:0,
+      transactionStatus: 'Pending confirmation...',
       czxp_balance : 'Log in Metamask',
       ownsCards : 0,
       cards_owned : 'Log in Metamask',
@@ -280,12 +298,21 @@ export default {
       console.log('Handling buy booster...');
       console.log(result);
       this.$bvModal.hide('open-booster-modal')
-      this.$store.dispatch('updateOwnerBalances')
-      this.setSubscriptions();
+      
+      //change from pending to ready
+      this.pendingTransaction = result.receipt.blockHash;
+      this.transactionStatus = 'Broadcast to chain...';
+      
+      //this.$store.dispatch('updateOwnerBalances')
+      //this.setSubscriptions();
     },
     openBooster : function () {
       
       console.log('Wagering..' + this.wagerAmount);
+      
+      //Change buy button to pending.. or show some pending state
+      this.showSpinner = 1;
+      this.transactionStatus = 'Pending confirmation...';
       
       var self = this;
       
@@ -325,5 +352,8 @@ export default {
   .jumbotron {
     margin: auto;
     width: 95%;
+  }
+  .spinner {
+    width: 2em;
   }
 </style>

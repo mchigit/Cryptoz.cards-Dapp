@@ -120,11 +120,12 @@ export default {
       }
     },
     currentEvent(newValue,oldValue) {
-      console.log('SHOP currentEvent:',newValue)
+      console.log('HEADER currentEvent:',newValue)
       if(newValue !== oldValue && typeof newValue !== "undefined"){
         if (this.pendingTransaction == newValue.blockHash) {
           this.showSpinner = 0;
           this.transactionStatus = 'Confirmed ! balance updated';
+          this.setSubscriptions();
         }
       }
     }
@@ -175,15 +176,9 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.getBonusBoosters({from: self.coinbase, gas:362000});
       }).then(function(result) {
-        console.log('getBonusBoosters called result should be T/F :', result);
         //change from pending to ready
         self.pendingTransaction = result.receipt.blockHash;
         self.transactionStatus = 'Broadcast to chain...';
-        
-        if(result = 'true'){
-          self.$store.dispatch('updateOwnerBalances')
-          self.setSubscriptions();// refresh the clock
-        }
       })
     },
     GetTimeString: function(_timeStamp) {
