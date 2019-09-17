@@ -32,7 +32,7 @@
           <!-- Loads cards here -->
             <div class="row">
               <div class="col">
-                <b-button class="btn btn-danger" v-bind:disabled="boosters_owned < 1" v-b-modal.open-booster-modal>Open Booster Card
+                <b-button class="btn btn-danger" v-bind:disabled="boostersOwned < 1" v-b-modal.open-booster-modal>Open Booster Card
                 </b-button>
                 <transition name="fade">
                   <span v-if="showSpinner==1">
@@ -41,8 +41,13 @@
                 </transition>
               </div>
               <div class="col">
-                <button class="btn btn-danger" v-bind:disabled="buyOpenBtnOn == 0 || balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
+                <button class="btn btn-danger" v-bind:disabled="balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
                 </button>
+                <transition name="fade">
+                  <span v-if="showSpinner2==1">
+                    <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus2}}</strong>
+                  </span>
+                </transition>
               </div>
             </div>
             <br>
@@ -122,6 +127,9 @@ export default {
     },
     cryptContent() {
       return this.$store.state.cryptContent;
+    },
+    boostersOwned() {
+      return this.$store.state.boostersOwned;
     }
   },
   watch: {
@@ -142,7 +150,7 @@ export default {
       }
     },
     currentEvent(newValue,oldValue) {
-      console.log('SHOP currentEvent:',newValue)
+      console.log('CRYPT currentEvent:',newValue)
       if(newValue !== oldValue && typeof newValue !== "undefined"){
         if (this.pendingTransaction == newValue.blockHash) {
           this.showSpinner = 0;
@@ -163,12 +171,11 @@ export default {
       pendingTransaction:0,
       showSpinner:0,
       transactionStatus: 'Pending confirmation...',
+      showSpinner2:0,
+      transactionStatus2: 'Pending confirmation...',
       czxp_balance : 'Log in Metamask',
       ownsCards : 0,
-      cards_owned : 'Log in Metamask',
-      boosters_owned : 'Log in Metamask',
       el : 0,
-      buyOpenBtnOn : 0,
       confirmOpenBtnDisabled : 0,
       wagerAmount : 0,
       allCards: []
@@ -186,7 +193,6 @@ export default {
         return instance.tokensOfOwner(self.coinbase)
       }).then(this.handleGetAllCards)
       
-      this.buyOpenBtnOn = 1;
     },
     buyAndOpenBooster : function() {
       console.log('Buy and Open Booster card...');
@@ -301,7 +307,7 @@ export default {
       
       //change from pending to ready
       this.pendingTransaction = result.receipt.blockHash;
-      this.transactionStatus = 'Broadcast to chain...';
+      this.transactionStatus2 = 'Broadcast to chain...';
       
       //this.$store.dispatch('updateOwnerBalances')
       //this.setSubscriptions();
@@ -322,9 +328,14 @@ export default {
         return instance.openBoosterCard(self.wagerAmount, {from: self.coinbase});
       }).then(this.handleBoosterOpened)
     },
-    handleBoosterOpened : function(res) {
-      this.$store.dispatch('updateOwnerBalances')
-      this.setSubscriptions();
+    handleBoosterOpened : function(result) {
+      //this.$store.dispatch('updateOwnerBalances')
+      //this.setSubscriptions();
+      
+      console.log('handleBoosterOpened:' ,result);
+      //change from pending to ready
+      this.pendingTransaction = result.receipt.blockHash;
+      this.transactionStatus = 'Broadcast to chain...';
     },
     sortByName : function(param) {
       this.allCards.sort(dynamicSort(param))
