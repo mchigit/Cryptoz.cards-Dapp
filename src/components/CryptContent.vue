@@ -130,6 +130,9 @@ export default {
     },
     boostersOwned() {
       return this.$store.state.boostersOwned;
+    },
+    currentEvent() {
+      return this.$store.state.lastChainEvent;
     }
   },
   watch: {
@@ -152,7 +155,7 @@ export default {
     currentEvent(newValue,oldValue) {
       console.log('CRYPT currentEvent:',newValue)
       if(newValue !== oldValue && typeof newValue !== "undefined"){
-        if (this.pendingTransaction == newValue.blockHash) {
+        if (this.pendingTransaction == newValue.transactionHash) {
           this.showSpinner = 0;
           this.transactionStatus = 'Confirmed ! balance updated';
           this.setSubscriptions();
@@ -332,9 +335,9 @@ export default {
       //this.$store.dispatch('updateOwnerBalances')
       //this.setSubscriptions();
       
-      console.log('handleBoosterOpened:' ,result);
+      console.log('handleBoosterOpened:' ,result.tx);
       //change from pending to ready
-      this.pendingTransaction = result.receipt.blockHash;
+      this.pendingTransaction = result.tx;
       this.transactionStatus = 'Broadcast to chain...';
     },
     sortByName : function(param) {
