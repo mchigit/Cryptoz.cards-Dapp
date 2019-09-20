@@ -35,7 +35,8 @@ let watchEvents = function (state) {
       if (!error){
         console.log('Cryptoz events captured! : ', event);
         //IF event affects our wallet, dispatch
-        if(event.args.to == store.state.web3.coinbase){
+        if(event.args.to == store.state.web3.coinbase ||
+           event.args.player == store.state.web3.coinbase){
           store.dispatch('updateOwnerBalances', event);
         }
           //Otherwise a czxp event ALWAYS updates the universe balance
