@@ -43,11 +43,6 @@
               <div class="col">
                 <button class="btn btn-danger" v-bind:disabled="balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
                 </button>
-                <transition name="fade">
-                  <span v-if="showSpinner2==1">
-                    <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus2}}</strong>
-                  </span>
-                </transition>
               </div>
             </div>
             <br>
@@ -156,10 +151,9 @@ export default {
       console.log('CRYPT currentEvent:',newValue)
       if(newValue !== oldValue && typeof newValue !== "undefined"){
         console.log('CRYPT old:',oldValue ,' new:',newValue);
-        if (this.pendingTransaction == newValue.transactionHash) {
-          console.log('CRYPT transactions matched!');
-          this.showSpinner = 0;
-          this.transactionStatus = 'Confirmed ! balance updated';
+        this.showSpinner = 0;
+        this.transactionStatus = 'Confirmed ! balance updated';
+        if(this.subscriptionState == 0){
           this.setSubscriptions();
         }
       }
@@ -173,11 +167,9 @@ export default {
   },
   data () {
     return {
-      pendingTransaction:0,
+      subscriptionState:0, // 0=idle,1=active
       showSpinner:0,
       transactionStatus: 'Pending confirmation...',
-      showSpinner2:0,
-      transactionStatus2: 'Pending confirmation...',
       czxp_balance : 'Log in Metamask',
       ownsCards : 0,
       el : 0,
@@ -192,8 +184,9 @@ export default {
       this.setSubscriptions();
     },
     setSubscriptions : function() {
+      this.subscriptionState = 1;
       var self = this;
-
+      
       Cryptoz.deployed().then(function(instance) {
         return instance.tokensOfOwner(self.coinbase)
       }).then(this.handleGetAllCards)
@@ -278,6 +271,8 @@ export default {
         console.log('no cards returned from handleGetAllCards()');
         this.ownsCards = 0; //set the message to buy or get Cryptoz
       }
+      //we are done, clear the state
+      this.subscriptionState = 0;
     },
     handleGotCardData : function(res) {
       //console.log(res.data);
@@ -311,11 +306,7 @@ export default {
       this.$bvModal.hide('open-booster-modal')
       
       //change from pending to ready
-      this.pendingTransaction = result.receipt.blockHash;
-      this.transactionStatus2 = 'Broadcast to chain...';
-      
-      //this.$store.dispatch('updateOwnerBalances')
-      //this.setSubscriptions();
+      this.transactionStatus = 'Broadcast to chain...';
     },
     openBooster : function () {
       
@@ -338,7 +329,6 @@ export default {
         if(result !== undefined){
           console.log('handleBoosterOpened:' ,result.tx);
           //change from pending to ready
-          this.pendingTransaction = result.tx;
           this.transactionStatus = 'Broadcast to chain...';
           resolve(result);
         }else{
