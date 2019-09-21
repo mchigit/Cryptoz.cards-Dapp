@@ -155,7 +155,9 @@ export default {
     currentEvent(newValue,oldValue) {
       console.log('CRYPT currentEvent:',newValue)
       if(newValue !== oldValue && typeof newValue !== "undefined"){
+        console.log('CRYPT old:',oldValue ,' new:',newValue);
         if (this.pendingTransaction == newValue.transactionHash) {
+          console.log('CRYPT transactions matched!');
           this.showSpinner = 0;
           this.transactionStatus = 'Confirmed ! balance updated';
           this.setSubscriptions();
@@ -331,14 +333,22 @@ export default {
         return instance.openBoosterCard(self.wagerAmount, {from: self.coinbase});
       }).then(this.handleBoosterOpened)
     },
-    handleBoosterOpened : function(result) {
-      //this.$store.dispatch('updateOwnerBalances')
-      //this.setSubscriptions();
-      
-      console.log('handleBoosterOpened:' ,result.tx);
-      //change from pending to ready
-      this.pendingTransaction = result.tx;
-      this.transactionStatus = 'Broadcast to chain...';
+    handleBoosterOpened : function(error, result) {
+      if(!error){
+        if(result !== undefined){
+          console.log('handleBoosterOpened:' ,result.tx);
+          //change from pending to ready
+          this.pendingTransaction = result.tx;
+          this.transactionStatus = 'Broadcast to chain...';
+          resolve(result);
+        }else{
+          console.log('USER CANCELLED in handleBoosterOpened');
+          return reject(error);
+        }
+      }else{
+        console.log('Error in handleBoosterOpened:', error);
+        return reject(error);
+      }
     },
     sortByName : function(param) {
       this.allCards.sort(dynamicSort(param))

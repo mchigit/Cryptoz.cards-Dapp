@@ -112,7 +112,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import OwnedCardContent from '@/components/OwnedCardContent.vue'
 import UniverseBalances from '@/components/UniverseBalances.vue'
 import OwnerBalances from '@/components/OwnerBalances.vue'
@@ -241,49 +240,68 @@ export default {
       this.storeCards = [];
       
       for (var i = 1; i < this.totalCyptozTypes; i++) {
-            axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + i)
-              .then(this.handleGotCardData)
+        fetch('https://cryptoz.cards/services/getCardData.php?card_id=' + i)
+        .then(this.handleGotCardData)
+        .catch(function(err){
+          console.log('FETCH error:',err);
+        })
       }
+      
     },
-    handleGotCardData : function(res) {
-      //console.log(res.data);
+    handleGotCardData : function(response) {
+      var self = this;
       
-      var newAttr = [];
-      //format the attributes to match our JS objects
-      res.data.attributes.forEach(function(element){
-        newAttr[element.trait_type] = element.value;
-      })
-            
-      //Overwrite our JSON reponse with vue friendly card binding data
-      res.data.attributes = newAttr;
-      
-      //Append the bg
-      switch(res.data.attributes.rarity){
-        case "Common":
-          res.data.attributes.rarity = 'card-bg card-bg-6';
-          break;
-        case "Uncommon":
-          res.data.attributes.rarity = 'card-bg card-bg-5';
-          break;
-        case "Rare":
-          res.data.attributes.rarity = 'card-bg card-bg-4';
-          break;
-        case "Epic":
-          res.data.attributes.rarity = 'card-bg card-bg-3';
-          break;
-        case "Diamond":
-          res.data.attributes.rarity = 'card-bg card-bg-2';
-          break;
-        case "Platinum":
-          res.data.attributes.rarity = 'card-bg card-bg-1';
-          break;
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem from FETCH. Status Code: ' +
+          response.status);
+        return;
       }
+
+      // Examine the text in the response
+      response.json().then(function(res) {
+        
+        //console.log('gotCardData:', res.data.attributes[0].value);
+        console.log('gotCardData:', res.attributes[0].value);
       
-      if(res.data.attributes.edition_total === 0){
-        res.data.attributes.edition_total = "Unlimited"
-      }
-      this.allCards.push(res.data);
-      this.storeCards.push(res.data);
+        var newAttr = [];
+        //format the attributes to match our JS objects
+        res.attributes.forEach(function(element){
+          newAttr[element.trait_type] = element.value;
+        })
+              
+        //Overwrite our JSON reponse with vue friendly card binding data
+        res.attributes = newAttr;
+        
+        //Append the bg
+        switch(res.attributes.rarity){
+          case "Common":
+            res.attributes.rarity = 'card-bg card-bg-6';
+            break;
+          case "Uncommon":
+            res.attributes.rarity = 'card-bg card-bg-5';
+            break;
+          case "Rare":
+            res.attributes.rarity = 'card-bg card-bg-4';
+            break;
+          case "Epic":
+            res.attributes.rarity = 'card-bg card-bg-3';
+            break;
+          case "Diamond":
+            res.attributes.rarity = 'card-bg card-bg-2';
+            break;
+          case "Platinum":
+            res.attributes.rarity = 'card-bg card-bg-1';
+            break;
+        }
+        
+        if(res.attributes.edition_total === 0){
+          res.attributes.edition_total = "Unlimited"
+        }
+        self.allCards.push(res);
+        self.storeCards.push(res);
+        
+      });
+
     },
     sortByName : function(param) {
       this.storeCards.sort(dynamicSort(param))
