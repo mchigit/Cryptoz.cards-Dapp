@@ -33,7 +33,7 @@
                 <img class="card-img" :src="image" />
                 <span class="card-edition">{{edition_total}}</span>
                 <div class="card-item-name text-center">{{name}}<br>{{cset}}</div>
-                <div class="card-czxp text-left">{{unlock_czxp}}</div>
+                <div class="card-czxp text-left">{{parseInt(unlock_czxp).toLocaleString()}}</div>
                 <div class="card-level">{{level}}</div>
               </div>
             </div>
@@ -43,18 +43,18 @@
 			          <div class="back-container">
 			            <div class="card-txt-black"><span class="font-weight-bold">Cost:</span> {{cost}}</div>
 			            <br>
-			            <div class="card-txt-black"><span class="font-weight-bold">Buy CZXP:</span><br>{{buy_czxp}}</div>
-			            <div class="card-txt-black"><span class="font-weight-bold">Transfer CZXP:</span><br>{{transfer_czxp}}</div>
-			            <div class="card-txt-black"><span class="font-weight-bold">Sacrifice CZXP:</span><br>{{sacrifice_czxp}}</div>
+			            <div class="card-txt-black"><span class="font-weight-bold">Buy CZXP:</span><br>{{parseInt(buy_czxp).toLocaleString()}}</div>
+			            <div class="card-txt-black"><span class="font-weight-bold">Transfer CZXP:</span><br>{{parseInt(transfer_czxp).toLocaleString()}}</div>
+			            <div class="card-txt-black"><span class="font-weight-bold">Sacrifice CZXP:</span><br>{{parseInt(sacrifice_czxp).toLocaleString()}}</div>
 			          </div>
 			        </div>
 		        </div>
           </div>
         </div>
-          <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" v-bind:disabled="balance <= cost" v-on:click="buyCard">
+          <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-on:click="buyCard">
             Buy Card {{cost}}E
           </button>
-          <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" v-on:click="getCard">
+          <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
             Get Card {{type_id}}
           </button>
           <div v-else-if="$route.path == '/crypt'">
@@ -69,12 +69,12 @@
           </div>
       </div>
       <br>
-      <div v-if="showTransaction == 1" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Tx# {{transaction_number}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      <!--<div v-if="showTransaction == 1" class="alert alert-success alert-dismissible fade show" role="alert">-->
+      <!--  <strong>Success!</strong> Tx# {{transaction_number}}-->
+      <!--  <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+      <!--    <span aria-hidden="true">&times;</span>-->
+      <!--  </button>-->
+      <!--</div>-->
 
   </div>
 </template>
@@ -96,9 +96,13 @@ export default {
     coinbase() {
       return this.$store.state.web3.coinbase;
     },
+    czxpBalance() {
+      return parseInt(this.$store.state.czxpBalance);
+    },
   },
   data () {
     return {
+      wei : 1000000000000000000,
       showTransaction : 0,
       transaction_number : 0,
       newWallet : '',

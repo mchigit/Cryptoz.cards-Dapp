@@ -8,7 +8,7 @@
       <strong>Your Cryptoz:</strong> {{cards_owned}}
     </b-col>
     <b-col>
-      <strong>Your CZXP Balance :</strong> {{czxp_balance}}
+      <strong>Your CZXP Balance :</strong> {{parseInt(czxp_balance).toLocaleString()}}
     </b-col>
   </b-row>
   
@@ -71,9 +71,7 @@
         }).then(this.setBoostersOwned)
       },
       setCzxpBalance :  function(bal){
-        //console.log('setCzxpBalance:',bal);
-        //this.czxp_balance = parseInt(bal).toLocaleString();
-        this.$store.dispatch('updateCZXPBalance', parseInt(bal).toLocaleString())
+        this.$store.dispatch('updateCZXPBalance', bal)
       },
       setCryptozBalance : function(bal) {
         //console.log('setCryptozBalance:',bal);

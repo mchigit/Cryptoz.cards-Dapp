@@ -232,18 +232,18 @@ export default {
   li{
     margin-right: 1.2em;
   }
+  
   a{
-    
     padding: 2px;
   }
-  
+
   a:hover{
     color:#FFF;
     text-decoration: none;
     border: 1px solid #fff;
     padding:1px;
   }
-  
+
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }

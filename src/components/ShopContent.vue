@@ -260,7 +260,7 @@ export default {
       // Examine the text in the response
       response.json().then(function(res) {
         
-        //console.log('gotCardData:', res.attributes[0].value);
+        console.log('gotCardData:', Number(res.attributes[11].value));
       
         var newAttr = [];
         //format the attributes to match our JS objects

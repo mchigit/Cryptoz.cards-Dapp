@@ -302,7 +302,7 @@ export default {
     },
     handleBuyBooster : function(result) {
       console.log('Handling buy booster...');
-      console.log(result);
+      //console.log(result);
       this.$bvModal.hide('open-booster-modal')
       
       //change from pending to ready
