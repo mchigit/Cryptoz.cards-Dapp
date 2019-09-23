@@ -1,13 +1,13 @@
 <template>
   
   <b-row>
-    <b-col>
+    <b-col cols="5" class="text-left">
       <p><img class="czxp-logo" src="static/czxp.png" /> <strong>{{totalCzxpSupply}} CZXP tokens</strong> in the Universe</p>
     </b-col>
-    <b-col>
+    <b-col class="text-center">
       <p><strong>{{totalCryptozTypes}} Cryptoz Types</strong> in the Universe</p>
     </b-col>
-    <b-col>
+    <b-col class="text-right">
       <p><strong>{{totalCryptozSupply}} Cryptoz Cards</strong> in the Universe</p>
     </b-col>
   </b-row>

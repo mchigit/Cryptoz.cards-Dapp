@@ -65,7 +65,6 @@
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('rarity')">Rarity</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('cost')">Cost</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_set')">Card Set</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('in_store')">In Store</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('edition_total')">Edition Total</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_level')">Level</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('unlock_czxp')">Unlock CZXP</a>
@@ -73,14 +72,6 @@
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('transfer_czxp')">Transfer CZXP</a>
                     <a class="dropdown-item" href="#" v-on:click="sortByAttr('sacrifice_czxp')">Sacrifice CZXP</a>
                   </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" v-bind:checked="showUnlimited" v-on:click="doHideUnlimited">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Show Unlimited
-                  </label>
                 </div>
               </div>
             </div>
@@ -192,16 +183,6 @@ export default {
       
   },
   methods : {
-    doHideUnlimited : function(){
-      console.log('Hide/show unlimited' + this.showUnlimited)
-      if(this.showUnlimited){
-        this.showUnlimited = 0  //hide
-        this.storeCards = this.allCards.filter(card => card.attributes.in_store == 'Store')
-      }else{
-        this.showUnlimited = 1  //show
-        this.storeCards = this.allCards
-      }
-    },
     buyBoosters : function() {
       console.log('Buy boosters called..');
       
@@ -260,8 +241,13 @@ export default {
       // Examine the text in the response
       response.json().then(function(res) {
         
-        console.log('gotCardData:', Number(res.attributes[11].value));
-      
+        //console.log('gotCardData:', res.attributes);
+        
+        if(res.attributes[3].value != 'Store'){
+          return;
+        }
+                
+        
         var newAttr = [];
         //format the attributes to match our JS objects
         res.attributes.forEach(function(element){

@@ -59,7 +59,7 @@
           </button>
           <div v-else-if="$route.path == '/crypt'">
             <button class="btn btn-danger" v-on:click="sacrificeCard">
-              Sacrifice {{id}}
+              Sacrifice
             </button>
             <div class="float-right">
               <b-button class="btn btn-danger btn-gift" v-b-modal="'transfer-modal-'+id">
