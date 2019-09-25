@@ -27,6 +27,8 @@ window.dynamicSort = function dynamicSort(property) {
 }
 
 window.sortAttributes = function sortAttributes(property) {
+    //console.log(property);
+    
     var sortOrder = 1;
     if(property[0] === "-") {
         sortOrder = -1;

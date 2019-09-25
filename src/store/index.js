@@ -64,6 +64,9 @@ export const store = new Vuex.Store({
   },
   updateCryptozTotal(state, payload) {
     state.totalCryptozSupply = payload
+  },
+  userLoggedOut(state,payload) {
+    state.web3.isInjected = false;
   }
  },
  actions: {
@@ -71,7 +74,11 @@ export const store = new Vuex.Store({
       console.log('registerWeb3 Action being executed', commit)
       getWeb3.then(result => {
         console.log('committing result to registerWeb3Instance mutation', result)
-        commit('registerWeb3Instance', result)
+        if(result !== undefined) {
+          commit('registerWeb3Instance', result)
+        }else{
+          console.log('getWeb3 returned Nothing !..error in vuex index')
+        }
       }).catch(e => {
         console.log('error in action registerWeb3', e)
       })
@@ -108,6 +115,9 @@ export const store = new Vuex.Store({
     },
     updateCryptozTotal({commit}, payload){
       commit('updateCryptozTotal', payload)
+    },
+    userLoggedOut({commit}){
+      commit('userLoggedOut')
     }
  }
 })

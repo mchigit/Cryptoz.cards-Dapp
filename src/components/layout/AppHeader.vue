@@ -40,13 +40,11 @@
           <transition name="fade" mode="out-in">
             
             <p class="mm-header" v-if="web3.isInjected == false">
-              Metamask is <strong>required</strong> to bridge Cryptoz on Ethereum
+              Metamask is <strong>required</strong> to connect Cryptoz on Ethereum
               <a href="https://metamask.io/" target="_blank">
                 <img src="static/metamask_logo.png" width="40%" />
               </a>
             </p>
-            
-            <button class="btn btn-success" v-else-if="web3.isInjected == true && coinbase == undefined" v-on:click="requestPermission()">Connect with MetaMask</button>
             
             <span class="wallet-nav" v-else>
               <img src="static/metamask-face.png" width="8%" />
@@ -58,6 +56,12 @@
           
           <b-nav-item>
             <router-link to="/help">Help</router-link>
+          </b-nav-item>
+          
+          <b-nav-item v-if="web3.isInjected == false">
+            <b-button variant="primary" v-on:click="requestPermission()">
+              Connect
+            </b-button>
           </b-nav-item>
           
         </b-collapse>
@@ -162,8 +166,17 @@ export default {
       })
       
     },
-    requestPermission : function() {
+    requestPermission : async function() {
       console.log('Connect to metamask button clicked');
+      
+      await ethereum.enable();
+      
+      // Acccounts now exposed
+      console.log('!!!!! WE ARE IN..from Header button');
+      
+      this.$store.dispatch('registerWeb3')
+      
+      
     },
     GetBonus : function() {
       console.log('GetBonus called...');

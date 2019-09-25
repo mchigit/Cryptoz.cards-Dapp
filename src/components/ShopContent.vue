@@ -55,24 +55,19 @@
           
           <br>
           <div class="row">
-              <div class="col">
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sort By
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#" v-on:click="sortByName('name')">Name</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('rarity')">Rarity</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('cost')">Cost</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_set')">Card Set</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('edition_total')">Edition Total</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('card_level')">Level</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('unlock_czxp')">Unlock CZXP</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('buy_czxp')">Buy CZXP</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('transfer_czxp')">Transfer CZXP</a>
-                    <a class="dropdown-item" href="#" v-on:click="sortByAttr('sacrifice_czxp')">Sacrifice CZXP</a>
-                  </div>
-                </div>
+              <div class="col text-left">
+                <b-dropdown id="dropdown" text="Sort By">
+                    <b-dropdown-item @click="sortByName('name')">Name</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('rarity')">Rarity</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('cost')">Cost</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('card_set')">Card Set</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('edition_total')">Edition Total</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('card_level')">Level</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('unlock_czxp')">Unlock CZXP</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('buy_czxp')">Buy CZXP</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('transfer_czxp')">Transfer CZXP</b-dropdown-item>
+                    <b-dropdown-item @click="sortByAttr('sacrifice_czxp')">Sacrifice CZXP</b-dropdown-item>
+                </b-dropdown>
               </div>
             </div>
           <br>
@@ -195,10 +190,16 @@ export default {
       
       //pass to metamask
       var self = this;
-      Cryptoz.deployed().then(function(instance) {
-        var totalBoostersCost = 2000000000000000 * parseInt(self.totalCreditsToBuy);
-        return instance.buyBoosterCard(parseInt(self.totalCreditsToBuy), {from: self.coinbase, value:totalBoostersCost});
-      }).then(this.handleBuyBooster) //update boosters owned and total types
+      
+      try{
+        Cryptoz.deployed().then(function(instance) {
+          var totalBoostersCost = 2000000000000000 * parseInt(self.totalCreditsToBuy);
+          return instance.buyBoosterCard(parseInt(self.totalCreditsToBuy), {from: self.coinbase, value:totalBoostersCost});
+        }).then(this.handleBuyBooster) //update boosters owned and total types
+        
+      }catch(error) {
+        console.error('buyBoosters cancelled/failed:', error);
+      }
       
     },
     handleBuyBooster : function(error,result) {

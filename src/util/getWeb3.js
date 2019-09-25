@@ -58,6 +58,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
   })
   .then(result => {
     return new Promise(function (resolve, reject) {
+      console.log('Inside getWeb3 in the js file..2.5..');
       // Retrieve balance for coinbase
       result.web3().eth.getBalance(result.coinbase, (err, balance) => {
         if (err) {
@@ -110,6 +111,8 @@ let getWeb3 = new Promise(function (resolve, reject) {
       resolve(result)
       })
     })
+  }).catch(error => {
+    console.log('ERROR in getWeb3 function:', error)
   })
 
 export default getWeb3

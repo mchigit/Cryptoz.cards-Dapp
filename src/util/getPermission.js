@@ -1,5 +1,7 @@
 import {store} from '../store/'
 
+
+
 window.addEventListener('load', async () => {
     // Modern dapp browsers...
     if (window.ethereum) {
@@ -13,6 +15,7 @@ window.addEventListener('load', async () => {
             
             //Go through the web3 registration process
             store.dispatch('registerWeb3')
+            
         } catch (error) {
             // User denied account access...
             console.log('User denied permission:', error);
@@ -22,7 +25,8 @@ window.addEventListener('load', async () => {
     else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
         // Acccounts always exposed
-        web3.eth.sendTransaction({/* ... */});
+        //Go through the web3 registration process
+        store.dispatch('registerWeb3')
     }
     // Non-dapp browsers...
     else {
