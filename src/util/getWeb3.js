@@ -11,10 +11,14 @@ import Web3 from 'web3'
 let getWeb3 = new Promise(function (resolve, reject) {
   // Check for injected web3 (mist/metamask)
   var web3js = window.web3
-  console.log('Inside getWeb3 in the js file....');
+  //console.log('Inside getWeb3 in the js file....', web3js);
   if (typeof web3js !== 'undefined') {
       console.log('Inside getWeb3 in the js file..2..');
     var web3 = new Web3(web3js.currentProvider)
+    //if(!web3.eth.coinbase){
+      //reject(new Error('No permission yet'));
+    //}
+    
     resolve({
       injectedWeb3: web3.isConnected(),
       web3 () {

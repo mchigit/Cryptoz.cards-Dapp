@@ -14,7 +14,7 @@ let pollWeb3 = function (state) {
           if (err) {
             console.log(err)
           } else {
-            store.dispatch('pollWeb3', {
+            store.dispatch('pollWeb3Action', {
               coinbase: newCoinbase,
               balance: newBalance
             })
@@ -30,7 +30,7 @@ let pollWeb3 = function (state) {
           if (err) {
             console.log(err)
           } else if (polledBalance !== store.state.web3.balance) {
-            store.dispatch('pollWeb3', {
+            store.dispatch('pollWeb3Action', {
               coinbase: store.state.web3.coinbase,
               balance: polledBalance
             })

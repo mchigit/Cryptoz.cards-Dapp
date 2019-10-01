@@ -78,12 +78,13 @@ export const store = new Vuex.Store({
           commit('registerWeb3Instance', result)
         }else{
           console.log('getWeb3 returned Nothing !..error in vuex index')
+          console.log(window.web3)
         }
-      }).catch(e => {
-        console.log('error in action registerWeb3', e)
+      }).catch(error => {
+        console.log("Error in return from getWeb3.then:", error)
       })
     },
-    pollWeb3 ({commit}, payload) {
+    pollWeb3Action ({commit}, payload) {
       //console.log('pollWeb3 action being executed')
       commit('pollWeb3Instance', payload)
     },

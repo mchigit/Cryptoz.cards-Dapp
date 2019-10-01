@@ -22,7 +22,7 @@
               <router-link to="/view/1">View</router-link>
             </b-nav-item>
           </b-navbar-nav>
-          
+      
           <div class="bonusClass" v-if="coinbase != null && bonusReady == 1  && showSpinner == 0" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
           </div>
@@ -35,29 +35,28 @@
           <div class="bonusClassNo" v-else-if="coinbase != null && bonusReady == 0 && showSpinner == 0">
             Your Next Bonus:<br><strong> {{timeToBonus}}</strong>
           </div>
-          
-          
+
           <transition name="fade" mode="out-in">
-            
-            <p class="mm-header" v-if="web3.isInjected == false">
+
+            <p class="mm-header ml-auto" v-if="web3.isInjected == false">
               Metamask is <strong>required</strong> to connect Cryptoz on Ethereum
               <a href="https://metamask.io/" target="_blank">
                 <img src="static/metamask_logo.png" width="40%" />
               </a>
             </p>
             
-            <span class="wallet-nav" v-else>
+            <span class="wallet-nav ml-auto" v-else>
               <img src="static/metamask-face.png" width="8%" />
               {{coinbase.substr(0,6) + '...' + coinbase.substr(38)}}
               <span class="wallet-balance"><img src="static/ethereum-symbol.png" width="10%" />  {{wallet.toFixed(4)}} </span>
             </span>
           
           </transition>
-          
-          <b-nav-item>
+
+          <b-nav  class="ml-auto">
             <router-link to="/help">Help</router-link>
-          </b-nav-item>
-          
+          </b-nav>
+        
           <b-nav-item v-if="web3.isInjected == false">
             <b-button variant="primary" v-on:click="requestPermission()">
               Connect

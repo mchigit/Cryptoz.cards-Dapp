@@ -11,7 +11,7 @@ window.addEventListener('load', async () => {
             await ethereum.enable();
             
             // Acccounts now exposed
-            console.log('!!!!! WE ARE IN');
+            console.log('!!!!! WE ARE IN, from getPermissions on load');
             
             //Go through the web3 registration process
             store.dispatch('registerWeb3')
