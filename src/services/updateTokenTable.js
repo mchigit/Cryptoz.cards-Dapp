@@ -1,9 +1,18 @@
 var schedule = require('node-schedule');
-var web3 = require('web3');
-var contract = require("truffle-contract");
+var Web3 = require('web3');
+var contract = require("@truffle/contract");
+
+var HDWalletProvider = require("truffle-hdwallet-provider");
+
+var mnemonic = "about raccoon battle bunker weekend direct drip below prevent sea thrive message";
+
+let provider = new HDWalletProvider(mnemonic,"https://rinkeby.infura.io/v3/d9b0212980d3471283f7b301b50d5362")
+
+const web3 = new Web3(provider);
+
 
 //Infura HttpProvider Endpoint
-web3 = new web3(new web3.providers.HttpProvider("https://rinkeby.infura.io/v3/d9b0212980d3471283f7b301b50d5362"));
+//web3 = new web3(new web3.providers.HttpProvider("https://rinkeby.infura.io/v3/d9b0212980d3471283f7b301b50d5362"));
 
 
 // Import our contract artifacts and turn them into usable abstractions.
@@ -23,12 +32,17 @@ CzxpToken.setProvider(web3.currentProvider);
 
 
 
-//query the total Cryptoz supply
+//watch Cryptoz events
 Cryptoz.deployed().then(function(instance) {
+  
+//  return instance.totalSupply.call();
+//}).then(function(res){console.log(res.toString(10))})
+
+  console.log('contract options:' ,instance.options)
   
   console.log('got instance, get all events..');
   
-  var cryptozEvents = instance.allEvents({fromBlock: 0}, function(error, event){
+  var cryptozEvents = instance.allEvents({from: 0}, function(error, event){
     console.log('From inside allEvents...');
         
     if (!error){
@@ -41,6 +55,6 @@ Cryptoz.deployed().then(function(instance) {
     }
     
   });
-  console.log('Got here..');
+  console.log('Got here..', cryptozEvents);
 })
 
