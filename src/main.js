@@ -18,8 +18,7 @@ var topVue = new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
-  template: '<App/>',
+  render: h => h(App),
   data : {
     loggedIn: 'from main.js data:loggedIn prop'
   }
