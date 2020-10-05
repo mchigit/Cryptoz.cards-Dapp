@@ -31,7 +31,7 @@
             </div>
             
             <div class="col-6">
-              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="static/czxp.png" />) <br>erc-20 tokens are supported on the following token exchanges</h3>
+              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="@/assets/czxp.png" />) <br>erc-20 tokens are supported on the following token exchanges</h3>
               
               <a href="https://idex.market/eth/czxp" target="_blank">
                 <div class="market-btn">

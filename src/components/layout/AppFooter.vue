@@ -13,12 +13,12 @@
         <div class="col-md-6 mt-md-0 mt-3">
 
           <!-- Content -->
-          <img class="img-fluid dev-logo" src="./assets/cardinal.png" />
+          <img class="img-fluid dev-logo" src="./../assets/cardinal.png" />
           <p v-if="isInjected">You are connected to: {{network}}</p>
           <p v-else>
             Metamask is <strong>required</strong> to bridge Cryptoz on Ethereum<br>
             <a href="https://metamask.io/" target="_blank">
-              <img src="static/metamask_logo.png" width="20%" />
+              <img src="@/assets/metamask_logo.png" width="20%" />
             </a>
           </p>
 

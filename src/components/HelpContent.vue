@@ -122,7 +122,7 @@
     <div class="card-header" role="tab" id="headingSix">
       <h5 class="mb-0">
         <a class="collapsed" data-toggle="collapse" href="#collapseSix" role="button" aria-expanded="false" aria-controls="collapseSix">
-          How can I get more <img class="czxp-logo" src="static/czxp.png" /> CZXP tokens ?
+          How can I get more <img class="czxp-logo" src="@/assets/czxp.png" /> CZXP tokens ?
         </a>
       </h5>
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app-header" class="headerComponent" >
     <b-navbar toggleable="lg" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <img class="logo-nav" src="./assets/cryptokeeper_logo.svg" />
+    <img class="logo-nav" src="./../assets/cryptokeeper_logo.svg" />
         
         <router-link class="navbar-brand" to="/">Cryptoz</router-link>
         
@@ -27,7 +27,7 @@
             Claim 2 FREE Boosters !
           </div>
           <div v-else-if="showSpinner==1">
-              <img src="static/spinner.gif" class="spinner" />
+              <img src="@/assets/spinner.gif" class="spinner" />
               <transition>
                 <span class="spinner-text-style">{{transactionStatus}}</span>
               </transition>
@@ -41,14 +41,14 @@
             <p class="mm-header ml-auto" v-if="web3.isInjected == false">
               Metamask is <strong>required</strong> to connect Cryptoz on Ethereum
               <a href="https://metamask.io/" target="_blank">
-                <img src="static/metamask_logo.png" width="40%" />
+                <img src="@/assets/metamask_logo.png" width="40%" />
               </a>
             </p>
             
             <span class="wallet-nav ml-auto" v-else>
-              <img src="static/metamask-face.png" width="8%" />
+              <img src="@/assets/metamask-face.png" width="8%" />
               {{coinbase.substr(0,6) + '...' + coinbase.substr(38)}}
-              <span class="wallet-balance"><img src="static/ethereum-symbol.png" width="10%" />  {{wallet.toFixed(4)}} </span>
+              <span class="wallet-balance"><img src="@/assets/ethereum-symbol.png" width="10%" />  {{wallet.toFixed(4)}} </span>
             </span>
           
           </transition>

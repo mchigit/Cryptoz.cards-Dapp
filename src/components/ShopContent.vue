@@ -44,7 +44,7 @@
               <b-button class="btn btn-danger" v-bind:disabled="buyBoostBtnOn == 0 || balance < 2000000000000000" v-b-modal.buy-boosters-modal>Buy Booster Credits @ 0.002E</b-button>
               <transition name="fade">
                 <span v-if="showSpinner==1">
-                  <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
+                  <img src="@/assets/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
                 </span>
               </transition>
             </div>

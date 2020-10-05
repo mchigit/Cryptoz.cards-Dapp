@@ -4,7 +4,7 @@
         <div class="jumbotron">
           <h1>Cryptoz.cards</h1>
           <p class="lead">Cryptoz is an Ethereum blockchain based collectibles trade game.</p>
-          <img class="img-responsive card-demo-group" src="static/cryptokeeper_card_types.png" />
+          <img class="img-responsive card-demo-group" src="@/assets/cryptokeeper_card_types.png" />
           <p>
             The goal of the game is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 Cryptoz card is a unique token on the Ethereum blockchain. Players can buy, sell, and exchange both their Cryptoz cards and CZXP tokens through any ERC standards compliant wallet application, markets, game engines and exchanges.
           </p>
