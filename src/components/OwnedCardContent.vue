@@ -63,7 +63,7 @@
             </button>
             <div class="float-right">
               <b-button class="btn btn-danger btn-gift" v-b-modal="'transfer-modal-'+id">
-                <img src="static/baseline_card_giftcard_white_24dp.png" />
+                <img src="@/assets/baseline_card_giftcard_white_24dp.png" />
               </b-button>
             </div>
           </div>

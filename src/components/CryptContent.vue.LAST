@@ -36,7 +36,7 @@
                 </b-button>
                 <transition name="fade">
                   <span v-if="showSpinner==1">
-                    <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
+                    <img src="@/assets/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
                   </span>
                 </transition>
               </div>

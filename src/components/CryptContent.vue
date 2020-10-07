@@ -36,7 +36,7 @@
                 </b-button>
                 <transition name="fade">
                   <span v-if="showSpinner==1">
-                    <img src="static/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
+                    <img src="@/assets/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
                   </span>
                 </transition>
               </div>
@@ -320,6 +320,21 @@ export default {
       Cryptoz.deployed().then(function(instance) {
         return instance.openBoosterCard(self.wagerAmount, {from: self.coinbase});
       }).then(this.handleBoosterOpened)
+      .catch(err => {
+        console.log(err);
+        this.showSpinner = 0;
+        if (err.code === 4001) {
+          this.$bvToast.toast(
+            'You have rejected the transaction.',
+            {
+              title: 'Transaction Rejected',
+              autoHideDelay: 5000,
+              solid: true,
+              variant: 'warning'
+            }
+          )
+        }
+      })
     },
     handleBoosterOpened : function(error, result) {
       if(!error){

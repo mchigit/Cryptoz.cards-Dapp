@@ -1,7 +1,5 @@
 import {store} from '../store/'
 
-
-
 window.addEventListener('load', async () => {
     // Modern dapp browsers...
     if (window.ethereum) {
