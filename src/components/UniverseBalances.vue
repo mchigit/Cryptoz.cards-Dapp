@@ -35,9 +35,11 @@
         return this.$store.state.web3.coinbase;
       },
     },
-    data (){
-      return {
-      }
+    data() {
+      return {}
+    },
+    mounted() {
+      this.setSubscriptions()
     },
     watch: {
       universeBalances(newValue, oldValue) {
@@ -52,7 +54,7 @@
     methods : {
       setSubscriptions : function() {
         console.log("Set the Universe balances...");
-  
+
         Cryptoz.deployed().then(function(instance) {
           return instance.getTotalTypes.call();
         }).then(this.handleTotalTypes)
