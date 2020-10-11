@@ -191,7 +191,12 @@ export default {
         //change from pending to ready
         self.pendingTransaction = result.receipt.blockHash;
         self.transactionStatus = 'Broadcast to chain...';
-      })
+      }).catch(function (e) {
+        // Transaction rejected or failed
+            //reset the claim tokens message
+            self.showSpinner = 0;
+            self.transactionStatus = 'Claim 2 FREE Boosters !';
+      });
     },
     GetTimeString: function(_timeStamp) {
       
