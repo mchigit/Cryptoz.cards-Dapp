@@ -57,10 +57,13 @@
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
             Get Card {{type_id}}
           </button>
-          <div v-else-if="$route.path == '/crypt'">
-            <button class="btn btn-danger" v-on:click="sacrificeCard">
-              Sacrifice
-            </button>
+          <div class="sacrifice-wrapper" v-else-if="$route.path == '/crypt'">
+            <div class="sacrifice-button">
+               <button class="btn btn-danger" v-on:click="sacrificeCard">
+                Sacrifice
+              </button>
+              <b-spinner v-if="isSacrificingCard" label="Spinning"></b-spinner>
+            </div>
             <div class="float-right">
               <b-button class="btn btn-danger btn-gift" v-b-modal="'transfer-modal-'+id">
                 <img src="@/assets/baseline_card_giftcard_white_24dp.png" />
@@ -107,6 +110,7 @@ export default {
       transaction_number : 0,
       newWallet : '',
       confirmTransferBtnDisabled : 0,
+      isSacrificingCard: false,
     }
   },
   methods : {
@@ -139,10 +143,12 @@ export default {
       var self = this;
       
       Cryptoz.deployed().then(function(instance) {
+        self.isSacrificingCard = true;
         return instance.sacrifice(self.id, {from:self.coinbase});
       }).then(function(res){
         console.log("sacrifice result:");
         console.log(res);
+        self.isSacrificingCard = false;
         self.$store.dispatch('updateOwnerBalances')
         //Send a mutation for the state change to the crypt
         self.$store.dispatch('updateCrypt')
@@ -355,5 +361,19 @@ export default {
   .btn-gift{
     color:#fff;
   }
+
+.sacrifice-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sacrifice-button {
+  display: flex;
+}
+
+.sacrifice-button button {
+  margin-right: 10px;
+}
 
 </style>
