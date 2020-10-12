@@ -3,10 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import BootstrapVue from 'bootstrap-vue'
+import { BootstrapVue, BIconLockFill } from 'bootstrap-vue'
 import { store } from './store/'
 
 Vue.use(BootstrapVue)
+Vue.component('BIconLockFill', BIconLockFill);
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
