@@ -51,11 +51,11 @@
 		        </div>
           </div>
         </div>
-          <button id="buy-button" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-b-tooltip.hover="tooltipText" title="You do not have enough CZXP tokens to unlock this button" class="btn btn-danger" v-on:click="buyCard">
+          <button id="buy-button" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-b-tooltip.hover="buyBtnTooltipText" title="You do not have enough CZXP tokens to unlock this button" class="btn btn-danger" v-on:click="buyCard">
             Buy Card {{cost}}E <b-icon-lock-fill v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
-          <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
-            Get Card {{type_id}} <b-icon-lock-fill v-b-tooltip.hover title="You do not have enough CZXP tokens to unlock this button" v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
+          <button id="get-button" v-else-if="in_store == 'Store' && cost == 0" class="btn btn-danger" v-b-tooltip.hover="getBtnTooltipText"  title="You do not have enough CZXP tokens to unlock this button and claim this Free card" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
+            Get Card {{type_id}} <b-icon-lock-fill v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
           <div v-else-if="$route.path == '/crypt'">
             <button class="btn btn-danger" v-on:click="sacrificeCard">
@@ -84,11 +84,18 @@ export default {
   name: 'OwnedCardContent',
   props: ['id','type_id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
   computed: {
-    tooltipText() {
+    buyBtnTooltipText() {
       if (!this.buybutton) {
-        return this.tooltipTextContent
+        return this.buyBtnTooltipTextContent
       } else {
-        return '${this.tooltipTextContent} changed'
+        return '${this.buyBtnTooltipTextContent} changed'
+      }
+    },
+    getBtnTooltipText() {
+      if (!this.buybutton) {
+        return this.getBtnTooltipTextContent
+      } else {
+        return '${this.getBtnTooltipTextContent} changed'
       }
     },
     web3 () {
@@ -114,7 +121,8 @@ export default {
       transaction_number : 0,
       newWallet : '',
       confirmTransferBtnDisabled : 0,
-      tooltipTextContent: 'Click to Buy'
+      buyBtnTooltipTextContent: 'Click to Buy',
+      getBtnTooltipTextContent: 'Click to get a copy of this card at no cost'
     }
   },
   methods : {
