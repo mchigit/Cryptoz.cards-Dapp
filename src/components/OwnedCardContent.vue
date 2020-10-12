@@ -59,7 +59,7 @@
           </button>
           <div class="sacrifice-wrapper" v-else-if="$route.path == '/crypt'">
             <div class="sacrifice-button">
-               <button class="btn btn-danger" v-on:click="sacrificeCard">
+               <button :disabled="isSacrificingCard" class="btn btn-danger" v-on:click="sacrificeCard">
                 Sacrifice
               </button>
               <b-spinner v-if="isSacrificingCard" label="Spinning"></b-spinner>
