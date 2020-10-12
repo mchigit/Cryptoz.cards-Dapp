@@ -220,7 +220,7 @@ export default {
       
       //reset the view
       this.storeCards = [];
-      
+
       for (var i = 1; i < this.totalCyptozTypes; i++) {
         fetch('https://cryptoz.cards/services/getCardData.php?card_id=' + i)
         .then(this.handleGotCardData)
@@ -228,7 +228,6 @@ export default {
           console.log('FETCH error:',err);
         })
       }
-      
     },
     handleGotCardData : function(response) {
       var self = this;
@@ -247,7 +246,6 @@ export default {
         if(res.attributes[3].value != 'Store'){
           return;
         }
-                
         
         var newAttr = [];
         //format the attributes to match our JS objects
