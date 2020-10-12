@@ -52,7 +52,7 @@
           </div>
         </div>
           <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-on:click="buyCard">
-            Buy Card {{cost}}E
+            Buy Card {{cost}}E <b-icon-lock-fill v-if="czxpBalance > parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
             Get Card {{type_id}}

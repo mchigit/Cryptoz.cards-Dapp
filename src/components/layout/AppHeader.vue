@@ -23,16 +23,16 @@
             </b-nav-item>
           </b-navbar-nav>
       
-          <div class="bonusClass" v-if="coinbase != null && bonusReady == 1  && showSpinner == 0" v-on:click="GetBonus">
+          <div class="bonusClass" v-if="coinbase != null && bonusReady == 1  && showSpinner == false" v-on:click="GetBonus">
             Claim 2 FREE Boosters !
           </div>
-          <div v-else-if="showSpinner==1">
+          <div v-else-if="showSpinner == true">
               <img src="@/assets/spinner.gif" class="spinner" />
               <transition>
-                <span class="spinner-text-style">{{transactionStatus}}</span>
+                <span class="spinner-text-style">{{transactionMessage}}</span>
               </transition>
           </div>
-          <div class="bonusClassNo" v-else-if="coinbase != null && bonusReady == 0 && showSpinner == 0">
+          <div class="bonusClassNo" v-else-if="coinbase != null && bonusReady == 0 && showSpinner == false">
             Your Next Bonus:<br><strong> {{timeToBonus}}</strong>
           </div>
 
@@ -105,8 +105,8 @@ export default {
   data () {
     return {
       pendingTransaction:0,
-      showSpinner:0,
-      transactionStatus: 'Pending confirmation...',
+      showSpinner:false,
+      transactionMessage: 'Pending confirmation...',
       showLogin : 1,
       bonusReady : 2,
       timeToBonus : 0,
@@ -126,8 +126,8 @@ export default {
       console.log('HEADER currentEvent:',newValue)
       if(newValue !== oldValue && typeof newValue !== "undefined"){
         if (this.pendingTransaction == newValue.blockHash) {
-          this.showSpinner = 0;
-          this.transactionStatus = 'Confirmed ! balance updated';
+          this.showSpinner = false;
+          this.transactionMessage = 'Confirmed ! balance updated';
           this.setSubscriptions();
         }
       }
@@ -181,8 +181,8 @@ export default {
       console.log('GetBonus called...');
       
       //change state to pending
-      this.showSpinner = 1;
-      this.transactionStatus = 'Pending confirmation...';
+      this.showSpinner = true;
+      this.transactionMessage = 'Pending confirmation...';
       
       var self = this;
       Cryptoz.deployed().then(function(instance) {
@@ -190,12 +190,12 @@ export default {
       }).then(function(result) {
         //change from pending to ready
         self.pendingTransaction = result.receipt.blockHash;
-        self.transactionStatus = 'Broadcast to chain...';
+        self.transactionMessage = 'Broadcast to chain...';
       }).catch(function (e) {
         // Transaction rejected or failed
             //reset the claim tokens message
-            self.showSpinner = 0;
-            self.transactionStatus = 'Claim 2 FREE Boosters !';
+            self.showSpinner = false;
+            self.transactionMessage = 'Claim 2 FREE Boosters !';
       });
     },
     GetTimeString: function(_timeStamp) {
