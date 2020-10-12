@@ -51,8 +51,8 @@
 		        </div>
           </div>
         </div>
-          <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-on:click="buyCard">
-            Buy Card {{cost}}E <b-icon-lock-fill v-b-tooltip.hover title="You do not have enough CZXP tokens to unlock this button" v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
+          <button id="buy-button" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-b-tooltip.hover="tooltipText" title="You do not have enough CZXP tokens to unlock this button" class="btn btn-danger" v-on:click="buyCard">
+            Buy Card {{cost}}E <b-icon-lock-fill v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
             Get Card {{type_id}} <b-icon-lock-fill v-b-tooltip.hover title="You do not have enough CZXP tokens to unlock this button" v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
@@ -83,7 +83,14 @@
 export default {
   name: 'OwnedCardContent',
   props: ['id','type_id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
-    computed: {
+  computed: {
+    tooltipText() {
+      if (!this.buybutton) {
+        return this.tooltipTextContent
+      } else {
+        return '${this.tooltipTextContent} changed'
+      }
+    },
     web3 () {
       return this.$store.state.web3
     },
@@ -107,6 +114,7 @@ export default {
       transaction_number : 0,
       newWallet : '',
       confirmTransferBtnDisabled : 0,
+      tooltipTextContent: 'Click to Buy'
     }
   },
   methods : {
