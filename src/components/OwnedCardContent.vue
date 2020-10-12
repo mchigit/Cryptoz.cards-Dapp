@@ -148,10 +148,24 @@ export default {
       }).then(function(res){
         console.log("sacrifice result:");
         console.log(res);
-        self.isSacrificingCard = false;
         self.$store.dispatch('updateOwnerBalances')
         //Send a mutation for the state change to the crypt
         self.$store.dispatch('updateCrypt')
+      }).catch((err) => {
+        console.log(err.message);
+        if (err.code === 4001) {
+          this.$bvToast.toast(
+            'You have rejected the transaction.',
+            {
+              title: 'Transaction Rejected',
+              autoHideDelay: 5000,
+              solid: true,
+              variant: 'warning'
+            }
+          )
+        }
+      }).finally(() => {
+        self.isSacrificingCard = false;
       })
     },
     transferCard : function() {
