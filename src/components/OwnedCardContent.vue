@@ -52,10 +52,10 @@
           </div>
         </div>
           <button class="btn btn-danger" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-on:click="buyCard">
-            Buy Card {{cost}}E <b-icon-lock-fill></b-icon-lock-fill>
+            Buy Card {{cost}}E <b-icon-lock-fill v-b-tooltip.hover title="You do not have enough CZXP tokens to unlock this button" v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
           <button class="btn btn-danger" v-else-if="in_store == 'Store' && cost == 0" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
-            Get Card {{type_id}}
+            Get Card {{type_id}} <b-icon-lock-fill v-b-tooltip.hover title="You do not have enough CZXP tokens to unlock this button" v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
           <div v-else-if="$route.path == '/crypt'">
             <button class="btn btn-danger" v-on:click="sacrificeCard">
