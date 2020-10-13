@@ -51,10 +51,10 @@
 		        </div>
           </div>
         </div>
-          <button id="buy-button" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-b-tooltip.hover="buyBtnTooltipText" title="You do not have enough CZXP tokens to unlock this button" class="btn btn-danger" v-on:click="buyCard">
-            Buy Card {{cost}}E <b-icon-lock-fill v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
+          <button id="buyButton" v-if="in_store == 'Store' && cost > 0" :disabled="wallet <= cost || czxpBalance < parseInt(unlock_czxp)" v-b-tooltip.hover="buyBtnTooltipText" class="btn btn-danger" v-on:click="buyCard">
+            Buy Card {{cost}}E <b-icon-lock-fill v-if="wallet <= cost || czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
-          <button id="get-button" v-else-if="in_store == 'Store' && cost == 0" class="btn btn-danger" v-b-tooltip.hover="getBtnTooltipText"  title="You do not have enough CZXP tokens to unlock this button and claim this Free card" :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
+          <button id="get-button" v-else-if="in_store == 'Store' && cost == 0" class="btn btn-danger" v-b-tooltip.hover="getBtnTooltipText"  :disabled="czxpBalance < parseInt(unlock_czxp)" v-on:click="getCard">
             Get Card {{type_id}} <b-icon-lock-fill v-if="czxpBalance < parseInt(unlock_czxp)"></b-icon-lock-fill>
           </button>
           <div class="sacrifice-wrapper" v-else-if="$route.path == '/crypt'">
@@ -88,17 +88,19 @@ export default {
   props: ['id','type_id','name','image','edition_total','cset','unlock_czxp','level','cost','buy_czxp','transfer_czxp','sacrifice_czxp','card_class', 'in_store'],
   computed: {
     buyBtnTooltipText() {
-      if (!this.buybutton) {
-        return this.buyBtnTooltipTextContent
+    console.log('Buy button tooltip fired..')
+      if (this.wallet <= this.cost || this.czxpBalance < parseInt(this.unlock_czxp)) {
+        console.log('block from buy..')
+        return this.buyBtnBlockedTooltipTextContent
       } else {
-        return '${this.buyBtnTooltipTextContent} changed'
+        return this.buyBtnTooltipTextContent
       }
     },
     getBtnTooltipText() {
-      if (!this.buybutton) {
+      if (!this.getbutton) {
         return this.getBtnTooltipTextContent
       } else {
-        return '${this.getBtnTooltipTextContent} changed'
+        return `${this.getBtnTooltipTextContent} changed`
       }
     },
     web3 () {
@@ -124,7 +126,10 @@ export default {
       transaction_number : 0,
       newWallet : '',
       confirmTransferBtnDisabled : 0,
+      buyBtnTooltipTextContent: 'Click to buy a copy of this card',
+      buyBtnBlockedTooltipTextContent:'You do not have enough Ether or CZXP tokens to purchase this card',
       getBtnTooltipTextContent: 'Click to get a copy of this card at no cost',
+      getBtnBlockedTooltipTextContent: 'You do not have enough CZXP tokens to unlock this button and claim this Free card',
       isSacrificingCard: false,
     }
   },
