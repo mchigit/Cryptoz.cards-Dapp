@@ -7,7 +7,7 @@ import { BootstrapVue, BIconLockFill } from 'bootstrap-vue'
 import { store } from './store/'
 
 Vue.use(BootstrapVue)
-Vue.component('BIconLockFill', BIconLockFill);
+Vue.component('BIconLockFill', BIconLockFill)
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
