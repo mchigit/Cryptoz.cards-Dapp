@@ -21,7 +21,7 @@ const router = new Router({
           metaTags: [
                 {
                     name: 'description',
-                    content : 'A Universe of limited edition ERC-721 NFT crypto collectible zombie cards stored in your Ethereum blockchain wallet'
+                    content : 'A Universe of limited edition ERC-721 NFT collectible zombie cards stored in your Ethereum blockchain wallet'
                 },
                 {
                     property: 'og:url',
@@ -33,11 +33,11 @@ const router = new Router({
                 },
                 {
                     property: 'og:title',
-                    content: 'Cryptoz Cards crypto collectibles on the Ethereum blockchain',
+                    content: 'Cryptoz Cards unique and fun collectibles on the Ethereum blockchain',
                 },
                 {
-                    property: 'og:title',
-                    content: 'Cryptoz Cards crypto collectibles on the Ethereum blockchain',
+                    property: 'og:image',
+                    content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
                 }
           ]
       }
@@ -45,27 +45,152 @@ const router = new Router({
     {
       path: '/shop',
       name: 'ShopContent',
-      component: ShopContent
+      component: ShopContent,
+        meta: {
+          title: 'Cryptoz Cards - Shop - Purchase Limited edition Cryptoz and claim cards for FREE',
+          metaTags: [
+                {
+                    name: 'description',
+                    content : 'Shop for Limited Edition cards, never to be released again, claim some for FREE while quantities last. Purchase Booster credits to open possibly rare and epic booster cards'
+                },
+                {
+                    property: 'og:url',
+                    content: 'https://cryptoz.cards/shop',
+                },
+                {
+                    property: 'og:type',
+                    content: 'website',
+                },
+                {
+                    property: 'og:title',
+                    content: 'Cryptoz Cards - Shop - Purchase Limited edition Cryptoz and claim some for FREE',
+                },
+                {
+                    property: 'og:image',
+                    content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
+                }
+          ]
+        }
     },
     {
       path: '/crypt',
       name: 'CryptContent',
-      component: CryptContent
+      component: CryptContent,
+      meta: {
+          title: 'Cryptoz Cards - Your Crypt - A collection of all the cards you own',
+          metaTags: [
+                {
+                    name: 'description',
+                    content : 'Browse through Your Crypt to view all the cards you have bought, claimed or been gifted. Also open Booster Cards for a chance to pull a Rare or even Epic card !. Sacrifice cards for CZXP tokens and gift cards to friends'
+                },
+                {
+                    property: 'og:url',
+                    content: 'https://cryptoz.cards/crypt',
+                },
+                {
+                    property: 'og:type',
+                    content: 'website',
+                },
+                {
+                    property: 'og:title',
+                    content: 'Cryptoz Cards - Your Crypt - A collection of all the cards you own',
+                },
+                {
+                    property: 'og:image',
+                    content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
+                }
+          ]
+        }
     },
     {
       path: '/market',
       name: 'MarketContent',
-      component: MarketContent
+      component: MarketContent,
+      meta: {
+          title: 'Cryptoz Cards - Market - Buy and Sell Cryptoz Cards and CZXP tokens with people around the world',
+          metaTags: [
+                {
+                    name: 'description',
+                    content : 'Cryptoz Cards and the CZXP tokens are built on the tokens standards that allow them to be traded, bought and sold on any of the compatible markets. Browse through the markets for opportunities and profits !'
+                },
+                {
+                    property: 'og:url',
+                    content: 'https://cryptoz.cards/market',
+                },
+                {
+                    property: 'og:type',
+                    content: 'website',
+                },
+                {
+                    property: 'og:title',
+                    content: 'Cryptoz Cards - Market - Buy and Sell Cryptoz Cards and CZXP tokens with people around the world',
+                },
+                {
+                    property: 'og:image',
+                    content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
+                }
+          ]
+        }
     },
     {
       path: '/help',
       name: 'HelpContent',
-      component: HelpContent
+      component: HelpContent,
+        meta: {
+          title: 'Cryptoz Cards - Help - Answers to all your Frequently Asked Questions',
+          metaTags: [
+                {
+                    name: 'description',
+                    content : 'While we do our best to make the Cryptoz Cards Experience as seamless as possible, this page offers answers and examples for most questions people have when getting started and even for the experienced player'
+                },
+                {
+                    property: 'og:url',
+                    content: 'https://cryptoz.cards/help',
+                },
+                {
+                    property: 'og:type',
+                    content: 'website',
+                },
+                {
+                    property: 'og:title',
+                    content: 'Cryptoz Cards - Help - Answers to all your Frequently Asked Questions',
+                },
+                {
+                    property: 'og:image',
+                    content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
+                }
+          ]
+        }
     },
     {
       path: '/view/:token_id',
       name: 'TokenContent',
-      component: TokenContent
+      component: TokenContent,
+        meta: {
+          title: 'Cryptoz Cards - View Card - Detailed information about a Cryptoz Card',
+          metaTags: [
+                {
+                    name: 'description',
+                    content : 'While we do our best to make the Cryptoz Cards Experience as seamless as possible, this page offers answers and examples for most questions people have when getting started and even for the experienced player'
+                },
+                {
+                    property: 'og:url',
+                    content: 'https://cryptoz.cards/view',
+                },
+                {
+                    property: 'og:type',
+                    content: 'website',
+                },
+                {
+                    property: 'og:title',
+                    content: 'Cryptoz Cards - View Card - Detailed information about a Cryptoz Card',
+                },
+                {
+                    property: 'og:image',
+                    content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
+                }
+          ]
+        }
     }
   ],
   scrollBehavior() {
