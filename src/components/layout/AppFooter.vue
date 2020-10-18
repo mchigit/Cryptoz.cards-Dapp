@@ -14,13 +14,7 @@
 
           <!-- Content -->
           <img class="img-fluid dev-logo" src="./../assets/cardinal.png" />
-          <p v-if="isInjected">You are connected to: {{network}}</p>
-          <p v-else>
-            Metamask is <strong>required</strong> to bridge Cryptoz on Ethereum<br>
-            <a href="https://metamask.io/" target="_blank">
-              <img src="@/assets/metamask_logo.png" width="20%" />
-            </a>
-          </p>
+          <p v-if="isConnected">You are connected to: {{network}}</p>
 
         </div>
         <!-- Grid column -->
@@ -93,14 +87,19 @@
 
 <script>
 import {NETWORKS} from '../../util/constants/networks'
-import {mapState} from 'vuex'
 
 export default {
   name: 'AppFooter',
-  computed: mapState({
-    isInjected: state => state.web3.isInjected,
-    network: state => NETWORKS[state.web3.networkId],
-  }),
+  computed: {
+    isConnected() {
+      return this.$store.state.web3.isConnected
+    },
+    network() {
+      const hexString = this.$store.state.web3.chainId
+      if (!hexString) return "Unidentified Network"
+      return NETWORKS[hexString.split('x')[1]]
+    }
+  },
   data () {
     return {
       // 0 - detecting, 1 - no metamask, 2- mm installed , show network
@@ -120,6 +119,7 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #343a40!important;
+    box-shadow: 0 50vh 0 50vh #343a40;
   }
   .dev-logo{
     width:28%;
