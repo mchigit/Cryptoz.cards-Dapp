@@ -171,11 +171,11 @@ const router = new Router({
           metaTags: [
                 {
                     name: 'description',
-                    content : 'While we do our best to make the Cryptoz Cards Experience as seamless as possible, this page offers answers and examples for most questions people have when getting started and even for the experienced player'
+                    content : 'Detailed information about a Cryptoz card. Including owner wallet address'
                 },
                 {
                     property: 'og:url',
-                    content: 'https://cryptoz.cards/view/{$token_id}',
+                    content: 'TOKEN_ID', // will get replaced in the loop processor below
                 },
                 {
                     property: 'og:type',
@@ -200,6 +200,7 @@ const router = new Router({
 
 // This callback runs before every route change, including on page load.
 router.beforeEach((to, from, next) => {
+    console.log('FROM router:',to)
   // This goes through the matched routes from last to first, finding the closest route with a title.
   // eg. if we have /some/deep/nested/route and /some, /deep, and /nested have titles, nested's will be chosen.
   const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
@@ -222,6 +223,12 @@ router.beforeEach((to, from, next) => {
     const tag = document.createElement('meta');
 
     Object.keys(tagDef).forEach(key => {
+        
+        //Replace the og:url content with a dynamic url
+        if(tagDef[key] == 'TOKEN_ID'){
+            tagDef[key] = 'https://cryptoz.cards/view/'+to.params.token_id
+        }
+        
       tag.setAttribute(key, tagDef[key]);
     });
 

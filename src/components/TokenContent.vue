@@ -127,12 +127,14 @@
           contract = instance;
           return instance.getOwnedCard.call(self.token_id);
         }).then(function(res){
-          //Does the token exist ?
-          if(res[0].c[0] > 0){
+          let cardTypeId = res[0].c[0];
+          
+          //If the tokenId is greater than 0, we have something valid
+          if(cardTypeId > 0){
             self.load_state = 1;
             self.edition_number = res[1].c[0];
             self.times_transferred = res[2].c[0];
-            self.getCardData(res[0].c[0]);
+            self.getCardData(cardTypeId);
             return contract.ownerOf.call(self.token_id);
           }else{
             self.load_state = 0; //and we stop here
