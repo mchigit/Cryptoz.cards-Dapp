@@ -175,7 +175,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:url',
-                    content: 'https://cryptoz.cards/view',
+                    content: 'https://cryptoz.cards/view/{$token_id}',
                 },
                 {
                     property: 'og:type',
