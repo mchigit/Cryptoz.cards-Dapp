@@ -26,7 +26,6 @@
 </template>
 
 <script>
-document.title = "Cryptoz Cards - Where the dead live forever on the Ethereum blockchain"
 export default {
   name: 'BodyContent',
   data () {
