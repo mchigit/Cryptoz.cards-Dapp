@@ -123,7 +123,7 @@
         var self = this;
         var contract;
         
-        Cryptoz.deployed().then(function(instance) {
+        window.Cryptoz.deployed().then(function(instance) {
           contract = instance;
           return instance.getOwnedCard.call(self.token_id);
         }).then(function(res){

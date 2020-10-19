@@ -37,16 +37,15 @@
     },
     watch: {
       ownerBalances(newValue, oldValue) {
-        console.log(`Updating ownerBalances from ${oldValue} to ${newValue}`);
+        // console.log(`Updating ownerBalances from ${oldValue} to ${newValue}`);
   
-        // new balances.. reset their boosters, cards and czxp balance
+        // // new balances.. reset their boosters, cards and czxp balance
         if (newValue !== oldValue) {
           this.setSubscriptions();
         }
-      },
+      }
     },
     mounted () { //Initialize the component
-      this.setSubscriptions()
     },
     data () {
       return {

@@ -1,8 +1,8 @@
 let state = {
  web3: {
-   isInjected: false,
+   isConnected: false,
    web3Instance: null,
-   networkId: null,
+   chainId: null,
    coinbase: null,
    balance: null,
    error: null
@@ -10,7 +10,6 @@ let state = {
  contractInstance: null,
 
 //Component states
- cryptContent:0,
  ownerBalances:0,
  universeBalances:0,
 
