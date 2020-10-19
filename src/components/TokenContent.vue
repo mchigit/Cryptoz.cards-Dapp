@@ -110,10 +110,11 @@
       }
     },
     mounted() {
+      //grab the token id from the url
       this.token_id = this.$route.params.token_id;
-      console.log('from string..' + this.$route.params.token_id);
-      console.log();
-      setTimeout(this.startSubscriptions, 2000)
+      //console.log('from string..' + this.$route.params.token_id);
+      //setTimeout(this.startSubscriptions, 2000)
+      this.startSubscriptions()
     },
     methods: {
       startSubscriptions : function() {
