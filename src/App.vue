@@ -14,32 +14,6 @@ import AppHeader from './components/layout/AppHeader'
 import AppFooter from './components/layout/AppFooter'
 import {mapState} from 'vuex'
 
-window.dynamicSort = function dynamicSort(property) {
-    var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}
-
-window.sortAttributes = function sortAttributes(property) {
-    //console.log(property);
-    
-    var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-        var result = (a.attributes[property] < b.attributes[property]) ? -1 : (a.attributes[property] > b.attributes[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}
-
 import Web3Modal from "web3modal";
 import BurnerConnectProvider from "@burner-wallet/burner-connect-provider";
 import WalletConnectProvider from "@walletconnect/web3-provider";
