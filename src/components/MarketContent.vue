@@ -33,9 +33,9 @@
             <div class="col-6">
               <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="@/assets/czxp.png" />) <br>erc-20 tokens are supported on the following token exchanges</h3>
               
-              <a href="https://idex.market/eth/czxp" target="_blank">
+              <a href="https://exchange.idex.io/trading/CZXP-ETH" target="_blank">
                 <div class="market-btn">
-                  <img class="idex-logo" src="https://idex.market/assets/IDEX_sf-color.svg" align="absmiddle" />
+                  <img class="idex-logo" src="@/assets/IDEX-Logo.png" align="absmiddle" />
                   <br>
                   <p>
                     Decentralized Ethereum Asset Exchange
