@@ -95,7 +95,11 @@
             :image="card.image"
             :card_class="card.rarity"
           ></OwnedCardContent>
-          <div id="buy-get-button-wrapper" :class="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp) ? 'disabled-btn' : ''">
+          <div
+            v-if="!card.isOwned"
+            id="buy-get-button-wrapper"
+            :class="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp) ? 'disabled-btn' : ''"
+          >
             <div v-if="card.cost > 0" id="buyBtnwrapper" v-b-tooltip.hover="buyBtnTooltipText(card.cost, card.unlock_czxp)">
               <button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" class="btn btn-danger" v-on:click="buyCard(card)">
                 Buy Card {{card.cost}}E <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
@@ -106,6 +110,16 @@
                 Get Card <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
               </button>
             </div>
+          </div>
+          <div
+            v-if="card.isOwned"
+            id="owned-button-wrapper"
+            v-b-tooltip.hover="getOwnedCardToolTipText"
+            class="disabled-btn"
+          >
+            <button id="owned-button" disabled class="btn btn-info">
+               <b-icon-lock-fill></b-icon-lock-fill> You already own this.
+            </button>
           </div>
         </div>
       </div>
@@ -184,7 +198,8 @@ export default {
       buyBtnTooltipTextContent: 'Click to buy a copy of this card',
       buyBtnBlockedTooltipTextContent:'You do not have enough Ether or CZXP tokens to purchase this card',
       getBtnTooltipTextContent: 'Click to get a copy of this card at no cost',
-      getBtnBlockedTooltipTextContent: 'You do not have enough CZXP tokens to unlock this button and claim this Free card'
+      getBtnBlockedTooltipTextContent: 'You do not have enough CZXP tokens to unlock this button and claim this Free card',
+      getOwnedCardToolTipText: 'You can only purchase/claim 1 card of each type'
     }
   },
   async mounted() {
@@ -381,20 +396,27 @@ export default {
   .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
-  #buy-get-button-wrapper{
+  #buy-get-button-wrapper,
+  #owned-button-wrapper{
     position: relative;
     text-align: center;
     height: 45px;
   }
   /* add a little arrow for users to be sure which they're purchasing */
-  #buy-get-button-wrapper::before {
+  #buy-get-button-wrapper::before,
+  #owned-button-wrapper::before {
     content: '';
     position: absolute;
     top:-10px;
+    left: 50%;
     transform: translateX(-50%);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #dc3545;
+  }
+  
+  #owned-button-wrapper::before {
+    border-bottom: 10px solid #17a2b8;
   }
 
   .disabled-btn::before {
