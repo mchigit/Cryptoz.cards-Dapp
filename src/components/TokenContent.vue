@@ -126,7 +126,8 @@
         window.Cryptoz.deployed().then(function(instance) {
           contract = instance;
           return instance.getOwnedCard.call(self.token_id);
-        }).then(function(res){
+        }).then(function(res){ //returns TypeId, Edition, # times transfed
+        console.log('CardOwned results:',res)
           let cardTypeId = res[0].c[0];
           
           //If the tokenId is greater than 0, we have something valid
