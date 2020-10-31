@@ -39,7 +39,7 @@
           Editon:<br>
           Times Transferred:<br>
           Card Name:<br>
-          Description:<br>
+          <!--Description:<br>-->
           Card Set:<br>
           Zombie Type:<br>
           Rarity:<br>
@@ -56,11 +56,11 @@
           {{card.attributes.edition_total}}<br>
           {{times_transferred}}<br>
           {{card.name}}<br>
-          {{card.description}}<br>
+      <!--{{card.description}}<br>-->
           {{card.attributes.card_set}}<br>
           {{card.attributes.zombie_type}}<br>
           {{rarity}}<br>
-          {{card.attributes.cost}}<br>
+          {{card.attributes.cost}} E<br>
           {{card.attributes.buy_czxp}}<br>
           {{card.attributes.transfer_czxp}}<br>
           {{card.attributes.sacrifice_czxp}}<br>
@@ -126,7 +126,8 @@
         window.Cryptoz.deployed().then(function(instance) {
           contract = instance;
           return instance.getOwnedCard.call(self.token_id);
-        }).then(function(res){
+        }).then(function(res){ //returns TypeId, Edition, # times transfed
+        console.log('CardOwned results:',res)
           let cardTypeId = res[0].c[0];
           
           //If the tokenId is greater than 0, we have something valid

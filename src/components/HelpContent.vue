@@ -4,6 +4,7 @@
       <div class="jumbotron">
         <h1>Frequently Asked Questions</h1>
         <div class="accordion" role="tablist">
+        
           <b-card no-body class="mb-1">
             <b-card-header
               header-tag="header"
@@ -47,8 +48,32 @@
                     <router-link to="/market"
                       >supported marketplaces</router-link
                     >. You can also trade and sell your CZXP on supported
-                    Ethereum token exchanges.
+                    <router-link to="/market">Ethereum token exchanges.</router-link>
                   </p>
+                </div>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1">
+            <b-card-header
+              header-tag="header"
+              class="accordion-header"
+              role="tab"
+            >
+              <b-button block v-b-toggle.accordion-1-5 class="accordion-button"
+                >How do I read the cards?</b-button
+              >
+            </b-card-header>
+            <b-collapse
+              id="accordion-1-5"
+              visible
+              accordion="my-accordion"
+              role="tabpanel"
+            >
+              <b-card-body>
+                <div class="card-body">
+                    <img src="@/assets/cryptoz_cards_explained.jpg" />
                 </div>
               </b-card-body>
             </b-collapse>
@@ -84,7 +109,7 @@
                   transaction, depending on how fast you would like the
                   transactions confirmed and what exactly you are trying to do.
                   This fee is not charged by Cryptoz, but by the Ethereum
-                  platform to execute code for people on this massive worldscale
+                  platform to execute contract code for people on this massive worldscale
                   computer
                 </div>
               </b-card-body>

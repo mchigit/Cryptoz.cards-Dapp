@@ -107,7 +107,7 @@
             </div>
             <div v-else id="getBtnwrapper" v-b-tooltip.hover="getBtnTooltipText(card.unlock_czxp)">
               <button id="get-button"  class="btn btn-danger" :disabled="czxpBalance < parseInt(card.unlock_czxp)" v-on:click="getCardForFree(card.type_id)">
-                Get Card <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                    Get Free Card <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
               </button>
             </div>
           </div>
@@ -214,7 +214,7 @@ export default {
   },
   methods : {
     buyCard : function(cardAttributes){
-      console.log("Buying card:" + cardAttributes.type_id);
+      console.log("Buying card:" ,cardAttributes.id ,cardAttributes);
       
       window.Cryptoz.deployed().then((instance) => {
         return instance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)});
