@@ -9,12 +9,18 @@
       ok-title="Open Booster"
       hide-footer
     >
-        
-          Minimum = 0 Or 2,000,000,000 , Maximum = 1,649,267,441,667,000
-          <input id="wager" class="form-control" type="text" v-on:input="wagerAmount = $event.target.value" value="0" required />
+          <div>Enter 0 for no wager</div>
+          <div><b>To wager:</b> Minimum = 2,000,000,000, Maximum = 1,649,267,441,667,000 </div>
+          <b-form-input class="form-control" :state="isWagerValid"  required type="number" v-model="wagerAmount" ></b-form-input>
+          <b-form-invalid-feedback id="input-live-feedback" v-if="!notEnoughWager">
+            <div>You need to enter a number between 2,000,000,000 and 1,649,267,441,667,000 to wager.</div>
+          </b-form-invalid-feedback>
+          <b-form-invalid-feedback id="input-live-feedback" v-if="notEnoughWager">
+            <div>You do not have enough CZXP tokens</div>
+          </b-form-invalid-feedback>
       <b-row>
         <b-col>
-          <b-button class="mt-3" variant="danger" block @click="openBooster">Open Booster</b-button>
+          <b-button class="mt-3" variant="danger" block @click="openBooster" :disabled="!isWagerValid">Open Booster</b-button>
         </b-col>
         <b-col>
           <b-button class="mt-3" block @click="$bvModal.hide('open-booster-modal')">Cancel</b-button>
@@ -192,7 +198,8 @@ export default {
       confirmTransferBtnDisabled : false,
       cardsBeingSacrificed: {},
       cardsBeingGifted: {},
-      receivingWallet : ''
+      receivingWallet : '',
+      notEnoughWager: false,
     }
   },
   mounted () {
@@ -215,7 +222,25 @@ export default {
     },
     currentEvent() {
       return this.$store.state.lastChainEvent;
-    }
+    },
+    isWagerValid() {
+      const wagerAmount = parseInt(this.wagerAmount)
+      this.notEnoughWager = false;
+
+      if (wagerAmount === 0) {
+        return true;
+      }
+
+      if (this.czxp_balance < wagerAmount) {
+        this.notEnoughWager = true;
+        return false;
+      }
+
+      return wagerAmount >= 2000000000 && wagerAmount <= 1649267441667000
+    },
+    czxp_balance(){
+      return this.$store.state.czxpBalance;
+    },
   },
   watch: {
     'web3': {
@@ -573,6 +598,10 @@ export default {
   .card-bg-3{
     background-color: rgba(87,69,229,0.5);
     border: 2px solid rgb(87,69,229);
+  }
+
+  #open-booster-modal div {
+    margin-bottom: 10px;
   }
 
   /*plat and diamond borders*/
