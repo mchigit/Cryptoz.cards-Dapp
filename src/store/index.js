@@ -52,6 +52,7 @@ export const store = new Vuex.Store({
  },
  actions: {
     updateWallet ({commit}, payload) {
+        console.log('update wallet eth balance action called',payload);
       commit('updateWallet', payload)
     },
     web3isConnected({commit}, payload) {
@@ -70,7 +71,7 @@ export const store = new Vuex.Store({
       commit('updateBalances', payload)
     },
     updateUniverseBalances({commit}, payload){
-      console.log('updateUniverseBalances action called')
+      //console.log('updateUniverseBalances action called',payload)
       commit('updateUniverseBalances', payload)
     },
     updateCZXPBalance ({commit}, payload){
