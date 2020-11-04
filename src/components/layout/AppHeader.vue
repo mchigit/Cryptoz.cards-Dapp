@@ -106,6 +106,15 @@ export default {
     }
   },
   watch: {
+      ethBalance(newValue, oldValue) {
+      console.log(`Updating ethBalance in header from ${oldValue} to ${newValue}`);
+      // new wallet.. check their bonus and tell Owner balances to update
+      if (newValue !== oldValue && newValue !== null) {
+        //this.$store.dispatch('updateOwnerBalances')
+        //this.$store.dispatch('updateUniverseBalances')
+        //this.setSubscriptions();
+      }
+    },
     coinbase(newValue, oldValue) {
       console.log(`Updating coinbase in header from ${oldValue} to ${newValue}`);
       // new wallet.. check their bonus and tell Owner balances to update
@@ -155,18 +164,6 @@ export default {
       })
       
     },
-    // requestPermission : async function() {
-    //   console.log('Connect to metamask button clicked');
-      
-    //   await ethereum.enable();
-      
-    //   // Acccounts now exposed
-    //   console.log('!!!!! WE ARE IN..from Header button');
-      
-    //   this.$store.dispatch('registerWeb3')
-      
-      
-    // },
     GetBonus : function() {
       console.log('GetBonus called...');
       

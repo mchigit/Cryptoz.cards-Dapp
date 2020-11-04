@@ -242,14 +242,14 @@ export default {
       this.showSpinner = 1;
       this.transactionStatus = 'Pending confirmation...';
       
-      Cryptoz.deployed()
+      window.Cryptoz.deployed()
       .then((instance) => {
         var totalBoostersCost = 2000000000000000 * parseInt(this.totalCreditsToBuy);
         return instance.buyBoosterCard(parseInt(this.totalCreditsToBuy), {from: this.coinbase, value:totalBoostersCost});
       })
       .then(this.handleBuyBooster) //update boosters owned and total types
       .catch(err => {
-        console.err('USER REJECTED!!', err);
+        console.error('USER REJECTED!!', err);
         this.showSpinner = 0;
       })
       
@@ -259,6 +259,13 @@ export default {
         //change from pending to ready
         this.pendingTransaction = result.receipt.blockHash;
         this.transactionStatus = 'Broadcast to chain...';
+        
+        //Update the Eth balance
+        if (this.coinbase !== null) {
+          window.web3.eth.getBalance(this.coinbase, (err, balance) => {
+            this.$store.dispatch('updateWallet', {balance})
+          })
+        }
     },
     getAllTypes: async function(){
       try {
