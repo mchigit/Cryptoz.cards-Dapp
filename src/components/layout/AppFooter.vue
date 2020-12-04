@@ -32,7 +32,7 @@
                 <a href="#!">Blog</a>
               </li>
               <li>
-                <a href="#!">Telegram</a>
+                <a href="#!">Telegram Support</a>
               </li>
               <li>
                 <a href="#!">Telegram Announcements</a>
@@ -49,21 +49,21 @@
           <div class="col-md-3 mb-md-0 mb-3">
 
             <!-- Links -->
-            <h5 class="text-uppercase">Links</h5>
+            <h5 class="text-uppercase">Support Us</h5>
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Link 1</a>
+                <a href="https://commerce.coinbase.com/checkout/1dfd66a1-a393-4c06-8036-d402441c7b19" target="_blank">Donations</a>
               </li>
               <li>
-                <a href="#!">Link 2</a>
+                <a href="https://www.zazzle.com/store/zombiepets" target="_blank">Cool Swag</a>
               </li>
-              <li>
+              <!--li>
                 <a href="#!">Link 3</a>
               </li>
               <li>
                 <a href="#!">Link 4</a>
-              </li>
+              </li-->
             </ul>
 
           </div>
