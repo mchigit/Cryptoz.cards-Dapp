@@ -2,24 +2,25 @@
   <div>
         <main role="main" class="container">
         <div class="jumbotron">
-          <h1>Cryptoz.cards</h1>
+          <h1>The Cryptoz Universe</h1>
           <p class="lead">Cryptoz is an Ethereum blockchain based collectibles trade game.</p>
           <img class="img-responsive card-demo-group" src="@/assets/cryptokeeper_card_types.png" />
           <p>
-            The goal of the game is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 Cryptoz card is a unique token on the Ethereum blockchain. Players can buy, sell, and exchange both their Cryptoz cards and CZXP tokens through any ERC standards compliant wallet application, markets, game engines and exchanges.
+            The goal is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 Cryptoz card is a unique token on the Ethereum blockchain. Collectors can buy, sell, and exchange both their Cryptoz cards and CZXP tokens through any standards compliant wallets, markets, game engines,  exchanges, DeFi and other future inventions.
           </p>
           <div>
             <h2>Get Started</h2>
             <span>To interact with Cryptoz you will need to <a href="https://metamask.io/" target="_blank">install Metamask</a> and have a small amount of Ether in your account.</span>
           </div>
           <p>
-            Ethereum token Cryptoz collecting and trading is an exciting and new opportunity for classic and modern collectors alike. What makes this platform unique compared to other online digital asset based games or systems are:
+            Ethereum Cryptoz token collecting and trading is an exciting and new opportunity for classic and modern collectors alike. What makes this platform unique compared to other online digital asset based games or systems are:
           </p>
           <ul>
-            <li>The entire Cryptoz Platform is run on a set of contracts that run independantly of the creators, there is no OFF switch, Cryptoz live forever on Ethereum</li>
+            <li>Cryptoz Cards functions and data are a set of Smart Contracts that run independantly of the creators. There is no OFF switch. The Cryptoz Universe will live forever on Ethereum</li>
             <li>The developers can not tamper or change the Card types once they are loaded. i.e: no re-minting rare cards</li>
-            <li>The cards are truly unique, owned and transferable between wallets manaully or on automated marketplace platforms</li>
+            <li>The cards are truly unique, owned and transferable between wallets manaully or automated through NFT auction marketplaces.</li>
           </ul>
+          <p><router-link to="/help">Visit the Help section</router-link> of our website to read more</p>
       </div>
       </main>
   </div>

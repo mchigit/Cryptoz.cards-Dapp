@@ -30,18 +30,17 @@
                       <a href="https://metamask.io/" target="_blank"
                         >Metamask</a
                       >
-                      Chrome browser extension, connected to your Ethereum
-                      wallet
+                      Chrome browser extension, or other  Ethereum wallet
                     </li>
                     <li>A balance of Ether coins ( the money of Ethereum )</li>
                   </ul>
                   <p>
-                    You may then Log in with Metamask and
+                    You may then Log in with your wallet and
                     <router-link to="/shop">Shop</router-link> for Booster
                     cards, buy limited edition cards and claim Free limited
-                    editions cards. You may then browse the contents of
+                    editions cards from <router-link to="/shop">the Shop.</router-link> You may then browse the contents of
                     <router-link to="/crypt">Your Crypt</router-link>, sacrifice
-                    cards from your Crypt or gift them to other Ethereum
+                    cards from your Crypt for czxp tokens, or gift them to other Ethereum
                     accounts. If you would like to
                     <router-link to="/market">auction</router-link> your Cryptoz
                     for profits, you may list them on OpenSea or other
@@ -100,16 +99,15 @@
                   quickest way to buy Ether is to:
                   <ul>
                     <li>Open Metamask</li>
-                    <li>Click on Deposit</li>
-                    <li>Buy on Coinbase</li>
+                    <li>Click Buy</li>
+                    <li>Follow instructions</li>
                   </ul>
-                  Follow the sign up on Coinbase, purchase some Ether. As of
-                  this writing, the transaction(gas) cost by Ethereum to
+                  As of this writing, the transaction cost by Ethereum (gas) to
                   interact with Cryptoz will cost approx $0.05 to $1.50 USD per
                   transaction, depending on how fast you would like the
                   transactions confirmed and what exactly you are trying to do.
                   This fee is not charged by Cryptoz, but by the Ethereum
-                  platform to execute contract code for people on this massive worldscale
+                  platform to execute contract code for you by you on this massive worldscale
                   computer
                 </div>
               </b-card-body>
@@ -135,10 +133,9 @@
                 <div class="card-body">
                   <p>
                     The Cryptoz universe will reward sponsors who have been
-                    associated to an affiliate. You may sponsor any number of
-                    affiliate players. This affiliation is permanent and cannot
-                    be unmade. You may only have 1 sponsor, but may have any
-                    number of affiliates. There is a number of affiliate player
+                    associated to an affiliate. This affiliation is permanent and cannot
+                    be unmade. You may only have 1 sponsor,  but may have any
+                    number of affiliates.<br/><br/>There are a number of affiliate player
                     actions that will generate a 20% CZXP reward for their
                     sponsor.
                   </p>
@@ -146,8 +143,9 @@
                     <li>Buy Booster Credits</li>
                     <li>Buy and Open a Booster Card</li>
                     <li>Buy a limited edition card</li>
-                    <li>Minting a Free limited edition card from the Shop</li>
+                    <li>Claim a Free limited edition card from the Shop</li>
                   </ul>
+                  <p>Click the Sponsors link in the menu to copy your Afilliate URL to send to other players.</p>
                 </div>
               </b-card-body>
             </b-collapse>
@@ -160,7 +158,7 @@
               role="tab"
             >
               <b-button block v-b-toggle.accordion-4 class="accordion-button"
-                >What are ERC20 and ERC721 tokens?</b-button
+                >What are ERC-20 and ERC-721 tokens?</b-button
               >
             </b-card-header>
             <b-collapse
@@ -172,14 +170,14 @@
                 <div class="card-body">
                   <p>Cryptoz.cards utilize 2 types of Ethereum tokens:</p>
                   <p>
-                    <strong>CZXP - CryptoZ eXPerience Tokens</strong> are ERC20
-                    Fungible tokens. This means that 1 CZXP is exchangeable with
+                    <img class="czxp-logo" src="@/assets/czxp.png" /> <strong>CZXP - CryptoZ eXPerience Tokens</strong> are ERC-20
+                    Fungible tokens. This means that any CZXP is exchangeable with
                     any other CZXP token and none are unique.
                   </p>
                   <p>
-                    <strong>Cryptoz</strong> the cards themselves are ERC721
-                    Non-Fungible tokens. This means that each card is a unique
-                    token. Even the Unlimted Booster cards that are minted in an
+                    <strong>Cryptoz</strong> the cards themselves are ERC-721
+                    Non-Fungible tokens (NFTs). This means that each card is a unique
+                    token. Even the Unlimited Booster cards that are minted in an
                     infinite supply are each unique, they have a unique token
                     number and a unique edition number.
                   </p>
@@ -207,7 +205,7 @@
                 <div class="card-body">
                   The <router-link to="/shop">Shop</router-link> will show you
                   the current total number of Cryptoz types available at the
-                  current time. We continue to load new sets containing approx
+                  current time. We will continue to load new sets containing approx
                   10-20 cards every month until we reach the hard limit of a
                   total of 5000 types. The Ethereum contracts do not allow us or
                   anyone to edit or overwrite a card types definition once they
@@ -237,7 +235,7 @@
                   <ul>
                     <li>
                       An <strong>Unlimited edition</strong> card type will ONLY
-                      appear in the booster packs. These cards have an edition
+                      appear in the booster cards. These cards have an edition
                       number starting at #1 and count up infinitely.
                     </li>
                     <li>
@@ -273,20 +271,24 @@
                   There are multiple ways in which you can get CZXP - CryptoZ
                   eXPerience tokens:
                   <ul>
-                    <li>Buy Booster Credit(s) - 120 CZXP per</li>
+                    <li><router-link to="/shop"
+                        >Buy Booster Credits</router-link> - 120 CZXP per</li>
                     <li>
-                      Buy a Limited edition Cryptoz card - Check back of card
+                      <router-link to="/shop"
+                        >Buy a Limited edition Cryptoz card</router-link> - Check back of card
                       for amount
                     </li>
                     <li>
-                      Claim a FREE Limited Edition Cryptoz Card - Check back of
+                      <router-link to="/shop"
+                        >Claim a FREE Limited Edition Cryptoz Card</router-link> - Check back of
                       card for amount
                     </li>
                     <li>
-                      Sacrifice a Cryptoz card - Check back of card for amount
+                      <router-link to="/crypt"
+                        >Sacrifice a Cryptoz card</router-link> - Check back of card for amount
                     </li>
                     <li>
-                      Buy or exchange them on
+                      Buy or exchange czxp on
                       <router-link to="/market"
                         >supported ERC20 token exchanges</router-link
                       >
