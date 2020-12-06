@@ -6,6 +6,16 @@
           <p class="lead">Cryptoz is an Ethereum blockchain based collectibles trade game.</p>
           <img class="img-responsive card-demo-group" src="@/assets/cryptokeeper_card_types.png" />
           <p>
+          <h2>The CryptoZ eXPerience Token Generation Event is LIVE</h2>
+            <form class="form-inline">
+                <div class="mx-sm-3 mb-2">
+                    <input id="czxp-amt" class="form-control" type="text" placeholder="Enter Ether amount" v-model="totalCzxpToBuy" v-on:input="totalCzxpToBuy = $event.target.value" v-on:keyup="filterCzxpInput">
+                </div>
+                <button id="buy-czxp-btn" type="button" class="btn btn-success" v-on:click="buyCzxp" v-bind:disabled="buyCzxpBtnEnabled == false">Buy CZXP tokens
+                </button>
+            </form>
+          </p>
+          <p>
             The goal is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 Cryptoz card is a unique token on the Ethereum blockchain. Collectors can buy, sell, and exchange both their Cryptoz cards and CZXP tokens through any standards compliant wallets, markets, game engines,  exchanges, DeFi and other future inventions.
           </p>
           <div>
@@ -28,12 +38,30 @@
 
 <script>
 export default {
-  name: 'BodyContent',
-  data () {
-    return {
-      msg: 'Here we go, here we go'
+    name: 'BodyContent',
+    computed : {
+        buyCzxpBtnEnabled() {
+                        if(this.totalCzxpToBuy !== "" && this.totalCzxpToBuy >= 0.00001 && this.totalCzxpToBuy <= 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    },
+    data () {
+        return {
+            msg: 'Here we go, here we go',
+            totalCzxpToBuy : '',
+        }
+    },
+    methods: {
+        buyCzxp : function() {
+            console.log("buy cxzp clicked !", this.totalCzxpToBuy);
+        },
+        filterCzxpInput : function() {
+            this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^0-9\.]/g,'');
+        }
     }
-  }
 }
 </script>
 
