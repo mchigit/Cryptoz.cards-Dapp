@@ -8,7 +8,7 @@
             <div class="col-6">
               <h3>Cryptoz Cards<br>erc-721 tokens are supported on the following auction marketplaces</h3>
               
-              <a href="https://testnets.opensea.io/collection/cryptoz-cards-v10" target="_blank">
+              <a href="https://testnets.opensea.io/storefront/cryptoz-cards-v10-1" target="_blank">
                 <div class="market-btn">
                   <img class="opensea-logo" src="https://opensea.io/static/images/logos/opensea-logo.png" align="absmiddle" /> <span class="opensea-header">OpenSea</span>
                   <br>
