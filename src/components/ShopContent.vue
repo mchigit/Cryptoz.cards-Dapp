@@ -281,7 +281,7 @@ export default {
         const indexes = [...Array(totalCardTypes)].map((_,i) => i)
         const results = await Promise.all(indexes.map(async id => {
           const cardData = await this.getCard(id + 1);
-          if (!cardData) {
+          if (!cardData || cardData.id  == 74) { //74 is buggy
             return;
           }
           return this.addIsOwnedProp(cardData);
