@@ -1,6 +1,12 @@
 <template>
   <div>
     <main role="main" class="container">
+    <!--
+        brown       - 545161
+        light blue  - 2BA4FA
+        red         - CA3C2C
+        purple      - 5745E5
+    -->
       <div class="jumbotron">
         <h1>Frequently Asked Questions</h1>
         <div class="accordion" role="tablist">
@@ -74,6 +80,16 @@
                 <div class="card-body">
                     <img src="@/assets/cryptoz_cards_explained.jpg" />
                 </div>
+                <p><h2>Rarity Distribution</h2>
+                    <p>The rarity distribution for each Booster card pull is as follows:</p>
+                    <ul>
+                        <li><span class="rarity-labels" style="background-color:#C0C0C0">Platinum</span> - O - This type is not available for purchase or from a booster</li>
+                        <li><span class="rarity-labels" style="background-color:#5745E5">Epic</span> - 1  in 10000 - This is like pulling a unicorn.</li>
+                        <li><span class="rarity-labels" style="background-color:#CA3C2C">Rare</span> - 49 in 10000 - These red cards are still very rare and should be handled with care</li>
+                        <li><span class="rarity-labels" style="background-color:#2BA4FA">Uncommon</span> - 2650 in 10000 - These when they occur, they are a nice little surprise</li>
+                        <li><span class="rarity-labels" style="background-color:#545161">Common</span> - 7300 in 10000 - The editions on these will count up fairly quickly as cards get pulled</li>
+                    </ul>
+                </p>
               </b-card-body>
             </b-collapse>
           </b-card>
@@ -338,5 +354,10 @@ export default {
   text-align: left;
   border-radius: 0;
   font-size: 1.25em;
+}
+
+.rarity-labels {
+    color: white;
+    padding: 2px 4px;
 }
 </style>
