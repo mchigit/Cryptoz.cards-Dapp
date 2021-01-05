@@ -46,6 +46,7 @@
       }
     },
     mounted () { //Initialize the component
+        this.setSubscriptions();
     },
     data () {
       return {
@@ -71,6 +72,7 @@
         this.$store.dispatch('updateCardsOwned', tokens.length)
       },
       setBoostersOwned: function(boostersOwned){
+      console.log('YYYYY',boostersOwned);
         this.$store.dispatch('updateBoostersOwned', parseInt(boostersOwned).toLocaleString())
       },
     }
@@ -78,6 +80,4 @@
   
 </script>
 <style scoped>
-
-
 </style>

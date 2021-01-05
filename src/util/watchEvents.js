@@ -36,7 +36,7 @@ let watchEvents = function () {
         //Otherwise a czxp event ALWAYS updates the universe balance
         store.dispatch('updateUniverseBalances', event);
       }else{
-        console.log("ERROR in watchEvents.js : ", error);
+        console.log("ERROR in watchEvents.js cryptozEvents: ", error);
       }
     });
   
