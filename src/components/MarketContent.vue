@@ -6,7 +6,7 @@
           
           <div class="row">
             <div class="col-6">
-              <h3>Cryptoz Cards<br>erc-721 tokens are supported on the following auction marketplaces</h3>
+              <h3>Cryptoz Cards<br>ERC721 NFT tokens are supported on the following auction marketplaces</h3>
               
               <a href="https://opensea.io/collection/cryptoz-cards/" target="_blank">
                 <div class="market-btn">
@@ -17,28 +17,30 @@
                   </p>
                 </div>
               </a>
-  <!-- DISABLED FOR NOW
-              <a href="https://rarebits.io/" target="_blank">
+<!--
+              <a href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">
                 <div class="market-btn">
-                  <img class="rb-logo" src="https://lever-client-logos.s3.amazonaws.com/b5195801-463f-4953-9cee-332ab2414511-1526322100422.png" align="absmiddle" />
+                  <img class="rb-logo" src="@/assets/256x256_App_Icon_Pink.svg" align="absmiddle" />
+                  <span class="opensea-header">Uniswap</span>
                   <br>
                   <p>
-                    Buy, sell, and discover unique crypto assets<br>Zero Fees.
+                    Swap CZXP for ETH<br>Earn Fees for providing liquidity.
                   </p>
                 </div>
               </a>
-   -->
+-->
             </div>
             
             <div class="col-6">
-              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="@/assets/czxp.png" />) <br>erc-20 tokens are supported on the following token exchanges</h3>
+              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="@/assets/czxp.png" />) <br>ERC20 tokens are supported on the following token exchanges</h3>
               
-              <a href="https://exchange.idex.io/trading/CZXP-ETH" target="_blank">
+              <a href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">
                 <div class="market-btn">
-                  <img class="idex-logo" src="@/assets/IDEX-Logo.png" align="absmiddle" />
+                  <img class="uni-logo" src="@/assets/256x256_Black-1.png" align="absmiddle" />
+                   <span class="opensea-header">Uniswap</span>
                   <br>
                   <p>
-                    Decentralized Ethereum Asset Exchange
+                    Uniswap Decentralized Ethereum liquidity Exchange - Instant swap - CZXP-ETH
                   </p>
                 </div>
               </a>
@@ -83,8 +85,8 @@ export default {
     width:39%;
     margin-bottom : 10px;
   }
-  .idex-logo {
-    width : 30%;
+  .uni-logo {
+    width : 8%;
     margin-bottom : 10px;
   }
   .czxp-logo {

@@ -29,16 +29,13 @@
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Blog</a>
+                <a href="https://t.me/cryptozcard" target="_blank">Telegram Support</a>
               </li>
               <li>
-                <a href="#!">Telegram Support</a>
+                <a href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">Uniswap CZXP-ETH Pool</a>
               </li>
               <li>
-                <a href="#!">Telegram Announcements</a>
-              </li>
-              <li>
-                <a href="#!">Instagram</a>
+                <a href="https://www.instagram.com/cryptoz.cards/" target="_blank">Instagram</a>
               </li>
             </ul>
 
