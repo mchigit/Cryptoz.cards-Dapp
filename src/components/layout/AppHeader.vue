@@ -185,7 +185,7 @@ export default {
       const siteURL =
         process.env.NODE_ENV === "development"
           ? "localhost:8080"
-          : "https://rinkeby.cryptoz.cards";
+          : "https://main.cryptoz.cards";
       return `${siteURL}?sponsor=${this.coinbase}`;
     },
     isSponsorValid() {
