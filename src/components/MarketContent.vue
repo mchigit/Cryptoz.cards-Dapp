@@ -13,7 +13,7 @@
                   <img class="opensea-logo" src="https://opensea.io/static/images/logos/opensea-logo.png" align="absmiddle" /> <span class="opensea-header">OpenSea</span>
                   <br>
                   <p>
-                    The world’s largest digital marketplace for crypto collectibles.<br> Buy, sell, and discover exclusive digital assets.
+                    View Cryptoz that are currently available in The world’s largest digital marketplace for crypto collectibles.<br> Buy, sell, and discover exclusive digital assets.
                   </p>
                 </div>
               </a>
@@ -40,7 +40,7 @@
                    <span class="opensea-header">Uniswap</span>
                   <br>
                   <p>
-                    Uniswap Decentralized Ethereum liquidity Exchange - Instant swap - CZXP-ETH
+                    Uniswap Decentralized Ethereum liquidity Exchange - Instant swap - CZXP-ETH. Earn fees by providing liquidity
                   </p>
                 </div>
               </a>

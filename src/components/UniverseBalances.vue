@@ -5,10 +5,10 @@
       <p><img class="czxp-logo" src="@/assets/czxp.png" /> <strong>{{totalCzxpSupply}} CZXP tokens</strong> in the Universe</p>
     </b-col>
     <b-col class="text-center">
-      <p><strong>{{totalCryptozTypes}} Cryptoz Types</strong> in the Universe</p>
+      <p><strong>{{totalCryptozTypes}} Mintable types</strong> in shop and boosters</p>
     </b-col>
     <b-col class="text-right">
-      <p><strong>{{totalCryptozSupply}} Cryptoz Cards</strong> in the Universe</p>
+      <p><strong>{{totalCryptozSupply}} NFT tokens </strong> in the Universe</p>
     </b-col>
   </b-row>
   

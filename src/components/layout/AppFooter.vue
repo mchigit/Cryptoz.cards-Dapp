@@ -73,7 +73,7 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright Cardinal Entertainment
+    <div class="footer-copyright text-center py-3">© 2021 Copyright Cardinal Entertainment
     </div>
     <!-- Copyright -->
 
