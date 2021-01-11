@@ -15,7 +15,7 @@
             <router-link to="/shop">Shop</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/crypt">Your Crypt</router-link>
+            <router-link to="/crypt">Your NFT Crypt</router-link>
           </b-nav-item>
           <b-nav-item>
             <router-link to="/market">Markets</router-link>

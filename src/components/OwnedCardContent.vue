@@ -12,6 +12,11 @@
                 <div class="card-item-name text-center">{{name}}<br>{{cset}}</div>
                 <div class="card-czxp text-left">{{parseInt(unlock_czxp).toLocaleString()}}</div>
                 <div class="card-level">{{level}}</div>
+                <div class="card-booster-shop card-booster-shop-circle"></div>
+                <div class="card-booster-shop-inner" :style="{backgroundColor: activeColor}">
+                    <b-icon-lightning-fill v-if="in_store=='Booster'" class="card-booster-shop-icon" font-scale="1.3" />
+                    <b-icon-tag-fill v-if="in_store=='Store'" class="card-booster-shop-icon" font-scale="1.3" />
+                </div>
               </div>
             </div>
 		        <div class="back">
@@ -40,9 +45,16 @@ import {showPendingToast, showSuccessToast, showRejectedToast} from '../util/sho
 export default {
   name: 'OwnedCardContent',
   props: ['id', 'type_id', 'name', 'image', 'edition_total', 'cset', 'unlock_czxp',
-    'level', 'cost', 'buy_czxp', 'transfer_czxp', 'sacrifice_czxp', 'card_class'],
+    'level', 'cost', 'buy_czxp', 'transfer_czxp', 'sacrifice_czxp', 'card_class','in_store'],
   computed: {
-  }
+    activeColor(){
+        if(this.in_store == "Store"){
+           return '#FFA500'; //orange
+        }else{
+            return '#FFFF33'; //yellow
+        }
+    }
+  },
 }
 </script>
 
@@ -133,6 +145,35 @@ export default {
   width: 100px;
   top: 89px;
   left:55px;
+}
+
+.card-booster-shop-icon{
+    position:relative;
+    top:10px;
+}
+
+.card-booster-shop-inner{
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  display: inline-block;
+  position:relative;
+  top:-338px;
+  left:83px;
+}
+
+.card-booster-shop-circle{
+  height: 48px;
+  width: 48px;
+  background-color: #000;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.card-booster-shop{
+  position: relative;
+  top: -310px;
+  left: 128px;
 }
 
 .card-txt-black{

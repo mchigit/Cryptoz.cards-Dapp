@@ -31,17 +31,17 @@
     <div class="jumbotron">
       <UniverseBalances></UniverseBalances>
       
-          <h1>Your Cryptoz Wallet</h1>
-          <p>This is where all your Cryptoz cards can be accessed. From here you can sort your cards, search your cards and sacrifice. Sacrificing is permanent. Not only in your wallet, but across the entire Cryptoz Universe. That unique item is gone forever.</p>
+          <h1>Your NFT Wallet</h1>
+          <p>This is where all your NFT Cryptoz tokens can be accessed. Sort, search, gift and sacrifice. Sacrificing is permanent, not only in your wallet but across the entire Cryptoz Universe. That unique NFT is burned forever.</p>
           
           <!-- Loads cards here -->
             <div class="row">
               <div class="col">
-                <b-button class="btn btn-danger" v-bind:disabled="boostersOwned < 1" v-b-modal.open-booster-modal>Open Booster Card
+                <b-button class="btn btn-danger" v-bind:disabled="boostersOwned < 1" v-b-modal.open-booster-modal>Open <b-icon-lightning-fill /> Booster Card
                 </b-button>
               </div>
               <div class="col buy-and-open-booster">
-                <button class="btn btn-danger" v-bind:disabled="web3.balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open Booster 0.002E
+                <button class="btn btn-danger" v-bind:disabled="web3.balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open <b-icon-lightning-fill /> Booster 0.002E
                 </button>
               </div>
             </div>
@@ -133,6 +133,7 @@
                     :sacrifice_czxp="card.sacrifice_czxp"
                     :image="card.image"
                     :card_class="card.rarity"
+                    :in_store="card.in_store"
                   ></OwnedCardContent>
                   <div class="sacrifice-wrapper" v-if="$route.path == '/crypt'">
                     <div class="sacrifice-button">
@@ -400,6 +401,7 @@ export default {
               tokenIdList[tokenId] = elementReturned
               return axios.get('https://cryptoz.cards/services/getCardData.php?card_id=' + elementReturned[0].c[0])
             }).then(function(res){
+            //console.log(res);
               // console.log('edition:' + tokenIdList[tokenId][1].c[0])
               res.data.id = tokenId;
               //format the attributes to match our JS objects
@@ -411,7 +413,16 @@ export default {
               
               //Overwrite our JSON reponse with vue friendly card binding data
               res.data.attributes = newAttr;
-              
+            
+            /**
+              //Set the Store or Booster icon
+              if(res.data.attributes.in_store == "Store")
+              {
+                  res.data.attributes.in_store = 'store_tag.svg';
+              }else{
+                  res.data.attributes.in_store = 'booster.svg';
+              }
+**/
               //Edition total
               // #4  , #4 of 300
               if(res.data.attributes.edition_total == 0) //unlimited

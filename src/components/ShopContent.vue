@@ -2,7 +2,7 @@
   <div>
     <b-modal
       id="buy-boosters-modal"
-      title="Buy Booster Credits @ 0.002E each"
+      title="Buy Booster Credits @ 0.002 E each"
       hide-footer
     >
       <h5 class="modal-title">Booster cards will never be sold in the shop</h5>
@@ -42,14 +42,14 @@
       <p>
         <UniverseBalances></UniverseBalances>
       </p>
-      <h1>Shop</h1>
+      <h1><b-icon-tag-fill /> Shop</h1>
       <p>
-        The Shop is a place to mint limited edition Cryptoz Cards. Some cards
-        are free, some have a cost. You may also buy and open a booster card,
-        which will randomly mint an unlimited edition card
+        The Shop is a place to mint limited edition Cryptoz Cards NFT tokens. Some cards
+        are free, some have a cost. You may also buy and <router-link to="/crypt">open a booster card</router-link>,
+        which will randomly mint an unlimited edition NFT token.
       </p>
       <p>
-        To Claim a FREE card Or buy a Limited edition card, you will need the
+        To mint a FREE NFT Or buy a Limited edition NFT, you will need the
         required minimum balance of CZXP tokens
       </p>
       <div class="row">
@@ -58,8 +58,7 @@
             class="btn btn-danger"
             v-bind:disabled="balance < 2000000000000000"
             v-b-modal.buy-boosters-modal
-            >Buy Booster Credits @ 0.002E</b-button
-          >
+            >Buy <b-icon-lightning-fill />  Booster Credits @ 0.002E</b-button>
           <transition name="fade">
             <span v-if="showSpinner==1">
               <img src="@/assets/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
@@ -102,12 +101,12 @@
           >
             <div v-if="card.cost > 0" id="buyBtnwrapper" v-b-tooltip.hover="buyBtnTooltipText(card.cost, card.unlock_czxp)">
               <button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" class="btn btn-danger" v-on:click="buyCard(card)">
-                Buy Card {{card.cost}}E <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                Mint NFT for {{card.cost}}E <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
               </button>
             </div>
             <div v-else id="getBtnwrapper" v-b-tooltip.hover="getBtnTooltipText(card.unlock_czxp)">
               <button id="get-button"  class="btn btn-danger" :disabled="czxpBalance < parseInt(card.unlock_czxp)" v-on:click="getCardForFree(card.type_id)">
-                    Get Free Card <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                    Mint for FREE <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
               </button>
             </div>
           </div>
