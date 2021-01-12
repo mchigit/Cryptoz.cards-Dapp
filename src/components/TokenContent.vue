@@ -31,6 +31,7 @@
                   :sacrifice_czxp="card.attributes.sacrifice_czxp"
                   :image="card.image"
                   :card_class="card.attributes.rarity"
+                  :in_store="card.attributes.in_store"
                 ></OwnedCardContent>
         </div>
         <div class="col-2 text-right font-weight-bold">

@@ -149,7 +149,8 @@ export default {
 
 .card-booster-shop-icon{
     position:relative;
-    top:10px;
+    top:11px;
+    left:1px;
 }
 
 .card-booster-shop-inner{
