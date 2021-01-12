@@ -111,7 +111,8 @@
                         variant="danger"
                         :disabled="cardsBeingGifted[row.item.id] || cardsBeingSacrificed[row.item.id]"
                       >
-                        <img src="@/assets/baseline_card_giftcard_white_24dp.png" />
+                        <!--img src="@/assets/baseline_card_giftcard_white_24dp.png" /-->
+                        <b-icon-gift-fill />
                       </b-button>
                     </div>
                   </template>
@@ -154,7 +155,7 @@
                         @click="openGiftModal(card.id)"
                         v-b-tooltip.hover="'Gift'"
                       >
-                          <img src="@/assets/baseline_card_giftcard_white_24dp.png" />
+                        <b-icon-gift style="color:white" />
                       </b-button>
                     </div>
                   </div>
@@ -276,9 +277,9 @@ export default {
   methods : {
     openGiftModal: function(id) {
       const h = this.$createElement
-      const titleVNode = h('h5', `Gift Cryptoz Card Token #${id} to another wallet`, { class: ['modal-title'] })
+      const titleVNode = h('h5', `Gift Cryptoz NFT Token #${id} to another address`, { class: ['modal-title'] })
       const messageVNode = h('div', { class: ['modal-message'] }, [
-        h('p', 'Enter a valid Ethereum wallet address to send this card to:', { class: [''] }),
+        h('p', 'Enter a valid Ethereum address to send this card to:', { class: [''] }),
         h('input', {
           on: { input: e => this.receivingWallet = e.target.value },
           props: {

@@ -14,8 +14,8 @@
                 <div class="card-level">{{level}}</div>
                 <div class="card-booster-shop card-booster-shop-circle"></div>
                 <div class="card-booster-shop-inner" :style="{backgroundColor: activeColor}">
-                    <b-icon-lightning-fill v-if="in_store=='Booster'" class="card-booster-shop-icon" font-scale="1.3" />
-                    <b-icon-tag-fill v-if="in_store=='Store'" class="card-booster-shop-icon" font-scale="1.3" />
+                    <b-icon-lightning-fill v-if="in_store=='Booster'" class="card-booster-shop-icon" scale="1.3" />
+                    <b-icon-tag-fill v-if="in_store=='Store'" class="card-booster-shop-icon" scale="1.3" />
                 </div>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default {
 .card-level{
   position: relative;
   width:50px;
-  top: 66px;
+  top: 65px;
   right: -209px;
   font-weight: bold;
   color: #fff;
