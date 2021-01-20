@@ -72,7 +72,7 @@
             </b-card-header>
             <b-collapse
               id="accordion-1-5"
-              visible
+              v-model="visible"
               accordion="my-accordion"
               role="tabpanel"
             >
@@ -328,12 +328,23 @@
 <script>
 export default {
   name: "HelpContent",
+  props: ['query'],
   data() {
     return {
       msg: "Here we go, here we go",
     };
   },
   methods: {},
+  mounted() {
+    //console.log('hello:',this.query);
+    if(this.query !== ''){
+        switch(this.query){
+            case "read-cards" :
+                console.log('open tab 2');
+                //this.accordion-1-5 = "visible";
+        }
+    }
+  }
 };
 </script>
 

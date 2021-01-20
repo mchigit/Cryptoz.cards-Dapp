@@ -135,6 +135,7 @@ const router = new Router({
     {
       path: '/help',
       name: 'HelpContent',
+      props: route => ({ query: route.query.t }),
       component: HelpContent,
         meta: {
           title: 'Cryptoz Cards - Help - Answers to all your Frequently Asked Questions',

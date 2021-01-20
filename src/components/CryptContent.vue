@@ -11,6 +11,7 @@
     >
           <div>Enter 0 for no wager</div>
           <div><b>To wager:</b> Minimum = 2,000,000,000, Maximum = 1,649,267,441,667,000 </div>
+          <router-link to='/help?read-cards'>Random odds explained</router-link>
           <b-form-input class="form-control" :state="isWagerValid"  required type="number" v-model="wagerAmount" ></b-form-input>
           <b-form-invalid-feedback  v-if="!notEnoughWager">
             <div>You need to enter a number between 2,000,000,000 and 1,649,267,441,667,000 to wager.</div>
@@ -20,7 +21,7 @@
           </b-form-invalid-feedback>
       <b-row>
         <b-col>
-          <b-button class="mt-3" variant="danger" block @click="openBooster" :disabled="!isWagerValid">Open Booster</b-button>
+          <b-button class="mt-3" variant="danger" v-b-tooltip.hover="'Open Booster'" block @click="openBooster" :disabled="!isWagerValid">Mint random NFT</b-button>
         </b-col>
         <b-col>
           <b-button class="mt-3" block @click="$bvModal.hide('open-booster-modal')">Cancel</b-button>
@@ -37,12 +38,12 @@
           <!-- Loads cards here -->
             <div class="row">
               <div class="col">
-                <b-button class="btn btn-danger" v-bind:disabled="boostersOwned < 1" v-b-modal.open-booster-modal>Open <b-icon-lightning-fill /> Booster Card
+                <b-button v-b-tooltip.hover="'Mint 1 random booster NFT'" class="btn btn-danger" v-bind:disabled="boostersOwned < 1" v-b-modal.open-booster-modal>Open <b-icon-lightning-fill /> Booster Card
                 </b-button>
               </div>
               <div class="col buy-and-open-booster">
-                <button class="btn btn-danger" v-bind:disabled="web3.balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open <b-icon-lightning-fill /> Booster 0.002E
-                </button>
+                <b-button v-b-tooltip.hover="'Mint 1 random booster NFT'" class="btn btn-danger" v-bind:disabled="web3.balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open <b-icon-lightning-fill /> Booster 0.002E
+                </b-button>
               </div>
             </div>
             <br>
@@ -414,16 +415,7 @@ export default {
               
               //Overwrite our JSON reponse with vue friendly card binding data
               res.data.attributes = newAttr;
-            
-            /**
-              //Set the Store or Booster icon
-              if(res.data.attributes.in_store == "Store")
-              {
-                  res.data.attributes.in_store = 'store_tag.svg';
-              }else{
-                  res.data.attributes.in_store = 'booster.svg';
-              }
-**/
+
               //Edition total
               // #4  , #4 of 300
               if(res.data.attributes.edition_total == 0) //unlimited
