@@ -17,6 +17,8 @@ import {mapState} from 'vuex'
 import Web3Modal from "web3modal";
 import BurnerConnectProvider from "@burner-wallet/burner-connect-provider";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import '@metamask/legacy-web3'
+const {web3} = window
 const Torus = require("@toruslabs/torus-embed");
 const Portis = require("@portis/web3");
 const Fortmatic = require("fortmatic");
