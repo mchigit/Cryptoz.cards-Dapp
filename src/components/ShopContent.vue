@@ -346,9 +346,25 @@ export default {
           cardObj.rarity = "card-bg card-bg-1";
           break;
       }
+      
+      //Get NFTs minted already to inject in our edition totals
+        window.Cryptoz.deployed()
+      .then((instance) => {
+        return instance.cardTypeToEdition(cardObj.id);
+      })
+      .then((result) => {
+          cardObj.edition_total =  parseInt(result).toLocaleString() + '/' + cardObj.edition_total;
+      })
+      .catch(err => {
+        console.error('Error getting NFTs minted:', err);
+        this.showSpinner = 0;
+      })
+      
 
       if (cardObj.edition_total === 0) {
         cardObj.edition_total = "Unlimited";
+      }else{
+          
       }
 
       this.allCards[cardObj.type_id] = cardObj;
