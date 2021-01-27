@@ -50,7 +50,7 @@
       </p>
       <p>
         To mint a FREE NFT Or buy a Limited edition NFT, you will need the
-        required minimum balance of CZXP tokens
+        required minimum balance of CZXP tokens, the newly minted NFT will appear in  <router-link to="/crypt"> Your NFT Crypt</router-link> once the transaction is confirmed
       </p>
       <div class="row">
         <div class="col">
@@ -354,6 +354,7 @@ export default {
       })
       .then((result) => {
           cardObj.edition_total =  parseInt(result).toLocaleString() + '/' + cardObj.edition_total;
+//TODO : Add a SOLD OUT banner when result = edition_total
       })
       .catch(err => {
         console.error('Error getting NFTs minted:', err);
