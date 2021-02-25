@@ -142,6 +142,7 @@ export default {
       });
       provider.on("chainChanged", (chainId) => {
         // without this check it auto-reloads to infinity
+        console.log("OnChainChanged:",web3.version.network);
         const currentChainId = localStorage.getItem('ethChainId')
         if (currentChainId) {
           this.$store.dispatch('chainChanged', currentChainId)

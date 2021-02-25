@@ -21,7 +21,7 @@
             </div>
 		        <div class="back">
               <!-- back content -->
-              <div class="card-bg card-bg-back">
+              <div class="card-bg card-bg-back-bsc">
 			          <div class="back-container">
 			            <div class="card-txt-black"><span class="font-weight-bold">Cost:</span> {{cost}}</div>
 			            <br>
@@ -101,6 +101,11 @@ export default {
 
 .card-bg-back{
   background-image: url(assets/cryptoz_card_back.svg);
+  padding:20px;
+}
+
+.card-bg-back-bsc{
+  background-image: url(assets/cryptoz_card_back_binance.svg);
   padding:20px;
 }
 

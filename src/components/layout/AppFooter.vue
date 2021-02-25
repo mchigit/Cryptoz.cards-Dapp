@@ -92,9 +92,11 @@ export default {
       return this.$store.state.web3.isConnected
     },
     network() {
+        console.log("Chain id:",this.$store.state.web3.chainId);
       const hexString = this.$store.state.web3.chainId
       if (!hexString) return "Unidentified Network"
-      return NETWORKS[hexString.split('x')[1]]
+      //return NETWORKS[hexString.split('x')[1]]
+      return NETWORKS[this.$store.state.web3.chainId];
     }
   },
   data () {
