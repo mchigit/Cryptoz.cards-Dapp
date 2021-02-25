@@ -107,8 +107,8 @@
                 :title="ethBalance"
                 class="wallet-balance"
               >
-                <img src="@/assets/ethereum-symbol.png" />
-                <img src="@/assets/binance-coin-logo.webp" />
+                <img v-if="this.$store.state.web3.chainId != 0x38" src="@/assets/ethereum-symbol.png" />
+                <img v-if="this.$store.state.web3.chainId == 0x38" src="@/assets/binance-coin-logo.webp" />
                 {{ ethBalance.toFixed(4) }}
               </span>
             </li>
