@@ -45,6 +45,17 @@
                 </div>
               </a>
             
+              <a href="" target="_blank">
+                <div class="market-btn">
+                  <img class="uni-logo" src="@/assets/pancakeswap-cake-logo.png" align="absmiddle" />
+                   <span class="opensea-header">PancakeSwap</span>
+                  <br>
+                  <p>
+                    PancakeSwap Decentralized BSC liquidity Exchange - Instant swap - CZXP-BNB. Earn fees by providing liquidity
+                  </p>
+                </div>
+              </a>
+              
             </div>
             
           </div>

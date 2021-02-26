@@ -125,6 +125,7 @@ export default {
   methods : {
     subscribeToProviderEvents: function(provider) {
       provider.on("connect", ({chainId}) => {
+      console.log("app mounted chain is:",chainId);
         this.$store.dispatch('web3isConnected', true)
         this.$store.dispatch('chainChanged', chainId)
         this.getWalletInfo()
@@ -218,4 +219,10 @@ export default {
     margin-left: 10px;
     font-size: 20px;
   }
+  
+  /* BINANCE color #F0B90B */
+  a {
+        padding: 2px;
+        color: #F0B90B;
+    }
 </style>

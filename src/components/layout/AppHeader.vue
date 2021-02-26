@@ -12,22 +12,22 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav id="cryptoz-nav">
           <b-nav-item>
-            <router-link to="/shop">Shop</router-link>
+            <router-link v-bind:class="classObject" to="/shop">Shop</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/crypt">Your NFT Crypt</router-link>
+            <router-link v-bind:class="classObject" to="/crypt">Your NFT Crypt</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/market">Markets</router-link>
+            <router-link v-bind:class="classObject" to="/market">Markets</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/view/1">View</router-link>
+            <router-link v-bind:class="classObject" to="/view/1">View</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/help">Help</router-link>
+            <router-link v-bind:class="classObject" to="/help">Help</router-link>
           </b-nav-item>
           <b-nav-item v-if="web3isConnected">
-            <b-link href="#" v-b-modal.sponsor-modal>Sponsors</b-link>
+            <b-link v-bind:class="classObject" href="#" v-b-modal.sponsor-modal>Sponsors</b-link>
           </b-nav-item>
 
           <b-modal
@@ -108,7 +108,7 @@
                 class="wallet-balance"
               >
                 <img v-if="this.$store.state.web3.chainId != 0x38" src="@/assets/ethereum-symbol.png" />
-                <img v-if="this.$store.state.web3.chainId == 0x38" src="@/assets/binance-coin-logo.webp" />
+                <img v-if="this.$store.state.web3.chainId == 0x38 || this.$store.state.web3.chainId == 0x61" src="@/assets/binance-coin-logo.webp" />
                 {{ ethBalance.toFixed(4) }}
               </span>
             </li>
@@ -123,7 +123,7 @@
             Connect To Ethereum
           </b-button>
         </b-navbar-nav>
-      </b-collapse>
+
 
       <div id="bonus-boosters">
         <div
@@ -145,7 +145,9 @@
         >
           Your Next Bonus:<br /><strong> {{ timeToBonus }}</strong>
         </div>
+        <div v-else class="base-text">ERROR: Try Different Network</div>
       </div>
+            </b-collapse>
     </b-navbar>
     <p></p>
   </div>
@@ -165,6 +167,14 @@ export default {
     // this.$store.dispatch('registerWeb3')
   },
   computed: {
+    classObject : function () { //Style the link colours
+            //console.log("Hey bg ", this.$store.state.web3.chainId);
+            if (this.$store.state.web3.chainId == 0x38 || this.$store.state.web3.chainId == 0x61) { //BNB 0x38/0x61
+                return 'bsc-link';
+            }else{
+                return 'eth-link'; //ether bg
+            }
+    },
     ethBalance() {
       return parseFloat(web3.fromWei(this.$store.state.web3.balance), "ether");
     },
@@ -430,6 +440,11 @@ a {
   padding: 2px;
 }
 
+/* BINANCE color #F0B90B */
+.bsc-link {
+  color: #F0B90B;
+}
+
 a:hover {
   color: #fff;
   text-decoration: none;
@@ -551,5 +566,8 @@ a:hover {
 .sponsor-warning {
   font-weight: bold;
   color: #dc3545;
+}
+.base-text{
+    color:#FFFFFF;
 }
 </style>

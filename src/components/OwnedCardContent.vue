@@ -21,7 +21,8 @@
             </div>
 		        <div class="back">
               <!-- back content -->
-              <div class="card-bg card-bg-back-bsc">
+              <!-- div class="card-bg card-bg-back-bsc" -->
+              <div class="card-bg" v-bind:class="classObject">
 			          <div class="back-container">
 			            <div class="card-txt-black"><span class="font-weight-bold">Cost:</span> {{cost}}</div>
 			            <br>
@@ -53,6 +54,16 @@ export default {
         }else{
             return '#FFFF33'; //yellow
         }
+    },
+    classObject : function () {
+        //return {
+            //console.log("Hey bg ", this.$store.state.web3.chainId);
+            if (this.$store.state.web3.chainId == 0x38 || this.$store.state.web3.chainId == 0x61) { //BNB 0x38/0x61
+                return 'card-bg-back-bsc';
+            }else{
+                return 'card-bg-back'; //ether bg
+            }
+        //}
     }
   },
 }

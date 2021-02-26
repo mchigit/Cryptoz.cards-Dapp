@@ -29,13 +29,13 @@
 
             <ul class="list-unstyled">
               <li>
-                <a href="https://t.me/cryptozcard" target="_blank">Telegram Support</a>
+                <a v-bind:class="classObject" href="https://t.me/cryptozcard" target="_blank">Telegram Support</a>
               </li>
               <li>
-                <a href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">Uniswap CZXP-ETH Pool</a>
+                <a v-bind:class="classObject" href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">Uniswap CZXP-ETH Pool</a>
               </li>
               <li>
-                <a href="https://www.instagram.com/cryptoz.cards/" target="_blank">Instagram</a>
+                <a v-bind:class="classObject" href="https://www.instagram.com/cryptoz.cards/" target="_blank">Instagram</a>
               </li>
             </ul>
 
@@ -50,10 +50,10 @@
 
             <ul class="list-unstyled">
               <li>
-                <a href="https://commerce.coinbase.com/checkout/1dfd66a1-a393-4c06-8036-d402441c7b19" target="_blank">Donations</a>
+                <a v-bind:class="classObject" href="https://commerce.coinbase.com/checkout/1dfd66a1-a393-4c06-8036-d402441c7b19" target="_blank">Donations</a>
               </li>
               <li>
-                <a href="https://www.zazzle.com/store/zombiepets" target="_blank">Cool Swag</a>
+                <a v-bind:class="classObject" href="https://www.zazzle.com/store/zombiepets" target="_blank">Cool Swag</a>
               </li>
               <!--li>
                 <a href="#!">Link 3</a>
@@ -88,6 +88,14 @@ import {NETWORKS} from '../../util/constants/networks'
 export default {
   name: 'AppFooter',
   computed: {
+     classObject : function () { //Style the link colours
+            //console.log("Hey bg ", this.$store.state.web3.chainId);
+            if (this.$store.state.web3.chainId == 0x38 || this.$store.state.web3.chainId == 0x61) { //BNB 0x38/0x61
+                return 'bsc-link';
+            }else{
+                return 'eth-link'; //ether bg
+            }
+    },
     isConnected() {
       return this.$store.state.web3.isConnected
     },
@@ -123,5 +131,9 @@ export default {
   .dev-logo{
     width:28%;
     padding:0px 0px 10px;
+  }
+  /* BINANCE color #F0B90B */
+  .bsc-link {
+    color: #F0B90B;
   }
 </style>
