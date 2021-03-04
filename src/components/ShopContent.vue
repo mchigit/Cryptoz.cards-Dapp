@@ -267,30 +267,60 @@ export default {
           })
         }
     },
-    getTypesFromChain: async function(){
-        try{
-            let instance = await window.Cryptoz.deployed();
-            let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
+    // getTypesFromChain: async function(){
+    //     try{
+    //         let instance = await window.Cryptoz.deployed();
+    //         let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
             
-            let idArray = []; //Store only the cardTypeIds
-            await events.get((err, logs) => {
-                    if(err){console.error(err)}
-                    //console.log("Got logs..",logs);
-                    //Strip just the cardTypeids from the logs
-                    idArray = logs.map(e => {
-                        //console.log(e.args.cardTypeId.c[0]);
-                        return e.args.cardTypeId.c[0];
-                    })
-                    console.log("idArray:",idArray);
-            });
-            return idArray;
-        } catch(err){
-                console.log("Error getting all types", err);
-                showErrorToast(this, "Failed to get loaded Types list");
-        }
-    },
+    //         // let idArray = []; //Store only the cardTypeIds
+    //         // await events.get((err, logs) => {
+    //         //         if(err){console.error(err)}
+    //         //         //console.log("Got logs..",logs);
+    //         //         //Strip just the cardTypeids from the logs
+    //         //         idArray = logs.map(e => {
+    //         //             //console.log(e.args.cardTypeId.c[0]);
+    //         //             return e.args.cardTypeId.c[0];
+    //         //         })
+    //         //         console.log("idArray:",idArray);
+    //         // });
+
+    //         // const result = await events.get()
+    //         // console.log(result)
+
+    //         // const idArray = await events.get((err, logs) => {
+    //         //   if(err){console.error(err)}
+
+    //         //   return logs.map(e => {
+    //         //     return e.args.cardTypeId.c[0]; 
+    //         //   })
+    //         // })
+
+    //         let idArray = []
+
+    //         events.get((err, logs) => {
+    //             if(err){console.error(err)}
+    //                 //console.log("Got logs..",logs);
+    //                 //Strip just the cardTypeids from the logs
+    //             // for (let e of logs) {
+    //             //   idArray.push(e.args.cardTypeId.c[0])
+    //             // }
+    //             Promise.resolve(logs)
+    //         });
+
+    //         // console.log(idArray)
+
+    //         // return idArray;
+    //     } catch(err){
+    //             console.log("Error getting all types", err);
+    //             showErrorToast(this, "Failed to get loaded Types list");
+    //             Promise.reject("failed")
+    //     }
+    // },
     getAllTypes: async function(){
       try {
+        let instance = await window.Cryptoz.deployed();
+        let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
+
         //Lets get all the cards now
         console.log("Get all the cards...");
         showPendingToast(this, 'Loading Store Cards...', {
@@ -298,30 +328,41 @@ export default {
         });
         //reset the view
         this.storeCards = [];
+
+        events.get(async (err, logs) => {
+          if(err){console.error(err)}
+
+
+          const typeIdsOnChain = logs.map(e => {
+            return e.args.cardTypeId.c[0]; 
+          })
+
+          console.log("list of Ids from logs:",typeIdsOnChain);
         
-        let typeIdsOnChain = await this.getTypesFromChain();
+          const results = await Promise.all(
+
+              typeIdsOnChain.map(async id => {
+                              console.log("getting card:",id);
+                              const cardData = await this.getCard(id + 1);
+            
+                  if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop
+                      return;
+                  }
+                  //console.log("results:",results);
+                  return this.addIsOwnedProp(cardData);
+              })
+              
+          )
+          this.storeCards = results.filter(result => result !== undefined);
+          if (this.storeCards.length > 0) {
+            showSuccessToast(this, 'Finished Loading Shop.');
+          }
+        })
+        
+        // let typeIdsOnChain = await this.getTypesFromChain();
 
         //Why is this executing before the above getTypesFromChain ???
-        console.log("list of Ids from logs:",typeIdsOnChain);
-        
-        const results = await Promise.all(
 
-            typeIdsOnChain.map(async id => {
-                            console.log("getting card:",id);
-                            const cardData = await this.getCard(id + 1);
-          
-                if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop
-                    return;
-                }
-                //console.log("results:",results);
-                return this.addIsOwnedProp(cardData);
-            })
-            
-        )
-        this.storeCards = results.filter(result => result !== undefined);
-        if (this.storeCards.length > 0) {
-          showSuccessToast(this, 'Finished Loading Shop.');
-        }
  
       } catch (err) {
         console.log("Error loading cards: ", err);
