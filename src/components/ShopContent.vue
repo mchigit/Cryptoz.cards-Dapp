@@ -189,6 +189,7 @@ export default {
       transactionStatus: "Pending confirmation...",
       showUnlimited: 1,
       transaction_number: "",
+      typesOnChain: [],
       storeCards: [],
       buyBoostBtnOn: 0,
       confirmBoosterBuyBtnDisabled: 0,
@@ -266,6 +267,68 @@ export default {
           })
         }
     },
+    getTypesFromChain: async function(){
+        try{
+            let instance = await window.Cryptoz.deployed();
+            let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
+            
+            let idArray = []; //Store only the cardTypeIds
+            await events.get((err, logs) => {
+                    if(err){console.error(err)}
+                    //console.log("Got logs..",logs);
+                    //Strip just the cardTypeids from the logs
+                    idArray = logs.map(e => {
+                        //console.log(e.args.cardTypeId.c[0]);
+                        return e.args.cardTypeId.c[0];
+                    })
+                    console.log("idArray:",idArray);
+            });
+            return idArray;
+        } catch(err){
+                console.log("Error getting all types", err);
+                showErrorToast(this, "Failed to get loaded Types list");
+        }
+    },
+    getAllTypes: async function(){
+      try {
+        //Lets get all the cards now
+        console.log("Get all the cards...");
+        showPendingToast(this, 'Loading Store Cards...', {
+          autoHideDelay: 1000
+        });
+        //reset the view
+        this.storeCards = [];
+        
+        let typeIdsOnChain = await this.getTypesFromChain();
+
+        //Why is this executing before the above getTypesFromChain ???
+        console.log("list of Ids from logs:",typeIdsOnChain);
+        
+        const results = await Promise.all(
+
+            typeIdsOnChain.map(async id => {
+                            console.log("getting card:",id);
+                            const cardData = await this.getCard(id + 1);
+          
+                if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop
+                    return;
+                }
+                //console.log("results:",results);
+                return this.addIsOwnedProp(cardData);
+            })
+            
+        )
+        this.storeCards = results.filter(result => result !== undefined);
+        if (this.storeCards.length > 0) {
+          showSuccessToast(this, 'Finished Loading Shop.');
+        }
+ 
+      } catch (err) {
+        console.log("Error loading cards: ", err);
+        showErrorToast(this, "Failed to load shop.");
+      }
+    },
+/**
     getAllTypes: async function(){
       try {
         //Lets get all the cards now
@@ -278,6 +341,9 @@ export default {
         // Creates an array [0, 1, 2 ...totalCyptozTypes - 1]
         const totalCardTypes = parseInt(this.totalCyptozTypes);
         const indexes = [...Array(totalCardTypes)].map((_,i) => i)
+        
+        
+        console.log("indexes:",indexes);
         const results = await Promise.all(indexes.map(async id => {
           const cardData = await this.getCard(id + 1);
           if (!cardData || cardData.id  == 74) { //74 is buggy
@@ -294,6 +360,7 @@ export default {
         showErrorToast(this, "Failed to load shop.");
       }
     },
+**/
     addIsOwnedProp: async function (card) {
       const instance = await window.Cryptoz.deployed();
       const isOwned = await instance.cardTypesOwned(this.coinbase, card.id);
