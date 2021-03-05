@@ -291,7 +291,7 @@ export default {
     //         //   if(err){console.error(err)}
 
     //         //   return logs.map(e => {
-    //         //     return e.args.cardTypeId.c[0]; 
+    //         //     return e.args.cardTypeId.c[0];
     //         //   })
     //         // })
 
@@ -334,16 +334,16 @@ export default {
 
 
           const typeIdsOnChain = logs.map(e => {
-            return e.args.cardTypeId.c[0]; 
+            return e.args.cardTypeId.c[0];
           })
 
-          console.log("list of Ids from logs:",typeIdsOnChain);
+          //console.log("list of Ids from logs:",typeIdsOnChain);
         
           const results = await Promise.all(
 
               typeIdsOnChain.map(async id => {
-                              console.log("getting card:",id);
-                              const cardData = await this.getCard(id + 1);
+                              //console.log("getting card:",id);
+                              const cardData = await this.getCard(id);
             
                   if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop
                       return;
@@ -369,39 +369,6 @@ export default {
         showErrorToast(this, "Failed to load shop.");
       }
     },
-/**
-    getAllTypes: async function(){
-      try {
-        //Lets get all the cards now
-        console.log("Get all the cards...");
-        showPendingToast(this, 'Loading Store Cards...', {
-          autoHideDelay: 1000
-        });
-        //reset the view
-        this.storeCards = [];
-        // Creates an array [0, 1, 2 ...totalCyptozTypes - 1]
-        const totalCardTypes = parseInt(this.totalCyptozTypes);
-        const indexes = [...Array(totalCardTypes)].map((_,i) => i)
-        
-        
-        console.log("indexes:",indexes);
-        const results = await Promise.all(indexes.map(async id => {
-          const cardData = await this.getCard(id + 1);
-          if (!cardData || cardData.id  == 74) { //74 is buggy
-            return;
-          }
-          return this.addIsOwnedProp(cardData);
-        }))
-        this.storeCards = results.filter(result => result !== undefined);
-        if (this.storeCards.length > 0) {
-          showSuccessToast(this, 'Finished Loading Shop.');
-        }
-      } catch (err) {
-        console.log("Error loading cards: ", err);
-        showErrorToast(this, "Failed to load shop.");
-      }
-    },
-**/
     addIsOwnedProp: async function (card) {
       const instance = await window.Cryptoz.deployed();
       const isOwned = await instance.cardTypesOwned(this.coinbase, card.id);
