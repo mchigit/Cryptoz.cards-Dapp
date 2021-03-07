@@ -342,7 +342,7 @@ export default {
           const results = await Promise.all(
 
               typeIdsOnChain.map(async id => {
-                              //console.log("getting card:",id);
+                              console.log("getting card:",id);
                               const cardData = await this.getCard(id);
             
                   if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop

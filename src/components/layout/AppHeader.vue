@@ -56,13 +56,18 @@
               <b-button v-on:click="copySponsorLink">
                 Copy Link To Clipboard
               </b-button>
+              
+              <a class="twitter-share-button" v-bind:href="getTweet" data-size="large">
+                Tweet
+              </a>
+              
             </b-jumbotron>
 
             <b-jumbotron class="jumbo" lead="Link Your Sponsor">
               <p>
                 By linking a sponsor with their wallet address, you will receive
                 a
-                <b>Free Platinum Sponsored Card!</b>
+                <b>Free Platinum Sponsored NFT Card!</b>
               </p>
               <p class="sponsor-warning" variant="info">
                 Note: You can only link sponsor once
@@ -87,11 +92,11 @@
                   <div>Please enter a valid address.</div>
                 </b-form-invalid-feedback>
                 <b-form-invalid-feedback v-else>
-                  <div>You can't link your own address.</div>
+                  <div>You can't link your own wallet.</div>
                 </b-form-invalid-feedback>
               </b-input-group>
                 <b-alert v-else variant="success" show
-                  >You are already linked to sponsor.</b-alert
+                  >You are already linked to sponsor wallet.</b-alert
                 >
             </b-jumbotron>
           </b-modal>
@@ -107,7 +112,7 @@
                 :title="ethBalance"
                 class="wallet-balance"
               >
-                <img v-if="this.$store.state.web3.chainId != 0x38" src="@/assets/ethereum-symbol.png" />
+                <img v-if="this.$store.state.web3.chainId != 0x38 || this.$store.state.web3.chainId != 0x61" src="@/assets/ethereum-symbol.png" />
                 <img v-if="this.$store.state.web3.chainId == 0x38 || this.$store.state.web3.chainId == 0x61" src="@/assets/binance-coin-logo.webp" />
                 {{ ethBalance.toFixed(4) }}
               </span>
@@ -120,7 +125,7 @@
             variant="primary"
             v-on:click="$emit('on-connect')"
           >
-            Connect To Ethereum
+            Connect To Blockchain
           </b-button>
         </b-navbar-nav>
 
@@ -145,7 +150,6 @@
         >
           Your Next Bonus:<br /><strong> {{ timeToBonus }}</strong>
         </div>
-        <div v-else class="base-text">ERROR: Try Different Network</div>
       </div>
             </b-collapse>
     </b-navbar>
@@ -196,8 +200,11 @@ export default {
       const siteURL =
         process.env.NODE_ENV === "development"
           ? "localhost:8080"
-          : "https://main.cryptoz.cards";
+          : "https://bsc.cryptoz.cards";
       return `${siteURL}?sponsor=${this.coinbase}`;
+    },
+    getTweet() {
+      return `https://twitter.com/intent/tweet?text=Click my%20sponsor%20link%20to%20 claim%20your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,nfts,NFTCommunity,nftcollectors,nftart,cryptoart&url=https%3A%2F%2F${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
     },
     isSponsorValid() {
       if (this.sponsorAddress.toLowerCase() === this.coinbase.toLowerCase()) {
@@ -398,6 +405,24 @@ export default {
     },
   },
 };
+
+window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
