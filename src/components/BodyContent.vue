@@ -20,7 +20,7 @@
           </p>
           <div>
             <h2>Get Started</h2>
-            <span>To interact with Cryptoz you will need to <a href="https://metamask.io/" target="_blank">install Metamask</a> and have a small amount of Ether/BNB in your account.</span>
+            <span>To interact with Cryptoz you will need to <a href="https://metamask.io/" target="_blank">install Metamask</a> and have a small amount of BNB in your account.</span>
           </div>
           <p>
              NFT token collecting and trading is an exciting and new opportunity for classic and modern collectors alike. What makes this platform unique compared to other online digital asset based games or systems are:

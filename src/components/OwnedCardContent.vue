@@ -21,8 +21,8 @@
             </div>
 		        <div class="back">
               <!-- back content -->
-              <!-- div class="card-bg card-bg-back-bsc" -->
-              <div class="card-bg" v-bind:class="classObject">
+              <div class="card-bg card-bg-back-bsc">
+              <!--div class="card-bg" v-bind:class="classObject"-->
 			          <div class="back-container">
 			            <div class="card-txt-black"><span class="font-weight-bold">Cost:</span> {{cost}}</div>
 			            <br>

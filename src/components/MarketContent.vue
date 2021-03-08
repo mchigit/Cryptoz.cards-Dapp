@@ -8,42 +8,20 @@
             <div class="col-6">
               <h3>Cryptoz Cards<br>ERC721 NFT tokens are supported on the following auction marketplaces</h3>
               
-              <a href="https://opensea.io/collection/cryptoz-cards/" target="_blank">
+              <a href="https://treasureland.market/" target="_blank">
                 <div class="market-btn">
-                  <img class="opensea-logo" src="https://opensea.io/static/images/logos/opensea-logo.png" align="absmiddle" /> <span class="opensea-header">OpenSea</span>
+                  <img class="opensea-logo" src="https://treasureland.market/static/media/logo.849b6817.svg" align="absmiddle" /> <span class="opensea-header">TreasureLand</span>
                   <br>
                   <p>
-                    View Cryptoz that are currently available in The world’s largest digital marketplace for crypto collectibles.<br> Buy, sell, and discover exclusive digital assets.
+                    Build the most unique NFT frictionless trading market where users can enjoy the fun of gold mining.
                   </p>
                 </div>
               </a>
-<!--
-              <a href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">
-                <div class="market-btn">
-                  <img class="rb-logo" src="@/assets/256x256_App_Icon_Pink.svg" align="absmiddle" />
-                  <span class="opensea-header">Uniswap</span>
-                  <br>
-                  <p>
-                    Swap CZXP for ETH<br>Earn Fees for providing liquidity.
-                  </p>
-                </div>
-              </a>
--->
             </div>
             
             <div class="col-6">
               <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="@/assets/czxp.png" />) <br>ERC20 tokens are supported on the following token exchanges</h3>
               
-              <a href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">
-                <div class="market-btn">
-                  <img class="uni-logo" src="@/assets/256x256_Black-1.png" align="absmiddle" />
-                   <span class="opensea-header">Uniswap</span>
-                  <br>
-                  <p>
-                    Uniswap Decentralized Ethereum liquidity Exchange - Instant swap - CZXP-ETH. Earn fees by providing liquidity
-                  </p>
-                </div>
-              </a>
             
               <a href="" target="_blank">
                 <div class="market-btn">

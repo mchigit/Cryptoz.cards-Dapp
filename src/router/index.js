@@ -123,7 +123,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:title',
-                    content: 'Cryptoz Cards - Market - Buy and Sell Cryptoz Cards and CZXP tokens with people around the world',
+                    content: 'Cryptoz NFTs - Market - Buy and Sell Cryptoz NFTs and CZXP tokens with people around the world',
                 },
                 {
                     property: 'og:image',
@@ -154,7 +154,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:title',
-                    content: 'Cryptoz Cards - Help - Answers to all your Frequently Asked Questions',
+                    content: 'Cryptoz NFT Cards - Help - Answers to all your Frequently Asked Questions',
                 },
                 {
                     property: 'og:image',
@@ -168,11 +168,11 @@ const router = new Router({
       name: 'TokenContent',
       component: TokenContent,
         meta: {
-          title: 'Cryptoz Cards - View Card - Detailed information about a Cryptoz Card',
+          title: 'Cryptoz NFTs - View NFT - Detailed information about a minted Cryptoz NFT',
           metaTags: [
                 {
                     name: 'description',
-                    content : 'Detailed information about a Cryptoz card. Including owner wallet address'
+                    content : 'Detailed information about a Cryptoz NFT. Including owner wallet address'
                 },
                 {
                     property: 'og:url',
@@ -184,7 +184,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:title',
-                    content: 'Cryptoz Cards - View Card - Detailed information about a Cryptoz Card',
+                    content: 'Cryptoz NFT - View NFT Card - Detailed information about a Cryptoz Card',
                 },
                 {
                     property: 'og:image',

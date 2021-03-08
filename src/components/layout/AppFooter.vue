@@ -29,13 +29,16 @@
 
             <ul class="list-unstyled">
               <li>
-                <a v-bind:class="classObject" href="https://t.me/cryptozcard" target="_blank">Telegram Support</a>
-              </li>
-              <li>
-                <a v-bind:class="classObject" href="https://info.uniswap.org/pair/0x3696e9044b189f16026e3c759aaebb70e31e612c" target="_blank">Uniswap CZXP-ETH Pool</a>
+                <a v-bind:class="classObject" href="https://t.me/cryptozcard" target="_blank">Telegram</a>
               </li>
               <li>
                 <a v-bind:class="classObject" href="https://www.instagram.com/cryptoz.cards/" target="_blank">Instagram</a>
+              </li>
+              <li>
+                <a class="twitter-follow-button" data-show-count="false"
+                    href="https://twitter.com/CryptozNFT">
+                    Follow @CryptozNFT
+                </a>
               </li>
             </ul>
 
