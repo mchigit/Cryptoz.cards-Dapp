@@ -273,12 +273,22 @@ export default {
         showPendingToast(this, 'Loading Store Cards...', {
           autoHideDelay: 1000
         });
+        
+        let instance = await window.Cryptoz.deployed();
+        let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
+        
+        events.get(async (err, logs) => {
+            if (err) { console.error(err) }
+            const typeIdsOnChain = logs.map(e => {
+                return e.args.cardTypeId.c[0];
+            })
+        });
+        
         //reset the view
         this.storeCards = [];
-        // Creates an array [0, 1, 2 ...totalCyptozTypes - 1]
-        const totalCardTypes = parseInt(this.totalCyptozTypes);
-        const indexes = [...Array(totalCardTypes)].map((_,i) => i)
-        const results = await Promise.all(indexes.map(async id => {
+
+        
+        const results = await Promise.all(typeIdsOnChain.map(async id => {
           const cardData = await this.getCard(id + 1);
           if (!cardData || cardData.id  == 74) { //74 is buggy
             return;

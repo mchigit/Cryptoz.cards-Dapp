@@ -27,7 +27,7 @@
             <router-link to="/help">Help</router-link>
           </b-nav-item>
           <b-nav-item v-if="web3isConnected">
-            <b-link href="#" v-b-modal.sponsor-modal>Sponsors</b-link>
+            <b-link href="#" v-b-modal.sponsor-modal>Affiliate</b-link>
           </b-nav-item>
 
           <b-modal
@@ -37,26 +37,6 @@
             title="Sponsor Link"
             hide-footer
           >
-            <b-jumbotron
-              id="sponsor-link-wrapper"
-              class="jumbo"
-              lead="Your Affiliate Link"
-            >
-              <p>Copy the link by clicking the button below.</p>
-              <p>
-                Send the link to your friends so they get a
-                <b>Free Platinum Sponsored Card!</b>
-              </p>
-              <input
-                ref="sponsor"
-                id="sponsor-link"
-                hidden
-                :value="getSponsorRoute"
-              />
-              <b-button v-on:click="copySponsorLink">
-                Copy Link To Clipboard
-              </b-button>
-            </b-jumbotron>
 
             <b-jumbotron class="jumbo" lead="Link Your Sponsor">
               <p>
@@ -94,6 +74,33 @@
                   >You are already linked to sponsor.</b-alert
                 >
             </b-jumbotron>
+            
+            <b-jumbotron
+              id="sponsor-link-wrapper"
+              class="jumbo"
+              lead="Your Affiliate Link"
+            >
+              <p>Copy the link by clicking the button below.</p>
+              <p>
+                Send the link to your friends so they get a
+                <b>Free Platinum Sponsored Card!</b>
+              </p>
+              <input
+                ref="sponsor"
+                id="sponsor-link"
+                hidden
+                :value="getSponsorRoute"
+              />
+              
+              <a class="twitter-share-button" v-bind:href="getTweet" data-size="large">
+                <b-button variant="primary" style="width:26%"><img style="width:13%" src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png"> Tweet your link</b-button>
+              </a>
+              &nbsp;
+              <b-button v-on:click="copySponsorLink">
+                Copy Link To Clipboard
+              </b-button>
+            </b-jumbotron>
+            
           </b-modal>
 
           <transition name="fade" mode="out-in">
@@ -187,6 +194,9 @@ export default {
           ? "localhost:8080"
           : "https://main.cryptoz.cards";
       return `${siteURL}?sponsor=${this.coinbase}`;
+    },
+    getTweet() {
+        return `https://twitter.com/intent/tweet?text=Click my%20sponsor%20link%20to%20 claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,nfts,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
     },
     isSponsorValid() {
       if (this.sponsorAddress.toLowerCase() === this.coinbase.toLowerCase()) {

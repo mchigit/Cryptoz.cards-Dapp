@@ -28,6 +28,10 @@
             <h5 class="text-uppercase">Links</h5>
 
             <ul class="list-unstyled">
+              <li><a class="twitter-follow-button" data-show-count="false"
+                    href="https://twitter.com/CryptozNFT">
+                    Follow @CryptozNFT
+                </a></li>
               <li>
                 <a href="https://t.me/cryptozcard" target="_blank">Telegram Support</a>
               </li>
