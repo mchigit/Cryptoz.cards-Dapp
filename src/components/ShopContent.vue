@@ -266,39 +266,49 @@ export default {
           })
         }
     },
-    getAllTypes: async function(){
+   getAllTypes: async function(){
       try {
+        let instance = await window.Cryptoz.deployed();
+        let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
+
         //Lets get all the cards now
         console.log("Get all the cards...");
         showPendingToast(this, 'Loading Store Cards...', {
           autoHideDelay: 1000
         });
-        
-        let instance = await window.Cryptoz.deployed();
-        let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
-        
-        events.get(async (err, logs) => {
-            if (err) { console.error(err) }
-            const typeIdsOnChain = logs.map(e => {
-                return e.args.cardTypeId.c[0];
-            })
-        });
-        
         //reset the view
         this.storeCards = [];
 
+        events.get(async (err, logs) => {
+          if(err){console.error(err)}
+
+
+          const typeIdsOnChain = logs.map(e => {
+            return e.args.cardTypeId.c[0];
+          })
+
+          //console.log("list of Ids from logs:",typeIdsOnChain);
         
-        const results = await Promise.all(typeIdsOnChain.map(async id => {
-          const cardData = await this.getCard(id + 1);
-          if (!cardData || cardData.id  == 74) { //74 is buggy
-            return;
+          const results = await Promise.all(
+
+              typeIdsOnChain.map(async id => {
+                              //console.log("getting card:",id);
+                              const cardData = await this.getCard(id);
+            
+                  if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop
+                      return;
+                  }
+                  //console.log("results:",results);
+                  return this.addIsOwnedProp(cardData);
+              })
+              
+          )
+          this.storeCards = results.filter(result => result !== undefined);
+          if (this.storeCards.length > 0) {
+            showSuccessToast(this, 'Finished Loading Shop.');
           }
-          return this.addIsOwnedProp(cardData);
-        }))
-        this.storeCards = results.filter(result => result !== undefined);
-        if (this.storeCards.length > 0) {
-          showSuccessToast(this, 'Finished Loading Shop.');
-        }
+        })
+
       } catch (err) {
         console.log("Error loading cards: ", err);
         showErrorToast(this, "Failed to load shop.");
