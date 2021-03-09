@@ -3,7 +3,7 @@
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>The Cryptoz NFT Universe</h1>
-          <p class="lead">Cryptoz is a blockchain based NFT collectibles trade game.</p>
+          <p class="lead">Cryptoz is a BSC blockchain based NFT collectibles trade game.</p>
           <img class="img-responsive card-demo-group" src="@/assets/cryptokeeper_card_types.png" />
           <p>
           <h2>The CryptoZ eXPerience Token Generation Event is LIVE</h2>
@@ -16,7 +16,7 @@
             </form>
           </p>
           <p>
-            The goal is to collect the undead and earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each ERC-721 Cryptoz card is a unique token on each blockchain. Collectors can buy, sell, and exchange both their Cryptoz cards and CZXP tokens through any standards compliant wallets, markets, game engines,  exchanges, DeFi and other future inventions.
+            The goal is to collect the rare and unique undead NFT cards, earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each minted NFT Cryptoz card is a unique token on the Binance Smart Chain. Collectors can buy, sell, and exchange both their Cryptoz NFT cards and CZXP tokens through any standards compliant wallets, markets, game engines,  exchanges, DeFi and other future inventions.
           </p>
           <div>
             <h2>Get Started</h2>
@@ -26,9 +26,9 @@
              NFT token collecting and trading is an exciting and new opportunity for classic and modern collectors alike. What makes this platform unique compared to other online digital asset based games or systems are:
           </p>
           <ul>
-            <li>Cryptoz NFT Cards functions and data are a set of Smart Contracts that run independantly of the creators. There is no OFF switch. The Cryptoz Universe will live forever on the blockchains</li>
-            <li>The developers can Not tamper or change the Card types once they are loaded. i.e: no re-minting rare cards</li>
-            <li>The cards are truly unique, owned and transferable between wallets manaully or automated through NFT auction marketplaces.</li>
+            <li>Cryptoz NFT Card functions and data are a set of Smart Contracts that run independantly of the creators. There is no OFF switch. The Cryptoz NFT Universe will live forever on the Binance Smart Chain</li>
+            <li>The developers can Not tamper or change the Card types once they are loaded. i.e: no re-minting scarce NFTs</li>
+            <li>The NFTs are truly unique, owned and transferable between wallets manaully or automated through NFT auction marketplaces.</li>
           </ul>
           <p><router-link to="/help">Visit the Help section</router-link> of our website to read more</p>
       </div>
