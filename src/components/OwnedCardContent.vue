@@ -55,16 +55,6 @@ export default {
             return '#FFFF33'; //yellow
         }
     },
-    classObject : function () {
-        //return {
-            //console.log("Hey bg ", this.$store.state.web3.chainId);
-            if (this.$store.state.web3.chainId == 0x38 || this.$store.state.web3.chainId == 0x61) { //BNB 0x38/0x61
-                return 'card-bg-back-bsc';
-            }else{
-                return 'card-bg-back'; //ether bg
-            }
-        //}
-    }
   },
 }
 </script>

@@ -94,32 +94,44 @@
             :image="card.image"
             :card_class="card.rarity"
           ></OwnedCardContent>
-          <div
-            v-if="!card.isOwned"
-            id="buy-get-button-wrapper"
-            :class="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp) ? 'disabled-btn' : ''"
-          >
-            <div v-if="card.cost > 0" id="buyBtnwrapper" v-b-tooltip.hover="buyBtnTooltipText(card.cost, card.unlock_czxp)">
-              <button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" class="btn btn-danger" v-on:click="buyCard(card)">
-                Mint NFT for {{card.cost}}E <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
-              </button>
-            </div>
-            <div v-else id="getBtnwrapper" v-b-tooltip.hover="getBtnTooltipText(card.unlock_czxp)">
-              <button id="get-button"  class="btn btn-danger" :disabled="czxpBalance < parseInt(card.unlock_czxp)" v-on:click="getCardForFree(card.type_id)">
-                    Mint for FREE <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
-              </button>
-            </div>
-          </div>
-          <div
-            v-if="card.isOwned"
-            id="owned-button-wrapper"
-            v-b-tooltip.hover="getOwnedCardToolTipText"
+         <div
+            v-if="card.soldOut == 1"
+            id="sold-button-wrapper"
+            v-b-tooltip.hover="getSoldCardToolTipText"
             class="disabled-btn"
           >
-            <button id="owned-button" disabled class="btn btn-info">
-               <b-icon-lock-fill></b-icon-lock-fill> You already own this.
+            <button id="owned-button" disabled class="btn btn-danger">
+            SOLD OUT !
             </button>
           </div>
+          <div v-else>
+              <div
+                v-if="!card.isOwned"
+                id="buy-get-button-wrapper"
+                :class="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp) ? 'disabled-btn' : ''"
+              >
+                <div v-if="card.cost > 0" id="buyBtnwrapper" v-b-tooltip.hover="buyBtnTooltipText(card.cost, card.unlock_czxp)">
+                  <b-button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" variant="primary" v-on:click="buyCard(card)">
+                    Mint {{card.soldOut}}NFT for {{card.cost}} BNB <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                  </b-button>
+                </div>
+                <div v-else id="getBtnwrapper" v-b-tooltip.hover="getBtnTooltipText(card.unlock_czxp)">
+                  <button id="get-button"  class="btn btn-primary" :disabled="czxpBalance < parseInt(card.unlock_czxp)" v-on:click="getCardForFree(card.type_id)">
+                        Mint for FREE <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                  </button>
+                </div>
+              </div>
+              <div
+                v-if="card.isOwned"
+                id="owned-button-wrapper"
+                v-b-tooltip.hover="getOwnedCardToolTipText"
+                class="disabled-btn"
+              >
+                <button id="owned-button" disabled class="btn btn-info">
+                   <b-icon-lock-fill></b-icon-lock-fill> You already own this.
+                </button>
+              </div>
+        </div>
         </div>
       </div>
     </div>
@@ -197,9 +209,10 @@ export default {
       allCards : {}, //We never mangle this,
       buyBtnTooltipTextContent: 'Click to buy a copy of this card',
       buyBtnBlockedTooltipTextContent:'You do not have enough Ether or CZXP tokens to purchase this card',
-      getBtnTooltipTextContent: 'Click to get a copy of this card at no cost',
-      getBtnBlockedTooltipTextContent: 'You do not have enough CZXP tokens to unlock this button and claim this Free card',
-      getOwnedCardToolTipText: 'You can only purchase/claim 1 card of each type'
+      getBtnTooltipTextContent: 'Click to mint a copy of this card at no cost',
+      getBtnBlockedTooltipTextContent: 'You do not have enough CZXP tokens to unlock minting an NFT of this type',
+      getOwnedCardToolTipText: 'You can only mint 1 card of each type',
+      getSoldCardToolTipText: 'All NFTs of this type have been minted, check markets'
     }
   },
   async mounted() {
@@ -293,7 +306,7 @@ export default {
           const results = await Promise.all(
 
               typeIdsOnChain.map(async id => {
-                              console.log("getting card:",id);
+                              //console.log("getting card:",id);
                               const cardData = await this.getCard(id);
             
                   if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop
@@ -374,8 +387,14 @@ export default {
         return instance.cardTypeToEdition(cardObj.id);
       })
       .then((result) => {
+      
+          //Set soldOut flag first
+          if(parseInt(result) == cardObj.edition_total){
+              cardObj.soldOut = 1;
+          }
+          
+          //Set human readable edition total
           cardObj.edition_total =  parseInt(result).toLocaleString() + '/' + cardObj.edition_total;
-//TODO : Add a SOLD OUT banner when result = edition_total
       })
       .catch(err => {
         console.error('Error getting NFTs minted:', err);
@@ -441,7 +460,8 @@ export default {
     opacity: 0;
   }
   #buy-get-button-wrapper,
-  #owned-button-wrapper{
+  #owned-button-wrapper,
+  #sold-button-wrapper {
     position: relative;
     text-align: center;
     height: 45px;
@@ -456,11 +476,22 @@ export default {
     transform: translateX(-50%);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #dc3545;
+    border-bottom: 10px solid #007bff;
   }
   
   #owned-button-wrapper::before {
     border-bottom: 10px solid #17a2b8;
+  }
+  
+  #sold-button-wrapper::before {
+    content: '';
+    position: absolute;
+    top:-10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #dc3545;
   }
 
   .disabled-btn::before {
