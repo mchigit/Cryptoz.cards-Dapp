@@ -112,7 +112,7 @@
               >
                 <div v-if="card.cost > 0" id="buyBtnwrapper" v-b-tooltip.hover="buyBtnTooltipText(card.cost, card.unlock_czxp)">
                   <b-button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" variant="primary" v-on:click="buyCard(card)">
-                    Mint {{card.soldOut}}NFT for {{card.cost}} BNB <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                    Mint NFT for {{card.cost}} BNB <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
                   </b-button>
                 </div>
                 <div v-else id="getBtnwrapper" v-b-tooltip.hover="getBtnTooltipText(card.unlock_czxp)">
@@ -208,7 +208,7 @@ export default {
       totalCreditsToBuy : 1,
       allCards : {}, //We never mangle this,
       buyBtnTooltipTextContent: 'Click to buy a copy of this card',
-      buyBtnBlockedTooltipTextContent:'You do not have enough Ether or CZXP tokens to purchase this card',
+      buyBtnBlockedTooltipTextContent:'You do not have enough BNB or CZXP tokens to purchase this card',
       getBtnTooltipTextContent: 'Click to mint a copy of this card at no cost',
       getBtnBlockedTooltipTextContent: 'You do not have enough CZXP tokens to unlock minting an NFT of this type',
       getOwnedCardToolTipText: 'You can only mint 1 card of each type',
@@ -295,7 +295,7 @@ export default {
 
         events.get(async (err, logs) => {
           if(err){console.error(err)}
-console.log("HEYEEEEE G",logs);
+
           const typeIdsOnChain = logs.map(e => {
             return e.args.cardTypeId.c[0];
           })
@@ -305,7 +305,7 @@ console.log("HEYEEEEE G",logs);
           const results = await Promise.all(
 
               typeIdsOnChain.map(async id => {
-                              console.log("getting card:",id);
+                              //console.log("getting card:",id);
                               const cardData = await this.getCard(id);
             
                   if (!cardData || cardData.id  == 74) { //keep 74 hidden from shop
