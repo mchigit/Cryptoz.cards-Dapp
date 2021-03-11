@@ -42,7 +42,7 @@
       <p>
         <UniverseBalances></UniverseBalances>
       </p>
-      <h1><b-icon-tag-fill /> Shop</h1>
+      <h1><b-icon-tag-fill /> Minting Shop</h1>
       <p>
         The Shop is a place to mint limited edition Cryptoz Cards NFT tokens. Some cards
         are free, some have a cost. You may also buy and <router-link to="/crypt">open a booster card</router-link>,
@@ -58,7 +58,7 @@
             class="btn btn-danger"
             v-bind:disabled="balance < 2000000000000000"
             v-b-modal.buy-boosters-modal
-            >Buy <b-icon-lightning-fill />  Booster Credits @ 0.002E</b-button>
+            >Buy <b-icon-lightning-fill />  Booster Credits @ 0.002 BNB</b-button>
           <transition name="fade">
             <span v-if="showSpinner==1">
               <img src="@/assets/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
@@ -112,12 +112,12 @@
               >
                 <div v-if="card.cost > 0" id="buyBtnwrapper" v-b-tooltip.hover="buyBtnTooltipText(card.cost, card.unlock_czxp)">
                   <b-button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" variant="primary" v-on:click="buyCard(card)">
-                    Mint NFT for {{card.cost}} BNB <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                    <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill> Mint NFT for {{card.cost}} BNB
                   </b-button>
                 </div>
                 <div v-else id="getBtnwrapper" v-b-tooltip.hover="getBtnTooltipText(card.unlock_czxp)">
                   <button id="get-button"  class="btn btn-primary" :disabled="czxpBalance < parseInt(card.unlock_czxp)" v-on:click="getCardForFree(card.type_id)">
-                        Mint for FREE <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill>
+                    <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill> Mint for FREE
                   </button>
                 </div>
               </div>
@@ -128,7 +128,7 @@
                 class="disabled-btn"
               >
                 <button id="owned-button" disabled class="btn btn-info">
-                   <b-icon-lock-fill></b-icon-lock-fill> You already own this.
+                 You already minted one
                 </button>
               </div>
         </div>
@@ -185,6 +185,7 @@ export default {
         if (this.pendingTransaction === newValue.blockHash) {
           this.showSpinner = 0;
           this.transactionStatus = 'Confirmed! balance updated';
+          this.getAllTypes();
         }
       }
     },
@@ -232,8 +233,9 @@ export default {
       window.Cryptoz.deployed().then((instance) => {
         return instance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)});
       }).then((res) => {
-        this.showTransaction =1
-        this.$store.dispatch('updateOwnerBalances')
+        this.showTransaction = 1;
+        this.getAllTypes();
+        this.$store.dispatch('updateOwnerBalances');
       })
     },
     getCardForFree : function(type_id){
@@ -283,7 +285,8 @@ export default {
     getAllTypes: async function(){
       try {
         let instance = await window.Cryptoz.deployed();
-        let events = await instance.LogCardTypeLoaded({},{fromBlock: 5566450});
+        //let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
+        let events = await instance.LogCardTypeLoaded({},{fromBlock: 5566450, toBlock:5568616});
 
         //Lets get all the cards now
         console.log("Get all the cards...");

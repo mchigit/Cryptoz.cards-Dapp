@@ -8,7 +8,7 @@
       <p><strong>{{totalCryptozTypes}} Mintable types</strong> in shop and boosters</p>
     </b-col>
     <b-col class="text-right">
-      <p><strong>{{totalCryptozSupply}} NFT tokens </strong> in the Universe</p>
+      <p><strong>{{totalCryptozSupply}} NFTs </strong> in the Universe</p>
     </b-col>
   </b-row>
   

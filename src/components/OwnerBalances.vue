@@ -2,10 +2,10 @@
   
   <b-row>
     <b-col>
-      <strong>Your Boosters :</strong> {{boosters_owned}}
+      <strong>Owned Booster credits :</strong> {{boosters_owned}}
     </b-col>
     <b-col class="text-center">
-      <strong>Your Cryptoz:</strong> {{cards_owned}}
+      <strong>Owned Cryptoz NFTs :</strong> {{cards_owned}}
     </b-col>
     <b-col class="text-right">
       <strong>Your CZXP Balance :</strong> {{parseInt(czxp_balance).toLocaleString()}}
