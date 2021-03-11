@@ -8,11 +8,14 @@
           <p>
           <h2>The CryptoZ eXPerience Token Generation Event is LIVE</h2>
             <form class="form-inline">
-                <div class="mx-sm-3 mb-2">( Max. 1 per wallet )
+                <div class="mx-sm-3 mb-2">( Max. 1 BNB per wallet )
                     <input id="czxp-amt" class="form-control" type="text" placeholder="Enter spend amount" v-model="totalCzxpToBuy" v-on:input="totalCzxpToBuy = $event.target.value" v-on:keyup="filterCzxpInput">
                 </div>
                 <button id="buy-czxp-btn" type="button" class="btn btn-success" v-on:click="buyCzxp" v-bind:disabled="buyCzxpBtnEnabled == false">Buy CZXP tokens
-                </button>
+                </button><br/><br/>
+                <p>1 BNB = 10,000,000 CZXP ( used to unlock minting Shop Cards )<br/>
+                    The TGE is hard capped at 100 wallets.
+                </p>
             </form>
           </p>
           <p>

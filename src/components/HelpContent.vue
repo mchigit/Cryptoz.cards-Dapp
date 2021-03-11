@@ -33,12 +33,12 @@
                   <ul>
                     <li>
                       The
-                      <a href="https://metamask.io/" target="_blank"
+                      <a href="https://docs.binance.org/smart-chain/wallet/metamask.html" target="_blank"
                         >Metamask</a
                       >
-                      Chrome browser extension, or other  Ethereum wallet
+                      Chrome browser extension, or other  Binance wallet
                     </li>
-                    <li>A balance of Ether coins ( the money of Ethereum )</li>
+                    <li>A balance of BNB coins ( the money of Binance Smart Chain )</li>
                   </ul>
                   <p>
                     You may then Log in with your wallet and
@@ -46,14 +46,14 @@
                     cards, buy limited edition cards and claim Free limited
                     editions cards from <router-link to="/shop">the Shop.</router-link> You may then browse the contents of
                     <router-link to="/crypt">Your Crypt</router-link>, sacrifice
-                    cards from your Crypt for czxp tokens, or gift them to other Ethereum
+                    cards from your Crypt for czxp tokens, or gift them to other BSC
                     accounts. If you would like to
-                    <router-link to="/market">auction</router-link> your Cryptoz
-                    for profits, you may list them on OpenSea or other
+                    <router-link to="/market">auction</router-link> your Cryptoz NFTs
+                    for profits, you may list them on
                     <router-link to="/market"
                       >supported marketplaces</router-link
                     >. You can also trade and sell your CZXP on supported
-                    <router-link to="/market">Ethereum token exchanges.</router-link>
+                    <router-link to="/market">BSC token exchanges.</router-link>
                   </p>
                 </div>
               </b-card-body>
@@ -101,7 +101,7 @@
               role="tab"
             >
               <b-button block v-b-toggle.accordion-2 class="accordion-button"
-                >How can I get Ether?</b-button
+                >How can I get BNB?</b-button
               >
             </b-card-header>
             <b-collapse
@@ -111,18 +111,16 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  You will need to buy Ether or have it sent to your wallet. The
-                  quickest way to buy Ether is to:
+                  You will need to buy BNB or have it sent to your wallet. The
+                  quickest way to buy BNB is to:
                   <ul>
-                    <li>Open Metamask</li>
-                    <li>Click Buy</li>
-                    <li>Follow instructions</li>
+                    <li><a href="https://www.binance.com/" target="_blank">Trade at Binance</a></li>
                   </ul>
-                  As of this writing, the transaction cost by Ethereum (gas) to
-                  interact with Cryptoz will cost approx $0.05 to $1.50 USD per
+                  As of this writing, the transaction cost by BSC (gas) to
+                  interact with Cryptoz will cost approx $0.10 to $2.50 USD per
                   transaction, depending on how fast you would like the
                   transactions confirmed and what exactly you are trying to do.
-                  This fee is not charged by Cryptoz, but by the Ethereum
+                  This fee is not charged by Cryptoz, but by the BSC
                   platform to execute contract code for you by you on this massive worldscale
                   computer
                 </div>
