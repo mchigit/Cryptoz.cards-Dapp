@@ -163,7 +163,7 @@
                 </div>
               </div>
             </div>
-            <div v-else><h2>You do not own any Cryptoz<br><router-link to="/shop">To get Free Cryptoz or Buy one, visit the Shop</router-link></h2></div>
+            <div v-else><h2>You do not own any Cryptoz<br><router-link to="/shop">To get Free Cryptoz NFTs or Buy one, visit the Minting Shop</router-link></h2></div>
         </div>
   </div>
 </template>
@@ -280,7 +280,7 @@ export default {
       const h = this.$createElement
       const titleVNode = h('h5', `Gift Cryptoz NFT Token #${id} to another address`, { class: ['modal-title'] })
       const messageVNode = h('div', { class: ['modal-message'] }, [
-        h('p', 'Enter a valid Ethereum address to send this card to:', { class: [''] }),
+        h('p', 'Enter a valid BSC wallet address to send this card to:', { class: [''] }),
         h('input', {
           on: { input: e => this.receivingWallet = e.target.value },
           props: {

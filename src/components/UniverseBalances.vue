@@ -2,7 +2,7 @@
   
   <b-row>
     <b-col cols="5" class="text-left">
-      <p><img class="czxp-logo" src="@/assets/czxp.png" /> <strong>{{totalCzxpSupply}} CZXP tokens</strong> in the Universe</p>
+      <p><img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" /> <strong>{{totalCzxpSupply}} CZXP tokens</strong> in the Universe</p>
     </b-col>
     <b-col class="text-center">
       <p><strong>{{totalCryptozTypes}} Mintable types</strong> in shop and boosters</p>

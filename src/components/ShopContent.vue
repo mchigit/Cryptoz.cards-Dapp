@@ -390,6 +390,11 @@ export default {
       })
       .then((result) => {
       
+            if(cardObj.id == 102){ //dragon edition limit bug ?
+                cardObj.soldOut = 1;
+                cardObj.edition_total = 5;
+            }
+            
           //Set soldOut flag first
           if(parseInt(result) == cardObj.edition_total){
               cardObj.soldOut = 1;
