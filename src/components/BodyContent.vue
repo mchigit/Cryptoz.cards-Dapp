@@ -3,7 +3,7 @@
         <main role="main" class="container">
         <div class="jumbotron">
           <h1>The Cryptoz NFT Universe</h1>
-          <p class="lead">Cryptoz is a BSC blockchain based NFT collectibles trade game.</p>
+          <p class="lead">Cryptoz is an NFT collectibles trade game built on scarcity, rarity and community</p>
           <img class="img-responsive card-demo-group" src="@/assets/cryptokeeper_card_types.png" />
           <p>
           <h2>The CryptoZ eXPerience Token Generation Event is LIVE</h2>

@@ -116,13 +116,13 @@
                   <ul>
                     <li><a href="https://www.binance.com/" target="_blank">Trade at Binance</a></li>
                   </ul>
-                  As of this writing, the transaction cost by BSC (gas) to
-                  interact with Cryptoz will cost approx $0.10 to $2.50 USD per
+                  As of this writing, the transaction cost by the Binance Smart Chain (gas) to
+                  interact with Cryptoz will cost approx $0.60 to $25.50 USD per
                   transaction, depending on how fast you would like the
                   transactions confirmed and what exactly you are trying to do.
-                  This fee is not charged by Cryptoz, but by the BSC
+                  This fee is not charged by Cryptoz, but by the Binance Smart Chain
                   platform to execute contract code for you by you on this massive worldscale
-                  computer
+                  computer.
                 </div>
               </b-card-body>
             </b-collapse>
@@ -172,7 +172,7 @@
               role="tab"
             >
               <b-button block v-b-toggle.accordion-4 class="accordion-button"
-                >What are ERC-20 and ERC-721 tokens?</b-button
+                >What are BEP-20 and BEP-721 tokens?</b-button
               >
             </b-card-header>
             <b-collapse
@@ -182,14 +182,14 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  <p>Cryptoz.cards utilize 2 types of Ethereum tokens:</p>
+                  <p>Cryptoz.cards utilize 2 types of BSC tokens:</p>
                   <p>
-                    <img class="czxp-logo" src="@/assets/czxp.png" /> <strong>CZXP - CryptoZ eXPerience Tokens</strong> are ERC-20
+                    <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" /> <strong>CZXP - CryptoZ eXPerience Tokens</strong> are BEP-20
                     Fungible tokens. This means that any CZXP is exchangeable with
                     any other CZXP token and none are unique.
                   </p>
                   <p>
-                    <strong>Cryptoz</strong> the cards themselves are ERC-721
+                    <strong>Cryptoz</strong> the cards themselves are BEP-721
                     Non-Fungible tokens (NFTs). This means that each card is a unique
                     token. Even the Unlimited Booster cards that are minted in an
                     infinite supply are each unique, they have a unique token
@@ -221,7 +221,7 @@
                   the current total number of Cryptoz types available at the
                   current time. We will continue to load new sets containing approx
                   10-20 cards every month until we reach the hard limit of a
-                  total of 5000 types. The Ethereum contracts do not allow us or
+                  total of 5000 types. The BSC contracts do not allow us or
                   anyone to edit or overwrite a card types definition once they
                   have been loaded.
                 </div>
@@ -248,15 +248,15 @@
                 <div class="card-body">
                   <ul>
                     <li>
-                      An <strong>Unlimited edition</strong> card type will ONLY
+                      An <strong>Unlimited edition</strong> NFT card type will ONLY
                       appear in the booster cards. These cards have an edition
                       number starting at #1 and count up infinitely.
                     </li>
                     <li>
-                      A <strong>limited edition</strong> card is minted from the
+                      A <strong>limited edition</strong> NFT card is minted from the
                       Shop and have a finite amount that will ever be created.
-                      You will see the current edition number on the card in a
-                      format like : #32 of 200
+                      You will see the current edition number on the NFT in a
+                      format like : #2 of 6
                     </li>
                   </ul>
                 </div>
@@ -271,7 +271,7 @@
             >
               <b-button block v-b-toggle.accordion-7 class="accordion-button">
                 How can I get more
-                <img class="czxp-logo" src="@/assets/czxp.png" /> CZXP tokens
+                <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" /> CZXP tokens
                 ?</b-button
               >
             </b-card-header>
@@ -304,13 +304,13 @@
                     <li>
                       Buy or exchange czxp on
                       <router-link to="/market"
-                        >supported ERC20 token exchanges</router-link
+                        >supported BEP-20 token exchanges</router-link
                       >
                     </li>
                     <li>Request them from other players</li>
                     <li>
                       Receive 20% of the amount earned by your affiliates
-                      purchase actions
+                      purchase actions. Click the Affiliate link in the header for more information.
                     </li>
                   </ul>
                 </div>
