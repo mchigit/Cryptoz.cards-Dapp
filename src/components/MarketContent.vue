@@ -13,6 +13,7 @@
                   <img class="opensea-logo" src="https://treasureland.market/static/media/logo.849b6817.svg" align="absmiddle" /> <span class="opensea-header">TreasureLand</span>
                   <br>
                   <p>
+                    <strong>Coming Soon</strong><br/>
                     Build the most unique NFT frictionless trading market where users can enjoy the fun of gold mining.
                   </p>
                 </div>

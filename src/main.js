@@ -12,7 +12,7 @@ Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.use(Clipboard)
 Vue.use(VueGtm, {
-  id: 'GTM-XXXXXXX', // Your GTM single container ID or array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy']
+  id: 'GTM-KPK6R7R', // Your GTM single container ID or array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy']
 /*
 queryParams: { // Add url query string when load gtm.js with GTM ID (optional)
     gtm_auth:'AB7cDEf3GHIjkl-MnOP8qr',

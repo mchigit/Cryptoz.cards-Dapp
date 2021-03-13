@@ -6,24 +6,22 @@
           <p class="lead">Cryptoz is an NFT collectibles trade game built on scarcity, rarity and community</p>
           <img class="img-responsive card-demo-group" src="@/assets/cryptokeeper_card_types.png" />
           <p>
-          <h2>The CryptoZ eXPerience Token Generation Event is LIVE</h2>
-            <form class="form-inline">
-                <div class="mx-sm-3 mb-2">( Max. 1 BNB per wallet )
-                    <input id="czxp-amt" class="form-control" type="text" placeholder="Enter spend amount" v-model="totalCzxpToBuy" v-on:input="totalCzxpToBuy = $event.target.value" v-on:keyup="filterCzxpInput">
-                </div>
-                <button id="buy-czxp-btn" type="button" class="btn btn-success" v-on:click="buyCzxp" v-bind:disabled="buyCzxpBtnEnabled == false">Buy CZXP tokens
-                </button><br/><br/>
-                <p>1 BNB = 10,000,000 CZXP ( used to unlock minting Shop Cards )<br/>
-                    The TGE is hard capped at 100 wallets.
+          <h2>The CryptoZ eXPerience Token Generation Event has ended.<br/> Welcome to the next Epoch.</h2>
+<br/><br/>
+                <p>The mint rate was 1 BNB = 10,000,000 CZXP<br/>
+                    The TGE was hard capped at 100 contributing wallets.
+                </p>
+                <p>The quickest way to earn CZXP is through your affiliate network. Use the Afiliate link in the top menu, and check the <router-link to="/help">help section</router-link> for all the ways to earn or purchase czxp from <router-link to="/market">the markets</router-link>
                 </p>
             </form>
           </p>
+          <h2>Time to have some fun</h2>
           <p>
             The goal is to collect the rare and unique undead NFT cards, earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each minted NFT Cryptoz card is a unique token on the Binance Smart Chain. Collectors can buy, sell, and exchange both their Cryptoz NFT cards and CZXP tokens through any standards compliant wallets, markets, game engines,  exchanges, DeFi and other future inventions.
           </p>
           <div>
             <h2>Get Started</h2>
-            <span>To interact with Cryptoz you will need to <a href="https://metamask.io/" target="_blank">install Metamask</a> and have a small amount of BNB in your account.</span>
+            <span>To interact with Cryptoz you will need to <a href="https://docs.binance.org/smart-chain/wallet/metamask.html" target="_blank">install Metamask configured for the Binance Smart Chain</a> and have a small amount of BNB in your account.</span>
           </div>
           <p>
              NFT token collecting and trading is an exciting and new opportunity for classic and modern collectors alike. What makes this platform unique compared to other online digital asset based games or systems are:

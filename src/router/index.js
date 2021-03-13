@@ -17,11 +17,11 @@ const router = new Router({
       name: 'BodyContent',
       component: BodyContent,
       meta: {
-          title: 'Cryptoz Cards - Where the dead live forever on the Blockchain',
+          title: 'The Cryptoz NFT Universe - Where the dead live forever on the Blockchain',
           metaTags: [
                 {
                     name: 'description',
-                    content : 'A Universe of limited edition ERC-721 NFT collectible zombie cards stored in your Ethereum blockchain wallet'
+                    content : 'A Universe of limited edition BEP-721 NFT collectible zombie cards stored in your BSC blockchain wallet'
                 },
                 {
                     property: 'og:url',

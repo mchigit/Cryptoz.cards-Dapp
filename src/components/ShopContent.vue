@@ -285,8 +285,9 @@ export default {
     getAllTypes: async function(){
       try {
         let instance = await window.Cryptoz.deployed();
-        //let events = await instance.LogCardTypeLoaded({},{fromBlock: 0});
-        let events = await instance.LogCardTypeLoaded({},{fromBlock: 5566450, toBlock:5568616});
+        let events = await instance.LogCardTypeLoaded({},{fromBlock: 'latest'});
+        //let events = await instance.LogCardTypeLoaded({'cardTypeId':[81,103]},{address:0x60D7a79367B35573B27E4F020794AEF299E9fd49});
+    
 
         //Lets get all the cards now
         console.log("Get all the cards...");
@@ -299,11 +300,15 @@ export default {
         events.get(async (err, logs) => {
           if(err){console.error(err)}
 
-          const typeIdsOnChain = logs.map(e => {
+          let typeIdsOnChain = logs.map(e => {
             return e.args.cardTypeId.c[0];
           })
 
           //console.log("list of Ids from logs:",typeIdsOnChain);
+          
+        //Dirty hack until we figure this event log shite out
+         typeIdsOnChain.push(4,5,8,22,29,31,45,56,81,101,102,103);
+          
         
           const results = await Promise.all(
 
@@ -390,9 +395,26 @@ export default {
       })
       .then((result) => {
       
+            //Edition bug hack
             if(cardObj.id == 102){ //dragon edition limit bug ?
                 cardObj.soldOut = 1;
                 cardObj.edition_total = 5;
+            }
+            if(cardObj.id == 103){ //bleeding fury edition limit bug ?
+                cardObj.soldOut = 1;
+                cardObj.edition_total = 1;
+            }
+            if(cardObj.id == 5){ //stu bug ?
+                cardObj.soldOut = 1;
+                cardObj.edition_total = 110;
+            }
+            if(cardObj.id == 22){ //thrny bug ?
+                cardObj.soldOut = 1;
+                cardObj.edition_total = 179;
+            }
+            if(cardObj.id == 56){ //shroom ?
+                cardObj.soldOut = 1;
+                cardObj.edition_total = 112;
             }
             
           //Set soldOut flag first
