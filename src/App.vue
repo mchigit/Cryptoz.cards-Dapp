@@ -22,6 +22,7 @@ const {web3} = window
 const Torus = require("@toruslabs/torus-embed");
 const Portis = require("@portis/web3");
 const Fortmatic = require("fortmatic");
+import './main.css'
 
 const testEnv = true
 
@@ -179,7 +180,7 @@ export default {
     },
     onConnect: async function() {
       const web3Modal = new Web3Modal({
-        cacheProvider: true, // optional
+        // cacheProvider: true, // optional
         providerOptions
       });
 
@@ -237,6 +238,10 @@ export default {
   .toast-message {
     margin-left: 10px;
     font-size: 20px;
+  }
+
+  .web3modal-modal-card {
+    margin-top: 150px;
   }
   
   /* BINANCE color #F0B90B */

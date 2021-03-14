@@ -22,8 +22,6 @@
             
             <div class="col-6">
               <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" />) <br>BEP-20 tokens are supported on the following token exchanges</h3>
-              
-            
               <a href="" target="_blank">
                 <div class="market-btn">
                   <img class="uni-logo" src="@/assets/pancakeswap-cake-logo.png" align="absmiddle" />
