@@ -44,12 +44,12 @@
                     You may then Log in with your wallet and
                     <router-link to="/shop">Shop</router-link> for Booster
                     cards, buy limited edition cards and claim Free limited
-                    editions cards from <router-link to="/shop">the Shop.</router-link> You may then browse the contents of
-                    <router-link to="/crypt">Your Crypt</router-link>, sacrifice
-                    cards from your Crypt for czxp tokens, or gift them to other BSC
+                    editions cards from <router-link to="/shop">the Minting Shop.</router-link> You may then browse the contents of
+                    <router-link to="/crypt">Your NFT Crypt</router-link>, sacrifice
+                    cards from your Crypt for $CZXP tokens, or gift them to other BSC
                     accounts. If you would like to
                     <router-link to="/market">auction</router-link> your Cryptoz NFTs
-                    for profits, you may list them on
+                    , you may list them on
                     <router-link to="/market"
                       >supported marketplaces</router-link
                     >. You can also trade and sell your CZXP on supported
