@@ -6,7 +6,7 @@
           
           <div class="row">
             <div class="col-6">
-              <h3>Cryptoz Cards<br>ERC721 NFT tokens are supported on the following auction marketplaces</h3>
+              <h3>Cryptoz Cards<br>BEP-721 NFT tokens are supported on the following auction marketplaces</h3>
               
               <a href="https://treasureland.market/" target="_blank">
                 <div class="market-btn">
@@ -21,7 +21,7 @@
             </div>
             
             <div class="col-6">
-              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="@/assets/czxp.png" />) <br>ERC20 tokens are supported on the following token exchanges</h3>
+              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" />) <br>BEP-20 tokens are supported on the following token exchanges</h3>
               
             
               <a href="" target="_blank">
