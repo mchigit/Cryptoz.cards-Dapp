@@ -58,17 +58,19 @@
                 <b-input-group-append>
                   <b-button
                     variant="success"
-                    :disabled="!isSponsorValid"
+                    :disabled="!isSponsorValid || sponsorAddress === ''"
                     v-on:click="linkSponsor"
                     >Link</b-button
                   >
                 </b-input-group-append>
-               <b-form-invalid-feedback v-if="notSameSponsorError">
-                  <div>Please enter a valid address.</div>
-                </b-form-invalid-feedback>
-                <b-form-invalid-feedback v-else>
-                  <div>You can't link your own wallet.</div>
-                </b-form-invalid-feedback>
+                <div v-if="sponsorAddress !== ''">
+                  <b-form-invalid-feedback v-if="notSameSponsorError">
+                    <div>Please enter a valid address.</div>
+                  </b-form-invalid-feedback>
+                  <b-form-invalid-feedback v-else>
+                    <div>You can't link your own wallet.</div>
+                  </b-form-invalid-feedback>
+                </div>
               </b-input-group>
                 <b-alert v-else variant="success" show
                   >You are already linked to sponsor wallet.</b-alert
@@ -94,7 +96,7 @@
               
               
               <a class="twitter-share-button" v-bind:href="getTweet" data-size="large">
-                <b-button variant="primary" style="width:26%"><img style="width:13%" src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png"> Tweet your link</b-button>
+                <b-button variant="primary" style="width:26%"><img style="width:30px" src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png"> Tweet your link</b-button>
               </a>
               &nbsp;
               <b-button v-on:click="copySponsorLink">
@@ -124,39 +126,40 @@
             </li>
           </transition>
 
-          <b-button
-            id="connect-button"
-            v-if="!web3isConnected"
-            variant="primary"
-            v-on:click="$emit('on-connect')"
-          >
-            Connect To Blockchain
-          </b-button>
+          <li id="connect-button">
+            <b-button
+              v-if="!web3isConnected"
+              variant="primary"
+              v-on:click="$emit('on-connect')"
+              v-b-toggle.nav-collapse
+            >
+              Connect To Blockchain
+            </b-button>
+          </li>
+
+          <li id="bonus-boosters">
+            <div
+              class="bonusClass"
+              v-if="web3isConnected && bonusReady == 1 && showSpinner == false"
+              v-on:click="GetBonus"
+            >
+              Claim 2 FREE Boosters!
+            </div>
+            <div v-else-if="web3isConnected && showSpinner == true">
+              <img src="@/assets/spinner.gif" class="spinner" />
+              <transition>
+                <span class="spinner-text-style">{{ transactionMessage }}</span>
+              </transition>
+            </div>
+            <div
+              class="bonusClassNo"
+              v-else-if="web3isConnected && bonusReady == 0 && showSpinner == false"
+            >
+              Your Next Bonus:<br /><strong> {{ timeToBonus }}</strong>
+            </div>
+          </li>
         </b-navbar-nav>
-
-
-      <div id="bonus-boosters">
-        <div
-          class="bonusClass"
-          v-if="web3isConnected && bonusReady == 1 && showSpinner == false"
-          v-on:click="GetBonus"
-        >
-          Claim 2 FREE Boosters !
-        </div>
-        <div v-else-if="web3isConnected && showSpinner == true">
-          <img src="@/assets/spinner.gif" class="spinner" />
-          <transition>
-            <span class="spinner-text-style">{{ transactionMessage }}</span>
-          </transition>
-        </div>
-        <div
-          class="bonusClassNo"
-          v-else-if="web3isConnected && bonusReady == 0 && showSpinner == false"
-        >
-          Your Next Bonus:<br /><strong> {{ timeToBonus }}</strong>
-        </div>
-      </div>
-            </b-collapse>
+      </b-collapse>
     </b-navbar>
     <p></p>
   </div>
@@ -212,6 +215,10 @@ export default {
       return `https://twitter.com/intent/tweet?text=Click my%20sponsor%20link%20to%20 claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,nfts,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
     },
     isSponsorValid() {
+      if (this.sponsorAddress === '') {
+        return true
+      }
+
       if (this.sponsorAddress.toLowerCase() === this.coinbase.toLowerCase()) {
         this.notSameSponsorError = false;
         return false;
@@ -431,6 +438,10 @@ export default {
   width: 23em;
 }
 
+#nav-collapse {
+  overflow-x: auto;
+}
+
 .logo-nav {
   margin-right: 0.5em;
   width: 2em;
@@ -440,6 +451,13 @@ export default {
   color: #d48b15;
   flex: 1;
   justify-content: center;
+}
+
+.wallet-nav > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .wallet-nav img {
@@ -474,12 +492,14 @@ a:hover {
 }
 
 #bonus-boosters {
-  position: absolute;
-  right: 3rem;
-  top: 0;
-  height: 100%;
+  height: 70px;
+  min-width: 140px;
   display: flex;
   align-items: center;
+}
+
+#bonus-boosters:empty {
+  display: none;
 }
 
 .bonusClass:hover {
@@ -521,20 +541,16 @@ a:hover {
 }
 
 #connect-button {
-  position: absolute;
-  right: 3rem;
+  margin-left: auto;
+  min-width: 190px;
 }
 
 #cryptoz-nav {
-  /*
-      this calc is to account for the boosters text on the right
-      flex: 1; didnt work so I hacked it. This ensures the wallet
-      info is centered between the main nav and the boosters text.
-    */
-  width: calc(100% - 150px - 3rem);
+  width: calc(100%);
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
 }
 
 @keyframes shake {
