@@ -54,7 +54,7 @@
       </p>
       <div class="row">
         <div class="col">
-          <b-button
+          <b-button v-b-tooltip.hover="'+120 CZXP per credit'"
             class="btn btn-danger"
             v-bind:disabled="balance < 2000000000000000"
             v-b-modal.buy-boosters-modal

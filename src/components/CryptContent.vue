@@ -42,7 +42,7 @@
                 </b-button>
               </div>
               <div class="col buy-and-open-booster">
-                <b-button v-b-tooltip.hover="'Mint 1 random booster NFT'" class="btn btn-danger" v-bind:disabled="web3.balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open <b-icon-lightning-fill /> Booster 0.002E
+                <b-button v-b-tooltip.hover="'Mint 1 random booster NFT +120 CZXP'" class="btn btn-danger" v-bind:disabled="web3.balance < 2000000000000000" v-on:click="buyAndOpenBooster">Buy and Open <b-icon-lightning-fill /> Booster 0.002E
                 </b-button>
               </div>
             </div>
