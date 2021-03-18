@@ -76,7 +76,7 @@
                   >You are already linked to sponsor wallet.</b-alert
                 >
             </b-jumbotron>
-            
+
             <b-jumbotron
               id="sponsor-link-wrapper"
               class="jumbo"
@@ -93,8 +93,8 @@
                 hidden
                 :value="getSponsorRoute"
               />
-              
-              
+
+
               <a class="twitter-share-button" v-bind:href="getTweet" data-size="large">
                 <b-button variant="primary" style="width:26%"><img style="width:30px" src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png"> Tweet your link</b-button>
               </a>
@@ -102,10 +102,10 @@
               <b-button v-on:click="copySponsorLink">
                 Copy Link To Clipboard
               </b-button>
-              
+
             </b-jumbotron>
-            
-            
+
+
           </b-modal>
 
           <transition name="fade" mode="out-in">
@@ -212,7 +212,7 @@ export default {
       return `${siteURL}?sponsor=${this.coinbase}`;
     },
     getTweet() {
-      return `https://twitter.com/intent/tweet?text=Click my%20sponsor%20link%20to%20 claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,nfts,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
+      return `https://twitter.com/intent/tweet?text=Click my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,cryptozfam,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
     },
     isSponsorValid() {
       if (this.sponsorAddress === '') {
@@ -283,7 +283,7 @@ export default {
   },
   methods: {
     checkSponsor: async function(address) {
-      
+
       const instance = await window.Cryptoz.deployed();
       const sponsors = await instance.sponsors.call(address);
       console.log("checking sponsor..", sponsors);
