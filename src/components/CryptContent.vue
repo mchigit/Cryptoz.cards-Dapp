@@ -38,7 +38,7 @@
           <!-- Loads cards here -->
             <div class="row">
               <div class="col">
-                <b-button v-b-tooltip.hover="'Mint 1 random booster NFT'" class="btn btn-danger" v-bind:disabled="boostersOwned < 1" v-b-modal.open-booster-modal>Open <b-icon-lightning-fill /> Booster Card
+                <b-button v-b-tooltip.hover="'Mint 1 random booster NFT'" class="btn btn-danger" v-bind:disabled="boostersOwned < 1" v-on:click="openBooster">Open <b-icon-lightning-fill /> Booster Card
                 </b-button>
               </div>
               <div class="col buy-and-open-booster">
@@ -491,7 +491,7 @@ export default {
       this.$bvModal.hide('open-booster-modal')
 
       window.Cryptoz.deployed().then(function(instance) {
-        return instance.openBoosterCard(self.wagerAmount, {from: self.coinbase});
+        return instance.openBoosterCard(0, {from: self.coinbase});
       })
       .then(res => {
         if (res === undefined) {
