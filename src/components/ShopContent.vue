@@ -300,6 +300,8 @@ export default {
             return e.args.cardTypeId.c[0];
           })
 
+          //push March 20,2021
+          typeIdsOnChain.push(34,38,41,43);
           //push March 19,2021
           typeIdsOnChain.push(13,18,19,26);
         //Dirty hack until we figure this event log shite out
