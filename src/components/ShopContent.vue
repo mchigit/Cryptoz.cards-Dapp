@@ -402,6 +402,9 @@ export default {
           if(cardObj.id == 56){ //shroom ?
             cardObj.edition_total = 112;
           }
+          if(cardObj.id == 19){ //guts r us
+            cardObj.edition_total = 80;
+          }
 
           // Set soldOut flag first
           if(cardObj.edition_current == cardObj.edition_total) {
