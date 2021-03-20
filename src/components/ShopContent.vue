@@ -300,6 +300,8 @@ export default {
             return e.args.cardTypeId.c[0];
           })
 
+          //push March 20,2021
+          typeIdsOnChain.push(34,38,41,43);
           //push March 19,2021
           typeIdsOnChain.push(13,18,19,26);
         //Dirty hack until we figure this event log shite out
@@ -401,6 +403,9 @@ export default {
           }
           if(cardObj.id == 56){ //shroom ?
             cardObj.edition_total = 112;
+          }
+          if(cardObj.id == 19){ //guts r us
+            cardObj.edition_total = 80;
           }
 
           // Set soldOut flag first
