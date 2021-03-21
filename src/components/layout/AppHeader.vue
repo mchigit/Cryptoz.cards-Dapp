@@ -685,7 +685,7 @@ a:hover {
 }
 
 .czxp-logo {
-  width : 4%;
+  width : 20px;
   vertical-align:middle;
 }
 </style>
