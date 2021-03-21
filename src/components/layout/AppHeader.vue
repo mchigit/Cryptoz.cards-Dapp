@@ -73,15 +73,16 @@
                 </div>
               </b-input-group>
                 <b-alert v-else variant="success" show
-                  >You are already linked to sponsor wallet.</b-alert
+                  >You have already linked to a sponsor wallet.</b-alert
                 >
             </b-jumbotron>
 
             <b-jumbotron
               id="sponsor-link-wrapper"
               class="jumbo"
-              lead="Your Affiliate Link"
+              lead="Your CZXP Affiliate Link"
             >
+              <p>Automatically earn <img class="czxp-logo" src="../assets/cryptokeeper_coin_binance.svg" align="middle" /> CZXP token rewards from your affiliate network</p>
               <p>Copy the link by clicking the button below.</p>
               <p>
                 Send the link to your friends so they get a
@@ -620,5 +621,10 @@ a:hover {
 }
 .base-text{
     color:#FFFFFF;
+}
+
+.czxp-logo {
+  width : 4%;
+  vertical-align:middle;
 }
 </style>
