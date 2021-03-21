@@ -3,11 +3,11 @@
     <div class="jumbotron">
           <h1>Markets</h1>
           <br>
-          
+
           <div class="row">
             <div class="col-6">
               <h3>Cryptoz Cards<br>BEP-721 NFT tokens are supported on the following auction marketplaces</h3>
-              
+
               <a href="https://treasureland.market/" target="_blank">
                 <div class="market-btn">
                   <img class="opensea-logo" src="https://treasureland.market/static/media/logo.849b6817.svg" align="absmiddle" /> <span class="opensea-header">TreasureLand</span>
@@ -19,10 +19,10 @@
                 </div>
               </a>
             </div>
-            
+
             <div class="col-6">
               <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" />) <br>BEP-20 tokens are supported on the following token exchanges</h3>
-              
+
               <a href="https://1inch.exchange/#/CZXP/BNB" target="_blank">
                 <div class="market-btn">
                   <img class="uni-logo" src="https://downloads.intercomcdn.com/i/o/241617/dc6bdc1d7b1bc0d6c33e904b/e1486b777bc88ddcdf2649b668e9fbcd.png" align="absmiddle" />
@@ -34,8 +34,8 @@
                   </p>
                 </div>
               </a>
-              
-              <!--a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x2b974da27c9dd35412d71dd36e3e108486c45444" target="_blank">
+
+              <a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x2b974da27c9dd35412d71dd36e3e108486c45444" target="_blank">
                 <div class="market-btn">
                   <img class="uni-logo" src="@/assets/pancakeswap-cake-logo.png" align="absmiddle" />
                    <span class="opensea-header">PancakeSwap</span>
@@ -44,22 +44,22 @@
                     PancakeSwap Decentralized BSC liquidity Exchange - Instant swap - CZXP-BNB. Earn fees by providing liquidity
                   </p>
                 </div>
-              </a-->
-              
-              
-              
-              
+              </a>
+
+
+
+
             </div>
-            
+
           </div>
-          
-          
-          
-          
-          
-          
-          
-            
+
+
+
+
+
+
+
+
         </div>
   </div>
 </template>
@@ -116,7 +116,7 @@ export default {
   h3{
     margin-bottom:1em;
   }
-  
+
   .jumbotron {
     margin: auto;
     width: 95%;

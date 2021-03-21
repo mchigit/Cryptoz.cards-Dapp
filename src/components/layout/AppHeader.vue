@@ -97,9 +97,9 @@
 
       <b-jumbotron class="jumbo" lead="Link Your Sponsor">
         <p>
-          By linking a sponsor with their wallet address, you will receive
+          By linking your sponsor's wallet address, you will mint
           a
-          <b>Free Platinum Sponsored NFT Card!</b>
+          <b>Free Diamond or Platinum Sponsored NFT Card!</b>
         </p>
         <p class="sponsor-warning" variant="info">
           Note: You can only link sponsor once
@@ -139,11 +139,9 @@
         class="jumbo"
         lead="Your Affiliate Link"
       >
+        <p>Automatically earn CZXP <img class="czxp-logo" src="../assets/cryptokeeper_coin_binance.svg" align="middle" /> Token rewards from your affiliate network</p>
         <p>Copy the link by clicking the button below.</p>
-        <p>
-          Send the link to your friends so they get a
-          <b>Free Platinum Sponsored Card!</b>
-        </p>
+        <p>Send the link to your friends so they can mint a <b>Free Platinum or Diamond Sponsored Card!</b></p>
         <input
           ref="sponsor"
           id="sponsor-link"
@@ -684,5 +682,10 @@ a:hover {
 }
 .base-text{
     color:#FFFFFF;
+}
+
+.czxp-logo {
+  width : 20px;
+  vertical-align:middle;
 }
 </style>
