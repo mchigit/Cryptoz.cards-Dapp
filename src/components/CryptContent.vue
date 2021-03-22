@@ -690,7 +690,6 @@ export default {
         });
     },
     sortByAttr: function(param, isDescending) {
-      console.log({ param, cards: this.orderedCards });
       this.sortType = param;
       this.isDescending = isDescending;
       switch (param) {

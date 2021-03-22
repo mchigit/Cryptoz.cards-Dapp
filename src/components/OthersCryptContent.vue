@@ -3,14 +3,21 @@
     <universe-balances></universe-balances>
     <div class="description">
       <h1>NFT Wallet</h1>
+      <h2>
+        Viewing <img src="@/assets/metamask-face.png" class="header-icon" />
+        {{ addressToLoad.substr(0, 6) + "..." + addressToLoad.substr(38) }}
+      </h2>
       <p>
-        This is where you can see other person's NTF Cryptoz tokens. You can
+        This is where you can see other person's NFT Cryptoz tokens. You can
         sort, and view them in a table. But you will not be able to perform any
-        actions on the NTFs.
+        actions on the NFTs.
       </p>
     </div>
 
-    <cards-container v-bind:addressToLoad="addressToLoad"></cards-container>
+    <cards-container
+      @cryptChanged="handleAddressChanged"
+      v-bind:addressToLoad="addressToLoad"
+    ></cards-container>
   </div>
 </template>
 
@@ -24,6 +31,11 @@ export default {
     CardsContainer,
     UniverseBalances,
   },
+  computed: {
+    coinbase() {
+      return this.$store.state.web3.coinbase;
+    },
+  },
   data() {
     return {
       addressToLoad: null,
@@ -31,6 +43,11 @@ export default {
   },
   created() {
     this.addressToLoad = this.$route.params.address;
+  },
+  methods: {
+    handleAddressChanged(value) {
+      this.addressToLoad = value;
+    },
   },
 };
 </script>
@@ -42,6 +59,10 @@ export default {
 }
 
 .description {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.header-icon {
+  height: 20px;
 }
 </style>
