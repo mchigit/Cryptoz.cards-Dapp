@@ -17,7 +17,7 @@
           </p>
           <h2>Time to have some fun</h2>
           <p>
-            The goal is to collect the rare and unique undead NFT cards, earn or trade ERC-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each minted NFT Cryptoz card is a unique token on the Binance Smart Chain. Collectors can buy, sell, and exchange both their Cryptoz NFT cards and CZXP tokens through any standards compliant wallets, markets, game engines,  exchanges, DeFi and other future inventions.
+            The goal is to collect the rare and unique undead NFT cards, earn or trade BEP-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels. Each minted NFT Cryptoz card is a unique token on the Binance Smart Chain. Collectors can buy, sell, and exchange both their Cryptoz NFT cards and CZXP tokens through any standards compliant wallets, markets, game engines,  exchanges, DeFi and other future inventions.
           </p>
           <div>
             <h2>Get Started</h2>

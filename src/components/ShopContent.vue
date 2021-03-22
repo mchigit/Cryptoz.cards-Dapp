@@ -50,7 +50,7 @@
       </p>
       <p>
         To mint a FREE NFT Or buy a Limited edition NFT, you will need the
-        required minimum balance of CZXP tokens displayed on the botton of the card to unlock the button. The newly minted NFT will appear in  <router-link to="/crypt"> Your NFT Crypt</router-link> once the transaction is confirmed. CZXP is NOT burned when minting
+        required minimum balance of CZXP tokens displayed on the botton of the card to unlock the minting button. The newly minted NFT will appear in <router-link to="/crypt"> Your NFT Crypt</router-link> once the transaction is confirmed. CZXP is NOT burned when minting
       </p>
       <div class="row">
         <div class="col">
