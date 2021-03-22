@@ -151,7 +151,7 @@ export default {
       }
     }
   },
-  async mounted() {
+  mounted() {
     window.ethereum.autoRefreshOnNetworkChange = false
     if (window.web3 && window.web3.currentProvider) {
       this.getWalletInfo()

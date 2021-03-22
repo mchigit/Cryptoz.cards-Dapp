@@ -6,6 +6,7 @@ import CryptContent from '@/components/CryptContent.vue'
 import MarketContent from '@/components/MarketContent.vue'
 import HelpContent from '@/components/HelpContent.vue'
 import TokenContent from '@/components/TokenContent.vue'
+import OthersCryptContent from '@/components/OthersCryptContent.vue'
 
 Vue.use(Router)
 
@@ -100,6 +101,36 @@ const router = new Router({
                     content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
                 }
           ]
+        }
+    },
+    {
+        path: '/crypt/:address',
+        name: 'OthersCrypt',
+        component: OthersCryptContent,
+        meta: {
+            title: 'Cryptoz Cards - A collection of cards',
+            metaTags: [
+                {
+                    name: 'description',
+                    content : 'Browse through other person\'s Cryptoz cards!'
+                },
+                {
+                    property: 'og:url',
+                    content: 'https://cryptoz.cards/crypt',
+                },
+                {
+                    property: 'og:type',
+                    content: 'website',
+                },
+                {
+                    property: 'og:title',
+                    content: 'Cryptoz Cards - Other\'s Crypt - A collection of all the cards your friend owns',
+                },
+                {
+                    property: 'og:image',
+                    content: 'https://cryptoz.cards/assets/cryptokeeper_logo.svg',
+                }
+            ]
         }
     },
     {

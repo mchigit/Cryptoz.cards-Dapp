@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-dropdown id="dropdown" :text="'Sort by ' + (sortType ? types[sortType] : '')">
+    <b-dropdown :disabled="disabled" id="dropdown" :text="'Sort by ' + (sortType ? types[sortType] : '')">
       <b-dropdown-item
         v-for="(name, type) in types"
         :key="type"
@@ -24,6 +24,12 @@
   export default {
     name: 'SortDropdown',
     components : {
+    },
+    props: {
+      disabled: {
+        type: Boolean,
+        default: false
+      }
     },
     data () {
       return {
