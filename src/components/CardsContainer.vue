@@ -1,129 +1,129 @@
 <template>
   <div>
-      <div class="wrapper">
-        <div id="button-container">
-          <div class="primary-actions">
-            <SortDropdown
-              :disabled="!ownsCards"
-              @sort-by-attr="sortByAttr"
-            ></SortDropdown>
-            <b-button
-              id="view-change-button"
-              variant="info"
-              @click="() => toggleTableView()"
-              :disabled="!ownsCards"
-            >
-              {{ "View " + (isTableView ? "Gallery" : "Table") }}
-            </b-button>
-          </div>
-          <div class="crypt-actions">
-            <b-button
-              class="my-crypt-button"
-              variant="warning"
-              @click="() => goBackToMyCrypt()"
-              >Go To My Crypt</b-button
-            >
-            <b-input-group class="crypt-search-input-group">
-              <b-form-input
-                trim
-                v-model="addressToSearch"
-                type="text"
-                placeholder="Wallet Address To Search"
-                :state="addressToSearchState"
-              ></b-form-input>
-              <b-input-group-append>
-                <b-button
-                  @click="() => searchNewCrypt()"
-                  :disabled="disableSearch"
-                  variant="success"
-                  >Search</b-button
-                >
-              </b-input-group-append>
-            </b-input-group>
-          </div>
+    <div class="wrapper">
+      <div id="button-container">
+        <div class="primary-actions">
+          <SortDropdown
+            :disabled="!ownsCards"
+            @sort-by-attr="sortByAttr"
+          ></SortDropdown>
+          <b-button
+            id="view-change-button"
+            variant="info"
+            @click="() => toggleTableView()"
+            :disabled="!ownsCards"
+          >
+            {{ "View " + (isTableView ? "Gallery" : "Table") }}
+          </b-button>
         </div>
-        <div class="loading" v-if="isLoading">
-          <b-spinner style="width: 3rem; height: 3rem;" type="grow"></b-spinner>
+        <div class="crypt-actions">
+          <b-button
+            class="my-crypt-button"
+            variant="warning"
+            @click="() => goBackToMyCrypt()"
+            >Go To My Crypt</b-button
+          >
+          <b-input-group class="crypt-search-input-group">
+            <b-form-input
+              trim
+              v-model="addressToSearch"
+              type="text"
+              placeholder="Wallet Address"
+              :state="addressToSearchState"
+            ></b-form-input>
+            <b-input-group-append>
+              <b-button
+                @click="() => searchNewCrypt()"
+                :disabled="disableSearch"
+                variant="success"
+                >Go</b-button
+              >
+            </b-input-group-append>
+          </b-input-group>
         </div>
-        <div v-else>
-          <div v-if="ownsCards">
-            <div v-if="!isTableView" class="cards-wrapper">
-              <div
-                v-for="card in orderedCards"
-                :key="card.id"
-                class="card-wrapper"
-              >
-                <OwnedCardContent
-                  :id="card.id"
-                  :type_id="card.type_id"
-                  :name="card.name"
-                  :cost="card.cost"
-                  :cset="card.card_set"
-                  :edition_current="card.edition_current"
-                  :edition_total="card.edition_total"
-                  :level="card.card_level"
-                  :unlock_czxp="card.unlock_czxp"
-                  :buy_czxp="card.buy_czxp"
-                  :transfer_czxp="card.transfer_czxp"
-                  :sacrifice_czxp="card.sacrifice_czxp"
-                  :image="card.image"
-                  :card_class="card.rarity"
-                  :in_store="card.in_store"
-                  :card_owned="true"
-                ></OwnedCardContent>
-              </div>
-            </div>
-            <div v-else>
-              <b-table
-                :items="orderedCards"
-                :fields="tableFields"
-                small
-                striped
-                responsive
-              >
-                <template #cell(name)="row">
-                  <div class="cell card-name-cell">
-                    <img
-                      :src="row.item.image"
-                      :class="`cell mr-4 ${row.item.rarity}`"
-                    />
-                    {{ row.item.name }}
-                  </div>
-                </template>
-                <template #cell(card_level)="row">
-                  <div class="cell">{{ row.item.card_level }}</div>
-                </template>
-                <template #cell(edition_number)="row">
-                  <div class="cell">{{ row.item.edition_label }}</div>
-                </template>
-                <template #cell(unlock_czxp)="row">
-                  <div class="cell">
-                    {{ parseInt(row.item.unlock_czxp).toLocaleString() }}
-                  </div>
-                </template>
-                <template #cell(sacrifice_czxp)="row">
-                  <div class="cell">
-                    {{ parseInt(row.item.sacrifice_czxp).toLocaleString() }}
-                  </div>
-                </template>
-                <template #cell(transfer_czxp)="row">
-                  <div class="cell">
-                    {{ parseInt(row.item.transfer_czxp).toLocaleString() }}
-                  </div>
-                </template>
-              </b-table>
+      </div>
+      <div class="loading" v-if="isLoading">
+        <b-spinner style="width: 3rem; height: 3rem;" type="grow"></b-spinner>
+      </div>
+      <div v-else>
+        <div v-if="ownsCards">
+          <div v-if="!isTableView" class="cards-wrapper">
+            <div
+              v-for="card in orderedCards"
+              :key="card.id"
+              class="card-wrapper"
+            >
+              <OwnedCardContent
+                :id="card.id"
+                :type_id="card.type_id"
+                :name="card.name"
+                :cost="card.cost"
+                :cset="card.card_set"
+                :edition_current="card.edition_current"
+                :edition_total="card.edition_total"
+                :level="card.card_level"
+                :unlock_czxp="card.unlock_czxp"
+                :buy_czxp="card.buy_czxp"
+                :transfer_czxp="card.transfer_czxp"
+                :sacrifice_czxp="card.sacrifice_czxp"
+                :image="card.image"
+                :card_class="card.rarity"
+                :in_store="card.in_store"
+                :card_owned="true"
+              ></OwnedCardContent>
             </div>
           </div>
           <div v-else>
-            <h2>
-              You do not own any Cryptoz<br /><router-link to="/shop"
-                >To get Free Cryptoz NFTs or Buy one, visit the Minting
-                Shop</router-link
-              >
-            </h2>
+            <b-table
+              :items="orderedCards"
+              :fields="tableFields"
+              small
+              striped
+              responsive
+            >
+              <template #cell(name)="row">
+                <div class="cell card-name-cell">
+                  <img
+                    :src="row.item.image"
+                    :class="`cell mr-4 ${row.item.rarity}`"
+                  />
+                  {{ row.item.name }}
+                </div>
+              </template>
+              <template #cell(card_level)="row">
+                <div class="cell">{{ row.item.card_level }}</div>
+              </template>
+              <template #cell(edition_number)="row">
+                <div class="cell">{{ row.item.edition_label }}</div>
+              </template>
+              <template #cell(unlock_czxp)="row">
+                <div class="cell">
+                  {{ parseInt(row.item.unlock_czxp).toLocaleString() }}
+                </div>
+              </template>
+              <template #cell(sacrifice_czxp)="row">
+                <div class="cell">
+                  {{ parseInt(row.item.sacrifice_czxp).toLocaleString() }}
+                </div>
+              </template>
+              <template #cell(transfer_czxp)="row">
+                <div class="cell">
+                  {{ parseInt(row.item.transfer_czxp).toLocaleString() }}
+                </div>
+              </template>
+            </b-table>
           </div>
         </div>
+        <div v-else>
+          <h2>
+            You do not own any Cryptoz<br /><router-link to="/shop"
+              >To get Free Cryptoz NFTs or Buy one, visit the Minting
+              Shop</router-link
+            >
+          </h2>
+        </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -187,11 +187,9 @@ export default {
   watch: {
     web3: {
       handler(val, oldVal) {
-        
-          if (val.isConnected) {
-            this.getAllCards(this.addressToLoad);
-          }
-        
+        if (val.isConnected) {
+          this.getAllCards(this.addressToLoad);
+        }
       },
       deep: true,
     },
@@ -206,15 +204,11 @@ export default {
   },
   methods: {
     addHashToLocation(params) {
-      const currentPath = this.$route.path
-      const newPath = currentPath.substring(0, currentPath.indexOf('crypt'))
-      console.log(newPath)
-      history.pushState(
-        {},
-        null,
-        newPath + `${params}`
-      )
-  },
+      const currentPath = this.$route.path;
+      const newPath = currentPath.substring(0, currentPath.indexOf("crypt"));
+      console.log(newPath);
+      history.pushState({}, null, newPath + `${params}`);
+    },
     clearCards: function() {
       this.orderedCards = [];
       this.ownsCards = false;
@@ -226,8 +220,9 @@ export default {
     searchNewCrypt: function() {
       this.isLoading = true;
       this.clearCards();
-      this.addHashToLocation(`crypt/${this.addressToSearch}`)
+      this.addHashToLocation(`crypt/${this.addressToSearch}`);
       this.getAllCards(this.addressToSearch);
+      this.$emit("cryptChanged", this.addressToSearch);
     },
     getAllCards: async function(addressToLoad) {
       this.isLoading = true;
