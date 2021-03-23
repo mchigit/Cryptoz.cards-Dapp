@@ -45,12 +45,12 @@
       <h1><b-icon-tag-fill /> Minting Shop</h1>
       <p>
         The Shop is a place to mint limited edition Cryptoz Cards NFT tokens. Some cards
-        are free, some have a cost. You may also buy and <router-link to="/crypt">open a booster card</router-link>,
+        are free, some have a cost. You may also buy and <router-link to="/my-cryptoz-nfts">open a booster card</router-link>,
         which will randomly mint an unlimited edition NFT token.
       </p>
       <p>
         To mint a FREE NFT Or buy a Limited edition NFT, you will need the
-        required minimum balance of CZXP tokens displayed on the botton of the card to unlock the minting button. The newly minted NFT will appear in <router-link to="/crypt"> Your NFT Crypt</router-link> once the transaction is confirmed. CZXP is NOT burned when minting
+        required minimum balance of CZXP tokens displayed on the botton of the card to unlock the minting button. The newly minted NFT will appear in <router-link to="/my-cryptoz-nfts"> Your NFT Crypt</router-link> once the transaction is confirmed. CZXP is NOT burned when minting
       </p>
       <div class="row">
         <div class="col">

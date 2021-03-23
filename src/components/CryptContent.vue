@@ -225,7 +225,7 @@
               :in_store="card.in_store"
               :card_owned="true"
             ></OwnedCardContent>
-            <div class="sacrifice-wrapper" v-if="$route.path == '/crypt'">
+            <div class="sacrifice-wrapper" v-if="$route.path == '/my-cryptoz-nfts'">
               <div class="sacrifice-button">
                 <button
                   :disabled="
@@ -374,7 +374,7 @@ export default {
     },
     getMyCryptLink() {
       const url = process.env.NODE_ENV == "development" ? "localhost:8080" : "https://bsc.cryptoz.cards";
-      return `${url}/crypt/${this.coinbase}`;
+      return `${url}/my-cryptoz-nfts/${this.coinbase}`;
     }
   },
   watch: {
@@ -414,7 +414,7 @@ export default {
   },
   methods: {
     goToCrypt: function() {
-      this.$router.push(`/crypt/${this.addressToSearch}`)
+      this.$router.push(`/my-cryptoz-nfts/${this.addressToSearch}`)
     },
     copyMyCryptLink: function() {
       const textToCopy = this.$refs.myCrypt.value;

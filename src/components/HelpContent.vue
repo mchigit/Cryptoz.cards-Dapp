@@ -45,7 +45,7 @@
                     <router-link to="/shop">Shop</router-link> for Booster
                     cards, buy limited edition cards and claim Free limited
                     editions cards from <router-link to="/shop">the Minting Shop.</router-link> You may then browse the contents of
-                    <router-link to="/crypt">Your NFT Crypt</router-link>, sacrifice
+                    <router-link to="/my-cryptoz-nfts">Your NFT Crypt</router-link>, sacrifice
                     cards from your Crypt for $CZXP tokens, or gift them to other BSC
                     accounts. If you would like to
                     <router-link to="/market">auction</router-link> your Cryptoz NFTs
@@ -299,11 +299,11 @@
                       card for amount
                     </li>
                     <li>
-                      Buy and Open a Booster from Your <router-link to="/crypt"
+                      Buy and Open a Booster from Your <router-link to="/my-cryptoz-nfts"
                         >NFT Crypt</router-link>
                     </li>
                     <li>
-                      <router-link to="/crypt"
+                      <router-link to="/my-cryptoz-nfts"
                         >Sacrifice a Cryptoz NFT card ( permanently )</router-link> - Check back of card for amount
                     </li>
                     <li>
