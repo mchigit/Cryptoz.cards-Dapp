@@ -337,7 +337,7 @@ export default {
       }
     },
     goBackToMyCrypt: function() {
-      this.$router.push("/crypt");
+      this.$router.push("/my-cryptoz-nfts");
     },
   },
 };

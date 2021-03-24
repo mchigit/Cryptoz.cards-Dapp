@@ -26,7 +26,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:url',
-                    content: 'https://cryptoz.cards/',
+                    content: 'https://bsc.cryptoz.cards/',
                 },
                 {
                     property: 'og:type',
@@ -74,7 +74,7 @@ const router = new Router({
         }
     },
     {
-      path: '/crypt',
+      path: '/my-cryptoz-nfts',
       name: 'CryptContent',
       component: CryptContent,
       meta: {
@@ -86,7 +86,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:url',
-                    content: 'https://cryptoz.cards/crypt',
+                    content: 'https://bsc.cryptoz.cards/my-cryptoz-nfts',
                 },
                 {
                     property: 'og:type',
@@ -104,7 +104,7 @@ const router = new Router({
         }
     },
     {
-        path: '/crypt/:address',
+        path: '/my-cryptoz-nfts/:address',
         name: 'OthersCrypt',
         component: OthersCryptContent,
         meta: {
@@ -116,7 +116,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:url',
-                    content: 'https://cryptoz.cards/crypt',
+                    content: 'https://bsc.cryptoz.cards/my-cryptoz-nfts',
                 },
                 {
                     property: 'og:type',
@@ -146,7 +146,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:url',
-                    content: 'https://cryptoz.cards/market',
+                    content: 'https://bsc.cryptoz.cards/market',
                 },
                 {
                     property: 'og:type',
@@ -177,7 +177,7 @@ const router = new Router({
                 },
                 {
                     property: 'og:url',
-                    content: 'https://cryptoz.cards/help',
+                    content: 'https://bsc.cryptoz.cards/help',
                 },
                 {
                     property: 'og:type',
@@ -255,12 +255,12 @@ router.beforeEach((to, from, next) => {
     const tag = document.createElement('meta');
 
     Object.keys(tagDef).forEach(key => {
-        
+
         //Replace the og:url content with a dynamic url
         if(tagDef[key] == 'TOKEN_ID'){
             tagDef[key] = 'https://cryptoz.cards/view/'+to.params.token_id
         }
-        
+
       tag.setAttribute(key, tagDef[key]);
     });
 
