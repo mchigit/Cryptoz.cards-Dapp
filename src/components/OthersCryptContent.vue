@@ -3,7 +3,7 @@
     <universe-balances></universe-balances>
     <div class="description">
       <h1>NFT Wallet</h1>
-      <h2>
+      <h2 class="text-danger">
         Viewing <img src="@/assets/metamask-face.png" class="header-icon" />
         {{ addressToLoad.substr(0, 6) + "..." + addressToLoad.substr(38) }}
       </h2>
