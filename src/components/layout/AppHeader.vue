@@ -254,7 +254,6 @@ export default {
       }
     },
     currentEvent(newValue, oldValue) {
-      console.log({newEvent: newValue})
       if (newValue !== oldValue && typeof newValue !== "undefined") {
         if (this.pendingTransaction == newValue.blockHash) {
           this.showSpinner = false;
