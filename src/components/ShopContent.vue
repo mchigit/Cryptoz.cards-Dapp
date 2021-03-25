@@ -97,7 +97,7 @@
             :card_class="card.rarity"
             :card_owned="false"
           ></OwnedCardContent>
-         <div
+          <div
             v-if="card.soldOut == 1"
             id="sold-button-wrapper"
             v-b-tooltip.hover="getSoldCardToolTipText"
@@ -165,7 +165,7 @@ export default {
       return this.$store.state.web3;
     },
     wallet() {
-      return parseFloat(web3.fromWei(this.$store.state.web3.balance), "ether");
+      return parseFloat(web3.utils.fromWei(this.$store.state.web3.balance.toString()), "ether");
     },
     balance() {
       return this.$store.state.web3.balance;
@@ -188,12 +188,10 @@ export default {
   },
   watch: {
     currentEvent(newValue,oldValue) {
-      if(newValue !== oldValue && typeof newValue !== "undefined"){
-        if (this.pendingTransaction === newValue.blockHash) {
-          this.showSpinner = 0;
-          this.transactionStatus = 'Confirmed! balance updated';
-          this.getAllTypes();
-        }
+      // we only update events in the store when it concerns our wallet
+      if (newValue !== oldValue && typeof newValue !== "undefined") {
+        this.getAllTypes();
+        this.showSpinner = 0;
       }
     },
     totalCyptozTypes(newValue, oldValue) {
@@ -231,32 +229,23 @@ export default {
   async mounted() {
     if (typeof Cryptoz !== "undefined" && this.coinbase) {
       await this.getAllTypes();
-    } else {
-      console.log("Cryptoz contract not defined !!!!!!!!!!");
     }
   },
   methods : {
     buyCard : function(cardAttributes){
       console.log("Buying card:" ,cardAttributes.id ,cardAttributes);
 
-      window.Cryptoz.deployed().then((instance) => {
-        return instance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)});
-      }).then((res) => {
-        this.showTransaction = 1;
-        this.getAllTypes();
-        this.$store.dispatch('updateOwnerBalances');
-      })
+      window.Cryptoz.deployed().then((instance) =>
+        instance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)})
+      )
     },
     getCardForFree : function(type_id){
       console.log("Claiming card:" + type_id);
 
       showPendingToast(this);
-      window.Cryptoz.deployed().then((instance) => {
-        return instance.getFreeCard(type_id, {from: this.coinbase});
-      }).then((res) => {
-        this.showTransaction = 1
-        this.$store.dispatch('updateOwnerBalances')
-      })
+      window.Cryptoz.deployed().then((instance) =>
+        instance.getFreeCard(type_id, {from: this.coinbase})
+      )
     },
     buyBoosters : function() {
       //Hide the modal
@@ -264,71 +253,54 @@ export default {
 
       //Change buy button to pending.. or show some pending state
       this.showSpinner = 1;
-      this.transactionStatus = 'Pending confirmation...';
 
       window.Cryptoz.deployed()
-      .then((instance) => {
-        var totalBoostersCost = 2000000000000000 * parseInt(this.totalCreditsToBuy);
-        return instance.buyBoosterCard(parseInt(this.totalCreditsToBuy), {from: this.coinbase, value:totalBoostersCost});
-      })
-      .then(this.handleBuyBooster) //update boosters owned and total types
-      .catch(err => {
-        console.error('USER REJECTED!!', err);
-        this.showSpinner = 0;
-      })
-
-    },
-    handleBuyBooster : function(result) {
-        console.log('Handling buy booster', result);
-        //change from pending to ready
-        this.pendingTransaction = result.receipt.blockHash;
-        this.transactionStatus = 'Broadcast to chain...';
-        this.$store.dispatch('updateWallet')
+        .then((instance) => {
+          var totalBoostersCost = 2000000000000000 * parseInt(this.totalCreditsToBuy);
+          return instance.buyBoosterCard(parseInt(this.totalCreditsToBuy), {from: this.coinbase, value:totalBoostersCost});
+        })
+        .catch(err => {
+          console.error('USER REJECTED!!', err);
+        })
     },
     getAllTypes: async function(){
       try {
-        let instance = await window.Cryptoz.deployed();
-        let events = await instance.LogCardTypeLoaded({},{fromBlock: 'latest'});
+        let showNotification = false
+        if (this.storeCards.length === 0) {
+          showPendingToast(this, 'Loading Store Cards...', {
+            autoHideDelay: 1000
+          });
+          showNotification = true
+        }
 
-        showPendingToast(this, 'Loading Store Cards...', {
-          autoHideDelay: 1000
-        });
+        const typeIdsOnChain = []
+        
+        //push March 20,2021
+        typeIdsOnChain.push(47,51,58,60,61,63);
+        //push March 20,2021
+        typeIdsOnChain.push(34,38,41,43);
+        //push March 19,2021
+        typeIdsOnChain.push(13,18,19,26);
+        //Dirty hack until we figure this event log shite out
+        typeIdsOnChain.push(4,5,8,22,29,31,45,56,81,101,102,103);
 
-        events.get(async (err, logs) => {
-          if(err){console.error(err)}
+        const results = await Promise.all(
+          typeIdsOnChain.map(async id => {
+            const cardData = await this.getCard(id);
 
-          let typeIdsOnChain = logs.map(e => {
-            return e.args.cardTypeId.c[0];
+            if (!cardData) {
+              return;
+            }
+
+            return this.addIsOwnedProp(cardData);
           })
+        )
+        const storeCards = results.filter(result => result !== undefined);
+        this.$store.dispatch('setStoreCards', storeCards)
 
-          //push March 20,2021
-          typeIdsOnChain.push(47,51,58,60,61,63);
-          //push March 20,2021
-          typeIdsOnChain.push(34,38,41,43);
-          //push March 19,2021
-          typeIdsOnChain.push(13,18,19,26);
-          //Dirty hack until we figure this event log shite out
-          typeIdsOnChain.push(4,5,8,22,29,31,45,56,81,101,102,103);
-
-          const results = await Promise.all(
-            typeIdsOnChain.map(async id => {
-
-              const cardData = await this.getCard(id);
-
-              if (!cardData) {
-                  return;
-              }
-
-              return this.addIsOwnedProp(cardData);
-            })
-          )
-          const storeCards = results.filter(result => result !== undefined);
-          this.$store.dispatch('setStoreCards', storeCards)
-
-          if (storeCards.length > 0) {
-            showSuccessToast(this, 'Finished Loading Shop.');
-          }
-        })
+        if (storeCards.length > 0 && showNotification) {
+          showSuccessToast(this, 'Finished Loading Shop.');
+        }
 
       } catch (err) {
         console.log("Error loading cards: ", err);

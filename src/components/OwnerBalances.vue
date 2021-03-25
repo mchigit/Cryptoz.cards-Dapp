@@ -30,43 +30,12 @@
       },
     },
     watch: {
-      ownerBalances(newValue, oldValue) {
-        // new balances.. reset their boosters, cards and czxp balance
+      coinbase(newValue, oldValue) {
         if (newValue !== oldValue) {
-          this.setSubscriptions();
+          this.$store.dispatch('updateOwnerBalances')
         }
       }
     },
-    mounted () { //Initialize the component
-        this.setSubscriptions();
-    },
-    data () {
-      return {
-
-      }
-    },
-    methods : {
-      setSubscriptions : function() {
-        CzxpToken.deployed().then((instance) => {
-          return instance.balanceOf(this.coinbase);
-        }).then(this.setCzxpBalance)
-        Cryptoz.deployed().then((instance) => {
-          return instance.tokensOfOwner(this.coinbase);
-        }).then(this.setCryptozBalance)
-        Cryptoz.deployed().then((instance) => {
-          return instance.boosterPacksOwned(this.coinbase);
-        }).then(this.setBoostersOwned)
-      },
-      setCzxpBalance: function(balance){
-        this.$store.dispatch('updateCZXPBalance', balance)
-      },
-      setCryptozBalance: function(tokens) {
-        this.$store.dispatch('updateCardsOwned', tokens.length)
-      },
-      setBoostersOwned: function(boostersOwned){
-        this.$store.dispatch('updateBoostersOwned', parseInt(boostersOwned).toLocaleString())
-      },
-    }
   }
 
 </script>

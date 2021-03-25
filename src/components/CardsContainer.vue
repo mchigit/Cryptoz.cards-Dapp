@@ -174,7 +174,6 @@ export default {
   },
   computed: {
     coinbase() {
-      console.log("coinbase: ", this.$store.state.web3.coinbase);
       return this.$store.state.web3.coinbase;
     },
     web3() {
@@ -247,7 +246,7 @@ export default {
           try {
             const ownedCard = await instance.getOwnedCard(tokenId);
             tokenIdList[tokenId] = ownedCard;
-            const cardData = await getCardTypes(ownedCard[0].c[0]);
+            const cardData = await getCardTypes(ownedCard[0].toNumber());
 
             cardData.id = tokenId;
             let newAttr = {};
@@ -257,7 +256,7 @@ export default {
             });
 
             cardData.attributes = newAttr;
-            cardData.attributes.edition_current = tokenIdList[tokenId][1].c[0];
+            cardData.attributes.edition_current = tokenIdList[tokenId][1].toNumber();
 
             if (cardData.attributes.edition_total == 0) {
               //unlimited
@@ -302,7 +301,7 @@ export default {
         };
 
         this.orderedCards = await Promise.all(
-          tokensOfOwner.map((token) => getCard(token.c[0]))
+          tokensOfOwner.map((token) => getCard(token.toNumber()))
         ).catch((err) => {
           console.error("Failed to fetch cards.", err);
           this.clearCards();

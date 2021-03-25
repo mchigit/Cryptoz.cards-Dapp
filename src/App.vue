@@ -9,19 +9,27 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+var contract = require("@truffle/contract");
+import cryptoz_artifacts from './contracts/Cryptoz.json';
+import cryptoz_token_artifacts from './contracts/CzxpToken.json';
+import watchEvents from './util/watchEvents';
+import { showSuccessToast } from './util/showToast'
+import {store} from './store/index'
 import BodyContent from './components/BodyContent'
 import AppHeader from './components/layout/AppHeader'
 import AppFooter from './components/layout/AppFooter'
 import {mapState} from 'vuex'
+import _ from 'lodash'
 
 import Web3Modal from "web3modal";
-import BurnerConnectProvider from "@burner-wallet/burner-connect-provider";
+// import BurnerConnectProvider from "@burner-wallet/burner-connect-provider";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import '@metamask/legacy-web3'
-const {web3} = window
-const Torus = require("@toruslabs/torus-embed");
-const Portis = require("@portis/web3");
-const Fortmatic = require("fortmatic");
+const Web3 = require('web3')
+// const Torus = require("@toruslabs/torus-embed");
+// const Portis = require("@portis/web3");
+// const Fortmatic = require("fortmatic");
 import './main.css'
 
 // import dev_cryptoz_artifacts from './dev/contracts/Cryptoz.json';
@@ -33,62 +41,39 @@ import './main.css'
 const testEnv = true
 
 const providerOptions = {
-  torus: {
-    package: Torus,
-  },
+  // torus: {
+  //   package: Torus,
+  // },
   walletconnect: {
     package: WalletConnectProvider,
     options: {
-      infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+      // infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+      rpc: {
+        56: 'https://bsc-dataseed.binance.org/',
+        97: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+      },
     },
   },
-  burnerconnect: {
-    package: BurnerConnectProvider,
-    options: {
-      defaultWallets: [
-        { origin: "https://denver-demo.burnerfactory.com/", name: "Denver Demo Wallet" },
-      ],
-    },
-  },
-  portis: {
-    package: Portis,
-    options: {
-      id: "1f9427a6-ceef-4d45-a6df-79f081e909d9",
-    },
-  },
-  fortmatic: {
-    package: Fortmatic,
-    options: {
-      key: process.env.NODE_ENV === 'production' ? "pk_live_6D8AC68104516C09" : "pk_test_2ED863FB3FCEB2F3",
-    },
-  }
-}
-
-
-// Import our contract artifacts and turn them into usable abstractions.
-
-import axios from 'axios';
-var contract = require("truffle-contract");
-import cryptoz_artifacts from './contracts/Cryptoz.json';
-import cryptoz_token_artifacts from './contracts/CzxpToken.json';
-import watchEvents from './util/watchEvents';
-import { showSuccessToast } from './util/showToast'
-import {store} from './store/index'
-
-function setContractProvider(provider) {
-  window.Cryptoz.setProvider(provider);
-  window.CzxpToken.setProvider(provider);
-}
-
-function onCardMinted({
-  cardTypeId,
-  editionNumber,
-}) {
-  store.dispatch('updateMintedCountForCard', { cardTypeId, editionNumber })
-}
-
-function subscribeToEvents() {
-  watchEvents({ onCardMinted })
+  // burnerconnect: {
+  //   package: BurnerConnectProvider,
+  //   options: {
+  //     defaultWallets: [
+  //       { origin: "https://denver-demo.burnerfactory.com/", name: "Denver Demo Wallet" },
+  //     ],
+  //   },
+  // },
+  // portis: {
+  //   package: Portis,
+  //   options: {
+  //     id: "1f9427a6-ceef-4d45-a6df-79f081e909d9",
+  //   },
+  // },
+  // fortmatic: {
+  //   package: Fortmatic,
+  //   options: {
+  //     key: process.env.NODE_ENV === 'production' ? "pk_live_6D8AC68104516C09" : "pk_test_2ED863FB3FCEB2F3",
+  //   },
+  // }
 }
 
 export default {
@@ -98,10 +83,13 @@ export default {
     AppHeader,
     AppFooter
   },
-  async beforeCreate() {
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' }) 
-
-    this.$store.dispatch('chainChanged', parseInt(chainId))
+  async created() {
+    // set this here to be able to debounce it..
+    // debounce prevents this from showing the "Balance Updated" twice
+    // when both Cryptoz and Czxp contracts emit an event
+    this.onBalanceUpdated = _.debounce(() => {
+      showSuccessToast(this, 'Balance Updated!')
+    }, 500, {leading: true})
 
     // //add 0x1, 0x3, 0x4,  for ethereum main net, ropsten, rinkeby
     // let cryptoz_artifacts
@@ -120,15 +108,27 @@ export default {
 
     window.Cryptoz   = contract(cryptoz_artifacts)
     window.CzxpToken = contract(cryptoz_token_artifacts)
-    // tell provider not to refresh page on network change
-    // instead we listen to on chainChanged event
 
     // this needs to be set in beforeCreate because vue lifecycle
     // is Parent create -> child create -> child mount -> parent mount
     // and we need provider to be set in child components
-    if (window.web3 && window.web3.currentProvider) {
-      setContractProvider(window.web3.currentProvider)
-      subscribeToEvents()
+    if (window.ethereum) {
+      const web3 = new Web3(window.ethereum)
+      window.web3 = web3
+      this.setContractProvider(web3.currentProvider)
+      this.subscribeToContractEvents()
+      this.subscribeToProviderEvents(web3.currentProvider)
+      this.getWalletInfo()
+      this.$store.dispatch('web3isConnected', true)
+      this.$store.dispatch('updateUniverseBalances')
+      this.$store.dispatch('updateOwnerBalances')
+
+      // const chainId = await window.ethereum.request({ method: 'eth_chainId' }) 
+
+      // this.$store.dispatch('chainChanged', parseInt(chainId))
+    }
+    else {
+      console.log('no window.ethereum')
     }
   },
   data() {
@@ -151,14 +151,7 @@ export default {
       }
     }
   },
-  mounted() {
-    window.ethereum.autoRefreshOnNetworkChange = false
-    if (window.web3 && window.web3.currentProvider) {
-      this.getWalletInfo()
-      this.subscribeToProviderEvents(window.web3.currentProvider)
-      this.$store.dispatch('web3isConnected', true)
-    }
-
+  async mounted() {
     // Twitter library - footer follow button uses it
     window.twttr = (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],
@@ -178,8 +171,43 @@ export default {
     }(document, "script", "twitter-wjs"));
   },
   methods: {
-    subscribeToProviderEvents: function(provider) {
-      provider.on("message", (message) => console.log(message))
+    onConnect: async function() {
+      const web3Modal = new Web3Modal({
+        cacheProvider: true,
+        providerOptions,
+      });
+
+      const provider = await web3Modal.connect()
+      await provider.enable()
+      const web3 = new Web3(provider)
+      window.web3 = web3
+      this.setContractProvider(provider)
+      this.subscribeToContractEvents()
+      this.subscribeToProviderEvents(provider)
+      this.getWalletInfo()
+    },
+    
+    setContractProvider(provider) {
+      window.Cryptoz.setProvider(provider);
+      window.CzxpToken.setProvider(provider);
+    },
+
+    onCardMinted({
+      cardTypeId,
+      editionNumber,
+    }) {
+      this.$store.dispatch('updateMintedCountForCard', { cardTypeId, editionNumber })
+    },
+
+    subscribeToContractEvents() {
+      console.log('subscribetoContractEvents')
+      watchEvents({
+        onCardMinted: this.onCardMinted,
+        onBalanceUpdated: this.onBalanceUpdated,
+      })
+    },
+
+    subscribeToProviderEvents(provider) {
       provider.on("connect", ({chainId}) => {
         this.$store.dispatch('web3isConnected', true)
         this.$store.dispatch('chainChanged', chainId)
@@ -189,7 +217,7 @@ export default {
         if (accounts.length > 0) {
           this.$store.dispatch('web3isConnected', true)
           this.getWalletInfo()
-          subscribeToEvents()
+          this.subscribeToContractEvents()
         }
         //user "locks" their wallet via provider
         else {
@@ -209,35 +237,27 @@ export default {
         this.disconnectWallet()
       });
     },
-    onConnect: async function() {
-      const web3Modal = new Web3Modal({
-        // cacheProvider: true, // optional
-        providerOptions
-      });
 
-      const provider = await web3Modal.connect()
-      await provider.enable()
-      const web3 = new Web3(provider)
-      window.web3 = web3
-      setContractProvider(provider)
-      subscribeToEvents()
-      this.subscribeToProviderEvents(provider)
-    },
-    getWalletInfo: function() {
-      console.log('getWalletinfo')
+    getWalletInfo() {
       this.$store.dispatch('updateWallet')
+      this.$store.dispatch('updateOwnerBalances')
     },
-    disconnectWallet: function() {
+
+    disconnectWallet() {
       this.$store.dispatch('web3isConnected', false)
       this.$store.dispatch('disconnectWallet')
       this.$store.dispatch('chainChanged', null)
-    },
+    }
   }
 }
 
 </script>
 
 <style>
+  #app {
+    overflow-x: hidden;
+  }
+
   .headerComponent{
     margin-bottom:2em;
   }

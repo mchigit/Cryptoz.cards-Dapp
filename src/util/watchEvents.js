@@ -1,22 +1,28 @@
 import {store} from '../store/'
 
 let watchEvents = function ({
-  onCardMinted
+  onCardMinted,
+  onBalanceUpdated,
 }) {
-  //This is all about CZXP tokens.. deal with events to this
   window.CzxpToken.deployed().then(function(instance) {
-    var czxpEvents = instance.allEvents({fromBlock: 'latest'});
-    
-    czxpEvents.watch(function(error, event){
+    instance.contract.events.allEvents({fromBlock: 'latest'}, function(error, event){
+      console.log({czxpEvent: event})
       if (!error){
-        console.log({event: event.event})
         // console.log('CZXP events captured! : ', event);
         //IF event affects our wallet, dispatch
-        if(event.args.to == store.state.web3.coinbase){
-          store.dispatch('updateOwnerBalances', event);
+        const { to, from, player } = event.returnValues
+        const { coinbase } = store.state.web3
+        if (
+          [to, from, player]
+            .filter(val => val !== undefined)
+            .find(val => val.toLowerCase() === coinbase.toLowerCase())
+        ) {
+          store.dispatch('setLastEvent', event)
+          store.dispatch('updateOwnerBalances');
+          onBalanceUpdated()
         }
         //Otherwise a czxp event ALWAYS updates the universe balance
-        store.dispatch('updateUniverseBalances', event);
+        store.dispatch('updateUniverseBalances');
       }else{
         console.log("ERROR in watchEvents.js czxpEvents : ", error);
       }
@@ -24,35 +30,36 @@ let watchEvents = function ({
   
   })
   
-  //This is all about Cryptoz tokens.. deal with events to this
   window.Cryptoz.deployed().then(function(instance) {
-    var cryptozEvents = instance.allEvents({fromBlock: 'latest'});
-    
-    cryptozEvents.watch(function(error, event){
+    instance.contract.events.allEvents({fromBlock: 'latest'}, function(error, event){
       switch (event.event) {
         case 'LogCardCreated':
           onCardMinted({
-            cardTypeId: parseInt(event.args.cardTypeId).toString(),
-            editionNumber: parseInt(event.args.editionNumber).toString(),
+            cardTypeId: parseInt(event.returnValues.cardTypeId).toString(),
+            editionNumber: parseInt(event.returnValues.editionNumber).toString(),
           })
           break
         default:
           break
       }
-      if (!error){
-        // console.log('Cryptoz events captured! : ', event);
-        //IF event affects our wallet, dispatch
-        if(event.args.to == store.state.web3.coinbase ||
-           event.args.player == store.state.web3.coinbase){
-          store.dispatch('updateOwnerBalances', event);
+      if (!error) {
+        const { to, from, player } = event.returnValues
+        const { coinbase } = store.state.web3
+        if (
+          [to, from, player]
+            .filter(val => val !== undefined)
+            .find(val => val.toLowerCase() === coinbase.toLowerCase())
+        ) {
+          store.dispatch('setLastEvent', event)
+          store.dispatch('updateOwnerBalances');
+          onBalanceUpdated()
         }
-        //Otherwise a czxp event ALWAYS updates the universe balance
-        store.dispatch('updateUniverseBalances', event);
+        //Otherwise a Cryptoz event ALWAYS updates the universe balance
+        store.dispatch('updateUniverseBalances');
       }else{
         console.log("ERROR in watchEvents.js cryptozEvents: ", error);
       }
     });
-  
   })
 }
 

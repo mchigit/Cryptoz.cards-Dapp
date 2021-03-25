@@ -338,7 +338,7 @@ export default {
     },
     wallet() {
       return parseFloat(
-        window.web3.fromWei(this.$store.state.web3.balance),
+        window.web3.utils.fromWei(this.$store.state.web3.balance.toString()),
         "ether"
       );
     },
@@ -350,6 +350,9 @@ export default {
     },
     boostersOwned() {
       return this.$store.state.boostersOwned;
+    },
+    cardsOwned() {
+      return this.$store.state.cardsOwned;
     },
     currentEvent() {
       return this.$store.state.lastChainEvent;
@@ -398,19 +401,11 @@ export default {
         this.disableSearch = true;
       }
     },
-    // TODO: figure out a more intelligent way of reloading cards.
-    // 'currentEvent': {
-    //   handler: function(newValue, oldValue) {
-    //     if (newValue) {
-    //       if(this.subscriptionState == 0){
-    //         this.getAllCards();
-    //       }
-    //       if(oldValue && newValue.transactionHash !== oldValue.transactionHash){
-    //         showSuccessToast(this, 'Confirmed! Balance updated')
-    //       }
-    //     }
-    //   }
-    // }
+    cardsOwned(val, oldVal) {
+      if (val !== oldVal) {
+        this.getAllCards()
+      }
+    },
   },
   methods: {
     goToCrypt: function() {
@@ -493,7 +488,6 @@ export default {
           return instance.sacrifice(id, { from: this.coinbase });
         })
         .then((res) => {
-          this.$store.dispatch("updateOwnerBalances");
           this.getAllCards();
         })
         .catch((err) => {
@@ -582,7 +576,7 @@ export default {
               .then(function(elementReturned) {
                 tokenIdList[tokenId] = elementReturned;
 
-                return getCardTypes(elementReturned[0].c[0]);
+                return getCardTypes(elementReturned[0].toNumber());
               })
               .then(function(res) {
                 res.id = tokenId;
@@ -594,7 +588,7 @@ export default {
 
                 //Overwrite our JSON reponse with vue friendly card binding data
                 res.attributes = newAttr;
-                res.attributes.edition_current = tokenIdList[tokenId][1].c[0];
+                res.attributes.edition_current = tokenIdList[tokenId][1].toNumber();
 
                 //Edition total
                 // #4  , #4 of 300
@@ -644,7 +638,7 @@ export default {
 
         //asynchronously get all our cards
         this.orderedCards = await Promise.all(
-          res.map((element) => getCard(element.c[0]))
+          res.map((element) => getCard(element.toNumber()))
         );
         this.orderedCards.sort((a, b) => b.id - a.id);
 
@@ -690,7 +684,6 @@ export default {
         });
     },
     sortByAttr: function(param, isDescending) {
-      console.log({ param, cards: this.orderedCards });
       this.sortType = param;
       this.isDescending = isDescending;
       switch (param) {

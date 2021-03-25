@@ -170,14 +170,13 @@
 import { mapState } from "vuex";
 import { showSuccessToast, showErrorToast } from "../../util/showToast";
 import { isAddress } from "../../util/addressUtil";
+import moment from 'moment'
 
 const baseAddress = "0x0000000000000000000000000000000000000000";
 export default {
   name: "AppHeader",
-  beforeCreate() {
-    //Initialize the app
-    // console.log('registerWeb3 Action dispatched from AppHeader.vue')
-    // this.$store.dispatch('registerWeb3')
+  mounted() {
+    this.setSubscriptions()
   },
   computed: {
     classObject : function () { //Style the link colours
@@ -191,7 +190,11 @@ export default {
       }
     },
     ethBalance() {
-      return parseFloat(web3.fromWei(this.$store.state.web3.balance), "ether");
+      const balance = this.$store.state.web3.balance
+      if (balance !== null) {
+        return parseFloat(web3.utils.fromWei(balance.toString()), "ether");
+      }
+      return null
     },
     coinbase() {
       return this.$store.state.web3.coinbase;
@@ -215,7 +218,7 @@ export default {
       return `${siteURL}?sponsor=${this.coinbase}`;
     },
     getTweet() {
-      return `https://twitter.com/intent/tweet?text=Click my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,cryptozfam,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
+      return `https://twitter.com/intent/tweet?text=Click%20my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,cryptozfam,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
     },
     isSponsorValid() {
       if (this.sponsorAddress === '') {
@@ -250,39 +253,15 @@ export default {
         this.checkSponsor(this.coinbase);
       }
     },
-    ethBalance(newValue, oldValue) {
-      // console.log(
-      //   `Updating ethBalance in header from ${oldValue} to ${newValue}`
-      // );
-      // new wallet.. check their bonus and tell Owner balances to update
-      // if (newValue !== oldValue && newValue !== null) {
-        //this.$store.dispatch('updateOwnerBalances')
-        //this.$store.dispatch('updateUniverseBalances')
-        //this.setSubscriptions();
-      // }
-    },
-    coinbase(newValue, oldValue) {
-      console.log(
-        `Updating coinbase in header from ${oldValue} to ${newValue}`
-      );
-      // new wallet.. check their bonus and tell Owner balances to update
-      if (newValue !== oldValue && newValue !== null) {
-        this.$store.dispatch("updateOwnerBalances");
-        this.$store.dispatch("updateUniverseBalances");
-        this.setSubscriptions();
-      }
-    },
     currentEvent(newValue, oldValue) {
+      console.log({newEvent: newValue})
       if (newValue !== oldValue && typeof newValue !== "undefined") {
         if (this.pendingTransaction == newValue.blockHash) {
           this.showSpinner = false;
           this.transactionMessage = "Confirmed! Balance updated";
-          this.setSubscriptions();
         }
       }
     },
-  },
-  async mounted() {
   },
   methods: {
     checkSponsor: async function(address) {
@@ -328,29 +307,23 @@ export default {
         });
     },
     setSubscriptions: function() {
-      //Lets do a check for the Daily bonus'
-      // console.log("Check if the bonus is available for this playa..");
-      //console.log(this.coinbase);
-      //console.log(this.balance);
+      if (window.Cryptoz) {
+        window.Cryptoz.deployed()
+          .then((instance) => {
+            return instance.getTimeToDailyBonus(this.coinbase);
+          })
+          .then((res) => {
+            var timeOfNextBonusInMilli = res.toNumber() * 1000;
+            var now = new Date();
 
-      window.Cryptoz.deployed()
-        .then((instance) => {
-          return instance.getTimeToDailyBonus(this.coinbase);
-        })
-        .then((res) => {
-          //console.log('Time to next bonus is:');
-          //console.log(res.c[0]*1000);
-          var timeToBonusInMilli = res.c[0] * 1000;
-          var now = new Date();
-          //console.log('now is ' + now.getTime());
-
-          if (now.getTime() >= timeToBonusInMilli) {
-            this.bonusReady = 1; //Claim bonus state
-          } else {
-            this.bonusReady = 0; //countdown to bonus state
-            this.timeToBonus = this.GetTimeString(res.c[0] * 1000);
-          }
-        });
+            if (now.getTime() >= timeOfNextBonusInMilli) {
+              this.bonusReady = 1; //Claim bonus state
+            } else {
+              this.bonusReady = 0; //countdown to bonus state
+              this.timeToBonus = this.GetTimeString(timeOfNextBonusInMilli);
+            }
+          });
+      }
     },
     GetBonus: function() {
       console.log("GetBonus called...");
@@ -375,49 +348,14 @@ export default {
           // Transaction rejected or failed
           //reset the claim tokens message
           this.showSpinner = false;
-          this.transactionMessage = "Claim 2 FREE Boosters !";
+          this.transactionMessage = "Claim 2 FREE Boosters!";
+        })
+        .finally(() => {
+          this.showSpinner = false;
         });
     },
     GetTimeString: function(_timeStamp) {
-      var t = new Date(_timeStamp),
-        hours = t.getHours(),
-        min = t.getMinutes() + "",
-        pm = false,
-        months = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-
-      if (hours > 11) {
-        hours = hours - 12;
-        pm = true;
-      }
-
-      if (hours == 0) hours = 12;
-      if (min.length == 1) min = "0" + min;
-
-      //return months[t.getMonth()] + ' ' + t.getDate() + ', ' + t.getFullYear() + ' ' + hours + ':' + min + ' ' + (pm ? 'pm' : 'am');
-      return (
-        months[t.getMonth()] +
-        " " +
-        t.getDate() +
-        " at " +
-        hours +
-        ":" +
-        min +
-        " " +
-        (pm ? "pm" : "am")
-      );
+      return moment(_timeStamp).format("MMM D, h:mm a")
     },
   },
 };
@@ -426,6 +364,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.navbar {
+  max-width: 100vw;
+}
 
 #cryptoz-nav {
   width: 100%;

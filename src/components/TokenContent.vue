@@ -161,12 +161,12 @@ export default {
         .then(function (res) {
           //returns TypeId, Edition, # times transfed
           // console.log("CardOwned results:", res);
-          let cardTypeId = res[0].c[0];
+          let cardTypeId = res[0].toNumber();
 
           //If the tokenId is greater than 0, we have something valid
           if (cardTypeId > 0) {
-            self.edition_current = res[1].c[0];
-            self.times_transferred = res[2].c[0];
+            self.edition_current = res[1].toNumber();
+            self.times_transferred = res[2].toNumber();
             self.getCardData(cardTypeId);
             return contract.ownerOf.call(self.token_id);
           } else {
