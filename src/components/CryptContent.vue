@@ -136,9 +136,6 @@ export default {
     boostersOwned() {
       return this.$store.state.boostersOwned;
     },
-    currentEvent() {
-      return this.$store.state.lastChainEvent;
-    },
     isWagerValid() {
       const wagerAmount = parseInt(this.wagerAmount);
       this.notEnoughWager = false;
@@ -175,24 +172,16 @@ export default {
   },
   methods: {
     buyAndOpenBooster: async function() {
-      try {
-        showPendingToast(this);
-        const instance = await window.Cryptoz.deployed();
-        const res = await instance.buyBoosterCardAndOpen({
-            from: this.coinbase,
-            value: 2000000000000000,
-          });
-        this.$bvModal.hide("open-booster-modal");
-        this.$store.dispatch("updateWallet");
-        showSuccessToast(this, "Booster opened!")
-      } catch (error) {
-        console.error(error.message);
+      showPendingToast(this);
+      this.CryptozInstance.buyBoosterCardAndOpen({
+        from: this.coinbase,
+        value: 2000000000000000,
+      }).catch((error) => {
         showRejectedToast(this);
-      }
+      })
+      this.$bvModal.hide("open-booster-modal");
     },
     openBooster: function() {
-      console.log("Wagering.." + this.wagerAmount);
-
       //Change buy button to pending.. or show some pending state
       showPendingToast(this);
       var self = this;

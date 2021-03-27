@@ -251,7 +251,21 @@ export default {
   },
   mounted() {
     this.isLoading = true;
-    this.getAllCards(this.addressToLoad);
+    if (this.CryptozInstance) {
+      this.getAllCards(this.addressToLoad);
+    }
+  },
+  watch: {
+    CryptozInstance(newVal) {
+      if (newVal && this.addressToLoad) {
+        this.getAllCards(this.addressToLoad);
+      }
+    },
+    currentEvent(newVal) {
+      if (newVal) {
+        this.getAllCards(this.addressToLoad);
+      }
+    }
   },
   computed: {
     coinbase() {
@@ -271,23 +285,26 @@ export default {
         return [
         "name",
         "card_level",
-        "edition",
+        "edition_number",
         "unlock_czxp",
         "sacrifice_czxp",
         "transfer_czxp",
       ]
       } else {
         return [
-                  "name",
-        "card_level",
-        "edition",
-        "unlock_czxp",
-        "sacrifice_czxp",
-        "transfer_czxp",
-                "sacrifice",
-        "gift",
+          "name",
+          "card_level",
+          "edition_number",
+          "unlock_czxp",
+          "sacrifice_czxp",
+          "transfer_czxp",
+          "sacrifice",
+          "gift",
         ]
       }
+    },
+    currentEvent() {
+      return this.$store.state.lastChainEvent;
     },
     getMyCryptLink() {
       const url =
@@ -404,7 +421,7 @@ export default {
       }
     },
     navigateToNewCrypt: function() {
-      this.$router.push(`/crypt/${this.addressToSearch}`);
+      this.$router.push(`/my-cryptoz-nfts/${this.addressToSearch}`);
     },
     getAllCards: async function(addressToLoad) {
       this.isLoading = true;

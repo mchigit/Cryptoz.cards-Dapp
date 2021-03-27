@@ -55,7 +55,7 @@
           <li id="bonus-boosters">
             <div
               class="bonusClass"
-              v-if="web3isConnected && bonusReady == 1 && showSpinner == false"
+              v-if="web3isConnected && bonusReady && showSpinner == false"
               v-on:click="GetBonus"
             >
               Claim 2 FREE Boosters!
@@ -68,7 +68,7 @@
             </div>
             <div
               class="bonusClassNo"
-              v-else-if="web3isConnected && bonusReady == 0 && showSpinner == false"
+              v-else-if="web3isConnected && !bonusReady && timeToBonus && showSpinner == false"
             >
               Your Next Bonus:<br /><strong> {{ timeToBonus }}</strong>
             </div>
@@ -176,7 +176,7 @@ const baseAddress = "0x0000000000000000000000000000000000000000";
 export default {
   name: "AppHeader",
   mounted() {
-    this.setSubscriptions()
+    this.getDailyBonusTime()
   },
   computed: {
     classObject : function () { //Style the link colours
@@ -201,6 +201,9 @@ export default {
     },
     coinbase() {
       return this.$store.state.web3.coinbase;
+    },
+    isConnected() {
+      return this.$store.state.web3.isConnected;
     },
     web3isConnected() {
       return (
@@ -244,7 +247,7 @@ export default {
       notSameSponsorError: true,
       transactionMessage: "Pending confirmation...",
       showLogin: 1,
-      bonusReady: 2,
+      bonusReady: false,
       timeToBonus: 0,
       sponsorAddress: "",
       shouldShowSponsor: true,
@@ -262,7 +265,11 @@ export default {
           this.showSpinner = false;
           this.transactionMessage = "Confirmed! Balance updated";
         }
+        this.getDailyBonusTime()
       }
+    },
+    coinbase(val) {
+      this.getDailyBonusTime()
     },
   },
   methods: {
@@ -306,17 +313,21 @@ export default {
           console.log("Copy Failed: ", error);
         });
     },
-    setSubscriptions: function() {
-      if (this.CryptozInstance) {
+    getDailyBonusTime: function() {
+      if (this.CryptozInstance && this.coinbase) {
+        console.log({CryptozInstance: this.CryptozInstance})
         this.CryptozInstance.getTimeToDailyBonus(this.coinbase)
           .then((res) => {
+            console.log({res})
             var timeOfNextBonusInMilli = res.toNumber() * 1000;
             var now = new Date();
 
+            console.log(timeOfNextBonusInMilli)
+
             if (now.getTime() >= timeOfNextBonusInMilli) {
-              this.bonusReady = 1; //Claim bonus state
+              this.bonusReady = true; //Claim bonus state
             } else {
-              this.bonusReady = 0; //countdown to bonus state
+              this.bonusReady = false
               this.timeToBonus = this.GetTimeString(timeOfNextBonusInMilli);
             }
           });
@@ -380,6 +391,8 @@ export default {
 
 #bonus-boosters:empty {
   height: 0;
+  min-width: 0;
+  width: 0;
 }
 
 #wallet-nav:empty {

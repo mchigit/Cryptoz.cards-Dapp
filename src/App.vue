@@ -11,7 +11,7 @@
 <script>
 
 import axios from 'axios';
-var contract = require("@truffle/contract");
+var contract = require("truffle-contract");
 import cryptoz_artifacts from './contracts/Cryptoz.json';
 import cryptoz_token_artifacts from './contracts/CzxpToken.json';
 import watchEvents from './util/watchEvents';

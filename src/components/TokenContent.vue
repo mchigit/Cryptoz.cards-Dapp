@@ -164,7 +164,7 @@ export default {
   methods: {
     loadCard: function (token_id) {
       console.log({load: token_id})
-      this.CryptozInstance.getOwnedCard.call(token_id)
+      this.CryptozInstance.getOwnedCard(token_id)
         .then((res) => {
           console.log({res})
           //returns TypeId, Edition, # times transfed
@@ -177,7 +177,7 @@ export default {
             this.edition_current = res[1].toNumber();
             this.times_transferred = res[2].toNumber();
             this.getCardData(cardTypeId);
-            return this.CryptozInstance.ownerOf.call(token_id);
+            return this.CryptozInstance.ownerOf(token_id);
           } else {
             this.load_state = 0; //and we stop here
             return 0;

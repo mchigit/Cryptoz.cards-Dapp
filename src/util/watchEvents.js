@@ -4,7 +4,7 @@ let watchEvents = function (CzxpInstance, CryptozInstance, {
   onCardMinted,
   onBalanceUpdated,
 }) {
-  console.log('watch events', {CzxpInstance, CryptozInstance, onCardMinted, onBalanceUpdated})
+  // console.log('watch events', {CzxpInstance, CryptozInstance, onCardMinted, onBalanceUpdated})
 
   CzxpInstance.contract.events.allEvents({fromBlock: 'latest'}, function(error, event){
     if (!error) {
