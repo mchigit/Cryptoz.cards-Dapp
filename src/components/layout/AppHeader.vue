@@ -15,7 +15,7 @@
             <router-link v-bind:class="classObject" to="/shop">Shop</router-link>
           </b-nav-item>
           <b-nav-item id="crypt">
-            <router-link v-bind:class="classObject" to="/crypt">Your NFT Crypt</router-link>
+            <router-link v-bind:class="classObject" to="/my-cryptoz-nfts">Your NFT Crypt</router-link>
           </b-nav-item>
           <b-nav-item id="markets">
             <router-link v-bind:class="classObject" to="/market">Markets</router-link>
