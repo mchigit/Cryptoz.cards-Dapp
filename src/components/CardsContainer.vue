@@ -386,7 +386,7 @@ export default {
       try {
         showPendingToast(this);
         Vue.set(this.cardsBeingGifted, id, true);
-        
+
         const instance = await window.Cryptoz.deployed();
         const giftRes = await instance.transferFrom(this.coinbase, this.receivingWallet, id, { from: this.coinbase })
 
@@ -402,7 +402,7 @@ export default {
       }
     },
     navigateToNewCrypt: function() {
-      this.$router.push(`/crypt/${this.addressToSearch}`);
+      this.$router.push(`/my-cryptoz-nfts/${this.addressToSearch}`);
     },
     getAllCards: async function(addressToLoad) {
       this.isLoading = true;
