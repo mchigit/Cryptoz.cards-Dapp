@@ -301,6 +301,8 @@ export default {
             return e.args.cardTypeId.c[0];
           })
 
+          //push March 27,2021
+          typeIdsOnChain.push(64,71,74,79,84,87,91,93,95,96,104);
           //push March 20,2021
           typeIdsOnChain.push(47,51,58,60,61,63);
           //push March 20,2021
