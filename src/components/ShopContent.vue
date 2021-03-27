@@ -421,6 +421,10 @@ export default {
           if(cardObj.id == 104){ //grumps
             cardObj.edition_total = 7;
           }
+          if(cardObj.id == 93){ //elephant
+            cardObj.edition_total = 49;
+          }
+
 
           // Set soldOut flag first
           if(cardObj.edition_current == cardObj.edition_total) {
