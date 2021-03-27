@@ -40,20 +40,20 @@ import './main.css'
 
 const testEnv = true
 
-const providerOptions = {
+// const providerOptions = {
   // torus: {
   //   package: Torus,
   // },
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      // infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
-      rpc: {
-        56: 'https://bsc-dataseed.binance.org/',
-        97: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
-      },
-    },
-  },
+  // walletconnect: {
+  //   package: WalletConnectProvider,
+  //   options: {
+  //     // infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+  //     rpc: {
+  //       56: 'https://bsc-dataseed.binance.org/',
+  //       97: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+  //     },
+  //   },
+  // },
   // burnerconnect: {
   //   package: BurnerConnectProvider,
   //   options: {
@@ -74,7 +74,7 @@ const providerOptions = {
   //     key: process.env.NODE_ENV === 'production' ? "pk_live_6D8AC68104516C09" : "pk_test_2ED863FB3FCEB2F3",
   //   },
   // }
-}
+// }
 
 const CryptozContract = contract(cryptoz_artifacts)
 const CzxpContract = contract(cryptoz_token_artifacts)
@@ -160,16 +160,17 @@ export default {
   },
   methods: {
     onConnect: async function() {
-      const web3Modal = new Web3Modal({
-        cacheProvider: true,
-        providerOptions,
-      });
+      await window.ethereum.enable()
+      // const web3Modal = new Web3Modal({
+      //   cacheProvider: true,
+      //   providerOptions,
+      // });
 
-      const provider = await web3Modal.connect()
-      await provider.enable()
-      const web3 = new Web3(provider)
-      window.web3 = web3
-      this.setContractProvider(provider)
+      // const provider = await web3Modal.connect()
+      // await provider.enable()
+      // const web3 = new Web3(provider)
+      // window.web3 = web3
+      // this.setContractProvider(provider)
     },
     
     async setContractProvider(provider) {
@@ -198,12 +199,10 @@ export default {
       provider.on("connect", ({chainId}) => {
         this.$store.dispatch('web3isConnected', true)
         this.$store.dispatch('chainChanged', chainId)
-        this.getWalletInfo()
       });
       provider.on("accountsChanged", (accounts) => {
         if (accounts.length > 0) {
           this.$store.dispatch('web3isConnected', true)
-          this.getWalletInfo()
         }
         //user "locks" their wallet via provider
         else {
