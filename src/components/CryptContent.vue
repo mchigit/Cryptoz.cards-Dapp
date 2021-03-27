@@ -345,6 +345,9 @@ export default {
     coinbase() {
       return this.$store.state.web3.coinbase;
     },
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
     addressToSearchState() {
       return isAddress(this.addressToSearch);
     },
@@ -467,9 +470,7 @@ export default {
     },
     getAllCards: async function() {
       this.subscriptionState = 1;
-
-      const instance = await window.Cryptoz.deployed();
-      const tokensOfOwner = await instance.tokensOfOwner(this.coinbase);
+      const tokensOfOwner = await this.CryptozInstance.tokensOfOwner(this.coinbase);
       this.handleGetAllCards(tokensOfOwner);
     },
     toggleTableView: function() {
@@ -483,10 +484,7 @@ export default {
       showPendingToast(this);
       Vue.set(this.cardsBeingSacrificed, id, true);
 
-      window.Cryptoz.deployed()
-        .then((instance) => {
-          return instance.sacrifice(id, { from: this.coinbase });
-        })
+      this.CryptozInstance.sacrifice(id, { from: this.coinbase })
         .then((res) => {
           this.getAllCards();
         })
@@ -508,18 +506,13 @@ export default {
 
       // console.log('to ' + this.receivingWallet)
       // console.log('from ' + this.coinbase)
-      var contract;
-      window.Cryptoz.deployed()
-        .then((instance) => {
-          contract = instance;
-          showPendingToast(this);
-          return contract.transferFrom(
-            this.coinbase,
-            this.receivingWallet,
-            id,
-            { from: this.coinbase }
-          );
-        })
+      showPendingToast(this);
+      this.CryptozInstance.transferFrom(
+        this.coinbase,
+        this.receivingWallet,
+        id,
+        { from: this.coinbase }
+      )
         .then((res) => {
           this.confirmTransferBtnDisabled = false;
           return contract.tokensOfOwner(this.coinbase);
@@ -535,14 +528,10 @@ export default {
     },
     buyAndOpenBooster: function() {
       showPendingToast(this);
-      window.Cryptoz.deployed()
-        .then((instance) => {
-          return instance.buyBoosterCardAndOpen({
-            from: this.coinbase,
-            value: 2000000000000000,
-          });
-        })
-        //update boosters owned and total types
+      this.CryptozInstance.buyBoosterCardAndOpen({
+        from: this.coinbase,
+        value: 2000000000000000,
+      })
         .then(() => {
           this.$bvModal.hide("open-booster-modal");
           this.getAllCards();
@@ -559,7 +548,6 @@ export default {
     },
     handleGetAllCards: async function(res) {
       if (res.length > 0) {
-        var self = this;
         //first we update the view
         this.ownsCards = true;
 
@@ -567,12 +555,9 @@ export default {
         var tokenIdList = {};
 
         //Define a function to do all our handling and chain the data before passing back to our view
-        var getCard = function(tokenId) {
+        var getCard = (tokenId) => {
           return new Promise((resolve, reject) => {
-            window.Cryptoz.deployed()
-              .then(function(instance) {
-                return instance.getOwnedCard(tokenId);
-              })
+            this.CryptozInstance.getOwnedCard(tokenId)
               .then(function(elementReturned) {
                 tokenIdList[tokenId] = elementReturned;
 
@@ -662,10 +647,7 @@ export default {
 
       this.$bvModal.hide("open-booster-modal");
 
-      window.Cryptoz.deployed()
-        .then(function(instance) {
-          return instance.openBoosterCard(0, { from: self.coinbase });
-        })
+      this.CryptozInstance.openBoosterCard(0, { from: self.coinbase })
         .then((res) => {
           if (res === undefined) {
             throw new Error("result is undefined in openBooster");

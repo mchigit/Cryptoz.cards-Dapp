@@ -76,6 +76,9 @@ const providerOptions = {
   // }
 }
 
+const CryptozContract = contract(cryptoz_artifacts)
+const CzxpContract = contract(cryptoz_token_artifacts)
+
 export default {
   name: 'App',
   components: {
@@ -88,26 +91,9 @@ export default {
     // debounce prevents this from showing the "Balance Updated" twice
     // when both Cryptoz and Czxp contracts emit an event
     this.onBalanceUpdated = _.debounce(() => {
+      console.log("show toast")
       showSuccessToast(this, 'Balance Updated!')
-    }, 500, {leading: true})
-
-    // //add 0x1, 0x3, 0x4,  for ethereum main net, ropsten, rinkeby
-    // let cryptoz_artifacts
-    // switch (chainId) {
-    //   // main and test bsc
-    //   case 0x38:
-    //   case 0x61:
-    //     cryptoz_artifacts = bsc_cryptoz_artifacts
-    //     cryptoz_token_artifacts = bsc_cryptoz_token_artifacts
-    //     break
-    //   default:
-    //     cryptoz_artifacts = dev_cryptoz_artifacts
-    //     cryptoz_token_artifacts = dev_cryptoz_token_artifacts
-    //     break
-    // }
-
-    window.Cryptoz   = contract(cryptoz_artifacts)
-    window.CzxpToken = contract(cryptoz_token_artifacts)
+    }, 1000)
 
     // this needs to be set in beforeCreate because vue lifecycle
     // is Parent create -> child create -> child mount -> parent mount
@@ -116,19 +102,9 @@ export default {
       const web3 = new Web3(window.ethereum)
       window.web3 = web3
       this.setContractProvider(web3.currentProvider)
-      this.subscribeToContractEvents()
-      this.subscribeToProviderEvents(web3.currentProvider)
-      this.getWalletInfo()
-      this.$store.dispatch('web3isConnected', true)
-      this.$store.dispatch('updateUniverseBalances')
-      this.$store.dispatch('updateOwnerBalances')
-
-      // const chainId = await window.ethereum.request({ method: 'eth_chainId' }) 
-
-      // this.$store.dispatch('chainChanged', parseInt(chainId))
     }
     else {
-      console.log('no window.ethereum')
+      console.log('non web3 browser detected')
     }
   },
   data() {
@@ -142,16 +118,28 @@ export default {
   computed: {
     coinbase() {
       return this.$store.state.web3.coinbase;
-    }
+    },
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
+    CzxpInstance() {
+      return this.$store.state.contractInstance.czxp;
+    },
   },
   watch: {
     coinbase(val, oldVal) {
       if (val && oldVal && val !== oldVal) {
         showSuccessToast(this, 'Successfully changed wallets.');
       }
+      if (val) {
+        watchEvents(this.CzxpInstance, this.CryptozInstance, {
+          onCardMinted: this.onCardMinted,
+          onBalanceUpdated: this.onBalanceUpdated,
+        })
+      }
     }
   },
-  async mounted() {
+  mounted() {
     // Twitter library - footer follow button uses it
     window.twttr = (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],
@@ -182,14 +170,21 @@ export default {
       const web3 = new Web3(provider)
       window.web3 = web3
       this.setContractProvider(provider)
-      this.subscribeToContractEvents()
-      this.subscribeToProviderEvents(provider)
-      this.getWalletInfo()
     },
     
-    setContractProvider(provider) {
-      window.Cryptoz.setProvider(provider);
-      window.CzxpToken.setProvider(provider);
+    async setContractProvider(provider) {
+      this.subscribeToProviderEvents(provider)
+
+      CryptozContract.setProvider(provider)
+      CzxpContract.setProvider(provider)
+      const [cryptoz, czxp] = await Promise.all([CryptozContract.deployed(), CzxpContract.deployed()])
+
+      await this.$store.dispatch('setContractInstance', { cryptoz, czxp })
+      this.$store.dispatch('web3isConnected', true)
+
+      await this.$store.dispatch('updateWallet')
+      this.$store.dispatch('updateUniverseBalances')
+      this.$store.dispatch('updateOwnerBalances')
     },
 
     onCardMinted({
@@ -197,14 +192,6 @@ export default {
       editionNumber,
     }) {
       this.$store.dispatch('updateMintedCountForCard', { cardTypeId, editionNumber })
-    },
-
-    subscribeToContractEvents() {
-      console.log('subscribetoContractEvents')
-      watchEvents({
-        onCardMinted: this.onCardMinted,
-        onBalanceUpdated: this.onBalanceUpdated,
-      })
     },
 
     subscribeToProviderEvents(provider) {
@@ -217,7 +204,6 @@ export default {
         if (accounts.length > 0) {
           this.$store.dispatch('web3isConnected', true)
           this.getWalletInfo()
-          this.subscribeToContractEvents()
         }
         //user "locks" their wallet via provider
         else {

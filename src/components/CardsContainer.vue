@@ -179,6 +179,9 @@ export default {
     web3() {
       return this.$store.state.web3;
     },
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
     addressToSearchState() {
       return isAddress(this.addressToSearch);
     },
@@ -186,11 +189,9 @@ export default {
   watch: {
     web3: {
       handler(val, oldVal) {
-        
-          if (val.isConnected) {
-            this.getAllCards(this.addressToLoad);
-          }
-        
+        if (val.isConnected) {
+          this.getAllCards(this.addressToLoad);
+        }
       },
       deep: true,
     },
@@ -230,9 +231,8 @@ export default {
     },
     getAllCards: async function(addressToLoad) {
       this.isLoading = true;
-      const instance = await window.Cryptoz.deployed();
-      const tokensOfOwner = await instance.tokensOfOwner(addressToLoad);
-      this.handleGetAllCards(tokensOfOwner, instance);
+      const tokensOfOwner = await this.CryptozInstance.tokensOfOwner(addressToLoad);
+      this.handleGetAllCards(tokensOfOwner, this.CryptozInstance);
       this.isLoading = false;
     },
     handleGetAllCards: async function(tokensOfOwner, instance) {

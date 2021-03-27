@@ -4,7 +4,7 @@
       <strong>Your <b-icon-lightning-fill /> Booster credits :</strong> {{boosters_owned}}
     </p>
     <p><strong>Your Cryptoz NFTs :</strong> {{cards_owned}}</p>
-    <p><strong>Your CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" align="middle" /> Balance :</strong> {{parseInt(czxp_balance).toLocaleString()}}</p>
+    <p><strong>Your CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" align="middle" /> Balance :</strong> {{czxp_balance}}</p>
   </div>
 </template>
 <script>

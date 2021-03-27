@@ -189,6 +189,9 @@ export default {
           return 'eth-link';
       }
     },
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
     ethBalance() {
       const balance = this.$store.state.web3.balance
       if (balance !== null) {
@@ -265,8 +268,7 @@ export default {
   methods: {
     checkSponsor: async function(address) {
 
-      const instance = await window.Cryptoz.deployed();
-      const sponsors = await instance.sponsors.call(address);
+      const sponsors = await this.CryptozInstance.sponsors.call(address);
       // console.log("checking sponsor..", sponsors);
       if (sponsors && sponsors !== baseAddress) {
         // console.log("hey",this.$route.query.sponsor);
@@ -281,8 +283,7 @@ export default {
     },
     linkSponsor: async function() {
       try {
-        const instance = await window.Cryptoz.deployed();
-        const result = await instance.linkMySponsor(
+        const result = await this.CryptozInstance.linkMySponsor(
           this.sponsorAddress,
           { from: this.coinbase }
         );
@@ -306,11 +307,8 @@ export default {
         });
     },
     setSubscriptions: function() {
-      if (window.Cryptoz) {
-        window.Cryptoz.deployed()
-          .then((instance) => {
-            return instance.getTimeToDailyBonus(this.coinbase);
-          })
+      if (this.CryptozInstance) {
+        this.CryptozInstance.getTimeToDailyBonus(this.coinbase)
           .then((res) => {
             var timeOfNextBonusInMilli = res.toNumber() * 1000;
             var now = new Date();
@@ -331,13 +329,10 @@ export default {
       this.showSpinner = true;
       this.transactionMessage = "Pending confirmation...";
 
-      window.Cryptoz.deployed()
-        .then((instance) => {
-          return instance.getBonusBoosters({
-            from: this.coinbase,
-            gas: 362000,
-          });
-        })
+      this.CryptozInstance.getBonusBoosters({
+        from: this.coinbase,
+        gas: 362000,
+      })
         .then((result) => {
           //change from pending to ready
           this.pendingTransaction = result.receipt.blockHash;

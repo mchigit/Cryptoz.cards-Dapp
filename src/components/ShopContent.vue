@@ -60,11 +60,6 @@
             v-bind:disabled="balance < 2000000000000000"
             v-b-modal.buy-boosters-modal
             >Buy <b-icon-lightning-fill />  Booster Credits @ 0.002 BNB</b-button>
-          <transition name="fade">
-            <span v-if="showSpinner==1">
-              <img src="@/assets/spinner.gif" class="spinner" /> <strong>{{transactionStatus}}</strong>
-            </span>
-          </transition>
         </div>
       </div>
 
@@ -149,7 +144,7 @@ import UniverseBalances from '@/components/UniverseBalances.vue'
 import OwnerBalances from '@/components/OwnerBalances.vue'
 import SortDropdown from '@/components/SortDropdown.vue'
 import {getEditionNumber, getRarity, dynamicSort} from '../helpers'
-import { showErrorToast, showPendingToast, showSuccessToast } from "../util/showToast";
+import { showErrorToast, showPendingToast, showRejectedToast, showSuccessToast } from "../util/showToast";
 import getCardType from '../util/getCardType'
 
 export default {
@@ -163,6 +158,9 @@ export default {
   computed: {
     web3() {
       return this.$store.state.web3;
+    },
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
     },
     wallet() {
       return parseFloat(web3.utils.fromWei(this.$store.state.web3.balance.toString()), "ether");
@@ -191,14 +189,18 @@ export default {
       // we only update events in the store when it concerns our wallet
       if (newValue !== oldValue && typeof newValue !== "undefined") {
         this.getAllTypes();
-        this.showSpinner = 0;
       }
     },
-    totalCyptozTypes(newValue, oldValue) {
-      if (newValue !== oldValue && newValue > 0) {
+    CryptozInstance(newVal) {
+      if (newVal) {
         this.getAllTypes();
       }
     },
+    // totalCyptozTypes(newValue, oldValue) {
+    //   if (newValue !== oldValue && newValue > 0) {
+    //     this.getAllTypes();
+    //   }
+    // },
     storeCards(newVal, oldVal) {
       if (newVal !== oldVal) {
         this.sortedCards = [...newVal]
@@ -209,7 +211,6 @@ export default {
     return {
       sortedCards: [],
       pendingTransaction: 0,
-      showSpinner: 0,
       transactionStatus: "Pending confirmation...",
       showUnlimited: 1,
       transaction_number: "",
@@ -226,44 +227,8 @@ export default {
       getSoldCardToolTipText: 'All NFTs of this type have been minted, check markets'
     }
   },
-  async mounted() {
-    if (typeof Cryptoz !== "undefined" && this.coinbase) {
-      await this.getAllTypes();
-    }
-  },
-  methods : {
-    buyCard : function(cardAttributes){
-      console.log("Buying card:" ,cardAttributes.id ,cardAttributes);
-
-      window.Cryptoz.deployed().then((instance) =>
-        instance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)})
-      )
-    },
-    getCardForFree : function(type_id){
-      console.log("Claiming card:" + type_id);
-
-      showPendingToast(this);
-      window.Cryptoz.deployed().then((instance) =>
-        instance.getFreeCard(type_id, {from: this.coinbase})
-      )
-    },
-    buyBoosters : function() {
-      //Hide the modal
-      this.$bvModal.hide("buy-boosters-modal");
-
-      //Change buy button to pending.. or show some pending state
-      this.showSpinner = 1;
-
-      window.Cryptoz.deployed()
-        .then((instance) => {
-          var totalBoostersCost = 2000000000000000 * parseInt(this.totalCreditsToBuy);
-          return instance.buyBoosterCard(parseInt(this.totalCreditsToBuy), {from: this.coinbase, value:totalBoostersCost});
-        })
-        .catch(err => {
-          console.error('USER REJECTED!!', err);
-        })
-    },
-    getAllTypes: async function(){
+  async created() {
+    this.getAllTypes = _.debounce(async function() {
       try {
         let showNotification = false
         if (this.storeCards.length === 0) {
@@ -292,7 +257,7 @@ export default {
               return;
             }
 
-            return this.addIsOwnedProp(cardData);
+            return this.coinbase ? this.addIsOwnedProp(cardData) : cardData;
           })
         )
         const storeCards = results.filter(result => result !== undefined);
@@ -306,10 +271,44 @@ export default {
         console.log("Error loading cards: ", err);
         showErrorToast(this, "Failed to load shop.");
       }
+    }, 500)
+  },
+  async mounted() {
+    if (this.web3.isConnected && this.CryptozInstance) {
+      await this.getAllTypes();
+    }
+  },
+  methods : {
+    buyCard : function(cardAttributes){
+      console.log("Buying card:", cardAttributes.id, cardAttributes);
+
+      showPendingToast(this)
+      this.CryptozInstance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)})
+        .catch(err => {
+          showRejectedToast(this)
+        })
+    },
+    getCardForFree : function(type_id){
+      showPendingToast(this)
+      this.CryptozInstance.getFreeCard(type_id, {from: this.coinbase})
+        .catch(err => {
+          showRejectedToast(this)
+        })
+    },
+    buyBoosters : function() {
+      //Hide the modal
+      this.$bvModal.hide("buy-boosters-modal");
+
+      showPendingToast(this)
+
+      var totalBoostersCost = 2000000000000000 * parseInt(this.totalCreditsToBuy);
+      this.CryptozInstance.buyBoosterCard(parseInt(this.totalCreditsToBuy), {from: this.coinbase, value:totalBoostersCost})
+        .catch(err => {
+          showRejectedToast(this)
+        })
     },
     addIsOwnedProp: async function (card) {
-      const instance = await window.Cryptoz.deployed();
-      const isOwned = await instance.cardTypesOwned(this.coinbase, card.id);
+      const isOwned = await this.CryptozInstance.cardTypesOwned(this.coinbase, card.id);
       card.isOwned  = isOwned;
 
       return card;
@@ -356,10 +355,7 @@ export default {
       }
 
       //Get NFTs minted already to inject in our edition totals
-      window.Cryptoz.deployed()
-        .then((instance) => {
-          return instance.cardTypeToEdition(cardObj.id);
-        })
+      this.CryptozInstance.cardTypeToEdition(cardObj.id)
         .then((result) => {
           cardObj.edition_current = parseInt(result)
 
@@ -390,7 +386,6 @@ export default {
         })
         .catch(err => {
           console.error('Error getting NFTs minted:', err);
-          this.showSpinner = 0;
         })
 
       this.allCards[cardObj.type_id] = cardObj;

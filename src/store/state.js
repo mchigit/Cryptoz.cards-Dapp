@@ -7,7 +7,10 @@ let state = {
     balance: null,
     error: null
   },
-  contractInstance: null,
+  contractInstance: {
+    cryptoz: null,
+    czxp: null,
+  },
 
   //Component states
   ownerBalances:0,
