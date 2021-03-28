@@ -8,7 +8,6 @@
   </div>
 </template>
 <script>
-  import {ownerBalances} from 'vuex'
 
   export default {
     name: 'OwnerBalances',

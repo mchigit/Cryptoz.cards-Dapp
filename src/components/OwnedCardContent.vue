@@ -72,11 +72,6 @@
 </template>
 
 <script>
-import {
-  showPendingToast,
-  showSuccessToast,
-  showRejectedToast,
-} from "../util/showToast";
 
 export default {
   name: "OwnedCardContent",
