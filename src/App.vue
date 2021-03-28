@@ -12,18 +12,13 @@
 
 import axios from 'axios';
 var contract = require("truffle-contract");
-import cryptoz_artifacts from './contracts/Cryptoz.json';
-import cryptoz_token_artifacts from './contracts/CzxpToken.json';
 import watchEvents from './util/watchEvents';
 import { showSuccessToast } from './util/showToast'
-import {store} from './store/index'
 import BodyContent from './components/BodyContent'
 import AppHeader from './components/layout/AppHeader'
 import AppFooter from './components/layout/AppFooter'
-import {mapState} from 'vuex'
 import _ from 'lodash'
 
-import Web3Modal from "web3modal";
 // import BurnerConnectProvider from "@burner-wallet/burner-connect-provider";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 const Web3 = require('web3')
@@ -39,15 +34,6 @@ import './main.css'
 // import bsc_cryptoz_token_artifacts from './bsc/contracts/CzxpToken.json';
 
 const testEnv = true
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCybxn6L5skhY1tlwatXqeFQpQtaiCDyaY",
-    authDomain: "cryptoz-nfts.firebaseapp.com",
-    projectId: "cryptoz-nfts",
-    storageBucket: "cryptoz-nfts.appspot.com",
-    messagingSenderId: "10817006083",
-    appId: "1:10817006083:web:b785e46a76800de4747c36"
-  };
 
 // const providerOptions = {
   // torus: {
@@ -85,8 +71,8 @@ const firebaseConfig = {
   // }
 // }
 
-const CryptozContract = contract(cryptoz_artifacts)
-const CzxpContract = contract(cryptoz_token_artifacts)
+
+const contractBaseUrl = `https://cryptoz.cards/services`
 
 export default {
   name: 'App',
@@ -184,6 +170,12 @@ export default {
     
     async setContractProvider(provider) {
       this.subscribeToProviderEvents(provider)
+
+      const cryptozContractResp = await axios.get(`${contractBaseUrl}/Cryptoz.json`);
+      const czxpContractResp = await axios.get(`${contractBaseUrl}/CzxpToken.json`)
+
+      const CryptozContract = contract(cryptozContractResp.data);
+      const CzxpContract = contract(czxpContractResp.data);
 
       CryptozContract.setProvider(provider)
       CzxpContract.setProvider(provider)
