@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import VueGtm from 'vue-gtm'
 import router from './router'
-import { VBTogglePlugin, VBTooltipPlugin, VBModalPlugin, ModalPlugin, ToastPlugin, IconsPlugin } from 'bootstrap-vue'
+import { VBTogglePlugin, VBTooltipPlugin, VBModalPlugin, ModalPlugin, ToastPlugin, IconsPlugin, SpinnerPlugin } from 'bootstrap-vue'
 import { store } from './store/'
 
 // Vue.use(BootstrapVue)
@@ -14,6 +14,7 @@ Vue.use(ModalPlugin)
 Vue.use(VBTogglePlugin)
 Vue.use(ToastPlugin)
 Vue.use(IconsPlugin)
+Vue.use(SpinnerPlugin)
 Vue.use(VueGtm, {
   id: 'GTM-KPK6R7R', // Your GTM single container ID or array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy']
 /*

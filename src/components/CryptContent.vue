@@ -189,6 +189,8 @@ export default {
         value: 2000000000000000,
       }).catch((error) => {
         showRejectedToast(this);
+      }).finally(() => {
+        this.$store.dispatch("updateWallet");
       })
       this.$bvModal.hide("open-booster-modal");
     },

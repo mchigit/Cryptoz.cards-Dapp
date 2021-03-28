@@ -135,27 +135,27 @@ export default {
 }
 
 .card-bg-6 {
-  background-image: url(assets/cryptoz_card_common_brown.svg);
+  background-image: url('https://cryptoz.cards/assets/cryptoz_card_common_brown.svg');
 }
 
 .card-bg-5 {
-  background-image: url(assets/cryptoz_card_uncommon_blue.svg);
+  background-image: url('https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg');
 }
 
 .card-bg-4 {
-  background-image: url(assets/cryptoz_card_rare_red.svg);
+  background-image: url('https://cryptoz.cards/assets/cryptoz_card_rare_red.svg');
 }
 
 .card-bg-3 {
-  background-image: url(assets/cryptoz_card_epic_purple.svg);
+  background-image: url('https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg');
 }
 
 .card-bg-2 {
-  background-image: url(assets/cryptoz_card_platinum.svg);
+  background-image: url('https://cryptoz.cards/assets/cryptoz_card_platinum.svg');
 }
 
 .card-bg-1 {
-  background-image: url(assets/cryptoz_card_diamond.svg);
+  background-image: url('https://cryptoz.cards/assets/cryptoz_card_diamond.svg');
 }
 
 .card-bg-back {
