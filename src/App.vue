@@ -40,6 +40,15 @@ import './main.css'
 
 const testEnv = true
 
+const firebaseConfig = {
+    apiKey: "AIzaSyCybxn6L5skhY1tlwatXqeFQpQtaiCDyaY",
+    authDomain: "cryptoz-nfts.firebaseapp.com",
+    projectId: "cryptoz-nfts",
+    storageBucket: "cryptoz-nfts.appspot.com",
+    messagingSenderId: "10817006083",
+    appId: "1:10817006083:web:b785e46a76800de4747c36"
+  };
+
 // const providerOptions = {
   // torus: {
   //   package: Torus,

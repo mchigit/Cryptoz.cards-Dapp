@@ -5,12 +5,10 @@ import App from './App'
 import VueGtm from 'vue-gtm'
 import router from './router'
 import { BootstrapVue, BIconLockFill, BootstrapVueIcons } from 'bootstrap-vue'
-import Clipboard from 'v-clipboard'
 import { store } from './store/'
 
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
-Vue.use(Clipboard)
 Vue.use(VueGtm, {
   id: 'GTM-KPK6R7R', // Your GTM single container ID or array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy']
 /*

@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BodyContent from '@/components/BodyContent.vue'
-import ShopContent from '@/components/ShopContent.vue'
-import CryptContent from '@/components/CryptContent.vue'
-import MarketContent from '@/components/MarketContent.vue'
-import HelpContent from '@/components/HelpContent.vue'
-import TokenContent from '@/components/TokenContent.vue'
-import OthersCryptContent from '@/components/OthersCryptContent.vue'
+// import BodyContent from '@/components/BodyContent.vue'
+// import ShopContent from '@/components/ShopContent.vue'
+// import CryptContent from '@/components/CryptContent.vue'
+// import MarketContent from '@/components/MarketContent.vue'
+// import HelpContent from '@/components/HelpContent.vue'
+// import TokenContent from '@/components/TokenContent.vue'
+// import OthersCryptContent from '@/components/OthersCryptContent.vue'
+
+const lazyLoadComponents = (component) => {
+    return () => import(`@/components/${component}.vue`)
+} 
 
 Vue.use(Router)
 
@@ -16,7 +20,7 @@ const router = new Router({
     {
       path: '/',
       name: 'BodyContent',
-      component: BodyContent,
+      component: lazyLoadComponents('BodyContent'),
       meta: {
           title: 'The Cryptoz NFT Universe - Where the dead live forever on the Blockchain',
           metaTags: [
@@ -46,7 +50,7 @@ const router = new Router({
     {
       path: '/shop',
       name: 'ShopContent',
-      component: ShopContent,
+      component: lazyLoadComponents('ShopContent'),
         meta: {
           title: 'Cryptoz Cards - Shop - Purchase Limited edition Cryptoz and claim cards for FREE',
           metaTags: [
@@ -76,7 +80,7 @@ const router = new Router({
     {
       path: '/my-cryptoz-nfts',
       name: 'CryptContent',
-      component: CryptContent,
+      component: lazyLoadComponents('CryptContent'),
       meta: {
           title: 'Cryptoz Cards - Your Crypt - A collection of all the cards you own',
           metaTags: [
@@ -106,7 +110,7 @@ const router = new Router({
     {
         path: '/my-cryptoz-nfts/:address',
         name: 'OthersCrypt',
-        component: OthersCryptContent,
+        component: lazyLoadComponents('OthersCryptContent'),
         meta: {
             title: 'Cryptoz Cards - A collection of cards',
             metaTags: [
@@ -136,7 +140,7 @@ const router = new Router({
     {
       path: '/market',
       name: 'MarketContent',
-      component: MarketContent,
+      component: lazyLoadComponents('MarketContent'),
       meta: {
           title: 'Cryptoz Cards - Market - Buy and Sell Cryptoz Cards and CZXP tokens with people around the world',
           metaTags: [
@@ -167,7 +171,7 @@ const router = new Router({
       path: '/help',
       name: 'HelpContent',
       props: route => ({ query: route.query.t }),
-      component: HelpContent,
+      component: lazyLoadComponents('HelpContent'),
         meta: {
           title: 'Cryptoz Cards - Help - Answers to all your Frequently Asked Questions',
           metaTags: [
@@ -197,7 +201,7 @@ const router = new Router({
     {
       path: '/view/:token_id',
       name: 'TokenContent',
-      component: TokenContent,
+      component: lazyLoadComponents('TokenContent'),
         meta: {
           title: 'Cryptoz NFTs - View NFT - Detailed information about a minted Cryptoz NFT',
           metaTags: [
