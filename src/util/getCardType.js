@@ -1,6 +1,3 @@
-import firebase from 'firebase/app';
-import 'firebase/storage'
-import 'axios'
 import axios from 'axios';
 
 const cardTypeBaseUrl = `https://cryptoz.cards/services/card_types`
