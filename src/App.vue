@@ -12,18 +12,13 @@
 
 import axios from 'axios';
 var contract = require("truffle-contract");
-import cryptoz_artifacts from './contracts/Cryptoz.json';
-import cryptoz_token_artifacts from './contracts/CzxpToken.json';
 import watchEvents from './util/watchEvents';
 import { showSuccessToast } from './util/showToast'
-import {store} from './store/index'
 import BodyContent from './components/BodyContent'
 import AppHeader from './components/layout/AppHeader'
 import AppFooter from './components/layout/AppFooter'
-import {mapState} from 'vuex'
 import _ from 'lodash'
 
-import Web3Modal from "web3modal";
 // import BurnerConnectProvider from "@burner-wallet/burner-connect-provider";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 const Web3 = require('web3')
@@ -76,8 +71,8 @@ const testEnv = true
   // }
 // }
 
-const CryptozContract = contract(cryptoz_artifacts)
-const CzxpContract = contract(cryptoz_token_artifacts)
+
+const contractBaseUrl = `https://cryptoz.cards/services`
 
 export default {
   name: 'App',
@@ -178,6 +173,12 @@ export default {
     
     async setContractProvider(provider) {
       this.subscribeToProviderEvents(provider)
+
+      const cryptozContractResp = await axios.get(`${contractBaseUrl}/Cryptoz.json`);
+      const czxpContractResp = await axios.get(`${contractBaseUrl}/CzxpToken.json`)
+
+      const CryptozContract = contract(cryptozContractResp.data);
+      const CzxpContract = contract(czxpContractResp.data);
 
       CryptozContract.setProvider(provider)
       CzxpContract.setProvider(provider)

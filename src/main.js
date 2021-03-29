@@ -4,13 +4,17 @@ import Vue from 'vue'
 import App from './App'
 import VueGtm from 'vue-gtm'
 import router from './router'
-import { BootstrapVue, BIconLockFill, BootstrapVueIcons } from 'bootstrap-vue'
-import Clipboard from 'v-clipboard'
+import { VBTogglePlugin, VBTooltipPlugin, VBModalPlugin, ModalPlugin, ToastPlugin, IconsPlugin, SpinnerPlugin } from 'bootstrap-vue'
 import { store } from './store/'
 
-Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
-Vue.use(Clipboard)
+// Vue.use(BootstrapVue)
+Vue.use(VBTooltipPlugin)
+Vue.use(VBModalPlugin)
+Vue.use(ModalPlugin)
+Vue.use(VBTogglePlugin)
+Vue.use(ToastPlugin)
+Vue.use(IconsPlugin)
+Vue.use(SpinnerPlugin)
 Vue.use(VueGtm, {
   id: 'GTM-KPK6R7R', // Your GTM single container ID or array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy']
 /*
@@ -28,12 +32,6 @@ queryParams: { // Add url query string when load gtm.js with GTM ID (optional)
   ignoredViews: ['homepage'], // Don't trigger events for specified router names (case insensitive) (optional)
   trackOnNextTick: false, // Whether or not call trackView in Vue.nextTick
 });
-Vue.component('BIconLockFill', BIconLockFill)
-
-
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 
 Vue.config.productionTip = false
 

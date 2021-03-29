@@ -103,9 +103,15 @@ import SortDropdown from "@/components/SortDropdown.vue";
 import {
   showPendingToast,
   showRejectedToast,
-  showSuccessToast,
 } from "../util/showToast";
 import CardsContainer from './CardsContainer.vue';
+import {
+  BFormInput,
+  BFormInvalidFeedback,
+  BRow,
+  BCol,
+  BButton,
+} from 'bootstrap-vue'
 
 export default {
   name: "CryptContent",
@@ -114,7 +120,12 @@ export default {
     UniverseBalances,
     OwnerBalances,
     SortDropdown,
-    CardsContainer
+    CardsContainer,
+    BFormInput,
+    BFormInvalidFeedback,
+    BRow,
+    BCol,
+    BButton,
   },
   data() {
     return {
@@ -178,6 +189,8 @@ export default {
         value: 2000000000000000,
       }).catch((error) => {
         showRejectedToast(this);
+      }).finally(() => {
+        this.$store.dispatch("updateWallet");
       })
       this.$bvModal.hide("open-booster-modal");
     },

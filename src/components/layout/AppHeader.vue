@@ -167,16 +167,47 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { showSuccessToast, showErrorToast } from "../../util/showToast";
 import { isAddress } from "../../util/addressUtil";
 import moment from 'moment'
+import {
+  BNavbar,
+  BNavbarToggle,
+  BCollapse,
+  BNavbarNav,
+  BNavItem,
+  BLink,
+  BButton,
+  BModal,
+  BJumbotron,
+  BInputGroup,
+  BFormInput,
+  BInputGroupAppend,
+  BFormInvalidFeedback,
+  BAlert
+} from 'bootstrap-vue' 
 
 const baseAddress = "0x0000000000000000000000000000000000000000";
 export default {
   name: "AppHeader",
   mounted() {
     this.getDailyBonusTime()
+  },
+  components: {
+    BNavbar,
+    BNavbarToggle,
+    BCollapse,
+    BNavbarNav,
+    BNavItem,
+    BLink,
+    BButton,
+    BModal,
+    BJumbotron,
+    BInputGroup,
+    BFormInput,
+    BInputGroupAppend,
+    BFormInvalidFeedback,
+    BAlert
   },
   computed: {
     classObject : function () { //Style the link colours

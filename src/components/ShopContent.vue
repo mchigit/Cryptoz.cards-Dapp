@@ -143,9 +143,15 @@ import OwnedCardContent from '@/components/OwnedCardContent.vue'
 import UniverseBalances from '@/components/UniverseBalances.vue'
 import OwnerBalances from '@/components/OwnerBalances.vue'
 import SortDropdown from '@/components/SortDropdown.vue'
-import {getEditionNumber, getRarity, dynamicSort} from '../helpers'
+import { getRarity, dynamicSort} from '../helpers'
 import { showErrorToast, showPendingToast, showRejectedToast, showSuccessToast } from "../util/showToast";
 import getCardType from '../util/getCardType'
+import {
+  BRow,
+  BCol,
+  BButton,
+  BSpinner,
+} from 'bootstrap-vue'
 
 export default {
   name: "ShopContent",
@@ -153,7 +159,11 @@ export default {
     OwnedCardContent,
     UniverseBalances,
     OwnerBalances,
-    SortDropdown
+    SortDropdown,
+    BRow,
+    BCol,
+    BButton,
+    BSpinner,
   },
   computed: {
     web3() {

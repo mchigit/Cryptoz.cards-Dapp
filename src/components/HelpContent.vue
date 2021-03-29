@@ -330,9 +330,23 @@
 </template>
 
 <script>
+import {
+  BCard,
+  BCardHeader,
+  BButton,
+  BCollapse,
+  BCardBody
+} from 'bootstrap-vue'
 export default {
   name: "HelpContent",
   props: ['query'],
+  components: {
+    BCard,
+    BCardHeader,
+    BButton,
+    BCollapse,
+    BCardBody
+  },
   data() {
     return {
       msg: "Here we go, here we go",

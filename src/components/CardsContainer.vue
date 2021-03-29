@@ -218,12 +218,26 @@ import {
   showPendingToast,
   showRejectedToast,
 } from "../util/showToast";
+import { 
+  BButton,
+  BInputGroup,
+  BFormInput,
+  BInputGroupAppend,
+  BSpinner,
+  BTable,
+} from 'bootstrap-vue'
 
 export default {
   name: "CardsContainer",
   components: {
     SortDropdown,
     OwnedCardContent,
+    BButton,
+    BInputGroup,
+    BFormInput,
+    BInputGroupAppend,
+    BSpinner,
+    BTable,
   },
   props: {
     addressToLoad: {
