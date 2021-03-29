@@ -327,6 +327,9 @@ export default {
           : "https://bsc.cryptoz.cards";
       return `${url}/my-cryptoz-nfts/${this.coinbase}`;
     },
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
   },
   watch: {
     web3: {
@@ -420,8 +423,7 @@ export default {
         showPendingToast(this);
         Vue.set(this.cardsBeingGifted, id, true);
 
-        const instance = await window.Cryptoz.deployed();
-        const giftRes = await instance.transferFrom(this.coinbase, this.receivingWallet, id, { from: this.coinbase })
+        const giftRes = await this.CryptozInstance.transferFrom(this.coinbase, this.receivingWallet, id, { from: this.coinbase })
 
         if (giftRes) {
           this.orderedCards = this.orderedCards.filter(card => card.id !== id)
@@ -447,9 +449,7 @@ export default {
       try {
         showPendingToast(this);
         Vue.set(this.cardsBeingSacrificed, id, true);
-
-        const instance = await window.Cryptoz.deployed();
-        const sacrificeRes = await instance.sacrifice(id, { from: this.coinbase });
+        const sacrificeRes = await this.CryptozInstance.sacrifice(id, { from: this.coinbase });
 
         if (sacrificeRes) {
           this.$store.dispatch("updateOwnerBalances");
