@@ -249,7 +249,9 @@ export default {
         }
 
         const typeIdsOnChain = []
-        
+
+        //push March 27,2021
+        typeIdsOnChain.push(64,71,74,79,84,87,91,93,95,96,104);
         //push March 20,2021
         typeIdsOnChain.push(47,51,58,60,61,63);
         //push March 20,2021
@@ -400,8 +402,12 @@ export default {
           if(cardObj.id == 93){ //elephant
             cardObj.edition_total = 49;
           }
-
-
+          if(cardObj.id == 74){ //dust bunny
+            cardObj.edition_total = 189;
+          }
+          if(cardObj.id == 96){ //lemur
+            cardObj.edition_total = 109;
+          }
           // Set soldOut flag first
           if(cardObj.edition_current == cardObj.edition_total) {
             cardObj.soldOut = 1;
