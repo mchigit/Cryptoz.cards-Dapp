@@ -21,6 +21,7 @@
     "font-awesome": "^4.7.0",
     "fortmatic": "^0.8.2",
     "lodash": "^4.17.21",
+    "logrocket": "^1.0.14",
     "moment": "^2.29.1",
     "openzeppelin-solidity": "^2.0.0",
     "truffle-contract": "^4.0.31",

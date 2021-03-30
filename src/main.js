@@ -7,6 +7,14 @@ import router from './router'
 import { VBTogglePlugin, VBTooltipPlugin, VBModalPlugin, ModalPlugin, ToastPlugin, IconsPlugin, SpinnerPlugin } from 'bootstrap-vue'
 import { store } from './store/'
 
+import LogRocket from 'logrocket';
+
+if (process.env.NODE_ENV == "development") {
+  LogRocket.init('hkkfms/cryptoztest');
+} else {
+  LogRocket.init('hkkfms/cryptozbsc');
+}
+
 // Vue.use(BootstrapVue)
 Vue.use(VBTooltipPlugin)
 Vue.use(VBModalPlugin)
