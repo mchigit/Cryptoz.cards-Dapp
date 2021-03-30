@@ -166,7 +166,6 @@ export default {
       console.log({load: token_id})
       this.CryptozInstance.getOwnedCard(token_id)
         .then((res) => {
-          console.log({res})
           //returns TypeId, Edition, # times transfed
           // console.log("CardOwned results:", res);
           let cardTypeId = res[0].toNumber();
@@ -183,7 +182,7 @@ export default {
             return 0;
           }
         })
-        .then(function (res) {
+        .then((res) => {
           // owners wallet address
           if (res == 0) {
             return 0;
