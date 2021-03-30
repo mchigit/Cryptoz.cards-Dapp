@@ -34,7 +34,18 @@
             </div>
 
             <div class="col-6">
-              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" />) <br>BEP-20 tokens are supported on the following token exchanges</h3>
+              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" />) <br>BEP-20 tokens are supported on the following token exchanges</h3><h5> ( anyone can make a pool )</h5>
+
+              <a href="https://info.julswap.com/pair/0x0f4b077f27E687b1e77E4a1b9ce0B4eceE100EB6#/" target="_blank">
+                <div class="market-btn">
+                  <img class="uni-logo" src="https://pbs.twimg.com/media/ExUNkLKVEAIabAW.jpg" align="absmiddle" />
+                   <span class="opensea-header">JulSwap</span>
+                  <br>
+                  <p>
+                    JulSwap fully decentralized and powered by the Community Governance.
+                  </p>
+                </div>
+              </a>
 
               <a href="https://1inch.exchange/#/CZXP/BNB" target="_blank">
                 <div class="market-btn">
@@ -48,7 +59,7 @@
                 </div>
               </a>
 
-              <a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x2b974da27c9dd35412d71dd36e3e108486c45444" target="_blank">
+              <!--a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x2b974da27c9dd35412d71dd36e3e108486c45444" target="_blank">
                 <div class="market-btn">
                   <img class="uni-logo" src="@/assets/pancakeswap.webp" align="absmiddle" />
                    <span class="opensea-header">PancakeSwap</span>
@@ -57,8 +68,7 @@
                     PancakeSwap Decentralized BSC liquidity Exchange - Instant swap - CZXP-BNB. Earn fees by providing liquidity
                   </p>
                 </div>
-              </a>
-
+              </a-->
 
 
 
