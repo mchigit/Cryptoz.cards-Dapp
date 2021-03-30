@@ -5,16 +5,29 @@
           <br>
 
           <div class="row">
+
             <div class="col-6">
               <h3>Cryptoz Cards<br>BEP-721 NFT tokens are supported on the following auction marketplaces</h3>
 
-              <a href="https://treasureland.market/" target="_blank">
+              <!--a href="https://treasureland.market/" target="_blank">
                 <div class="market-btn">
                   <img class="opensea-logo" src="https://treasureland.market/static/media/logo.849b6817.svg" align="absmiddle" /> <span class="opensea-header">TreasureLand</span>
                   <br>
                   <p>
                     <strong>Coming Soon</strong><br/>
                     Build the most unique NFT frictionless trading market where users can enjoy the fun of gold mining.
+                  </p>
+                </div>
+              </a>
+            </div -->
+
+              <a href="https://whalecrate.com/browse/cryptoz" target="_blank">
+                <div class="market-btn">
+                  <img class="opensea-logo" src="https://whalecrate.com/logo-wide.svg" align="absmiddle" /> <span class="opensea-header">Whalecrate</span>
+                  <br>
+                  <p>
+                    <strong>Coming Soon</strong><br/>
+                    Buy and sell curated digital items across multiple chains.
                   </p>
                 </div>
               </a>
@@ -53,12 +66,7 @@
 
           </div>
 
-
-
-
-
-
-
+          <p style="margin-top:100px">If you have an NFT market on the Binance Smart Chain and would like to feature Cryptoz NFT Cards, you can use the contract TokenURI endpoints for automated metadata consumption. We currently follow the OpenSea metadata standard. For inquires <a href="mailto:contactus@cryptoz.cards?subject=NFT market integrations">please contact us</a> </p>
 
         </div>
   </div>
@@ -82,7 +90,7 @@ export default {
     margin-left : 10px;
   }
   .opensea-logo {
-    width : 10%;
+    width : 25%;
     margin-bottom : 10px;
   }
   .rb-logo{
