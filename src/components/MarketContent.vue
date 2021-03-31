@@ -5,10 +5,11 @@
           <br>
 
           <div class="row">
+
             <div class="col-6">
               <h3>Cryptoz Cards<br>BEP-721 NFT tokens are supported on the following auction marketplaces</h3>
 
-              <a href="https://treasureland.market/" target="_blank">
+              <!--a href="https://treasureland.market/" target="_blank">
                 <div class="market-btn">
                   <img class="opensea-logo" src="https://treasureland.market/static/media/logo.849b6817.svg" align="absmiddle" /> <span class="opensea-header">TreasureLand</span>
                   <br>
@@ -18,10 +19,33 @@
                   </p>
                 </div>
               </a>
+            </div -->
+
+              <a href="https://whalecrate.com/browse/cryptoz" target="_blank">
+                <div class="market-btn">
+                  <img class="opensea-logo" src="https://whalecrate.com/logo-wide.svg" align="absmiddle" /> <span class="opensea-header">Whalecrate</span>
+                  <br>
+                  <p>
+                    <strong>Coming Soon</strong><br/>
+                    Buy and sell curated digital items across multiple chains.
+                  </p>
+                </div>
+              </a>
             </div>
 
             <div class="col-6">
-              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" />) <br>BEP-20 tokens are supported on the following token exchanges</h3>
+              <h3>CryptoZ eXPerience (CZXP <img class="czxp-logo" src="./assets/cryptokeeper_coin_binance.svg" />) <br>BEP-20 tokens are supported on the following token exchanges</h3><h5> ( anyone can make a pool )</h5>
+
+              <a href="https://info.julswap.com/pair/0x0f4b077f27E687b1e77E4a1b9ce0B4eceE100EB6#/" target="_blank">
+                <div class="market-btn">
+                  <img class="uni-logo" src="https://pbs.twimg.com/media/ExUNkLKVEAIabAW.jpg" align="absmiddle" />
+                   <span class="opensea-header">JulSwap</span>
+                  <br>
+                  <p>
+                    JulSwap fully decentralized and powered by the Community Governance.
+                  </p>
+                </div>
+              </a>
 
               <a href="https://1inch.exchange/#/CZXP/BNB" target="_blank">
                 <div class="market-btn">
@@ -35,7 +59,7 @@
                 </div>
               </a>
 
-              <a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x2b974da27c9dd35412d71dd36e3e108486c45444" target="_blank">
+              <!--a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x2b974da27c9dd35412d71dd36e3e108486c45444" target="_blank">
                 <div class="market-btn">
                   <img class="uni-logo" src="@/assets/pancakeswap.webp" align="absmiddle" />
                    <span class="opensea-header">PancakeSwap</span>
@@ -44,8 +68,7 @@
                     PancakeSwap Decentralized BSC liquidity Exchange - Instant swap - CZXP-BNB. Earn fees by providing liquidity
                   </p>
                 </div>
-              </a>
-
+              </a-->
 
 
 
@@ -53,12 +76,7 @@
 
           </div>
 
-
-
-
-
-
-
+          <p style="margin-top:100px">If you have an NFT market on the Binance Smart Chain and would like to feature Cryptoz NFT Cards, you can use the contract TokenURI endpoints for automated metadata consumption. We currently follow the OpenSea metadata standard. For inquires <a href="mailto:contactus@cryptoz.cards?subject=NFT market integrations">please contact us</a> </p>
 
         </div>
   </div>
@@ -82,7 +100,7 @@ export default {
     margin-left : 10px;
   }
   .opensea-logo {
-    width : 10%;
+    width : 25%;
     margin-bottom : 10px;
   }
   .rb-logo{
