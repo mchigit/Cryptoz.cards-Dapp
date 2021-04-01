@@ -109,12 +109,12 @@
                 :class="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp) ? 'disabled-btn' : ''"
               >
                 <div v-if="card.cost > 0" id="buyBtnwrapper" v-b-tooltip.hover="buyBtnTooltipText(card.cost, card.unlock_czxp)">
-                  <b-button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" variant="primary" v-on:click="buyCard(card)">
+                  <b-button id="buy-button" :disabled="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)" variant="primary" @click="buyCard(card)">
                     <b-icon-lock-fill v-if="balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill> Mint NFT for {{card.cost}} BNB
                   </b-button>
                 </div>
                 <div v-else id="getBtnwrapper" v-b-tooltip.hover="getBtnTooltipText(card.unlock_czxp)">
-                  <button id="get-button"  class="btn btn-primary" :disabled="czxpBalance < parseInt(card.unlock_czxp)" v-on:click="getCardForFree(card.type_id)">
+                  <button id="get-button"  class="btn btn-primary" :disabled="czxpBalance < parseInt(card.unlock_czxp)" v-on:click="getCardForFree(card.id)">
                     <b-icon-lock-fill v-if="czxpBalance < parseInt(card.unlock_czxp)"></b-icon-lock-fill> Mint for FREE
                   </button>
                 </div>
@@ -250,6 +250,10 @@ export default {
 
         const typeIdsOnChain = []
 
+        //push Apr 1,2021
+        typeIdsOnChain.push(135,136,137);
+        //push March 31,2021
+        typeIdsOnChain.push(131,132,133,134);
         //push March 27,2021
         typeIdsOnChain.push(64,71,74,79,84,87,91,93,95,96,104);
         //push March 20,2021
@@ -292,16 +296,13 @@ export default {
   },
   methods : {
     buyCard : function(cardAttributes){
-      console.log("Buying card:", cardAttributes.id, cardAttributes);
-
-      showPendingToast(this)
       const cardToBuyIndex = this.sortedCards.findIndex(card => card.id === cardAttributes.id)
       this.sortedCards[cardToBuyIndex].isOwned = true;
+      console.log("Buying card:", cardAttributes.id);
+
+      showPendingToast(this)
 
       this.CryptozInstance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)})
-        .then(() => {
-            this.$store.dispatch('setStoreCards', this.sortedCards)
-        })
         .catch(err => {
           showRejectedToast(this)
           this.sortedCards[cardToBuyIndex].isOwned = false;
@@ -309,9 +310,13 @@ export default {
     },
     getCardForFree : function(type_id){
       showPendingToast(this)
+      const cardToGet = this.sortedCards.findIndex(card => card.id === type_id)
+      this.sortedCards[cardToGet].isOwned = true;
+
       this.CryptozInstance.getFreeCard(type_id, {from: this.coinbase})
         .catch(err => {
           showRejectedToast(this)
+          this.sortedCards[cardToGet].isOwned = false;
         })
     },
     buyBoosters : function() {
@@ -405,6 +410,9 @@ export default {
           }
           if(cardObj.id == 104){ //grumps
             cardObj.edition_total = 7;
+          }
+          if(cardObj.id == 60){ //wraith
+            cardObj.edition_total = 384;
           }
           if(cardObj.id == 93){ //elephant
             cardObj.edition_total = 49;
