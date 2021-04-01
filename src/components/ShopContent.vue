@@ -250,6 +250,8 @@ export default {
 
         const typeIdsOnChain = []
 
+        //push Apr 1,2021
+        typeIdsOnChain.push(135,136,137);
         //push March 31,2021
         typeIdsOnChain.push(131,132,133,134);
         //push March 27,2021
