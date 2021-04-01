@@ -250,10 +250,6 @@ export default {
 
         const typeIdsOnChain = []
 
-        //push Apr 1,2021
-        typeIdsOnChain.push(135,136,137);
-        //push March 31,2021
-        typeIdsOnChain.push(131,132,133,134);
         //push March 27,2021
         typeIdsOnChain.push(64,71,74,79,84,87,91,93,95,96,104);
         //push March 20,2021
@@ -299,9 +295,13 @@ export default {
       console.log("Buying card:", cardAttributes.id, cardAttributes);
 
       showPendingToast(this)
+      const cardToBuyIndex = this.sortedCards.findIndex(card => card.id === cardAttributes.id)
+      this.sortedCards[cardToBuyIndex].isOwned = true;
+
       this.CryptozInstance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)})
         .catch(err => {
           showRejectedToast(this)
+          this.sortedCards[cardToBuyIndex].isOwned = false;
         })
     },
     getCardForFree : function(type_id){
@@ -412,10 +412,6 @@ export default {
           if(cardObj.id == 96){ //lemur
             cardObj.edition_total = 109;
           }
-          if(cardObj.id == 60){ //wraith
-            cardObj.edition_total = 384;
-          }
-
           // Set soldOut flag first
           if(cardObj.edition_current == cardObj.edition_total) {
             cardObj.soldOut = 1;
