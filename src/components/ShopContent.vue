@@ -299,6 +299,9 @@ export default {
       this.sortedCards[cardToBuyIndex].isOwned = true;
 
       this.CryptozInstance.buyCard(cardAttributes.type_id, {from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)})
+        .then(() => {
+            this.$store.dispatch('setStoreCards', this.sortedCards)
+        })
         .catch(err => {
           showRejectedToast(this)
           this.sortedCards[cardToBuyIndex].isOwned = false;
