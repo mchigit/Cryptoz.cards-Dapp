@@ -408,6 +408,10 @@ export default {
           if(cardObj.id == 96){ //lemur
             cardObj.edition_total = 109;
           }
+          if(cardObj.id == 60){ //wraith
+            cardObj.edition_total = 384;
+          }
+
           // Set soldOut flag first
           if(cardObj.edition_current == cardObj.edition_total) {
             cardObj.soldOut = 1;
