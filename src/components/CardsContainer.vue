@@ -279,7 +279,23 @@ export default {
       if (newVal) {
         this.getAllCards(this.addressToLoad);
       }
-    }
+    },
+    web3: {
+      handler(val, oldVal) {
+        if (val.isConnected) {
+          this.getAllCards(this.addressToLoad);
+        }
+      },
+      deep: true,
+    },
+    addressToSearch: function(newVal, oldVal) {
+      const isSearchAddressValid = isAddress(newVal.toLowerCase());
+      if (isSearchAddressValid) {
+        this.disableSearch = false;
+      } else {
+        this.disableSearch = true;
+      }
+    },
   },
   computed: {
     coinbase() {
@@ -329,24 +345,6 @@ export default {
     },
     CryptozInstance() {
       return this.$store.state.contractInstance.cryptoz;
-    },
-  },
-  watch: {
-    web3: {
-      handler(val, oldVal) {
-        if (val.isConnected) {
-          this.getAllCards(this.addressToLoad);
-        }
-      },
-      deep: true,
-    },
-    addressToSearch: function(newVal, oldVal) {
-      const isSearchAddressValid = isAddress(newVal.toLowerCase());
-      if (isSearchAddressValid) {
-        this.disableSearch = false;
-      } else {
-        this.disableSearch = true;
-      }
     },
   },
   methods: {

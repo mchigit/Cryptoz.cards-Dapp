@@ -168,7 +168,7 @@ export default {
     getMyCryptLink() {
       const url = process.env.NODE_ENV == "development" ? "localhost:8080" : "https://bsc.cryptoz.cards";
       return `${url}/my-cryptoz-nfts/${this.coinbase}`;
-    }
+    },
   },
   watch: {
     web3: {
