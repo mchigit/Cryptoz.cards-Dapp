@@ -115,7 +115,6 @@ export default {
       }
     },
     isFullSize() {
-      console.log(this.is_single_card_view)
       return this.is_single_card_view
     }
   },
