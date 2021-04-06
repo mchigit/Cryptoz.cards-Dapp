@@ -72,6 +72,7 @@
               v-b-tooltip.hover="'Mint 1 random booster NFT'"
               class="btn btn-danger"
               v-on:click="openBooster"
+              v-bind:disabled="boostersOwned < 1"
               >Open <b-icon-lightning-fill /> Booster Card
             </b-button>
           </div>
