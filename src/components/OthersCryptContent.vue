@@ -1,6 +1,6 @@
 <template>
   <div class="jumbotron">
-    <universe-balances></universe-balances>
+    <universe-balances />
     <div class="description">
       <h1>NFT Wallet</h1>
       <h2 class="text-danger">
@@ -14,7 +14,11 @@
       </p>
     </div>
 
-    <cards-container @cryptChanged="handleAddressChanged" v-bind:isOthersCrypt="true" v-bind:addressToLoad="addressToLoad"></cards-container>
+    <cards-container
+      :is-others-crypt="true"
+      :address-to-load="addressToLoad"
+      @cryptChanged="handleAddressChanged"
+    />
   </div>
 </template>
 
@@ -28,15 +32,15 @@ export default {
     CardsContainer,
     UniverseBalances,
   },
-  computed: {
-    coinbase() {
-      return this.$store.state.web3.coinbase;
-    },
-  },
   data() {
     return {
       addressToLoad: null,
     };
+  },
+  computed: {
+    coinbase() {
+      return this.$store.state.web3.coinbase;
+    },
   },
   created() {
     this.addressToLoad = this.$route.params.address;

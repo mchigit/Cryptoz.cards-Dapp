@@ -1,0 +1,5 @@
+build
+BACKUP_do_not_delete
+static
+src/card_types/*
+src/contracts/*

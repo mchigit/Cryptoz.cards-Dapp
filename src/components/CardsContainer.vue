@@ -3,23 +3,20 @@
     <div class="wrapper">
       <div id="button-container">
         <div class="primary-actions">
-          <SortDropdown
-            :disabled="!ownsCards"
-            @sort-by-attr="sortByAttr"
-          ></SortDropdown>
+          <SortDropdown :disabled="!ownsCards" @sort-by-attr="sortByAttr" />
           <b-button
             id="view-change-button"
             variant="info"
-            @click="() => toggleTableView()"
             :disabled="!ownsCards"
+            @click="() => toggleTableView()"
           >
             {{ "View " + (isTableView ? "Gallery" : "Table") }}
           </b-button>
         </div>
         <div class="crypt-actions">
           <input
-            ref="myCrypt"
             id="my-crypt-link"
+            ref="myCrypt"
             hidden
             :value="getMyCryptLink"
           />
@@ -28,36 +25,39 @@
             class="my-crypt-button"
             variant="warning"
             @click="() => goBackToMyCrypt()"
-            >Go To My Crypt</b-button
           >
+            Go To My Crypt
+          </b-button>
           <b-button
             v-else
             class="my-crypt-button"
             variant="warning"
             @click="() => copyMyCryptLink()"
-            >Copy My Crypt Link</b-button
           >
+            Copy My Crypt Link
+          </b-button>
           <b-input-group class="crypt-search-input-group">
             <b-form-input
-              trim
               v-model="addressToSearch"
+              trim
               type="text"
               placeholder="Wallet Address"
               :state="addressToSearchState"
-            ></b-form-input>
+            />
             <b-input-group-append>
               <b-button
-                @click="() => searchNewCrypt()"
                 :disabled="disableSearch"
                 variant="success"
-                >Go</b-button
+                @click="() => searchNewCrypt()"
               >
+                Go
+              </b-button>
             </b-input-group-append>
           </b-input-group>
         </div>
       </div>
-      <div class="loading" v-if="isLoading">
-        <b-spinner style="width: 3rem; height: 3rem;" type="grow"></b-spinner>
+      <div v-if="isLoading" class="loading">
+        <b-spinner style="width: 3rem; height: 3rem" type="grow" />
       </div>
       <div v-else>
         <div v-if="isOthersCrypt || isWalletConnected">
@@ -85,16 +85,16 @@
                 :in_store="card.in_store"
                 :card_owned="true"
                 :index="i"
-              ></OwnedCardContent>
-              <div class="sacrifice-wrapper" v-if="!isOthersCrypt">
+              />
+              <div v-if="!isOthersCrypt" class="sacrifice-wrapper">
                 <div>
                   <button
+                    v-b-tooltip.hover="'Sacrifice'"
                     :disabled="
                       cardsBeingGifted[card.id] || cardsBeingSacrificed[card.id]
                     "
                     class="btn btn-danger"
-                    v-on:click="sacrificeCard(card.id)"
-                    v-b-tooltip.hover="'Sacrifice'"
+                    @click="sacrificeCard(card.id)"
                   >
                     <span class="emoji">☠️</span>
                   </button>
@@ -104,17 +104,17 @@
                     cardsBeingGifted[card.id] || cardsBeingSacrificed[card.id]
                   "
                   label="Spinning"
-                ></b-spinner>
+                />
                 <div class="float-right">
                   <b-button
+                    v-b-tooltip.hover="'Gift'"
                     :disabled="
                       cardsBeingGifted[card.id] || cardsBeingSacrificed[card.id]
                     "
                     class="btn btn-danger btn-gift"
                     @click="openGiftModal(card.id)"
-                    v-b-tooltip.hover="'Gift'"
                   >
-                    <b-icon-gift style="color:white" />
+                    <b-icon-gift style="color: white" />
                   </b-button>
                 </div>
               </div>
@@ -138,10 +138,14 @@
                 </div>
               </template>
               <template #cell(card_level)="row">
-                <div class="cell">{{ row.item.card_level }}</div>
+                <div class="cell">
+                  {{ row.item.card_level }}
+                </div>
               </template>
               <template #cell(edition_number)="row">
-                <div class="cell">{{ row.item.edition_label }}</div>
+                <div class="cell">
+                  {{ row.item.edition_label }}
+                </div>
               </template>
               <template #cell(unlock_czxp)="row">
                 <div class="cell">
@@ -162,45 +166,44 @@
                 <div v-if="!isOthersCrypt" class="cell">
                   <b-button
                     size="md"
-                    @click="sacrificeCard(row.item.id)"
                     variant="danger"
                     :disabled="
                       cardsBeingGifted[row.item.id] ||
-                        cardsBeingSacrificed[row.item.id]
+                      cardsBeingSacrificed[row.item.id]
                     "
+                    @click="sacrificeCard(row.item.id)"
                   >
                     <span class="emoji">☠️</span>
                   </b-button>
                 </div>
               </template>
               <template #cell(gift)="row">
-                <div  v-if="!isOthersCrypt" class="cell">
+                <div v-if="!isOthersCrypt" class="cell">
                   <b-button
                     size="md"
-                    @click="openGiftModal(row.item.id)"
                     variant="danger"
                     :disabled="
                       cardsBeingGifted[row.item.id] ||
-                        cardsBeingSacrificed[row.item.id]
+                      cardsBeingSacrificed[row.item.id]
                     "
+                    @click="openGiftModal(row.item.id)"
                   >
                     <!--img src="@/assets/baseline_card_giftcard_white_24dp.png" /-->
                     <b-icon-gift-fill />
                   </b-button>
                 </div>
               </template>
-              </fragment>
             </b-table>
           </div>
         </div>
         <div v-else>
           <h2 class="centered">
             <b-button
-              id="connect-button"
               v-if="!isWalletConnected"
-              variant="primary"
-              v-on:click="onConnect"
+              id="connect-button"
               v-b-toggle.nav-collapse
+              variant="primary"
+              @click="onConnect"
             >
               Connect
             </b-button>
@@ -209,10 +212,9 @@
         </div>
         <div v-if="(isWalletConnected || isOthersCrypt) && !ownsCards">
           <h2 v-if="!isOthersCrypt">
-            You do not own any Cryptoz<br /><router-link to="/shop"
-              >To get Free Cryptoz NFTs or Buy one, visit the Minting
-              Shop</router-link
-            >
+            You do not own any Cryptoz<br /><router-link to="/shop">
+              To get Free Cryptoz NFTs or Buy one, visit the Minting Shop
+            </router-link>
           </h2>
           <h2 v-else>No Avaliable NFTs</h2>
         </div>
@@ -233,16 +235,16 @@ import {
   showPendingToast,
   showRejectedToast,
 } from "../util/showToast";
-import { 
+import {
   BButton,
   BInputGroup,
   BFormInput,
   BInputGroupAppend,
   BSpinner,
   BTable,
-} from 'bootstrap-vue'
-import dAppStates from '@/dAppStates';
-import { MessageBus } from '@/messageBus';
+} from "bootstrap-vue";
+import dAppStates from "@/dAppStates";
+import { MessageBus } from "@/messageBus";
 
 export default {
   name: "CardsContainer",
@@ -266,6 +268,7 @@ export default {
       default: false,
     },
   },
+  emits: ["cryptChanged"],
   data() {
     return {
       cardsBeingGifted: {},
@@ -279,41 +282,6 @@ export default {
       addressToSearch: null,
       disableSearch: true,
     };
-  },
-  mounted() {
-    if (this.CryptozInstance) {
-      this.getAllCards(this.addressToLoad);
-    }
-  },
-  watch: {
-    CryptozInstance(newVal) {
-      if (newVal && this.addressToLoad) {
-        this.getAllCards(this.addressToLoad);
-      }
-    },
-    currentEvent(newVal) {
-      if (newVal) {
-        this.getAllCards(this.addressToLoad);
-      }
-    },
-    isWalletConnected(val) {
-      if (val) {
-        this.getAllCards(this.addressToLoad);
-      }
-    },
-    addressToSearch: function(newVal, oldVal) {
-      const isSearchAddressValid = isAddress(newVal.toLowerCase());
-      if (isSearchAddressValid) {
-        this.disableSearch = false;
-      } else {
-        this.disableSearch = true;
-      }
-    },
-    addressToLoad: function(newVal, oldVal) {
-      if (newVal && newVal !== oldVal) {
-        this.getAllCards(newVal);
-      }
-    },
   },
   computed: {
     coinbase() {
@@ -334,13 +302,13 @@ export default {
     tableFields() {
       if (this.isOthersCrypt) {
         return [
-        "name",
-        "card_level",
-        "edition_number",
-        "unlock_czxp",
-        "sacrifice_czxp",
-        "transfer_czxp",
-      ]
+          "name",
+          "card_level",
+          "edition_number",
+          "unlock_czxp",
+          "sacrifice_czxp",
+          "transfer_czxp",
+        ];
       } else {
         return [
           "name",
@@ -351,7 +319,7 @@ export default {
           "transfer_czxp",
           "sacrifice",
           "gift",
-        ]
+        ];
       }
     },
     currentEvent() {
@@ -365,21 +333,59 @@ export default {
       return `${url}/my-cryptoz-nfts/${this.coinbase}`;
     },
   },
+  watch: {
+    CryptozInstance(newVal) {
+      if (newVal && this.addressToLoad) {
+        this.getAllCards(this.addressToLoad);
+      }
+    },
+    currentEvent(newVal) {
+      if (newVal) {
+        this.getAllCards(this.addressToLoad);
+      }
+    },
+    isWalletConnected(val) {
+      if (val) {
+        this.getAllCards(this.addressToLoad);
+      }
+    },
+    addressToSearch: function (newVal, oldVal) {
+      const isSearchAddressValid = isAddress(newVal.toLowerCase());
+      if (isSearchAddressValid) {
+        this.disableSearch = false;
+      } else {
+        this.disableSearch = true;
+      }
+    },
+    addressToLoad: function (newVal, oldVal) {
+      if (newVal && newVal !== oldVal) {
+        this.getAllCards(newVal);
+      }
+    },
+  },
+  mounted() {
+    if (this.CryptozInstance) {
+      this.getAllCards(this.addressToLoad);
+    }
+  },
   methods: {
     addHashToLocation(params) {
       const currentPath = this.$route.path;
-      const newPath = currentPath.substring(0, currentPath.indexOf("my-cryptoz-nfts"));
+      const newPath = currentPath.substring(
+        0,
+        currentPath.indexOf("my-cryptoz-nfts")
+      );
       history.pushState({}, null, newPath + `${params}`);
     },
-    clearCards: function() {
+    clearCards: function () {
       this.orderedCards = [];
       this.ownsCards = false;
     },
-    toggleTableView: function() {
+    toggleTableView: function () {
       const nextVal = !this.isTableView;
       this.isTableView = nextVal;
     },
-    searchNewCrypt: function() {
+    searchNewCrypt: function () {
       if (this.isOthersCrypt) {
         this.isLoading = true;
         this.clearCards();
@@ -390,7 +396,7 @@ export default {
         this.navigateToNewCrypt();
       }
     },
-    openGiftModal: function(id) {
+    openGiftModal: function (id) {
       const h = this.$createElement;
       const titleVNode = h(
         "h5",
@@ -433,29 +439,29 @@ export default {
           console.error(err);
         });
     },
-    navigateToNewCrypt: function() {
+    navigateToNewCrypt: function () {
       this.$router.push(`/my-cryptoz-nfts/${this.addressToSearch}`);
     },
-    getAllCards: async function(addressToLoad) {
+    getAllCards: async function (addressToLoad) {
       if (!this.isOthersCrypt && !this.isWalletConnected) {
-        return
+        return;
       }
       this.isLoading = true;
       const tokensOfOwner = await this.CryptozInstance.methods
         .tokensOfOwner(addressToLoad)
         .call();
 
-      console.log({tokensOfOwner})
+      console.log({ tokensOfOwner });
       this.handleGetAllCards(tokensOfOwner, this.CryptozInstance);
       this.isLoading = false;
     },
-    sacrificeCard: async function(id) {
-      this.$store.dispatch('setIsTransactionPending', true);
+    sacrificeCard: async function (id) {
+      this.$store.dispatch("setIsTransactionPending", true);
       Vue.set(this.cardsBeingSacrificed, id, true);
       const sacrificeRes = await this.CryptozInstance.methods
         .sacrifice(id)
         .send({ from: this.coinbase }, (err, txHash) => {
-          this.$store.dispatch('setIsTransactionPending', false);
+          this.$store.dispatch("setIsTransactionPending", false);
 
           if (err) {
             Vue.set(this.cardsBeingSacrificed, id, false);
@@ -465,39 +471,39 @@ export default {
           if (err.code !== 4001) {
             console.log(err);
             Vue.set(this.cardsBeingSacrificed, id, false);
-            showErrorToast(this, 'Failed to sacrifice card')
+            showErrorToast(this, "Failed to sacrifice card");
           }
-        })
+        });
 
       if (sacrificeRes) {
-        this.orderedCards = this.orderedCards.filter(card => card.id !== id)
+        this.orderedCards = this.orderedCards.filter((card) => card.id !== id);
         showSuccessToast(this, "Card sacrificed.");
       }
     },
-    transferCard: async function(id) {
+    transferCard: async function (id) {
       Vue.set(this.cardsBeingGifted, id, true);
-      this.$store.dispatch('setIsTransactionPending', true);
+      this.$store.dispatch("setIsTransactionPending", true);
 
       const giftRes = await this.CryptozInstance.methods
         .transferFrom(this.coinbase, this.receivingWallet, id)
         .send({ from: this.coinbase }, (err, txHash) => {
-          this.$store.dispatch('setIsTransactionPending', false);
+          this.$store.dispatch("setIsTransactionPending", false);
         })
         .catch((err) => {
           if (err.code !== 4001) {
-            console.log('Error: ', err)
+            console.log("Error: ", err);
           }
         })
         .finally(() => {
           Vue.set(this.cardsBeingGifted, id, false);
-        })
+        });
 
       if (giftRes) {
-        this.orderedCards = this.orderedCards.filter(card => card.id !== id)
+        this.orderedCards = this.orderedCards.filter((card) => card.id !== id);
         showSuccessToast(this, "Card Gifted.");
       }
     },
-    handleGetAllCards: async function(tokensOfOwner, instance) {
+    handleGetAllCards: async function (tokensOfOwner, instance) {
       if (tokensOfOwner.length > 0) {
         this.ownsCards = true;
 
@@ -521,7 +527,9 @@ export default {
             });
 
             cardData.attributes = newAttr;
-            cardData.attributes.edition_current = parseInt(tokenIdList[tokenId][1]);
+            cardData.attributes.edition_current = parseInt(
+              tokenIdList[tokenId][1]
+            );
 
             if (cardData.attributes.edition_total == 0) {
               //unlimited
@@ -611,10 +619,10 @@ export default {
           break;
       }
     },
-    goBackToMyCrypt: function() {
+    goBackToMyCrypt: function () {
       this.$router.push("/my-cryptoz-nfts");
     },
-    copyMyCryptLink: function() {
+    copyMyCryptLink: function () {
       const textToCopy = this.$refs.myCrypt.value;
       navigator.clipboard
         .writeText(textToCopy)
@@ -625,9 +633,9 @@ export default {
           console.log("Copy Failed: ", error);
         });
     },
-    onConnect: function() {
-      MessageBus.$emit('connect')
-    }
+    onConnect: function () {
+      MessageBus.$emit("connect");
+    },
   },
 };
 </script>
@@ -705,7 +713,7 @@ export default {
 table {
   .cell {
     min-height: 60px;
-    
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -714,7 +722,6 @@ table {
       height: 60px;
     }
   }
-
 }
 
 .sacrifice-wrapper {
@@ -763,5 +770,4 @@ table {
   padding: 5px 10px;
   margin-right: 10px;
 }
-
 </style>
