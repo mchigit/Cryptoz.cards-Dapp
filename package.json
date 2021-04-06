@@ -8,7 +8,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-report": "vue-cli-service build --report",
-    "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.vue src --fix",
+    "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.vue src",
     "format": "yarn prettier --write ."
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-service": "^4.5.6",
     "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.8.0",
     "prettier": "2.2.1",
     "vue-template-compiler": "^2.6.10",
