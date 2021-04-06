@@ -21,7 +21,7 @@
         @click="toggleOrder"
         v-b-tooltip.hover="'Toggle sort order'"
       >
-        {{ isDescending ? "🡦" : "🡥" }}
+        {{ isDescending ? "➘" : "➚" }}
       </b-button>
     </div>
     <b-button

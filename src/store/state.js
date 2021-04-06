@@ -1,16 +1,15 @@
 let state = {
+  dAppState: 'NOT_CONNECTED',
   web3: {
-    isConnected: false,
-    web3Instance: null,
     chainId: null,
     coinbase: null,
-    balance: null,
-    error: null
+    balance: null
   },
   contractInstance: {
     cryptoz: null,
     czxp: null,
   },
+  isTransactionPending: false,
 
   //Component states
   ownerBalances:0,

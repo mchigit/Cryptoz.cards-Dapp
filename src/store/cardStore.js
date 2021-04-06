@@ -109,7 +109,9 @@ const getCard = async (cardId, CryptozInstance) => {
     cardObj[attribute.trait_type] = attribute.value;
   }
 
-  const edition = await CryptozInstance.cardTypeToEdition(cardObj.id);
+  const edition = await CryptozInstance.methods
+    .cardTypeToEdition(cardObj.id)
+    .call();
 
   cardObj.edition_current = parseInt(edition);
 
@@ -128,7 +130,9 @@ const getCard = async (cardId, CryptozInstance) => {
 };
 
 const addIsOwnedProp = async (card, CryptozInstance, coinbase) => {
-  const isOwned = await CryptozInstance.cardTypesOwned(coinbase, card.id);
+  const isOwned = await CryptozInstance.methods
+    .cardTypesOwned(coinbase, card.id)
+    .call();
   card.isOwned = isOwned;
 
   return card;
@@ -248,7 +252,9 @@ const cardStore = {
         const {cardId, isSorted} = payload;
         const parsedId = parseInt(cardId);
 
-        const edition = await CryptozInstance.cardTypeToEdition(parsedId);
+        const edition = await CryptozInstance.methods
+          .cardTypeToEdition(parsedId)
+          .call();
 
         commit(CARD_MUTATIONS.SET_CARD_EDITION, {
           cardId: parsedId,

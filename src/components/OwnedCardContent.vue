@@ -4,6 +4,7 @@
     :class="{ fullsize: isFullSize }"
     @click="isFlipped = !isFlipped"
     @mouseleave="isFlipped = false"
+    :data-index="index"
   >
     <div
       id="flip-container"
@@ -88,10 +89,17 @@ export default {
     "in_store",
     "card_owned",
     "is_single_card_view",
+    "index",
+    "observer",
   ],
   data() {
     return {
       isFlipped: false,
+    }
+  },
+  mounted() {
+    if (this.observer) {
+      this.observer.observe(this.$el);
     }
   },
   computed: {
@@ -231,9 +239,14 @@ export default {
 #card-name {
   font-weight: bold;
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 15%;
+  left: 5%;
+  right: 5%;
+  top: 70%;
+  bottom: 13%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #bottom-text {
@@ -287,7 +300,7 @@ export default {
   perspective: 600px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   #card-container {
     height: calc(0.55 * 410px);
     width: calc(0.55 * 260px);
