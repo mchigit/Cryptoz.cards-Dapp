@@ -11,18 +11,6 @@
             auction marketplaces
           </h3>
 
-          <!--a href="https://treasureland.market/" target="_blank">
-                <div class="market-btn">
-                  <img class="opensea-logo" src="https://treasureland.market/static/media/logo.849b6817.svg" align="absmiddle" /> <span class="opensea-header">TreasureLand</span>
-                  <br>
-                  <p>
-                    <strong>Coming Soon</strong><br/>
-                    Build the most unique NFT frictionless trading market where users can enjoy the fun of gold mining.
-                  </p>
-                </div>
-              </a>
-            </div -->
-
           <a href="https://whalecrate.com/browse/cryptoz" target="_blank">
             <div class="market-btn">
               <img
@@ -32,10 +20,23 @@
               />
               <span class="opensea-header">Whalecrate</span>
               <br />
-              <p>
-                <strong>Coming Soon</strong><br />
-                Buy and sell curated digital items across multiple chains.
-              </p>
+              <p>Buy and sell curated digital items across multiple chains.</p>
+            </div>
+          </a>
+
+          <a
+            href="https://treasureland.market/#/nft-market/cryptoz?sellingType=0&priceType=0&title=0&sortValue=1&page=1&project=20"
+            target="_blank"
+          >
+            <div class="market-btn">
+              <img
+                class="opensea-logo"
+                src="https://treasureland.market/static/media/logo.849b6817.svg"
+                align="absmiddle"
+              />
+              <span class="opensea-header">TreasureLand</span>
+              <br />
+              <p>Frictionless NFT trading market.</p>
             </div>
           </a>
         </div>
@@ -49,7 +50,6 @@
             />) <br />BEP-20 tokens are supported on the following token
             exchanges
           </h3>
-          <h5>( anyone can make a pool )</h5>
 
           <a
             href="https://info.julswap.com/pair/0x0f4b077f27E687b1e77E4a1b9ce0B4eceE100EB6#/"
@@ -80,23 +80,11 @@
               <span class="opensea-header">1inch Exchange</span>
               <br />
               <p>
-                LEADING DEX AGGREGATOR<br />
                 1inch offers the best rates by discovering the most efficient
                 swapping routes across all leading DEXes.
               </p>
             </div>
           </a>
-
-          <!--a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x2b974da27c9dd35412d71dd36e3e108486c45444" target="_blank">
-                <div class="market-btn">
-                  <img class="uni-logo" src="@/assets/pancakeswap.webp" align="absmiddle" />
-                   <span class="opensea-header">PancakeSwap</span>
-                  <br>
-                  <p>
-                    PancakeSwap Decentralized BSC liquidity Exchange - Instant swap - CZXP-BNB. Earn fees by providing liquidity
-                  </p>
-                </div>
-              </a-->
         </div>
       </div>
 
@@ -131,7 +119,7 @@ export default {
   margin-left: 10px;
 }
 .opensea-logo {
-  width: 25%;
+  width: 16%;
   margin-bottom: 10px;
 }
 .rb-logo {
@@ -139,7 +127,7 @@ export default {
   margin-bottom: 10px;
 }
 .uni-logo {
-  width: 8%;
+  width: 16%;
   margin-bottom: 10px;
 }
 .czxp-logo {
@@ -149,16 +137,19 @@ export default {
 .market-btn:hover {
   color: #000;
   background-color: #ccc;
-  padding: 5px;
-  height: 130px;
+  padding: 10px;
+  max-height: fit-content;
   text-decoration: none;
   border: 1px solid black;
 }
+a:hover {
+  text-decoration: none;
+}
 .market-btn {
   color: #000;
-  padding: 5px;
+  padding: 10px;
   text-decoration: none;
-  height: 130px;
+  max-height: fit-content;
   border: 1px solid white;
   margin-bottom: 5px;
 }
