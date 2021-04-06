@@ -14,64 +14,66 @@
           <b>To wager:</b> Minimum = 2,000,000,000, Maximum =
           1,649,267,441,667,000
         </div>
-        <router-link to="/help?read-cards">Random odds explained</router-link>
+        <router-link to="/help?read-cards"> Random odds explained </router-link>
         <b-form-input
+          v-model="wagerAmount"
           class="form-control"
           :state="isWagerValid"
           required
           type="number"
-          v-model="wagerAmount"
-        ></b-form-input>
-        <b-form-invalid-feedback v-if="!notEnoughWager">
+        />
+        <b-form-invalid-feedback v-if="isWagerValid">
           <div>
             You need to enter a number between 2,000,000,000 and
             1,649,267,441,667,000 to wager.
           </div>
         </b-form-invalid-feedback>
-        <b-form-invalid-feedback v-if="notEnoughWager">
+        <b-form-invalid-feedback v-if="!hasEnoughCZXP">
           <div>You do not have enough CZXP tokens</div>
         </b-form-invalid-feedback>
         <b-row>
           <b-col>
             <b-button
+              v-b-tooltip.hover="'Open Booster'"
               class="mt-3"
               variant="danger"
-              v-b-tooltip.hover="'Open Booster'"
               block
-              @click="openBooster"
               :disabled="!isWagerValid"
-              >Mint random NFT</b-button
+              @click="openBooster"
             >
+              Mint random NFT
+            </b-button>
           </b-col>
           <b-col>
             <b-button
               class="mt-3"
               block
               @click="$bvModal.hide('open-booster-modal')"
-              >Cancel</b-button
             >
+              Cancel
+            </b-button>
           </b-col>
         </b-row>
       </b-modal>
 
       <div class="jumbotron">
-        <UniverseBalances></UniverseBalances>
+        <UniverseBalances />
 
         <h1>Your NFT Wallet</h1>
         <p>
-          This is where all your NFT Cryptoz tokens can be accessed. Sort, search,
-          gift and sacrifice. Sacrificing is permanent, not only in your wallet
-          but across the entire Cryptoz Universe. That unique NFT is burned
-          forever.
+          This is where all your NFT Cryptoz tokens can be accessed. Sort,
+          search, gift and sacrifice. Sacrificing is permanent, not only in your
+          wallet but across the entire Cryptoz Universe. That unique NFT is
+          burned forever.
         </p>
 
         <!-- Loads cards here -->
-        <div class="row" v-if="isWalletConnected">
+        <div v-if="isWalletConnected" class="row">
           <div class="col">
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT'"
               class="btn btn-danger"
-              v-on:click="openBooster"
+              @click="openBooster"
               v-bind:disabled="boostersOwned < 1"
               >Open <b-icon-lightning-fill /> Booster Card
             </b-button>
@@ -80,17 +82,21 @@
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT +120 CZXP'"
               class="btn btn-danger"
-              v-bind:disabled="balance < 2000000000000000"
-              v-on:click="buyAndOpenBooster"
-              >Buy and Open <b-icon-lightning-fill /> Booster 0.002 BNB
+              :disabled="balance < 2000000000000000"
+              @click="buyAndOpenBooster"
+            >
+              Buy and Open <b-icon-lightning-fill /> Booster 0.002 BNB
             </b-button>
           </div>
         </div>
         <br />
-        
-        <OwnerBalances></OwnerBalances>
+
+        <OwnerBalances />
         <div class="cards-wrapper">
-          <cards-container :isOthersCrypt="false" :addressToLoad="coinbase"></cards-container>
+          <cards-container
+            :is-others-crypt="false"
+            :address-to-load="coinbase"
+          />
         </div>
       </div>
     </div>
@@ -98,28 +104,24 @@
 </template>
 
 <script>
-import OwnedCardContent from "@/components/OwnedCardContent.vue";
 import UniverseBalances from "@/components/UniverseBalances.vue";
 import OwnerBalances from "@/components/OwnerBalances.vue";
-import SortDropdown from "@/components/SortDropdown.vue";
-import CardsContainer from './CardsContainer.vue';
+import CardsContainer from "./CardsContainer.vue";
 import {
   BFormInput,
   BFormInvalidFeedback,
   BRow,
   BCol,
   BButton,
-} from 'bootstrap-vue'
-import { showErrorToast } from '../util/showToast';
-import dAppStates from '@/dAppStates';
+} from "bootstrap-vue";
+import { showErrorToast } from "../util/showToast";
+import dAppStates from "@/dAppStates";
 
 export default {
   name: "CryptContent",
   components: {
-    OwnedCardContent,
     UniverseBalances,
     OwnerBalances,
-    SortDropdown,
     CardsContainer,
     BFormInput,
     BFormInvalidFeedback,
@@ -131,7 +133,6 @@ export default {
     return {
       wagerAmount: 0,
       receivingWallet: "",
-      notEnoughWager: false,
     };
   },
   computed: {
@@ -152,24 +153,33 @@ export default {
     },
     isWagerValid() {
       const wagerAmount = parseInt(this.wagerAmount);
-      this.notEnoughWager = false;
 
       if (wagerAmount === 0) {
         return true;
       }
 
       if (this.czxp_balance < wagerAmount) {
-        this.notEnoughWager = true;
         return false;
       }
 
       return wagerAmount >= 2000000000 && wagerAmount <= 1649267441667000;
     },
+    hasEnoughCZXP() {
+      const wagerAmount = parseInt(this.wagerAmount);
+      if (wagerAmount > 0) {
+        return this.czxp_balance < wagerAmount;
+      }
+
+      return true;
+    },
     czxp_balance() {
       return this.$store.state.czxpBalance;
     },
     getMyCryptLink() {
-      const url = process.env.NODE_ENV == "development" ? "localhost:8080" : "https://bsc.cryptoz.cards";
+      const url =
+        process.env.NODE_ENV == "development"
+          ? "localhost:8080"
+          : "https://bsc.cryptoz.cards";
       return `${url}/my-cryptoz-nfts/${this.coinbase}`;
     },
   },
@@ -179,41 +189,44 @@ export default {
         this.$bvModal.hide("gift-modal");
         this.$bvModal.hide("open-booster-modal");
       }
-    }
+    },
   },
   methods: {
-    buyAndOpenBooster: async function() {
-      this.$store.dispatch('setIsTransactionPending', true)
+    buyAndOpenBooster: async function () {
+      this.$store.dispatch("setIsTransactionPending", true);
       const res = await this.CryptozInstance.methods
         .buyBoosterCardAndOpen()
-        .send({
-          from: this.coinbase,
-          value: 2000000000000000,
-        }, (err, txHash) => {
-          this.$store.dispatch('setIsTransactionPending', false);
-        })
+        .send(
+          {
+            from: this.coinbase,
+            value: 2000000000000000,
+          },
+          (err, txHash) => {
+            this.$store.dispatch("setIsTransactionPending", false);
+          }
+        )
         .catch((err) => {
           if (err.code !== 4001) {
-            showErrorToast(this, 'Failed to buy/open booster')
+            showErrorToast(this, "Failed to buy/open booster");
           }
-        })
-        
+        });
+
       this.$bvModal.hide("open-booster-modal");
     },
-    openBooster: function() {
+    openBooster: function () {
       //Change buy button to pending.. or show some pending state
-      this.$store.dispatch('setIsTransactionPending', true)
+      this.$store.dispatch("setIsTransactionPending", true);
       this.$bvModal.hide("open-booster-modal");
       this.CryptozInstance.methods
         .openBoosterCard(0)
-        .send({from: this.coinbase}, (err, transactionHash) => {
-          this.$store.dispatch('setIsTransactionPending', false)
+        .send({ from: this.coinbase }, (err, transactionHash) => {
+          this.$store.dispatch("setIsTransactionPending", false);
         })
         .catch((err) => {
           if (err.code !== 4001) {
-            showErrorToast(this, 'Failed to open booster')
+            showErrorToast(this, "Failed to open booster");
           }
-        })
+        });
     },
   },
 };
@@ -246,5 +259,4 @@ export default {
 .cards-wrapper {
   margin-top: 24px;
 }
-
 </style>

@@ -1,9 +1,9 @@
 let state = {
-  dAppState: 'NOT_CONNECTED',
+  dAppState: "NOT_CONNECTED",
   web3: {
     chainId: null,
     coinbase: null,
-    balance: null
+    balance: null,
   },
   contractInstance: {
     cryptoz: null,
@@ -12,25 +12,25 @@ let state = {
   isTransactionPending: false,
 
   //Component states
-  ownerBalances:0,
-  universeBalances:0,
+  ownerBalances: 0,
+  universeBalances: 0,
 
   // wallet balances
-  boostersOwned:0,
-  cardsOwned:0,
-  czxpBalance:0,
+  boostersOwned: 0,
+  cardsOwned: 0,
+  czxpBalance: 0,
 
   //universe balances
-  totalCzxpSupply:0,
-  totalCryptozSupply:0,
-  totalCryptozTypes:0,
+  totalCzxpSupply: 0,
+  totalCryptozSupply: 0,
+  totalCryptozTypes: 0,
 
   //blockchain events [objects]
-  lastChainEvent:{},
+  lastChainEvent: {},
 
   shop: {
     cards: [],
   },
-}
+};
 
-export default state
+export default state;

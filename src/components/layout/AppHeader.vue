@@ -8,39 +8,44 @@
         <img class="logo-nav" src="./../assets/cryptokeeper_logo_binance.png" />
         Cryptoz
       </router-link>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" />
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav id="cryptoz-nav">
           <b-nav-item id="shop">
-            <router-link v-bind:class="classObject" to="/shop">Shop</router-link>
+            <router-link :class="classObject" to="/shop"> Shop </router-link>
           </b-nav-item>
           <b-nav-item id="crypt">
-            <router-link v-bind:class="classObject" to="/my-cryptoz-nfts">Your NFT Crypt</router-link>
+            <router-link :class="classObject" to="/my-cryptoz-nfts">
+              Your NFT Crypt
+            </router-link>
           </b-nav-item>
           <b-nav-item id="markets">
-            <router-link v-bind:class="classObject" to="/market">Markets</router-link>
+            <router-link :class="classObject" to="/market">
+              Markets
+            </router-link>
           </b-nav-item>
           <b-nav-item id="view">
-            <router-link v-bind:class="classObject" to="/view/1">View</router-link>
+            <router-link :class="classObject" to="/view/1"> View </router-link>
           </b-nav-item>
           <b-nav-item id="help">
-            <router-link v-bind:class="classObject" to="/help">Help</router-link>
+            <router-link :class="classObject" to="/help"> Help </router-link>
           </b-nav-item>
           <b-nav-item v-if="isWalletConnected" id="affiliate">
-            <b-link v-bind:class="classObject" href="#" v-b-modal.sponsor-modal>Affiliate</b-link>
+            <b-link v-b-modal.sponsor-modal :class="classObject" href="#">
+              Affiliate
+            </b-link>
           </b-nav-item>
 
-          <li
-            id="wallet-nav"
-            v-if="isWalletConnected"
-          >
+          <li v-if="isWalletConnected" id="wallet-nav">
             <div
               id="wallet-id"
-              :title="coinbase"
               v-b-tooltip.hover="{ customClass: 'tooltip-1' }"
+              :title="coinbase"
             >
               <img src="@/assets/metamask-face.png" class="header-icon" />
-              <span>{{ coinbase.substr(0, 6) + "..." + coinbase.substr(38) }}</span>
+              <span>{{
+                coinbase.substr(0, 6) + "..." + coinbase.substr(38)
+              }}</span>
             </div>
             <div
               id="wallet-balance"
@@ -55,21 +60,32 @@
 
           <li id="bonus-boosters">
             <div
-              class="bonusClass"
               v-if="isWalletConnected && bonusReady && showSpinner == false"
-              v-on:click="GetBonus"
+              class="bonusClass"
+              @click="GetBonus"
             >
               Claim 2 FREE Boosters!
             </div>
             <div v-else-if="isWalletConnected && showSpinner == true">
-              <b-spinner style="width: 1.5rem; height: 1.5rem;" type="grow" variant="light"></b-spinner>
+              <b-spinner
+                style="width: 1.5rem; height: 1.5rem"
+                type="grow"
+                variant="light"
+              />
               <transition>
-                <span class="spinner-text-style"> {{ transactionMessage }}</span>
+                <span class="spinner-text-style">
+                  {{ transactionMessage }}</span
+                >
               </transition>
             </div>
             <div
+              v-else-if="
+                isWalletConnected &&
+                !bonusReady &&
+                timeToBonus &&
+                showSpinner == false
+              "
               class="bonusClassNo"
-              v-else-if="isWalletConnected && !bonusReady && timeToBonus && showSpinner == false"
             >
               Your Next Bonus:<br /><strong> {{ timeToBonus }}</strong>
             </div>
@@ -78,9 +94,9 @@
           <li id="connect-button">
             <b-button
               v-if="!isWalletConnected"
-              variant="primary"
-              v-on:click="$emit('connect')"
               v-b-toggle.nav-collapse
+              variant="primary"
+              @click="$emit('connect')"
             >
               Connect To Blockchain
             </b-button>
@@ -95,11 +111,9 @@
       title="Sponsor Link"
       hide-footer
     >
-
       <b-jumbotron class="jumbo" lead="Link Your Sponsor">
         <p>
-          By linking your sponsor's wallet address, you will mint
-          a
+          By linking your sponsor's wallet address, you will mint a
           <b>Free Diamond or Platinum Sponsored NFT Card!</b>
         </p>
         <p class="sponsor-warning" variant="info">
@@ -112,27 +126,28 @@
             required
             type="text"
             placeholder="Enter Address"
-          ></b-form-input>
+          />
           <b-input-group-append>
             <b-button
               variant="success"
               :disabled="!isSponsorValid || sponsorAddress === ''"
-              v-on:click="linkSponsor"
-              >Link</b-button
+              @click="linkSponsor"
             >
+              Link
+            </b-button>
           </b-input-group-append>
           <div v-if="sponsorAddress !== ''">
-            <b-form-invalid-feedback v-if="notSameSponsorError">
+            <b-form-invalid-feedback v-if="!isSponsorValid">
               <div>Please enter a valid address.</div>
             </b-form-invalid-feedback>
-            <b-form-invalid-feedback v-else>
+            <b-form-invalid-feedback v-if="isSameSponsor">
               <div>You can't link your own wallet.</div>
             </b-form-invalid-feedback>
           </div>
         </b-input-group>
-          <b-alert v-else variant="success" show
-            >You are already linked to sponsor wallet.</b-alert
-          >
+        <b-alert v-else variant="success" show>
+          You are already linked to sponsor wallet.
+        </b-alert>
       </b-jumbotron>
 
       <b-jumbotron
@@ -140,38 +155,49 @@
         class="jumbo"
         lead="Your Affiliate Link"
       >
-        <p>Automatically earn CZXP <img class="czxp-logo" src="../assets/cryptokeeper_coin_binance.svg" align="middle" /> Token rewards from your affiliate network</p>
+        <p>
+          Automatically earn CZXP
+          <img
+            class="czxp-logo"
+            src="../assets/cryptokeeper_coin_binance.svg"
+            align="middle"
+          />
+          Token rewards from your affiliate network
+        </p>
         <p>Copy the link by clicking the button below.</p>
-        <p>Send the link to your friends so they can mint a <b>Free Platinum or Diamond Sponsored Card!</b></p>
+        <p>
+          Send the link to your friends so they can mint a
+          <b>Free Platinum or Diamond Sponsored Card!</b>
+        </p>
         <input
-          ref="sponsor"
           id="sponsor-link"
+          ref="sponsor"
           hidden
           :value="getSponsorRoute"
         />
 
-
-        <a class="twitter-share-button" v-bind:href="getTweet" data-size="large">
-          <b-button variant="primary" style="width:26%"><img style="width:30px" src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png"> Tweet your link</b-button>
+        <a class="twitter-share-button" :href="getTweet" data-size="large">
+          <b-button variant="primary" style="width: 26%"
+            ><img
+              style="width: 30px"
+              src="https://utilitypeopleuk.com/wp-content/uploads/2017/06/twitter-icon-circle-blue-logo-preview.png"
+            />
+            Tweet your link</b-button
+          >
         </a>
         &nbsp;
-        <b-button v-on:click="copySponsorLink">
-          Copy Link To Clipboard
-        </b-button>
-
+        <b-button @click="copySponsorLink"> Copy Link To Clipboard </b-button>
       </b-jumbotron>
-
-
     </b-modal>
-    <p></p>
+    <p />
   </div>
 </template>
 
 <script>
 import { showSuccessToast, showErrorToast } from "../../util/showToast";
 import { isAddress } from "../../util/addressUtil";
-import moment from 'moment'
-import dAppStates from '@/dAppStates'
+import moment from "moment";
+import dAppStates from "@/dAppStates";
 import {
   BNavbar,
   BNavbarToggle,
@@ -186,15 +212,12 @@ import {
   BFormInput,
   BInputGroupAppend,
   BFormInvalidFeedback,
-  BAlert
-} from 'bootstrap-vue' 
+  BAlert,
+} from "bootstrap-vue";
 
 const baseAddress = "0x0000000000000000000000000000000000000000";
 export default {
   name: "AppHeader",
-  mounted() {
-    this.getDailyBonusTime()
-  },
   components: {
     BNavbar,
     BNavbarToggle,
@@ -209,66 +232,9 @@ export default {
     BFormInput,
     BInputGroupAppend,
     BFormInvalidFeedback,
-    BAlert
+    BAlert,
   },
-  computed: {
-    classObject : function () { //Style the link colours
-      const chainId = this.$store.state.web3.chainId
-      switch (chainId) {
-        case 0x38:
-        case 0x61:
-          return 'bsc-link';
-        default:
-          return 'eth-link';
-      }
-    },
-    CryptozInstance() {
-      return this.$store.state.contractInstance.cryptoz;
-    },
-    dAppState() {
-      return this.$store.state.dAppState;
-    },
-    isWalletConnected() {
-      return this.$store.state.dAppState === dAppStates.WALLET_CONNECTED;
-    },
-    ethBalance() {
-      const balance = this.$store.state.web3.balance
-      if (balance !== null) {
-        return parseFloat(web3.utils.fromWei(balance.toString()));
-      }
-      return null
-    },
-    coinbase() {
-      return this.$store.state.web3.coinbase;
-    },
-    currentEvent() {
-      return this.$store.state.lastChainEvent;
-    },
-    getSponsorRoute() {
-      console.log("Env: ", process.env.NODE_ENV)
-      const siteURL =
-        process.env.NODE_ENV == "development"
-          ? "localhost:8080"
-          : "https://bsc.cryptoz.cards";
-      return `${siteURL}?sponsor=${this.coinbase}`;
-    },
-    getTweet() {
-      return `https://twitter.com/intent/tweet?text=Click%20my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,cryptozfam,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
-    },
-    isSponsorValid() {
-      if (this.sponsorAddress === '') {
-        return true
-      }
-
-      if (this.sponsorAddress.toLowerCase() === this.coinbase.toLowerCase()) {
-        this.notSameSponsorError = false;
-        return false;
-      }
-
-      this.notSameSponsorError = true;
-      return isAddress(this.sponsorAddress.toLowerCase());
-    },
-  },
+  emits: ["connect", "LogSponsorLinked"],
   data() {
     return {
       pendingTransaction: 0,
@@ -282,6 +248,66 @@ export default {
       shouldShowSponsor: true,
     };
   },
+  computed: {
+    classObject: function () {
+      //Style the link colours
+      const chainId = this.$store.state.web3.chainId;
+      switch (chainId) {
+        case 0x38:
+        case 0x61:
+          return "bsc-link";
+        default:
+          return "eth-link";
+      }
+    },
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
+    dAppState() {
+      return this.$store.state.dAppState;
+    },
+    isWalletConnected() {
+      return this.$store.state.dAppState === dAppStates.WALLET_CONNECTED;
+    },
+    ethBalance() {
+      const balance = this.$store.state.web3.balance;
+      if (balance !== null) {
+        return parseFloat(web3.utils.fromWei(balance.toString()));
+      }
+      return null;
+    },
+    coinbase() {
+      return this.$store.state.web3.coinbase;
+    },
+    currentEvent() {
+      return this.$store.state.lastChainEvent;
+    },
+    getSponsorRoute() {
+      console.log("Env: ", process.env.NODE_ENV);
+      const siteURL =
+        process.env.NODE_ENV == "development"
+          ? "localhost:8080"
+          : "https://bsc.cryptoz.cards";
+      return `${siteURL}?sponsor=${this.coinbase}`;
+    },
+    getTweet() {
+      return `https://twitter.com/intent/tweet?text=Click%20my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,cryptozfam,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
+    },
+    isSponsorValid() {
+      if (this.sponsorAddress === "") {
+        return true;
+      }
+
+      if (this.sponsorAddress.toLowerCase() === this.coinbase.toLowerCase()) {
+        return false;
+      }
+
+      return isAddress(this.sponsorAddress.toLowerCase());
+    },
+    isSameSponsor() {
+      return this.sponsorAddress.toLowerCase() === this.coinbase.toLowerCase();
+    },
+  },
   watch: {
     isWalletConnected(value) {
       if (value) {
@@ -294,48 +320,50 @@ export default {
           this.showSpinner = false;
           this.transactionMessage = "Confirmed! Balance updated";
         }
-        this.getDailyBonusTime()
+        this.getDailyBonusTime();
       }
     },
     coinbase() {
-      this.getDailyBonusTime()
+      this.getDailyBonusTime();
     },
   },
+  mounted() {
+    this.getDailyBonusTime();
+  },
   methods: {
-    checkSponsor: async function(address) {
-
-      const sponsor = await this.CryptozInstance.methods.sponsors(address)
+    checkSponsor: async function (address) {
+      const sponsor = await this.CryptozInstance.methods
+        .sponsors(address)
         .call();
       if (sponsor && sponsor !== baseAddress) {
         this.shouldShowSponsor = false;
-      }
-      else {
+      } else {
         if (this.$route.query.sponsor) {
           this.sponsorAddress = this.$route.query.sponsor;
           this.$bvModal.show("sponsor-modal");
         }
       }
     },
-    linkSponsor: async function() {
-      this.$store.dispatch('setIsTransactionPending', true)
+    linkSponsor: async function () {
+      this.$store.dispatch("setIsTransactionPending", true);
       const result = await this.CryptozInstance.methods
         .linkMySponsor(this.sponsorAddress)
-        .send({from: this.coinbase}, (err, transactionHash) => {
-          this.$store.dispatch('setIsTransactionPending', false)
+        .send({ from: this.coinbase }, (err, transactionHash) => {
+          this.$store.dispatch("setIsTransactionPending", false);
         })
         .catch((err) => {
           if (err.code !== 4001) {
-            console.log(err)
+            console.log(err);
             showErrorToast(this, "Failed to link sponsor.");
           }
-        })
-      
+        });
+
       if (result) {
         showSuccessToast(this, "Sponsor linked!");
         this.$emit("LogSponsorLinked", [this.sponsorAddress, this.coinbase]);
       }
     },
-    copySponsorLink: function() {
+    copySponsorLink: function () {
       const textToCopy = this.$refs.sponsor.value;
       navigator.clipboard
         .writeText(textToCopy)
@@ -346,9 +374,11 @@ export default {
           console.log("Copy Failed: ", error);
         });
     },
-    getDailyBonusTime: async function() {
+    getDailyBonusTime: async function () {
       if (this.CryptozInstance && this.coinbase) {
-        const res = await this.CryptozInstance.methods.getTimeToDailyBonus(this.coinbase).call()
+        const res = await this.CryptozInstance.methods
+          .getTimeToDailyBonus(this.coinbase)
+          .call();
 
         var timeOfNextBonusInMilli = parseInt(res) * 1000;
         var now = new Date();
@@ -356,50 +386,47 @@ export default {
         if (now.getTime() >= timeOfNextBonusInMilli) {
           this.bonusReady = true; //Claim bonus state
         } else {
-          this.bonusReady = false
+          this.bonusReady = false;
           this.timeToBonus = this.GetTimeString(timeOfNextBonusInMilli);
         }
       }
     },
-    GetBonus: async function() {
+    GetBonus: async function () {
       this.showSpinner = true;
       this.transactionMessage = "Pending confirmation...";
-      this.$store.dispatch('setIsTransactionPending', true)
+      this.$store.dispatch("setIsTransactionPending", true);
 
       const result = await this.CryptozInstance.methods
         .getBonusBoosters()
-        .send({from: this.coinbase}, (err, transactionHash) => {
+        .send({ from: this.coinbase }, (err, transactionHash) => {
           this.pendingTransaction = transactionHash;
           if (err) {
             this.showSpinner = false;
             this.transactionMessage = "Claim 2 FREE Boosters!";
-          }
-          else {
+          } else {
             this.transactionMessage = "Broadcast to chain...";
           }
-          this.$store.dispatch('setIsTransactionPending', false)
-        })  
+          this.$store.dispatch("setIsTransactionPending", false);
+        })
         .catch((e) => {
           this.showSpinner = false;
           this.transactionMessage = "Claim 2 FREE Boosters!";
-        })
+        });
 
       this.showSpinner = false;
       if (result) {
-        this.getDailyBonusTime()
+        this.getDailyBonusTime();
       }
     },
-    GetTimeString: function(_timeStamp) {
-      return moment(_timeStamp).format("MMM D, h:mm a")
+    GetTimeString: function (_timeStamp) {
+      return moment(_timeStamp).format("MMM D, h:mm a");
     },
   },
 };
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .navbar {
   max-width: 100vw;
 }
@@ -463,11 +490,11 @@ export default {
 }
 
 .tooltip-1 {
-  top: 65px!important;
+  top: 65px !important;
 }
 
 .tooltip-2 {
-  top: 45px!important;
+  top: 45px !important;
 }
 
 @media screen and (max-width: 600px) {
@@ -503,7 +530,7 @@ export default {
   }
 
   #shop:before {
-    content: '';
+    content: "";
     height: 1px;
     background: gray;
     position: absolute;
@@ -513,11 +540,11 @@ export default {
   }
 
   .tooltip-1 {
-    top: 0!important;
+    top: 0 !important;
   }
 
   .tooltip-2 {
-    top: 0!important;
+    top: 0 !important;
   }
 }
 
@@ -555,7 +582,7 @@ a {
 
 /* BINANCE color #F0B90B */
 .bsc-link {
-  color: #F0B90B;
+  color: #f0b90b;
 }
 
 a:hover {
@@ -613,7 +640,8 @@ a:hover {
   min-width: 0;
 }
 
-.eth-link, .bsc-link {
+.eth-link,
+.bsc-link {
   white-space: nowrap;
 }
 
@@ -661,12 +689,12 @@ a:hover {
   font-weight: bold;
   color: #dc3545;
 }
-.base-text{
-    color:#FFFFFF;
+.base-text {
+  color: #ffffff;
 }
 
 .czxp-logo {
-  width : 20px;
-  vertical-align:middle;
+  width: 20px;
+  vertical-align: middle;
 }
 </style>

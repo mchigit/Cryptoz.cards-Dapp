@@ -2,8 +2,8 @@
   <div class="dropdown-wrapper">
     <div>
       <b-dropdown
-        :disabled="disabled"
         id="dropdown"
+        :disabled="disabled"
         :text="'Sort by ' + (sortType ? types[sortType] : '')"
       >
         <b-dropdown-item
@@ -18,19 +18,20 @@
       <b-button
         v-if="sortType"
         id="toggle-order-button"
-        @click="toggleOrder"
         v-b-tooltip.hover="'Toggle sort order'"
+        @click="toggleOrder"
       >
         {{ isDescending ? "➘" : "➚" }}
       </b-button>
     </div>
     <b-button
+      v-if="isSorting"
       class="clear-sorting"
       variant="outline-warning"
       @click="clearSortFilter"
-      v-if="isSorting"
-      >Clear Sort Filter</b-button
     >
+      Clear Sort Filter
+    </b-button>
   </div>
 </template>
 
@@ -49,6 +50,7 @@ export default {
       default: false,
     },
   },
+  emits: ["sort-by-attr"],
   data() {
     return {
       isDescending: false,

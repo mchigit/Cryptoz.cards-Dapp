@@ -7,7 +7,7 @@ import { dynamicSort, getRarity, soldOutSort } from "../helpers";
 const typeIdsOnChain = [];
 
 //push Apr 4,2021
-typeIdsOnChain.push(138,140);
+typeIdsOnChain.push(138, 140);
 //push Apr 1,2021
 typeIdsOnChain.push(135, 136, 137);
 //push March 31,2021
@@ -44,7 +44,7 @@ export const CARD_MUTATIONS = {
   SET_SORTED_CARDS: "SET_SORTED_CARDS",
   SET_CARD_BOUGHT: "SET_CARD_BOUGHT",
   SET_CARD_NOT_BOUGHT: "SET_CARD_NOT_BOUGHT",
-  SET_CARD_EDITION: "SET_CARD_EDITION"
+  SET_CARD_EDITION: "SET_CARD_EDITION",
 };
 
 const RARITY = {
@@ -79,7 +79,7 @@ const EDITION_HACK = {
   96: 109,
   60: 384,
   133: 309,
-  135:204,
+  135: 204,
   137: 3,
   138: 159,
   165: 12,
@@ -142,24 +142,26 @@ const cardStore = {
   state: DEFAULT_CARD_STATE,
   mutations: {
     [CARD_MUTATIONS.SET_CARD_EDITION](state, payload) {
-      const {cardId, edition, isSorted} = payload;
+      const { cardId, edition, isSorted } = payload;
 
       if (isSorted) {
-        const sortedIndex = state.sortedCards.findIndex(card => card.id === cardId);
+        const sortedIndex = state.sortedCards.findIndex(
+          (card) => card.id === cardId
+        );
         state.sortedCards[sortedIndex].edition_current = edition;
       }
 
-      const index = state.allShopCards.findIndex(card => card.id === cardId);
+      const index = state.allShopCards.findIndex((card) => card.id === cardId);
       state.allShopCards[index].edition_current = edition;
     },
     [CARD_MUTATIONS.SET_CARD_BOUGHT](state, payload) {
       const { cardId, isSorted } = payload;
-      const parsedCardId = parseInt(cardId)
+      const parsedCardId = parseInt(cardId);
 
       if (isSorted) {
         const cardSortedIndex = state.sortedCards.findIndex(
           (card) => card.id === parsedCardId
-        )
+        );
         state.sortedCards[cardSortedIndex].isOwned = true;
       } else {
         const cardBoughtIndex = state.allShopCards.findIndex(
@@ -170,12 +172,12 @@ const cardStore = {
     },
     [CARD_MUTATIONS.SET_CARD_NOT_BOUGHT](state, payload) {
       const { cardId, isSorted } = payload;
-      const parsedCardId = parseInt(cardId)
+      const parsedCardId = parseInt(cardId);
 
       if (isSorted) {
         const cardSortedIndex = state.sortedCards.findIndex(
           (card) => card.id === parsedCardId
-        )
+        );
         state.sortedCards[cardSortedIndex].isOwned = false;
       } else {
         const cardBoughtIndex = state.allShopCards.findIndex(
@@ -231,25 +233,29 @@ const cardStore = {
       state.sortedCards = shopCards;
     },
     updateMintedCountForCard(state, payload) {
-      const { cardTypeId, editionNumber } = payload
+      const { cardTypeId, editionNumber } = payload;
 
-      const cardIndex = state.allShopCards.findIndex(card => card.type_id === cardTypeId);
+      const cardIndex = state.allShopCards.findIndex(
+        (card) => card.type_id === cardTypeId
+      );
       if (cardIndex > -1) {
-        state.allShopCards[cardIndex].edition_current = editionNumber
+        state.allShopCards[cardIndex].edition_current = editionNumber;
       }
 
       if (state.sortedCards.length > 0) {
-        const sortedIndex = state.sortedCards.findIndex(card => card.type_id === cardTypeId);
-        state.sortedCards[sortedIndex].edition_current = editionNumber
+        const sortedIndex = state.sortedCards.findIndex(
+          (card) => card.type_id === cardTypeId
+        );
+        state.sortedCards[sortedIndex].edition_current = editionNumber;
       }
-    }
+    },
   },
   actions: {
-    async setCurrentEdition({commit, rootState}, payload) {
+    async setCurrentEdition({ commit, rootState }, payload) {
       try {
         const CryptozInstance = rootState.contractInstance.cryptoz;
 
-        const {cardId, isSorted} = payload;
+        const { cardId, isSorted } = payload;
         const parsedId = parseInt(cardId);
 
         const edition = await CryptozInstance.methods
@@ -259,12 +265,11 @@ const cardStore = {
         commit(CARD_MUTATIONS.SET_CARD_EDITION, {
           cardId: parsedId,
           edition,
-          isSorted
-        })
+          isSorted,
+        });
       } catch (err) {
         console.error(err);
       }
-
     },
     async fetchStoreCards({ commit, rootState }) {
       try {
@@ -307,8 +312,8 @@ const cardStore = {
     setCardAsNotBought({ commit }, payload) {
       commit(CARD_MUTATIONS.SET_CARD_NOT_BOUGHT, payload);
     },
-    updateMintedCountForCard({commit}, payload) {
-      commit('updateMintedCountForCard', payload)
+    updateMintedCountForCard({ commit }, payload) {
+      commit("updateMintedCountForCard", payload);
     },
   },
   getters: {

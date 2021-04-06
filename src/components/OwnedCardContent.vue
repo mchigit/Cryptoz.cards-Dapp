@@ -2,14 +2,11 @@
   <div
     id="card-container"
     :class="{ fullsize: isFullSize }"
+    :data-index="index"
     @click="isFlipped = !isFlipped"
     @mouseleave="isFlipped = false"
-    :data-index="index"
   >
-    <div
-      id="flip-container"
-      :class="{ flipped: isFlipped }"
-    >
+    <div id="flip-container" :class="{ flipped: isFlipped }">
       <!-- front content -->
       <div :class="[card_class, 'front']">
         <!--img class="card-img" :src="'static/assets/' + url" /-->
@@ -19,18 +16,15 @@
         <div id="card-edition">
           <span>{{ edition_label }}</span>
         </div>
-        <div id="card-name">
-          {{ name }}<br />{{ cset }}
-        </div>
+        <div id="card-name">{{ name }}<br />{{ cset }}</div>
         <div id="bottom-text">
           {{ parseInt(unlock_czxp).toLocaleString() }}
         </div>
-        <div id="bottom-right-corner">{{ level }}</div>
-        <div class="card-booster-shop card-booster-shop-circle"></div>
-        <div
-          id="top-right-corner"
-          :style="{ backgroundColor: activeColor }"
-        >
+        <div id="bottom-right-corner">
+          {{ level }}
+        </div>
+        <div class="card-booster-shop card-booster-shop-circle" />
+        <div id="top-right-corner" :style="{ backgroundColor: activeColor }">
           <b-icon-lightning-fill
             v-if="in_store == 'Booster'"
             class="card-booster-shop-icon"
@@ -68,7 +62,6 @@
 </template>
 
 <script>
-
 export default {
   name: "OwnedCardContent",
   props: [
@@ -95,12 +88,7 @@ export default {
   data() {
     return {
       isFlipped: false,
-    }
-  },
-  mounted() {
-    if (this.observer) {
-      this.observer.observe(this.$el);
-    }
+    };
   },
   computed: {
     activeColor() {
@@ -112,24 +100,28 @@ export default {
     },
     edition_label() {
       if (!this.card_owned) {
-        return this.edition_current + '/' + this.edition_total
-      }
-      else {
+        return this.edition_current + "/" + this.edition_total;
+      } else {
         if (this.edition_total === 0) {
-          return '#'+this.edition_current;
+          return "#" + this.edition_current;
         } else {
-          return '#'+this.edition_current +' of '+this.edition_total;
+          return "#" + this.edition_current + " of " + this.edition_total;
         }
       }
     },
     isFullSize() {
-      return this.is_single_card_view
+      return this.is_single_card_view;
+    },
+  },
+  mounted() {
+    if (this.observer) {
+      this.observer.observe(this.$el);
     }
   },
   methods: {
     toggleFlipped() {
-      this.isFlipped = !this.isFlipped
-    }
+      this.isFlipped = !this.isFlipped;
+    },
   },
 };
 </script>
@@ -151,27 +143,27 @@ export default {
 }
 
 .card-bg-6 {
-  background-image: url('https://cryptoz.cards/assets/cryptoz_card_common_brown.svg');
+  background-image: url("https://cryptoz.cards/assets/cryptoz_card_common_brown.svg");
 }
 
 .card-bg-5 {
-  background-image: url('https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg');
+  background-image: url("https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg");
 }
 
 .card-bg-4 {
-  background-image: url('https://cryptoz.cards/assets/cryptoz_card_rare_red.svg');
+  background-image: url("https://cryptoz.cards/assets/cryptoz_card_rare_red.svg");
 }
 
 .card-bg-3 {
-  background-image: url('https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg');
+  background-image: url("https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg");
 }
 
 .card-bg-2 {
-  background-image: url('https://cryptoz.cards/assets/cryptoz_card_platinum.svg');
+  background-image: url("https://cryptoz.cards/assets/cryptoz_card_platinum.svg");
 }
 
 .card-bg-1 {
-  background-image: url('https://cryptoz.cards/assets/cryptoz_card_diamond.svg');
+  background-image: url("https://cryptoz.cards/assets/cryptoz_card_diamond.svg");
 }
 
 .card-bg-back {
@@ -289,7 +281,6 @@ export default {
 
 /* entire container, keeps perspective */
 
-
 #card-container {
   margin: 0;
   height: 410px;
@@ -308,9 +299,9 @@ export default {
   }
 
   .fullsize {
-    height: 410px!important;
-    width: 260px!important;
-    font-size: 16px!important;
+    height: 410px !important;
+    width: 260px !important;
+    font-size: 16px !important;
   }
 }
 

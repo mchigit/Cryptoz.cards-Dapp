@@ -11,7 +11,7 @@
           <div class="col">
             <h2>Cryptoz Token #{{ token_id }} does not exist on this chain</h2>
             <p>If you would like to see a token:</p>
-            <button class="btn btn-primary" v-on:click="go_genesis">
+            <button class="btn btn-primary" @click="go_genesis">
               View The CryptoKeeper - our #0 Genesis token
             </button>
           </div>
@@ -19,8 +19,8 @@
         <div v-else id="container" class="row">
           <div id="card-wrapper">
             <OwnedCardContent
-              :key="card.id"
               :id="card.id"
+              :key="card.id"
               :type_id="card.attributes.type_id"
               :name="card.name"
               :cost="card.attributes.cost"
@@ -37,64 +37,102 @@
               :in_store="card.attributes.in_store"
               :card_owned="true"
               :is_single_card_view="true"
-            ></OwnedCardContent>
+            />
           </div>
           <div id="stats-container" class="col">
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Owner:</div>
-              <div><a class="wrap-text" v-bind:href="owner_url" target="_blank">{{ owner }}</a></div>
+              <div>
+                <a class="wrap-text" :href="owner_url" target="_blank">{{
+                  owner
+                }}</a>
+              </div>
             </div>
             <div class="flex-row">
-              <div class="text-right font-weight-bold label">Cryptoz Token #:</div>
-              <div class="">{{ token_id }}</div>
-            </div>            
+              <div class="text-right font-weight-bold label">
+                Cryptoz Token #:
+              </div>
+              <div class="">
+                {{ token_id }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Editon:</div>
-              <div class="">{{ edition_current }}</div>
-            </div>            
+              <div class="">
+                {{ edition_current }}
+              </div>
+            </div>
             <div class="flex-row">
-              <div class="text-right font-weight-bold label">Times Transferred:</div>
-              <div class="">{{ times_transferred }}</div>
-            </div>            
+              <div class="text-right font-weight-bold label">
+                Times Transferred:
+              </div>
+              <div class="">
+                {{ times_transferred }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Card Name:</div>
-              <div class="">{{ card.name }}</div>
-            </div>            
+              <div class="">
+                {{ card.name }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Card Set:</div>
-              <div class="">{{ card.attributes.card_set }}</div>
-            </div>            
+              <div class="">
+                {{ card.attributes.card_set }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Zombie Type:</div>
-              <div class="">{{ card.attributes.zombie_type }}</div>
-            </div>            
+              <div class="">
+                {{ card.attributes.zombie_type }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Rarity:</div>
-              <div class="">{{ rarity }}</div>
-            </div>            
+              <div class="">
+                {{ rarity }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Cost:</div>
-              <div class="">{{ card.attributes.cost }}</div>
-            </div>            
+              <div class="">
+                {{ card.attributes.cost }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Buy CZXP:</div>
-              <div class="">{{ card.attributes.buy_czxp }}</div>
-            </div>            
+              <div class="">
+                {{ card.attributes.buy_czxp }}
+              </div>
+            </div>
             <div class="flex-row">
-              <div class="text-right font-weight-bold label">Transfer CZXP:</div>
-              <div class="">{{ card.attributes.transfer_czxp }}</div>
-            </div>            
+              <div class="text-right font-weight-bold label">
+                Transfer CZXP:
+              </div>
+              <div class="">
+                {{ card.attributes.transfer_czxp }}
+              </div>
+            </div>
             <div class="flex-row">
-              <div class="text-right font-weight-bold label">Sacrifice CZXP:</div>
-              <div class="">{{ card.attributes.sacrifice_czxp }}</div>
-            </div>            
+              <div class="text-right font-weight-bold label">
+                Sacrifice CZXP:
+              </div>
+              <div class="">
+                {{ card.attributes.sacrifice_czxp }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Unlock CZXP:</div>
-              <div class="">{{ card.attributes.unlock_czxp }}</div>
-            </div>            
+              <div class="">
+                {{ card.attributes.unlock_czxp }}
+              </div>
+            </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">Level:</div>
-              <div class="">{{ card.attributes.card_level }}</div>
+              <div class="">
+                {{ card.attributes.card_level }}
+              </div>
             </div>
           </div>
         </div>
@@ -106,7 +144,7 @@
 <script>
 import axios from "axios";
 import OwnedCardContent from "@/components/OwnedCardContent.vue";
-import dAppStates from '@/dAppStates'
+import dAppStates from "@/dAppStates";
 
 export default {
   name: "TokenContent",
@@ -146,17 +184,19 @@ export default {
       return this.$store.state.contractInstance.cryptoz;
     },
     isDAppConnected() {
-      return this.$store.state.dAppState === dAppStates.CONNECTED
-        || this.$store.state.dAppState === dAppStates.WALLET_CONNECTED
+      return (
+        this.$store.state.dAppState === dAppStates.CONNECTED ||
+        this.$store.state.dAppState === dAppStates.WALLET_CONNECTED
+      );
     },
     coinbase() {
       return this.$store.state.web3.coinbase;
-    }
+    },
   },
   watch: {
     isDAppConnected(value) {
       if (value) {
-        this.loadCard(this.token_id)
+        this.loadCard(this.token_id);
       }
     },
   },
@@ -165,17 +205,21 @@ export default {
     this.token_id = parseInt(this.$route.params.token_id);
 
     if (this.isDAppConnected) {
-      console.log('from mount')
-      this.loadCard(this.token_id)
+      console.log("from mount");
+      this.loadCard(this.token_id);
     }
   },
   methods: {
     loadCard: async function (token_id) {
-      console.log({token_id, inst: this.CryptozInstance, dAppState: this.dAppState})
+      console.log({
+        token_id,
+        inst: this.CryptozInstance,
+        dAppState: this.dAppState,
+      });
       const res = await this.CryptozInstance.methods
         .getOwnedCard(token_id)
         .call()
-        .catch(err => console.log({err}));
+        .catch((err) => console.log({ err }));
 
       //returns TypeId, Edition, # times transfed
       // console.log("CardOwned results:", res);
@@ -183,16 +227,14 @@ export default {
 
       //If the tokenId is greater than 0, we have something valid
       if (cardTypeId === 0) {
-        this.load_state = 0
-        return
+        this.load_state = 0;
+        return;
       }
 
       this.edition_current = parseInt(res[1]);
       this.times_transferred = parseInt(res[2]);
       this.getCardData(cardTypeId);
-      const owner = await this.CryptozInstance.methods
-        .ownerOf(token_id)
-        .call()
+      const owner = await this.CryptozInstance.methods.ownerOf(token_id).call();
       this.owner = owner;
       this.owner_url = "https://etherscan.io/addowners/" + owner;
     },

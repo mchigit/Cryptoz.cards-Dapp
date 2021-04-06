@@ -13,16 +13,16 @@
             id="toWallet"
             class="form-control"
             type="text"
-            v-on:input="totalCreditsToBuy = $event.target.value"
             value="1"
             required
+            @input="totalCreditsToBuy = $event.target.value"
           />
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <b-button class="mt-3" variant="danger" block @click="buyBoosters"
-            >Buy Credits
+          <b-button class="mt-3" variant="danger" block @click="buyBoosters">
+            Buy Credits
           </b-button>
         </b-col>
         <b-col>
@@ -31,7 +31,8 @@
             variant="secondary"
             block
             @click="$bvModal.hide('buy-boosters-modal')"
-            >Cancel
+          >
+            Cancel
           </b-button>
         </b-col>
       </b-row>
@@ -42,14 +43,14 @@
       <p>
         The Shop is a place to mint limited edition Cryptoz Cards NFT tokens.
         Some cards are free, some have a cost. You may also buy and
-        <router-link to="/my-cryptoz-nfts">open a booster card</router-link>,
+        <router-link to="/my-cryptoz-nfts"> open a booster card </router-link>,
         which will randomly mint an unlimited edition NFT token.
       </p>
       <p>
         To mint a FREE NFT Or buy a Limited edition NFT, you will need the
         required minimum balance of CZXP tokens displayed on the botton of the
         card to unlock the minting button. The newly minted NFT will appear in
-        <router-link to="/my-cryptoz-nfts"> Your NFT Crypt</router-link> once
+        <router-link to="/my-cryptoz-nfts"> Your NFT Crypt </router-link> once
         the transaction is confirmed. CZXP is NOT burned when minting
       </p>
 
@@ -58,10 +59,12 @@
           <div class="col">
             <b-button
               v-b-tooltip.hover="'Earn +120 CZXP per credit'"
-              class="btn btn-danger"
-              v-bind:disabled="balance < 2000000000000000 || isBuyingBooster"
               v-b-modal.buy-boosters-modal
-              >Buy <b-icon-lightning-fill />  Booster Credits @ 0.002 BNB</b-button>
+              class="btn btn-danger"
+              :disabled="balance < 2000000000000000 || isBuyingBooster"
+            >
+              Buy <b-icon-lightning-fill /> Booster Credits @ 0.002 BNB
+            </b-button>
           </div>
         </div>
         <OwnerBalances />
@@ -70,11 +73,11 @@
       <div v-else>
         <h2 class="centered">
           <b-button
-            id="connect-button"
             v-if="!isWalletConnected"
-            variant="primary"
-            v-on:click="onConnect"
+            id="connect-button"
             v-b-toggle.nav-collapse
+            variant="primary"
+            @click="onConnect"
           >
             Connect
           </b-button>
@@ -82,19 +85,23 @@
         </h2>
       </div>
 
-      <div class="loading" v-if="isLoadingShopCards">
-        <b-spinner style="width: 3rem; height: 3rem" type="grow"></b-spinner>
+      <div v-if="isLoadingShopCards" class="loading">
+        <b-spinner style="width: 3rem; height: 3rem" type="grow" />
       </div>
       <div v-else>
         <div class="row sort-wrapper">
           <div class="col text-left">
-            <SortDropdown @sort-by-attr="sortByAttr"></SortDropdown>
+            <SortDropdown @sort-by-attr="sortByAttr" />
           </div>
         </div>
       </div>
-      <br>
+      <br />
       <div id="cards-wrapper">
-        <div v-for="(card, i) in displayCards" :key="card.type_id" class="card-wrapper">
+        <div
+          v-for="(card, i) in displayCards"
+          :key="card.type_id"
+          class="card-wrapper"
+        >
           <OwnedCardContent
             :type_id="card.type_id"
             :name="card.name"
@@ -113,8 +120,8 @@
             :card_owned="false"
             :index="i"
             :observer="observer"
-          ></OwnedCardContent>
-          <div class="card-button-container" v-if="isWalletConnected">
+          />
+          <div v-if="isWalletConnected" class="card-button-container">
             <div
               v-if="card.soldOut == 1"
               id="sold-button-wrapper"
@@ -129,8 +136,7 @@
               v-else-if="!card.isOwned"
               id="buy-get-button-wrapper"
               :class="
-                balance <= card.cost ||
-                czxpBalance < parseInt(card.unlock_czxp)
+                balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)
                   ? 'disabled-btn'
                   : ''
               "
@@ -149,14 +155,14 @@
                     czxpBalance < parseInt(card.unlock_czxp)
                   "
                   variant="primary"
-                  v-on:click="buyCard(card)"
+                  @click="buyCard(card)"
                 >
                   <b-icon-lock-fill
                     v-if="
                       balance <= card.cost ||
                       czxpBalance < parseInt(card.unlock_czxp)
                     "
-                  ></b-icon-lock-fill>
+                  />
                   Mint NFT for {{ card.cost }} BNB
                 </b-button>
               </div>
@@ -169,11 +175,11 @@
                   id="get-button"
                   class="btn btn-primary"
                   :disabled="czxpBalance < parseInt(card.unlock_czxp)"
-                  v-on:click="getCardForFree(card.type_id)"
+                  @click="getCardForFree(card.type_id)"
                 >
                   <b-icon-lock-fill
                     v-if="czxpBalance < parseInt(card.unlock_czxp)"
-                  ></b-icon-lock-fill>
+                  />
                   Mint for FREE
                 </button>
               </div>
@@ -197,18 +203,22 @@
 
 <script>
 import { mapGetters } from "vuex";
-import axios from 'axios'
+import axios from "axios";
 import { BRow, BCol, BButton, BSpinner } from "bootstrap-vue";
 
-import OwnedCardContent from '@/components/OwnedCardContent.vue'
-import UniverseBalances from '@/components/UniverseBalances.vue'
-import OwnerBalances from '@/components/OwnerBalances.vue'
-import SortDropdown from '@/components/SortDropdown.vue'
-import dAppStates from '@/dAppStates'
-import { getRarity, dynamicSort} from '../helpers'
-import { showRejectedToast, showSuccessToast, showPendingToast } from "../util/showToast";
-import getCardType from '../util/getCardType'
-import { MessageBus } from '@/messageBus';
+import OwnedCardContent from "@/components/OwnedCardContent.vue";
+import UniverseBalances from "@/components/UniverseBalances.vue";
+import OwnerBalances from "@/components/OwnerBalances.vue";
+import SortDropdown from "@/components/SortDropdown.vue";
+import dAppStates from "@/dAppStates";
+import { getRarity, dynamicSort } from "../helpers";
+import {
+  showRejectedToast,
+  showSuccessToast,
+  showPendingToast,
+} from "../util/showToast";
+import getCardType from "../util/getCardType";
+import { MessageBus } from "@/messageBus";
 
 export default {
   components: {
@@ -247,35 +257,36 @@ export default {
     this.observer.disconnect();
   },
   created() {
-    this.observer = new IntersectionObserver(
-      this.onElementObserved, 
-      {
-        root: this.$el,
-        threshold: 1.0,
-      }
+    this.observer = new IntersectionObserver(this.onElementObserved, {
+      root: this.$el,
+      threshold: 1.0,
+    });
+    this.loadMoreCards = _.debounce(
+      () => {
+        if (this.isCardSorted) {
+          const newCards = this.$store.getters.getPaginatedShopCards(
+            this.pageSize,
+            this.sortedPageNext,
+            this.isCardSorted
+          );
+          this.sortedPaginatedCards = [
+            ...this.sortedPaginatedCards,
+            ...newCards.cards,
+          ];
+          this.sortedPageNext = newCards.next;
+        } else {
+          const newCards = this.$store.getters.getPaginatedShopCards(
+            this.pageSize,
+            this.pageNext,
+            this.isCardSorted
+          );
+          this.paginatedCards = [...this.paginatedCards, ...newCards.cards];
+          this.pageNext = newCards.next;
+        }
+      },
+      500,
+      { leading: true }
     );
-    this.loadMoreCards = _.debounce(() => {
-      if (this.isCardSorted) {
-        const newCards = this.$store.getters.getPaginatedShopCards(
-          this.pageSize,
-          this.sortedPageNext,
-          this.isCardSorted
-        );
-        this.sortedPaginatedCards = [
-          ...this.sortedPaginatedCards,
-          ...newCards.cards,
-        ];
-        this.sortedPageNext = newCards.next;
-      } else {
-        const newCards = this.$store.getters.getPaginatedShopCards(
-          this.pageSize,
-          this.pageNext,
-          this.isCardSorted
-        );
-        this.paginatedCards = [...this.paginatedCards, ...newCards.cards];
-        this.pageNext = newCards.next;
-      }
-    }, 500, {leading: true})
   },
   mounted() {
     if (this.CryptozInstance) {
@@ -342,7 +353,10 @@ export default {
   },
   watch: {
     dAppState(newVal) {
-      if (newVal === dAppStates.CONNECTED || newVal === dAppStates.WALLET_CONNECTED) {
+      if (
+        newVal === dAppStates.CONNECTED ||
+        newVal === dAppStates.WALLET_CONNECTED
+      ) {
         this.fetchStoreCards();
       }
     },
@@ -376,8 +390,8 @@ export default {
         return this.getBtnTooltipTextContent;
       }
     },
-    getCardForFree: async function(type_id){
-      this.showTransactionModal()
+    getCardForFree: async function (type_id) {
+      this.showTransactionModal();
       this.$store.dispatch("setCardAsBought", {
         cardId: type_id,
         isSorted: this.isCardSorted,
@@ -385,20 +399,20 @@ export default {
 
       const result = await this.CryptozInstance.methods
         .getFreeCard(type_id)
-        .send({from: this.coinbase}, (err, txHash) => {
+        .send({ from: this.coinbase }, (err, txHash) => {
           this.hideTransactionModal();
         })
-        .catch(err => {
+        .catch((err) => {
           this.$store.dispatch("setCardAsNotBought", {
             cardId: type_id,
             isSorted: this.isCardSorted,
           });
 
           if (err.code !== 4001) {
-            console.log(err)
-            showErrorToast(this, 'Failed to mint card')
+            console.log(err);
+            showErrorToast(this, "Failed to mint card");
           }
-        })
+        });
 
       if (result) {
         this.$store.dispatch("setCurrentEdition", {
@@ -407,29 +421,35 @@ export default {
         });
       }
     },
-    buyCard: async function(cardAttributes){
+    buyCard: async function (cardAttributes) {
       this.$store.dispatch("setCardAsBought", {
         cardId: cardAttributes.id,
         isSorted: this.isCardSorted,
       });
 
-      this.showTransactionModal()
+      this.showTransactionModal();
 
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)
-        .send({from: this.coinbase, value:(cardAttributes.cost*1000000000000000000)}, (err, transactionHash) => {
-          this.hideTransactionModal();
-        })
-        .catch(err => {
+        .send(
+          {
+            from: this.coinbase,
+            value: cardAttributes.cost * 1000000000000000000,
+          },
+          (err, transactionHash) => {
+            this.hideTransactionModal();
+          }
+        )
+        .catch((err) => {
           this.$store.dispatch("setCardAsNotBought", {
             cardId: cardAttributes.id,
             isSorted: this.isCardSorted,
           });
           if (err.code !== 4001) {
-            console.log(err)
-            showErrorToast(this, 'Failed to mint card')
+            console.log(err);
+            showErrorToast(this, "Failed to mint card");
           }
-        })
+        });
 
       if (result) {
         this.$store.dispatch("setCurrentEdition", {
@@ -438,26 +458,30 @@ export default {
         });
       }
     },
-    buyBoosters : function() {
+    buyBoosters: function () {
       this.$bvModal.hide("buy-boosters-modal");
       this.isBuyingBooster = true;
 
-      this.showTransactionModal()
+      this.showTransactionModal();
 
-      var totalBoostersCost = 2000000000000000 * parseInt(this.totalCreditsToBuy);
+      var totalBoostersCost =
+        2000000000000000 * parseInt(this.totalCreditsToBuy);
       this.CryptozInstance.methods
         .buyBoosterCard(parseInt(this.totalCreditsToBuy))
-        .send({from: this.coinbase, value:totalBoostersCost}, (err, txHash) => {
-          this.hideTransactionModal();
-        })
-        .catch(err => {
+        .send(
+          { from: this.coinbase, value: totalBoostersCost },
+          (err, txHash) => {
+            this.hideTransactionModal();
+          }
+        )
+        .catch((err) => {
           if (err.code !== 4001) {
-            showErrorToast(this, 'Failed to mint card')
+            showErrorToast(this, "Failed to mint card");
           }
         })
         .finally(() => {
           this.isBuyingBooster = false;
-        })
+        });
     },
     buyBtnTooltipText(cost, unlock_czxp) {
       if (this.balance <= cost || this.czxpBalance < parseInt(unlock_czxp)) {
@@ -494,29 +518,29 @@ export default {
       this.sortedPageNext = newCards.next;
     },
     showTransactionModal() {
-      this.$store.dispatch('setIsTransactionPending', true)
+      this.$store.dispatch("setIsTransactionPending", true);
     },
     hideTransactionModal() {
-      this.$store.dispatch('setIsTransactionPending', false)
+      this.$store.dispatch("setIsTransactionPending", false);
     },
-    onConnect: function() {
-      MessageBus.$emit('connect')
+    onConnect: function () {
+      MessageBus.$emit("connect");
     },
     onElementObserved(entries) {
-      entries.forEach(({ target, isIntersecting}) => {
-          if (!isIntersecting) {
-            return;
+      entries.forEach(({ target, isIntersecting }) => {
+        if (!isIntersecting) {
+          return;
+        }
+
+        this.observer.unobserve(target);
+
+        const index = parseInt(target.getAttribute("data-index"));
+        // if the 10th last card scrolls into view, load more
+        if (index === this.displayCards.length - 10) {
+          if (this.canLoadMore) {
+            this.loadMoreCards();
           }
-          
-          this.observer.unobserve(target);
-        
-          const index = parseInt(target.getAttribute("data-index"));
-          // if the 10th last card scrolls into view, load more
-          if (index === this.displayCards.length - 10) {
-            if (this.canLoadMore) {
-              this.loadMoreCards()
-            }
-          }
+        }
       });
     },
   },
@@ -568,7 +592,7 @@ export default {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .10s;
+  transition: opacity 0.1s;
 }
 .fade-enter,
 .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
@@ -577,9 +601,9 @@ export default {
 /* add a little arrow for users to be sure which they're purchasing */
 #buy-get-button-wrapper::before,
 #owned-button-wrapper::before {
-  content: '';
+  content: "";
   position: absolute;
-  top:-10px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
   border-left: 10px solid transparent;
