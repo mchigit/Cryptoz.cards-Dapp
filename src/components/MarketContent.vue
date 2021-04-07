@@ -119,7 +119,7 @@
   </div>
 </template>
 
-<script type="application/javascript">
+<script>
 export default {
   name: "MarketContent",
   data() {
