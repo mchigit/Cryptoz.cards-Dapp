@@ -24,6 +24,22 @@
             </div>
           </a>
 
+          <a href="https://www.aotoy.club/" target="_blank">
+            <div class="market-btn">
+              <img
+                class="opensea-logo"
+                src="https://www.aotoy.club/img/logo.4e931c7f.svg"
+                align="absmiddle"
+              />
+              <span class="opensea-header">- BSC NFT Platform</span>
+              <br />
+              <p>
+                Easily mint, collect, and trade your NFT, all on aotoy, the NFT
+                platform deployed on the BSC.
+              </p>
+            </div>
+          </a>
+
           <a
             href="https://treasureland.market/#/nft-market/cryptoz?sellingType=0&priceType=0&title=0&sortValue=1&page=1&project=20"
             target="_blank"
@@ -40,8 +56,10 @@
             </div>
           </a>
         </div>
+        <!-- End nft column -->
 
         <div class="col-6">
+
           <h3>
             CryptoZ eXPerience (CZXP
             <img
@@ -88,7 +106,7 @@
         </div>
       </div>
 
-      <p style="margin-top: 100px">
+      <p>
         If you have an NFT market on the Binance Smart Chain and would like to
         feature Cryptoz NFT Cards, you can use the contract TokenURI endpoints
         for automated metadata consumption. We currently follow the OpenSea
@@ -111,54 +129,52 @@ export default {
   },
 };
 </script>
+        <style scoped>
+          .opensea-header {
+            font-size: 2rem !important;
+            margin-left: 10px;
+          }
+          .opensea-logo {
+            width: 16%;
+            margin-bottom: 10px;
+          }
+          .rb-logo {
+            width: 39%;
+            margin-bottom: 10px;
+          }
+          .uni-logo {
+            width: 16%;
+            margin-bottom: 10px;
+          }
+          .czxp-logo {
+            width: 7%;
+            margin-right: 0.2em;
+          }
+          .market-btn:hover {
+            color: #000;
+            background-color: #ccc;
+            padding: 10px;
+            max-height: fit-content;
+            text-decoration: none;
+            border: 1px solid black;
+          }
+          a:hover {
+            text-decoration: none;
+          }
+          .market-btn {
+            color: #000;
+            padding: 10px;
+            text-decoration: none;
+            max-height: fit-content;
+            border: 1px solid white;
+            margin-bottom: 5px;
+          }
+          h3 {
+            margin-bottom: 1em;
+          }
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.opensea-header {
-  font-size: 2rem !important;
-  margin-left: 10px;
-}
-.opensea-logo {
-  width: 16%;
-  margin-bottom: 10px;
-}
-.rb-logo {
-  width: 39%;
-  margin-bottom: 10px;
-}
-.uni-logo {
-  width: 16%;
-  margin-bottom: 10px;
-}
-.czxp-logo {
-  width: 7%;
-  margin-right: 0.2em;
-}
-.market-btn:hover {
-  color: #000;
-  background-color: #ccc;
-  padding: 10px;
-  max-height: fit-content;
-  text-decoration: none;
-  border: 1px solid black;
-}
-a:hover {
-  text-decoration: none;
-}
-.market-btn {
-  color: #000;
-  padding: 10px;
-  text-decoration: none;
-  max-height: fit-content;
-  border: 1px solid white;
-  margin-bottom: 5px;
-}
-h3 {
-  margin-bottom: 1em;
-}
-
-.jumbotron {
-  margin: auto;
-  width: 95%;
-}
-</style>
+          .jumbotron {
+            margin: auto;
+            width: 95%;
+          }
+        </style>
