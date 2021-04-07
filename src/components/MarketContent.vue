@@ -31,7 +31,7 @@
                 src="https://www.aotoy.club/img/logo.4e931c7f.svg"
                 align="absmiddle"
               />
-              <span class="opensea-header">AOTOY - BSC NFT Platform</span>
+              <span class="opensea-header">- BSC NFT Platform</span>
               <br />
               <p>
                 Easily mint, collect, and trade your NFT, all on aotoy, the NFT
@@ -56,7 +56,7 @@
             </div>
           </a>
         </div>
-        <!-- End nft column -- >
+        <!-- End nft column -->
 
         <div class="col-6">
 
