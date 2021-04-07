@@ -114,7 +114,7 @@
       <b-jumbotron class="jumbo" lead="Link Your Sponsor">
         <p>
           By linking your sponsor's wallet address, you will mint a
-          <b>Free Diamond or Platinum Sponsored NFT Card!</b>
+          <b>Free Platinum Sponsored NFT Card!</b>
         </p>
         <p class="sponsor-warning" variant="info">
           Note: You can only link sponsor once
@@ -167,7 +167,7 @@
         <p>Copy the link by clicking the button below.</p>
         <p>
           Send the link to your friends so they can mint a
-          <b>Free Platinum or Diamond Sponsored Card!</b>
+          <b>Free Platinum Sponsored Card!</b>
         </p>
         <input
           id="sponsor-link"
