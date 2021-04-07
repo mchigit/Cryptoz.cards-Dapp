@@ -70,7 +70,7 @@
           </h3>
 
           <a
-            href="https://info.julswap.com/pair/0x0f4b077f27E687b1e77E4a1b9ce0B4eceE100EB6#/"
+            href="https://info.julswap.com/token/0x2b974da27c9dd35412d71dd36e3e108486c45444"
             target="_blank"
           >
             <div class="market-btn">
