@@ -3,39 +3,38 @@
     <b-modal
       id="buy-boosters-modal"
       title="Buy Booster Credits @ 0.002 BNB each"
-      hide-footer
     >
-      <h5 class="modal-title">Booster cards will never be sold in the shop</h5>
-      Enter the number of booster credits you would like to purchase:
-      <b-row>
-        <b-col cols="4">
-          <input
-            id="toWallet"
-            class="form-control"
-            type="text"
-            value="1"
-            required
-            @input="totalCreditsToBuy = $event.target.value"
-          />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <b-button class="mt-3" variant="danger" block @click="buyBoosters">
+      <div class="booster-modal-content">
+        <p class="booster-modal-title">
+          Booster cards will never be sold in the shop
+        </p>
+        <p class="booster-modal-explain">
+          Enter the number of booster credits you would like to purchase:
+        </p>
+        <input
+          id="toWallet"
+          class="form-control"
+          type="text"
+          value="1"
+          required
+          @input="totalCreditsToBuy = $event.target.value"
+        />
+      </div>
+
+      <template #modal-footer>
+        <div class="booster-modal-footer">
+          <b-button class="mt-3" variant="danger" @click="buyBoosters">
             Buy Credits
           </b-button>
-        </b-col>
-        <b-col>
           <b-button
             class="mt-3"
             variant="secondary"
-            block
             @click="$bvModal.hide('buy-boosters-modal')"
           >
             Cancel
           </b-button>
-        </b-col>
-      </b-row>
+        </div>
+      </template>
     </b-modal>
     <div class="jumbotron">
       <UniverseBalances />
@@ -203,7 +202,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import axios from "axios";
 import { BRow, BCol, BButton, BSpinner } from "bootstrap-vue";
 
 import OwnedCardContent from "@/components/OwnedCardContent.vue";
@@ -211,13 +209,7 @@ import UniverseBalances from "@/components/UniverseBalances.vue";
 import OwnerBalances from "@/components/OwnerBalances.vue";
 import SortDropdown from "@/components/SortDropdown.vue";
 import dAppStates from "@/dAppStates";
-import { getRarity, dynamicSort } from "../helpers";
-import {
-  showRejectedToast,
-  showSuccessToast,
-  showPendingToast,
-} from "../util/showToast";
-import getCardType from "../util/getCardType";
+import { showErrorToast } from "../util/showToast";
 import { MessageBus } from "@/messageBus";
 
 export default {
@@ -657,6 +649,39 @@ export default {
   justify-content: center;
 }
 
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
+#connect-button {
+  font-size: 20px;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+.booster-modal-footer {
+  display: flex;
+  align-items: flex-end;
+
+  button {
+    margin-left: 16px;
+  }
+}
+
+.booster-modal-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.booster-modal-explain {
+  font-size: 1.2rem;
+}
+
+.booster-modal-content {
+  padding: 36px 36px;
+}
+
 @media screen and (max-width: 1000px) {
   #cards-wrapper {
     grid-template-columns: repeat(auto-fit, minmax(calc(0.55 * 260px), 1fr));
@@ -675,16 +700,9 @@ export default {
       }
     }
   }
-}
 
-.centered {
-  display: flex;
-  justify-content: center;
-}
-
-#connect-button {
-  font-size: 20px;
-  padding: 5px 10px;
-  margin-right: 10px;
+  .booster-modal-content {
+    padding: 10px 10px;
+  }
 }
 </style>
