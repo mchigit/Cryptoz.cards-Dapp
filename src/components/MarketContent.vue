@@ -9,7 +9,7 @@
           <h3>
             Cryptoz Cards
           </h3>
-          <h5> 
+          <h5>
             BEP-721 NFT tokens are supported on the following
             auction marketplaces
           </h5>
@@ -27,7 +27,7 @@
             </div>
           </a>
 
-          <a href="https://www.aotoy.club/" target="_blank">
+          <a href="https://www.aotoy.club/#/market" target="_blank">
             <div class="market-btn">
               <img
                 class="logo"
