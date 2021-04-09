@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col">
           <h3>
-            Cryptoz Cards
+            Cryptoz NFT Cards
           </h3>
           <h5>
             BEP-721 NFT tokens are supported on the following
