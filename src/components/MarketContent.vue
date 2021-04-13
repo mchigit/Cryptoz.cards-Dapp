@@ -266,7 +266,7 @@ h3 {
   background-color: lightgray;
 }
 
-@media only screen and (min-width: 1100px) {
+@media only screen and (min-width: 1300px) {
   .markets-wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -282,8 +282,9 @@ h3 {
   }
 
   .market {
-    max-width: 600px;
+    width: 550px;
     height: 120px;
+    justify-self: center;
 
     .market-btn {
       height: 100%;
