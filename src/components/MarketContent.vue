@@ -5,13 +5,9 @@
         <h1>Markets</h1>
       </div>
 
-      <b-card bg-variant="light" class="market-card" no-body>
-        <b-tabs pills fill card>
-          <b-tab
-            :title-link-class="'tab-titles'"
-            title="Cryptoz NFT Cards"
-            active
-          >
+      <b-card class="market-card" no-body>
+        <b-tabs fill card>
+          <b-tab title="Cryptoz NFT Cards" active>
             <h3>Cryptoz NFT Cards</h3>
             <h5>
               BEP-721 NFT tokens are supported on the following auction
@@ -90,7 +86,7 @@
               </b-card>
             </div>
           </b-tab>
-          <b-tab :title-link-class="'tab-titles'" title="CryptoZ eXPerience">
+          <b-tab title="CryptoZ eXPerience">
             <h3>
               CryptoZ eXPerience (CZXP
               <img
@@ -134,7 +130,7 @@
                   target="_blank"
                 >
                   <div class="market-info">
-                    <div class="market-img">
+                    <div class="market-img oneinch-exchange">
                       <img
                         class="uni-logo"
                         src="https://downloads.intercomcdn.com/i/o/241617/dc6bdc1d7b1bc0d6c33e904b/e1486b777bc88ddcdf2649b668e9fbcd.png"
@@ -234,15 +230,18 @@ h3 {
 
 .market-info {
   display: flex;
+  flex-direction: column;
 }
 
 .market-img {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 8px;
 
   img {
-    width: 50px;
+    width: 200px;
+    height: 90px;
   }
 }
 
@@ -263,7 +262,11 @@ h3 {
   margin-bottom: 24px;
 }
 
-@media only screen and (min-width: 1000px) {
+.oneinch-exchange {
+  background-color: lightgray;
+}
+
+@media only screen and (min-width: 1100px) {
   .markets-wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -271,8 +274,10 @@ h3 {
   }
 
   .market-img {
+    margin-bottom: 0;
     img {
-      width: 100px;
+      width: 120px;
+      height: 80px;
     }
   }
 
@@ -285,6 +290,7 @@ h3 {
 
       .market-info {
         height: 100%;
+        flex-direction: row;
       }
     }
   }
