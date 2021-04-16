@@ -4,6 +4,8 @@ import { dynamicSort, getRarity, soldOutSort } from "../helpers";
 const typeIdsOnChain = [];
 
 
+//push Apr 16,2021
+typeIdsOnChain.push(213);
 //push Apr 13,2021
 typeIdsOnChain.push(197);
 //push Apr 12,2021
