@@ -30,18 +30,18 @@
         header="Total NFTs Minted Over Time"
         header-tag="header"
       >
-        <b-tabs>
+        <div class="line-container" v-if="nftsMintedOverTime.cumulative">
+          <line-chart :chart-data="nftsMintedOverTime.cumulative" :options="options" />
+        </div>
+        <!--b-tabs>
           <b-tab title="NFTs minted total" lazy>
-            <div class="line-container" v-if="nftsMintedOverTime.cumulative">
-              <line-chart :chart-data="nftsMintedOverTime.cumulative" />
-            </div>
           </b-tab>
           <b-tab title="NFTs minted daily" lazy>
             <div class="line-container" v-if="nftsMintedOverTime.daily">
-              <line-chart :chart-data="nftsMintedOverTime.daily" />
+              <line-chart :chart-data="nftsMintedOverTime.daily" :options="lineOptions" />
             </div>
           </b-tab>
-        </b-tabs>
+        </b-tabs-->
       </b-card>
     </div>
   </div>
@@ -89,38 +89,13 @@ export default {
         store: null,
         boosters: null,
       },
-      // allTypesData: {
-      //   labels: Object.values(rarityNames),
-      //   datasets:[{
-      //     label: 'yeet',
-      //     data: [79, 59, 34, 20, 5], //SELECT count(rarity),rarity FROM cards GROUP BY rarity
-      //     backgroundColor: [
-      //       '#545161',
-      //       '#2BA4FA',
-      //       '#CA3C2C',
-      //       '#5745E5',
-      //       '#D3D3D3',
-      //     ],
-      //     hoverOffset: 2,
-      //   }]
-      // },
-      // storeTypesData: {
-      //   labels: [
-      //     'Common',
-      //     'Uncommon',
-      //     'Rare',
-      //     'Epic',
-      //     'Platinum',
-      //   ],
-      // },
       nftsMintedOverTime: {
-        cumulative: null,
-        daily: null,
+        cumulative: null
       },
       options: {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
-      }
+      },
     }
   },
   mounted() {
@@ -159,11 +134,11 @@ export default {
           }]
         },
         boosters: {
-          labels,
+          labels: labels.slice(1),
           datasets: [{
             label: '',
             data: data.booster.map(datum => parseInt(datum.count)),
-            backgroundColor: colors,
+            backgroundColor: colors.slice(1),
           }]
         },
       }
@@ -175,36 +150,36 @@ export default {
         moment.unix(parseInt(timestamp)).format('MMM D, YYYY')
       )
       const cumulativeData = Object.values(data)
-      const dailyData = cumulativeData.map((val, i) => {
-        if (i === 0) {
-          return 0
-        }
-        return val - cumulativeData[i-1]
-      })
+      // const dailyData = cumulativeData.map((val, i) => {
+      //   if (i === 0) {
+      //     return 0
+      //   }
+      //   return val - cumulativeData[i-1]
+      // })
       
       this.nftsMintedOverTime = {
         cumulative: {
           labels,
           datasets: [
             {
-              label: 'Minted Cumulative',
+              label: 'Total NFTs Minted',
               data: cumulativeData,
               borderColor: 'hsla(11, 100%, 50%, 1)',
               backgroundColor: 'hsla(11, 100%, 50%, 0.4)',
             },
           ],
         },
-        daily: {
-          labels,
-          datasets: [
-            {
-              label: 'Minted Daily',
-              data: dailyData,
-              borderColor: 'hsla(236, 100%, 50%, 1)',
-              backgroundColor: 'hsla(236, 100%, 50%, 0.4)',
-            },
-          ]
-        }
+        // daily: {
+        //   labels,
+        //   datasets: [
+        //     {
+        //       label: 'Minted Daily',
+        //       data: dailyData,
+        //       borderColor: 'hsla(236, 100%, 50%, 1)',
+        //       backgroundColor: 'hsla(236, 100%, 50%, 0.4)',
+        //     },
+        //   ]
+        // }
       }
     }
   }
@@ -214,7 +189,7 @@ export default {
 <style scoped lang="scss">
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
   grid-gap: 20px;
   margin-top: 20px;
 }
@@ -235,7 +210,8 @@ export default {
   }
 
   .line-container {
-    max-width: 450px;
+    width: 100%;
+    height: 450px;
     position: relative;
   }
 }
