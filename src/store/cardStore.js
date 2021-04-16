@@ -88,6 +88,8 @@ const EDITION_HACK = {
   193: 222,
   196: 130,
   197: 14,
+  213: 135,
+  214: 165,
 };
 
 const getCard = async (cardId, CryptozInstance) => {
