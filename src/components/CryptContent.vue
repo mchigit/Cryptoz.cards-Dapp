@@ -64,12 +64,24 @@
         hide-footer
       >
         <div class="row">
-          <div class="col">Epic</div>
-          <div class="col">Rare</div>
+          <div class="col">
+            Epic
+            <b-img src="https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg" fluid />
+          </div>
+          <div class="col">
+            Rare
+            <b-img src="https://cryptoz.cards/assets/cryptoz_card_rare_red.svg" fluid />
+          </div>
         </div>
         <div class="row">
-          <div class="col">Uncommon</div>
-          <div class="col">Common</div>
+          <div class="col">
+            Uncommon
+            <b-img src="https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg" fluid />
+          </div>
+          <div class="col">
+            Common
+            <b-img src="https://cryptoz.cards/assets/cryptoz_card_common_brown.svg" fluid />
+          </div>
         </div>
       </b-modal>
 
@@ -139,6 +151,7 @@ import {
   BRow,
   BCol,
   BButton,
+  BImg,
 } from "bootstrap-vue";
 import { showErrorToast } from "../util/showToast";
 import dAppStates from "@/dAppStates";
@@ -155,6 +168,7 @@ export default {
     BRow,
     BCol,
     BButton,
+    BImg,
   },
   data() {
     return {
