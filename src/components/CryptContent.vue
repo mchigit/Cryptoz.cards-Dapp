@@ -60,36 +60,36 @@
         id="open-probability-modal"
         title="Open Booster Minting Probability by Rarity"
         header-bg-variant="warning"
-        ok-variant="danger"
-        ok-title="Close"
         centered
         hide-footer
       >
-      <h3>These probabilities are hard coded in the Cryptoz contract and will never change</h3>
-        <b-row>
-          <b-col>
-            Epic
-            <b-img src="https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg" fluid />
-            <div class="prob-text">0.01%</div>
-          </b-col>
-          <b-col>
-            Rare
-            <b-img src="https://cryptoz.cards/assets/cryptoz_card_rare_red.svg" fluid />
-            <div class="prob-text">0.5%</div>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            Uncommon
-            <b-img src="https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg" fluid />
-            <div class="prob-text">26.5%</div>
-          </b-col>
-          <b-col>
-            Common
-            <b-img src="https://cryptoz.cards/assets/cryptoz_card_common_brown.svg" fluid />
-            <div class="prob-text">73%</div>
-          </b-col>
-        </b-row>
+      <b-container fluid>
+        <h4>The probabilities are hard coded in the Cryptoz contract and will never change</h4>
+          <b-row>
+            <b-col>
+              <b-img src="https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg" fluid />
+              <div class="rarity-text">Epic</div>
+              <div class="prob-text">0.01%</div>
+            </b-col>
+            <b-col>
+              <b-img src="https://cryptoz.cards/assets/cryptoz_card_rare_red.svg" fluid />
+              <div class="rarity-text">Rare</div>
+              <div class="prob-text">0.50%</div>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <b-img src="https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg" fluid />
+              <div class="rarity-text">Uncommon</div>
+              <div class="prob-text">26.5%</div>
+            </b-col>
+            <b-col>
+              <b-img src="https://cryptoz.cards/assets/cryptoz_card_common_brown.svg" fluid />
+              <div class="rarity-text">Common</div>
+              <div class="prob-text">73.0%</div>
+            </b-col>
+          </b-row>
+        </b-container>
       </b-modal>
 
       <div class="jumbotron">
@@ -159,6 +159,7 @@ import {
   BCol,
   BButton,
   BImg,
+  BContainer,
 } from "bootstrap-vue";
 import { showErrorToast } from "../util/showToast";
 import dAppStates from "@/dAppStates";
@@ -176,6 +177,7 @@ export default {
     BCol,
     BButton,
     BImg,
+    BContainer,
   },
   data() {
     return {
@@ -325,8 +327,17 @@ export default {
   color: white;
   font-size: 48px;
   position: relative;
-  top: -275px;
-  left: 1.4em;
+  top: -295px;
+  text-align: center;
 
 }
+
+.rarity-text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    top: -141px;
+ }
 </style>
