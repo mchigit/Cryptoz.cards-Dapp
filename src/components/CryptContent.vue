@@ -56,6 +56,23 @@
         </b-row>
       </b-modal>
 
+      <b-modal
+        id="open-probability-modal"
+        title="Probability of minting by rarity"
+        ok-variant="danger"
+        ok-title="Close"
+        hide-footer
+      >
+        <div class="row">
+          <div class="col">Epic</div>
+          <div class="col">Rare</div>
+        </div>
+        <div class="row">
+          <div class="col">Uncommon</div>
+          <div class="col">Common</div>
+        </div>
+      </b-modal>
+
       <div class="jumbotron">
         <UniverseBalances />
 
@@ -76,6 +93,15 @@
               :disabled="boostersOwned < 1"
               @click="openBooster"
               >Open <b-icon-lightning-fill /> Booster Card
+            </b-button>
+          </div>
+          <div class="col-2">
+            <b-button
+            v-b-tooltip.hover="'View probability of mint by rarity'"
+            class="btn btn-danger"
+            v-b-modal="'open-probability-modal'"
+            >
+              <b-icon-pie-chart-fill />
             </b-button>
           </div>
           <div class="col buy-and-open-booster">
@@ -239,6 +265,9 @@ export default {
         showErrorToast(this, "Failed to open booster");
       }
     },
+    openProbabilityModal: function () {
+      console.log('Hey hey');
+    }
   },
 };
 
