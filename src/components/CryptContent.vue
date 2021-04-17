@@ -58,14 +58,14 @@
 
       <b-modal
         id="open-probability-modal"
-        title="Open Booster Minting Probability by Rarity"
+        title="Booster Minting Probability by Rarity"
         header-bg-variant="warning"
         centered
         hide-footer
       >
       <b-container fluid>
-        <h4>The probabilities are hard coded in the Cryptoz contract and will never change</h4>
-          <b-row>
+        <h4>The probabilities of minting by rarity are hard coded in the Cryptoz contract and will never change</h4>
+          <b-row class="lg-12">
             <b-col>
               <b-img src="https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg" fluid />
               <div class="rarity-text">Epic</div>
