@@ -56,6 +56,52 @@
         </b-row>
       </b-modal>
 
+      <b-modal
+        id="open-probability-modal"
+        title="Booster Minting Probability by Rarity"
+        header-bg-variant="warning"
+        centered
+        hide-footer
+        size="lg"
+      >
+        <div class="probablity-modal">
+          <h4>
+            The probabilities of minting by rarity are hard coded in the Cryptoz
+            contract and will never change
+          </h4>
+          <div class="cards-image-container">
+            <div class="booster-card-wrapper">
+              <img
+                src="https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg"
+              />
+              <span class="rarity-text">Epic</span>
+              <span class="prob-text">0.01%</span>
+            </div>
+            <div class="booster-card-wrapper">
+              <img
+                src="https://cryptoz.cards/assets/cryptoz_card_rare_red.svg"
+              />
+              <span class="rarity-text">Rare</span>
+              <span class="prob-text">0.50%</span>
+            </div>
+            <div class="booster-card-wrapper">
+              <img
+                src="https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg"
+              />
+              <span class="rarity-text uncommon">Uncommon</span>
+              <span class="prob-text">26.5%</span>
+            </div>
+            <div class="booster-card-wrapper">
+              <img
+                src="https://cryptoz.cards/assets/cryptoz_card_common_brown.svg"
+              />
+              <span class="rarity-text common">Common</span>
+              <span class="prob-text">73.0%</span>
+            </div>
+          </div>
+        </div>
+      </b-modal>
+
       <div class="jumbotron">
         <UniverseBalances />
 
@@ -68,8 +114,8 @@
         </p>
 
         <!-- Loads cards here -->
-        <div v-if="isWalletConnected" class="row">
-          <div class="col">
+        <div v-if="isWalletConnected" class="action-buttons">
+          <div>
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT'"
               class="btn btn-danger"
@@ -78,7 +124,16 @@
               >Open <b-icon-lightning-fill /> Booster Card
             </b-button>
           </div>
-          <div class="col buy-and-open-booster">
+          <div>
+            <b-button
+              v-b-tooltip.hover="'View probability of mint by rarity'"
+              class="btn btn-danger"
+              v-b-modal="'open-probability-modal'"
+            >
+              <b-icon-pie-chart-fill />
+            </b-button>
+          </div>
+          <div class="buy-and-open-booster">
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT +120 CZXP'"
               class="btn btn-danger"
@@ -113,6 +168,8 @@ import {
   BRow,
   BCol,
   BButton,
+  BImg,
+  BContainer,
 } from "bootstrap-vue";
 import { showErrorToast } from "../util/showToast";
 import dAppStates from "@/dAppStates";
@@ -129,6 +186,8 @@ export default {
     BRow,
     BCol,
     BButton,
+    BImg,
+    BContainer,
   },
   data() {
     return {
@@ -239,6 +298,9 @@ export default {
         showErrorToast(this, "Failed to open booster");
       }
     },
+    openProbabilityModal: function () {
+      console.log("Hey hey");
+    },
   },
 };
 
@@ -253,7 +315,32 @@ export default {
 */
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  div {
+    margin-top: 16px;
+
+    button {
+      min-width: 200px;
+      max-width: 200px;
+
+      @media screen and (min-width: 600px) {
+        min-width: fit-content;
+      }
+    }
+  }
+}
+
 .jumbotron {
   margin: auto;
   width: 95%;
@@ -269,5 +356,83 @@ export default {
 
 .cards-wrapper {
   margin-top: 24px;
+}
+
+.cards-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 800px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .booster-card-wrapper {
+    position: relative;
+    width: 250px;
+
+    @media screen and (min-width: 800px) {
+      width: 300px;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .rarity-text {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      position: absolute;
+      right: 41%;
+      top: 61%;
+
+      @media screen and (min-width: 800px) {
+        right: 43%;
+      }
+    }
+
+    .prob-text {
+      color: white;
+      font-size: 48px;
+      position: absolute;
+      top: 26%;
+      left: 28%;
+      text-align: center;
+
+      @media screen and (min-width: 800px) {
+        top: 30%;
+        left: 30%;
+      }
+    }
+
+    .uncommon {
+      right: 24%;
+
+      @media screen and (min-width: 800px) {
+        right: 28%;
+      }
+    }
+    .common {
+      right: 32%;
+
+      @media screen and (min-width: 800px) {
+        right: 34%;
+      }
+    }
+  }
+}
+
+.probablity-modal {
+  padding: 0 12px;
+  width: 100%;
+
+  h4 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
 }
 </style>
