@@ -2,14 +2,14 @@
   <div>
     <b-modal
       id="buy-boosters-modal"
-      title="Buy Booster Credits @ 0.002 BNB each"
+      title="Buy Booster Minting Credits @ 0.002 BNB each"
     >
       <div class="booster-modal-content">
         <p class="booster-modal-title">
-          Booster cards will never be sold in the shop
+          Booster NFT cards will never be sold in the shop
         </p>
         <p class="booster-modal-explain">
-          Enter the number of booster credits you would like to purchase:
+          Enter the number of booster NFT minting credits you would like to purchase:
         </p>
         <input
           id="toWallet"
@@ -62,7 +62,7 @@
               class="btn btn-danger"
               :disabled="balance < 2000000000000000 || isBuyingBooster"
             >
-              Buy <b-icon-lightning-fill /> Booster Credits @ 0.002 BNB
+              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.002 BNB
             </b-button>
           </div>
         </div>

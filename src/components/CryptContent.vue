@@ -127,7 +127,7 @@
           <div>
             <b-button
               v-b-tooltip.hover="'View probability of mint by rarity'"
-              class="btn btn-danger"
+              class="btn" variant="info" 
               v-b-modal="'open-probability-modal'"
             >
               <b-icon-pie-chart-fill />
