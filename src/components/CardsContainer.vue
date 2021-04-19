@@ -61,95 +61,100 @@
         <b-spinner style="width: 3rem; height: 3rem" type="grow" />
       </div>
       <div v-else>
-        <div v-if="isOthersCrypt || isWalletConnected">
-          <div v-if="!isTableView" class="cards-wrapper">
-            <div
-              v-for="(card, i) in displayCards"
-              :key="card.id"
-              class="card-wrapper"
-            >
-              <OwnedCardContent
-                :id="card.id"
-                :type_id="card.type_id"
-                :name="card.name"
-                :cost="card.cost"
-                :cset="card.card_set"
-                :edition_current="card.edition_current"
-                :edition_total="card.edition_total"
-                :level="card.card_level"
-                :unlock_czxp="card.unlock_czxp"
-                :buy_czxp="card.buy_czxp"
-                :transfer_czxp="card.transfer_czxp"
-                :sacrifice_czxp="card.sacrifice_czxp"
-                :image="card.image"
-                :card_class="card.rarity"
-                :in_store="card.in_store"
-                :card_owned="true"
-                :index="i"
-                :observer="observer"
-              />
-              <div v-if="!isOthersCrypt" class="sacrifice-wrapper">
-                <div>
-                  <button
-                    v-b-tooltip.hover="'Sacrifice'"
-                    :disabled="
-                      cardsBeingGifted[card.id] || cardsBeingSacrificed[card.id]
-                    "
-                    class="btn btn-danger"
-                    @click="sacrificeCard(card.id)"
-                  >
-                    <span class="emoji">☠️</span>
-                  </button>
-                </div>
-                <b-spinner
-                  v-if="
-                    cardsBeingGifted[card.id] || cardsBeingSacrificed[card.id]
-                  "
-                  label="Spinning"
+        <div v-if="ownsCards">
+          <div v-if="isOthersCrypt || isWalletConnected">
+            <div v-if="!isTableView" class="cards-wrapper">
+              <div
+                v-for="(card, i) in displayCards"
+                :key="card.id"
+                class="card-wrapper"
+              >
+                <OwnedCardContent
+                  :id="card.id"
+                  :type_id="card.type_id"
+                  :name="card.name"
+                  :cost="card.cost"
+                  :cset="card.card_set"
+                  :edition_current="card.edition_current"
+                  :edition_total="card.edition_total"
+                  :level="card.card_level"
+                  :unlock_czxp="card.unlock_czxp"
+                  :buy_czxp="card.buy_czxp"
+                  :transfer_czxp="card.transfer_czxp"
+                  :sacrifice_czxp="card.sacrifice_czxp"
+                  :image="card.image"
+                  :card_class="card.rarity"
+                  :in_store="card.in_store"
+                  :card_owned="true"
+                  :index="i"
+                  :observer="observer"
                 />
-                <div class="float-right">
-                  <b-button
-                    v-b-tooltip.hover="'Gift'"
-                    :disabled="
+                <div v-if="!isOthersCrypt" class="sacrifice-wrapper">
+                  <div>
+                    <button
+                      v-b-tooltip.hover="'Sacrifice'"
+                      :disabled="
+                        cardsBeingGifted[card.id] ||
+                        cardsBeingSacrificed[card.id]
+                      "
+                      class="btn btn-danger"
+                      @click="sacrificeCard(card.id)"
+                    >
+                      <span class="emoji">☠️</span>
+                    </button>
+                  </div>
+                  <b-spinner
+                    v-if="
                       cardsBeingGifted[card.id] || cardsBeingSacrificed[card.id]
                     "
-                    class="btn btn-danger btn-gift"
-                    @click="openGiftModal(card.id)"
-                  >
-                    <b-icon-gift style="color: white" />
-                  </b-button>
+                    label="Spinning"
+                  />
+                  <div class="float-right">
+                    <b-button
+                      v-b-tooltip.hover="'Gift'"
+                      :disabled="
+                        cardsBeingGifted[card.id] ||
+                        cardsBeingSacrificed[card.id]
+                      "
+                      class="btn btn-danger btn-gift"
+                      @click="openGiftModal(card.id)"
+                    >
+                      <b-icon-gift style="color: white" />
+                    </b-button>
+                  </div>
                 </div>
               </div>
             </div>
+            <div v-else>
+              <crypt-table
+                :displayCards="displayCards"
+                :tableFields="tableFields"
+                :isOthersCrypt="isOthersCrypt"
+                :observer="observer"
+                :cardsBeingSacrificed="cardsBeingSacrificed"
+                :cardsBeingGifted="cardsBeingGifted"
+                @giftCard="openGiftModal"
+                @sacrificeCard="sacrificeCard"
+                @loadMore="loadMoreCards"
+              ></crypt-table>
+            </div>
           </div>
           <div v-else>
-            <crypt-table
-              :displayCards="displayCards"
-              :tableFields="tableFields"
-              :isOthersCrypt="isOthersCrypt"
-              :observer="observer"
-              :cardsBeingSacrificed="cardsBeingSacrificed"
-              :cardsBeingGifted="cardsBeingGifted"
-              @giftCard="openGiftModal"
-              @sacrificeCard="sacrificeCard"
-              @loadMore="loadMoreCards"
-            ></crypt-table>
+            <h2 class="centered">
+              <b-button
+                v-if="!isWalletConnected"
+                id="connect-button"
+                v-b-toggle.nav-collapse
+                variant="primary"
+                @click="onConnect"
+              >
+                Connect
+              </b-button>
+              your wallet.
+            </h2>
           </div>
         </div>
-        <div v-else>
-          <h2 class="centered">
-            <b-button
-              v-if="!isWalletConnected"
-              id="connect-button"
-              v-b-toggle.nav-collapse
-              variant="primary"
-              @click="onConnect"
-            >
-              Connect
-            </b-button>
-            your wallet.
-          </h2>
-        </div>
+
         <div v-if="(isWalletConnected || isOthersCrypt) && !ownsCards">
           <h2 v-if="!isOthersCrypt">
             You do not own any Cryptoz<br /><router-link to="/shop">
@@ -459,19 +464,23 @@ export default {
         isOwnCrypt: !this.isOthersCrypt,
       });
 
-      const pageStart = this.isCardSorted ? this.sortedPageNext : this.pageNext;
-      const newCards = this.getPaginatedCryptCards(
-        this.pageSize,
-        pageStart,
-        this.isCardSorted
-      );
+      if (this.ownsCards) {
+        const pageStart = this.isCardSorted
+          ? this.sortedPageNext
+          : this.pageNext;
+        const newCards = this.getPaginatedCryptCards(
+          this.pageSize,
+          pageStart,
+          this.isCardSorted
+        );
 
-      if (this.isCardSorted) {
-        this.sortedPaginatedCryptCards = [...newCards.cards];
-        this.sortedPageNext = newCards.next;
-      } else {
-        this.paginatedCryptCards = [...newCards.cards];
-        this.pageNext = newCards.next;
+        if (this.isCardSorted) {
+          this.sortedPaginatedCryptCards = [...newCards.cards];
+          this.sortedPageNext = newCards.next;
+        } else {
+          this.paginatedCryptCards = [...newCards.cards];
+          this.pageNext = newCards.next;
+        }
       }
     },
     sacrificeCard: async function (id) {
@@ -595,7 +604,7 @@ export default {
         const dataId = target.getAttribute("data-id");
         const index = dataIndex
           ? parseInt(dataIndex)
-          : this.displayCards.findIndex(card => card.id === parseInt(dataId))
+          : this.displayCards.findIndex((card) => card.id === parseInt(dataId));
 
         // if the 10th last card scrolls into view, load more
         if (index >= this.displayCards.length - 10) {
