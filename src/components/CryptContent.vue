@@ -121,13 +121,13 @@
               class="btn btn-danger"
               :disabled="boostersOwned < 1"
               @click="openBooster"
-              >Open <b-icon-lightning-fill /> Booster Card
+              >Mint <b-icon-lightning-fill /> Booster NFT
             </b-button>
           </div>
           <div>
             <b-button
               v-b-tooltip.hover="'View probability of mint by rarity'"
-              class="btn btn-danger"
+              class="btn" variant="info" 
               v-b-modal="'open-probability-modal'"
             >
               <b-icon-pie-chart-fill />
@@ -140,7 +140,7 @@
               :disabled="balance < 2000000000000000"
               @click="buyAndOpenBooster"
             >
-              Buy and Open <b-icon-lightning-fill /> Booster 0.002 BNB
+              Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.002 BNB
             </b-button>
           </div>
         </div>
