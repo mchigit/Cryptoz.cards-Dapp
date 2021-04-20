@@ -66,7 +66,7 @@
               <b-card class="market" no-body>
                 <a
                   class="market-btn"
-                  href="https://treasureland.market/#/nft-market/cryptoz?sellingType=0&priceType=0&title=0&sortValue=1&page=1&project=20"
+                  href="https://v2.treasureland.market/assets?contract=0x8a0c542ba7bbbab7cf3551ffcc546cdc5362d2a1"
                   target="_blank"
                 >
                   <div class="market-info">
