@@ -147,6 +147,7 @@ const cryptStore = {
 
         if (tokensOfOwner.length === 0) {
           console.log("Current address doesn't have any cards.");
+          commit(CRYPT_MUTATIONS.SET_CRYPT_CARDS, [])
           return;
         }
 
