@@ -4,6 +4,8 @@ import { dynamicSort, getRarity, soldOutSort } from "../helpers";
 const typeIdsOnChain = [];
 
 
+//push Apr 20,2021
+typeIdsOnChain.push(242,239,241,237);
 //push Apr 18,2021
 typeIdsOnChain.push(230,231,229,223);
 //push Apr 16,2021
@@ -94,6 +96,8 @@ const EDITION_HACK = {
   197: 14,
   213: 135,
   214: 165,
+  241: 18,
+  242: 12,
 };
 
 const getCard = async (cardId, CryptozInstance) => {
