@@ -4,7 +4,7 @@
     <div class="grid">
       <b-card
         class="card-container"
-        header="Rarity Distribution"
+        header="Rarity Distribution by Mintable Type"
         header-tag="header"
       >
         <b-tabs content-class="centered-container">
@@ -146,7 +146,7 @@ export default {
     async getNFTsMintedOverTime() {
       const result = await axios.get(`${statsBaseUrl}/nfts-minted-over-time.json`)
       const { data } = result
-      const labels = Object.keys(data).map(timestamp => 
+      const labels = Object.keys(data).map(timestamp =>
         moment.unix(parseInt(timestamp)).format('MMM D, YYYY')
       )
       const cumulativeData = Object.values(data)
@@ -156,7 +156,7 @@ export default {
       //   }
       //   return val - cumulativeData[i-1]
       // })
-      
+
       this.nftsMintedOverTime = {
         cumulative: {
           labels,
