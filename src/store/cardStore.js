@@ -5,7 +5,7 @@ const typeIdsOnChain = [];
 
 
 //push Apr 22,2021
-typeIdsOnChain.push(250,255,254);
+typeIdsOnChain.push(253,250,255,254);
 //push Apr 20,2021
 typeIdsOnChain.push(242,239,241,237);
 //push Apr 18,2021
