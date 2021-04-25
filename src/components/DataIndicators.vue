@@ -4,7 +4,7 @@
     <div class="grid">
       <b-card
         class="card-container"
-        header="Rarity Distribution"
+        header="Rarity Distribution by Mintable Type"
         header-tag="header"
       >
         <b-tabs content-class="centered-container">
@@ -21,6 +21,19 @@
           <b-tab v-if="rarityDistribution.boosters" title="Booster Types" lazy>
             <div class="doughnut-container">
               <doughnut-chart :chart-data="rarityDistribution.boosters" />
+            </div>
+          </b-tab>
+        </b-tabs>
+      </b-card>
+      <b-card
+        class="card-container"
+        header="All NFTs minted by Rarity"
+        header-tag="header"
+      >
+        <b-tabs  content-class="centered-container">
+          <b-tab title="All NFTs" lazy>
+            <div class="doughnut-container" v-if="nftsMintedByRarity" lazy>
+              <doughnut-chart :chart-data="nftsMintedByRarity" />
             </div>
           </b-tab>
         </b-tabs>
@@ -65,12 +78,22 @@ import axios from 'axios'
 import moment from 'moment'
 
 const rarityNames = {
+  1: 'Diamond',
   2: 'Platinum',
   3: 'Epic',
   4: 'Rare',
   5: 'Uncommon',
   6: 'Common',
 }
+
+const colors = [
+  '#FFFFFF',
+  '#D3D3D3',
+  '#5745E5',
+  '#CA3C2C',
+  '#2BA4FA',
+  '#545161',
+]
 
 export default {
   name: "DataIndicators",
@@ -89,6 +112,7 @@ export default {
         store: null,
         boosters: null,
       },
+      nftsMintedByRarity: null,
       nftsMintedOverTime: {
         cumulative: null
       },
@@ -98,23 +122,39 @@ export default {
       },
     }
   },
+  computed: {
+    CryptozInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
+  },
   mounted() {
     this.getRarityDistributions()
     this.getNFTsMintedOverTime()
+    if (this.CryptozInstance) {
+      this.getNFTsByRarity()
+    }
   },
   methods: {
+    async getNFTsByRarity() {
+      const nftByRarity = await this.CryptozInstance.methods.getTokensByRarity().call();
+
+      const labels = Object.values(rarityNames)
+      const rarities = Object.values(nftByRarity).map((val) => parseInt(val))
+
+      this.nftsMintedByRarity = {
+        labels,
+        datasets: [{
+          label: '',
+          data: rarities,
+          backgroundColor: colors,
+        }]
+      }
+    },
     async getRarityDistributions() {
       const rarityResult = await axios.get(`${statsBaseUrl}/type-rarity.json`)
       const { data } = rarityResult
 
       const labels = Object.values(rarityNames)
-      const colors = [
-        '#D3D3D3',
-        '#5745E5',
-        '#CA3C2C',
-        '#2BA4FA',
-        '#545161',
-      ]
 
       this.rarityDistribution = {
         all: {
@@ -126,19 +166,19 @@ export default {
           }]
         },
         store: {
-          labels: labels.slice(1),
+          labels: labels.slice(2),
           datasets: [{
             label: '',
             data: data.store.map(datum => parseInt(datum.count)),
-            backgroundColor: colors.slice(1),
+            backgroundColor: colors.slice(2),
           }]
         },
         boosters: {
-          labels: labels.slice(1),
+          labels: labels.slice(2),
           datasets: [{
             label: '',
             data: data.booster.map(datum => parseInt(datum.count)),
-            backgroundColor: colors.slice(1),
+            backgroundColor: colors.slice(2),
           }]
         },
       }
@@ -146,7 +186,7 @@ export default {
     async getNFTsMintedOverTime() {
       const result = await axios.get(`${statsBaseUrl}/nfts-minted-over-time.json`)
       const { data } = result
-      const labels = Object.keys(data).map(timestamp => 
+      const labels = Object.keys(data).map(timestamp =>
         moment.unix(parseInt(timestamp)).format('MMM D, YYYY')
       )
       const cumulativeData = Object.values(data)
@@ -156,7 +196,7 @@ export default {
       //   }
       //   return val - cumulativeData[i-1]
       // })
-      
+
       this.nftsMintedOverTime = {
         cumulative: {
           labels,
