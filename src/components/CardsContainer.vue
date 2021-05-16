@@ -892,6 +892,30 @@ table {
   box-shadow: inset 0px 0px 5px #c1c1c1;
 }
 
+.btn-epic {
+  color: #fff;
+  background-color: #5745e5;
+  border-color: #5745e5;
+}
+
+.btn-rare {
+  color: #fff;
+  background-color: #ca3c2c;
+  border-color: #ca3c2c;
+}
+
+.btn-uncommon {
+  color: #fff;
+  background-color: #2ba4fa;
+  border-color: #2ba4fa;
+}
+
+.btn-common {
+  color: #fff;
+  background-color: #545161;
+  border-color: #545161;
+}
+
 /* Desktop CSS */
 @media only screen and (min-width: 1300px) {
   #button-container {

@@ -17,6 +17,9 @@ import { store } from "./store/";
 
 import LogRocket from "logrocket";
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 if (process.env.NODE_ENV == "development") {
   LogRocket.init("jf4zzm/cryptoz-testbsc");
 } else {
