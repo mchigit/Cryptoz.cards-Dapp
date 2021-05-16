@@ -295,4 +295,28 @@ a {
   padding: 2px;
   color: #f0b90b;
 }
+
+.btn-epic {
+  color: #fff;
+  background-color: #5745e5;
+  border-color: #5745e5;
+}
+
+.btn-rare {
+  color: #fff;
+  background-color: #ca3c2c;
+  border-color: #ca3c2c;
+}
+
+.btn-uncommon {
+  color: #fff;
+  background-color: #2ba4fa;
+  border-color: #2ba4fa;
+}
+
+.btn-common {
+  color: #fff;
+  background-color: #545161;
+  border-color: #545161;
+}
 </style>
