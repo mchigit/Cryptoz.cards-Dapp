@@ -11,15 +11,6 @@
           class="img-responsive card-demo-group"
           src="@/assets/cryptokeeper_card_types.png"
         />
-        <h2>
-          The CryptoZ eXPerience Token Generation Event has ended.<br />
-          Welcome to the next Epoch.
-        </h2>
-        <br /><br />
-        <p>
-          The mint rate was 1 BNB = 10,000,000 CZXP<br />
-          The TGE was hard capped at 100 contributing wallets.
-        </p>
         <p>
           The quickest way to earn CZXP is through your affiliate network. Use
           the Afiliate link in the top menu, and check the
