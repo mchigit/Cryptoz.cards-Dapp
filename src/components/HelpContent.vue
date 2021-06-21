@@ -37,10 +37,10 @@
                         target="_blank"
                         >Metamask</a
                       >
-                      Chrome browser extension, or other Binance wallet
+                      Chrome browser extension, <a href="https://trustwallet.com/" target="_blank">Trust Wallet ( mobile )</a> or other Smart Chain compatibile wallet
                     </li>
                     <li>
-                      A balance of BNB coins ( the money of Binance Smart Chain
+                      A balance of BNB coins ( the cryptocurrency of Binance Smart Chain
                       )
                     </li>
                   </ul>
@@ -250,11 +250,12 @@
                     <strong>CZXP - CryptoZ eXPerience Tokens</strong> are BEP-20
                     Fungible tokens. This means that any CZXP is exchangeable
                     with any other CZXP token and none are unique.
+                    <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add CZXP to Metamask</div>
                   </p>
                   <p>
                     <strong>Cryptoz</strong> the cards themselves are BEP-721
-                    Non-Fungible tokens (NFTs). This means that each card is a
-                    unique token. Even the Unlimited Booster cards that are
+                    Non-Fungible tokens (NFTs). This means that each card is minted as a
+                    unique NFT token. Even the Unlimited Booster cards that are
                     minted in an infinite supply are each unique, they have a
                     unique token number and a unique edition number.
                   </p>
@@ -447,7 +448,32 @@ export default {
       }
     }
   },
-  methods: {},
+  methods: {
+    addCZXPtoMetaMask: async function() {
+      const tokenAddress = '0x2b974da27c9dd35412d71dd36e3e108486c45444';
+      const tokenSymbol = 'CZXP';
+      const tokenDecimals = 0;
+      const tokenImage = 'https://cryptoz.cards/assets/cryptokeeper_coin_binance_200_200.png';
+
+      try {
+        // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+        const wasAdded = await ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+            options: {
+              address: tokenAddress, // The address that the token is at.
+              symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+              decimals: tokenDecimals, // The number of decimals in the token
+              image: tokenImage, // A string url of the token logo
+            },
+          },
+        });
+      } catch (error) {
+        console.log('addCZXPtoMetaMask error:',error);
+      }
+    }
+  },
 };
 </script>
 
