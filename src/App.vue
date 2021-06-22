@@ -32,6 +32,8 @@ import "./main.css";
 
 // import dev_cryptoz_artifacts from './dev/contracts/Cryptoz.json';
 // import dev_cryptoz_token_artifacts from './dev/contracts/CzxpToken.json';
+import cryptozContractResp from './contracts/Zoombies.json';
+import czxpContractResp from './contracts/ZoomToken.json';
 
 // import bsc_cryptoz_artifacts from'./bsc/contracts/Cryptoz.json';
 // import bsc_cryptoz_token_artifacts from './bsc/contracts/CzxpToken.json';
@@ -74,7 +76,7 @@ const testEnv = true;
 // }
 // }
 
-const contractBaseUrl = `https://cryptoz.cards/services`;
+const contractBaseUrl = `https://movr.zoombies.world/services`;
 
 export default {
   name: "App",
@@ -177,14 +179,17 @@ export default {
       }
     },
     loadContracts: async function (accounts, networkId) {
+/*
       const cryptozContractResp = await axios.get(
-        `${contractBaseUrl}/Cryptoz.json`
+        `${contractBaseUrl}/Zoombies.json`
       );
       const czxpContractResp = await axios.get(
-        `${contractBaseUrl}/CzxpToken.json`
+        `${contractBaseUrl}/ZoomToken.json`
       );
-      const cryptozArtifact = cryptozContractResp.data;
-      const czxpArtifact = czxpContractResp.data;
+*/
+
+      const cryptozArtifact = cryptozContractResp;
+      const czxpArtifact = czxpContractResp;
       const cryptozContractAddress =
         cryptozArtifact.networks[networkId].address;
       const czxpContractAddress = czxpArtifact.networks[networkId].address;

@@ -93,7 +93,7 @@ export const store = new Vuex.Store({
       const czxpBalancePromise = czxp.methods.balanceOf(coinbase).call();
       const cryptozBalancePromise = cryptoz.methods.balanceOf(coinbase).call();
       const boosterPacksOwnedPromise = cryptoz.methods
-        .boosterPacksOwned(coinbase)
+        .boosterCreditsOwned(coinbase)
         .call();
 
       const [
@@ -117,7 +117,7 @@ export const store = new Vuex.Store({
       const { cryptoz, czxp } = this.state.contractInstance;
 
       const totalCzxpPromise = czxp.methods.totalSupply().call();
-      const totalTypesPromise = cryptoz.methods.getTotalTypes().call();
+      const totalTypesPromise = cryptoz.methods.totalCardTypes().call();
       const totalCryptozPromise = cryptoz.methods.totalSupply().call();
 
       const [totalCzxp, totalTypes, totalCryptoz] = await Promise.all([

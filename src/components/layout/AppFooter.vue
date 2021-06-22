@@ -22,7 +22,7 @@
               <br />
               <a
                 :class="classObject"
-                href="https://bscscan.com/token/0x8a0c542ba7bbbab7cf3551ffcc546cdc5362d2a1"
+                href=""
                 target="_blank"
                 >Zoombies NFT Contract -
                 </a
@@ -162,7 +162,7 @@ footer {
   color: #fff;
   width: 100%;
   height: 100%;
-  background-color: #343a40 !important;
+  background-color: #301748 !important;
   box-shadow: 0 50vh 0 50vh #343a40;
 }
 .dev-logo {

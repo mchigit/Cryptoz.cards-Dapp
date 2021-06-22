@@ -1,8 +1,8 @@
 <template>
   <div id="app-header" class="headerComponent">
-    <b-navbar
+    <b-navbar border-variant="info" type="warning"
       toggleable="lg"
-      class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+      class="navbar navbar-expand-md navbar-dark fixed-top zoombies-purple-bg text-warning"
     >
       <router-link id="cryptoz-logo" class="navbar-brand" to="/">
         <img class="logo-nav" src="./../assets/zoombies_head.svg" />
@@ -100,10 +100,10 @@
             <b-button
               v-if="!isWalletConnected"
               v-b-toggle.nav-collapse
-              variant="primary"
+              variant="warning"
               @click="$emit('connect')"
             >
-              Connect To Blockchain
+              Connect To Moonriver
             </b-button>
           </li>
         </b-navbar-nav>
@@ -490,6 +490,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.zoombies-purple-bg{
+    background-color: #301748;
+}
+
 .navbar {
   max-width: 100vw;
 }
