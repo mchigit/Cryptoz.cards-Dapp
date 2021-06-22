@@ -15,17 +15,17 @@
             <div class="col-md-6 mt-md-0 mt-3">
               <a
                 :class="classObject"
-                href="https://bscscan.com/token/0x2b974da27c9dd35412d71dd36e3e108486c45444"
+                href=""
                 target="_blank"
-                >CZXP Contract - 0x2b974da27c9dd35412d71dd36e3e108486c45444</a
+                >ZOOM token Contract - </a
               >
               <br />
               <a
                 :class="classObject"
                 href="https://bscscan.com/token/0x8a0c542ba7bbbab7cf3551ffcc546cdc5362d2a1"
                 target="_blank"
-                >Cryptoz Contract -
-                0x8a0c542ba7bbbab7cf3551ffcc546cdc5362d2a1</a
+                >Zoombies NFT Contract -
+                </a
               >
             </div>
           </div>
@@ -43,9 +43,9 @@
                 <a
                   class="twitter-follow-button"
                   data-show-count="false"
-                  href="https://twitter.com/CryptozNFT"
+                  href="https://twitter.com/"
                 >
-                  Follow @CryptozNFT
+                  Follow @ZoombiesNFT
                 </a>
               </li>
               <li>
@@ -59,7 +59,7 @@
               <li>
                 <a
                   :class="classObject"
-                  href="https://t.me/cryptozcard"
+                  href="https://t.me/zoombiesworld"
                   target="_blank"
                   >Telegram</a
                 >

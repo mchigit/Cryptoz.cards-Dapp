@@ -5,8 +5,8 @@
       class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
     >
       <router-link id="cryptoz-logo" class="navbar-brand" to="/">
-        <img class="logo-nav" src="./../assets/cryptokeeper_logo_binance.png" />
-        Cryptoz
+        <img class="logo-nav" src="./../assets/zoombies_head.svg" />
+        Zoombies
       </router-link>
       <b-navbar-toggle target="nav-collapse" />
       <b-collapse id="nav-collapse" is-nav>
@@ -324,7 +324,7 @@ export default {
       const siteURL =
         process.env.NODE_ENV == "development"
           ? "localhost:8080"
-          : "https://bsc.cryptoz.cards";
+          : "https://movr.zoombies.world";
       return `${siteURL}?sponsor=${this.coinbase}`;
     },
     sponsorTitle() {

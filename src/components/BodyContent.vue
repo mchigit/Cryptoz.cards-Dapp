@@ -2,41 +2,41 @@
   <div>
     <main role="main" class="container">
       <div class="jumbotron">
-        <h1>The Cryptoz NFT Universe</h1>
+        <h1>Zoombies NFT World</h1>
         <p class="lead">
-          Cryptoz is an NFT collectibles trade game built on scarcity, rarity
+          Zoombies is an NFT collectibles trade game built on scarcity, rarity
           and community
         </p>
         <img
           class="img-responsive card-demo-group"
-          src="@/assets/cryptokeeper_card_types.png"
+          src="@/assets/zoombies_card_types.png"
         />
         <p>
-          The quickest way to earn CZXP is through your affiliate network. Use
+          The quickest way to earn ZOOM tokens is through your affiliate network. Use
           the Afiliate link in the top menu, and check the
           <router-link to="/help"> help section </router-link> for all the ways
-          to earn or purchase czxp from
+          to earn or purchase ZOOM from
           <router-link to="/market"> the markets </router-link>
         </p>
         <h2>Time to have some fun</h2>
         <p>
           The goal is to collect the rare and unique undead NFT cards, earn or
-          trade BEP-20 Cryptoz eXPerience (CZXP) tokens to unlock new levels.
-          Each minted NFT Cryptoz card is a unique token on the Binance Smart
-          Chain. Collectors can buy, sell, and exchange both their Cryptoz NFT
-          cards and CZXP tokens through any standards compliant wallets,
+          trade ERC-20 ZOOM Experience (ZOOM) tokens to unlock new levels.
+          Each minted NFT Zoombies card is a unique token on the Moonriver blockchain.
+          Collectors can buy, sell, and exchange both their Zoombies NFT
+          cards and ZOOM tokens through any standards compliant wallets,
           markets, game engines, exchanges, DeFi and other future inventions.
         </p>
         <div>
           <h2>Get Started</h2>
           <span
-            >To interact with Cryptoz you will need to
+            >To interact with Zoombies you will need to
             <a
-              href="https://docs.binance.org/smart-chain/wallet/metamask.html"
+              href="https://docs.moonbeam.network/getting-started/moonbase/metamask/"
               target="_blank"
-              >install Metamask configured for the Binance Smart Chain</a
+              >install Metamask configured for Moonriver</a
             >
-            and have a small amount of BNB in your account.</span
+            and have a small amount of MOVR in your account.</span
           >
         </div>
         <p>
@@ -47,9 +47,9 @@
         </p>
         <ul>
           <li>
-            Cryptoz NFT Card functions and data are a set of Smart Contracts
+            Zoombies NFT Card functions and data are a set of Smart Contracts
             that run independantly of the creators. There is no OFF switch. The
-            Cryptoz NFT Universe will live forever on the Binance Smart Chain
+            Zoombies NFT World will live forever on Moonriver.
           </li>
           <li>
             The developers can Not tamper or change the Card types once they are

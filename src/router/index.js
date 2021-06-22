@@ -23,16 +23,16 @@ const router = new Router({
       component: lazyLoadComponents("BodyContent"),
       meta: {
         title:
-          "The Cryptoz NFT Universe - Where the dead live forever on the Blockchain",
+          "Zoombies NFT World - Where the dead live forever on the Blockchain",
         metaTags: [
           {
             name: "description",
             content:
-              "A Universe of limited edition BEP-721 NFT collectible zombie cards stored in your BSC blockchain wallet",
+              "A world of limited edition BEP-721 NFT collectible zombie cards stored in your BSC blockchain wallet",
           },
           {
             property: "og:url",
-            content: "https://bsc.cryptoz.cards/",
+            content: "https://movr.zoombies.world/",
           },
           {
             property: "og:type",
@@ -41,11 +41,11 @@ const router = new Router({
           {
             property: "og:title",
             content:
-              "Cryptoz NFT Cards unique and fun collectibles on the Binance Smart Chain",
+              "Zoombies NFT Cards are unique and fun collectibles on the Moonriver blockchain",
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
@@ -56,7 +56,7 @@ const router = new Router({
       component: lazyLoadComponents("ShopContent"),
       meta: {
         title:
-          "Cryptoz Cards - Shop - Purchase Limited edition Cryptoz and claim cards for FREE",
+          "Zoombies Cards - Shop - Purchase Limited edition Zoombies and claim cards for FREE",
         metaTags: [
           {
             name: "description",
@@ -65,7 +65,7 @@ const router = new Router({
           },
           {
             property: "og:url",
-            content: "https://cryptoz.cards/shop",
+            content: "https://movr.zoombies.world/shop",
           },
           {
             property: "og:type",
@@ -74,22 +74,22 @@ const router = new Router({
           {
             property: "og:title",
             content:
-              "The Cryptoz NFT Universe - Shop - Purchase Limited edition Cryptoz NFTs and claim some for FREE",
+              "Zoombies NFT World - Shop - Purchase Limited edition Zoombies NFTs and claim some for FREE",
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
     },
     {
-      path: "/my-cryptoz-nfts",
+      path: "/my-zoombies-nfts",
       name: "CryptContent",
       component: lazyLoadComponents("CryptContent"),
       meta: {
         title:
-          "Cryptoz Cards - Your Crypt - A collection of all the cards you own",
+          "Zoombies Cards - Your Crypt - A collection of all the NFTs you own",
         metaTags: [
           {
             name: "description",
@@ -98,7 +98,7 @@ const router = new Router({
           },
           {
             property: "og:url",
-            content: "https://bsc.cryptoz.cards/my-cryptoz-nfts",
+            content: "https://movr.zoombies.world/my-zoombies-nfts",
           },
           {
             property: "og:type",
@@ -107,11 +107,11 @@ const router = new Router({
           {
             property: "og:title",
             content:
-              "Cryptoz Cards - Your Crypt - A collection of all the cards you own",
+              "Zoombies Cards - Your Crypt - A collection of all the NFTs you own",
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
@@ -142,7 +142,7 @@ const router = new Router({
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
@@ -175,7 +175,7 @@ const router = new Router({
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
@@ -209,7 +209,7 @@ const router = new Router({
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
@@ -242,7 +242,7 @@ const router = new Router({
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
@@ -275,7 +275,7 @@ const router = new Router({
           },
           {
             property: "og:image",
-            content: "https://cryptoz.cards/assets/cryptokeeper_logo_binance.svg",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
           },
         ],
       },
