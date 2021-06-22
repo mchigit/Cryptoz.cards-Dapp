@@ -460,7 +460,7 @@ export default {
       this.$store.dispatch("setIsTransactionPending", true);
 
       const result = await this.CryptozInstance.methods
-        .getBonusBoosters()
+        .getBonusBoosters(this.coinbase)
         .send({ from: this.coinbase }, (err, transactionHash) => {
           this.pendingTransaction = transactionHash;
           if (err) {
