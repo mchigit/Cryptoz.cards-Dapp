@@ -15,7 +15,7 @@
             <router-link :class="classObject" to="/shop"> Shop </router-link>
           </b-nav-item>
           <b-nav-item id="crypt">
-            <router-link :class="classObject" to="/my-cryptoz-nfts">
+            <router-link :class="classObject" to="/my-zoombies-nfts">
               Your NFT Crypt
             </router-link>
           </b-nav-item>
