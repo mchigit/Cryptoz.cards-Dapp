@@ -119,7 +119,7 @@
       <b-jumbotron class="jumbo" :lead="sponsorTitle">
         <p>
           By linking your sponsor's wallet address, you will mint a
-          <b>Free Platinum Sponsored NFT Card!</b>
+          <b>Free Platinum Sponsored NFT Card AND earn ZOOM tokens!</b>
         </p>
         <p class="sponsor-warning" variant="info">
           Note: You can only link sponsor once
@@ -158,7 +158,7 @@
       <div class="platinum-card" v-if="queryHasSponsor && !showShareMyLink">
         <b-jumbotron class="platinum-jumbotron">
           <div class="platinum-card-wrapper">
-            <img src="../assets/cryptoz_card_platinum.svg" />
+            <img src="https://zoombies.world/images/dapp/zoombies_card_platinum.svg" />
             <span class="question-mark">?</span>
           </div>
         </b-jumbotron>
@@ -174,7 +174,7 @@
           Automatically earn ZOOM
           <img
             class="czxp-logo"
-            src="../assets/cryptokeeper_coin_binance.svg"
+            src="https://zoombies.world/images/zoombies_coin.svg"
             align="middle"
           />
           Token rewards from your affiliate network
@@ -333,7 +333,7 @@ export default {
         : "Link Your Sponsor";
     },
     getTweet() {
-      return `https://twitter.com/intent/tweet?text=Click%20my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20%23Cryptoz%20NFT%20Now!%0D%0A%0D%0A&hashtags=bsc,nft,cryptozfam,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
+      return `https://twitter.com/intent/tweet?text=Click%20my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20Zoombies%20NFT%20Now!%0D%0A%0D%0A&hashtags=moonriver,nft,ZWorldNFT,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
     },
     isSponsorValid() {
       if (this.sponsorAddress === "") {

@@ -8,7 +8,7 @@
     no-close-on-backdrop
   >
     <span id="spinner-container">
-      <img src="../../public/cryptokeeper_logo_binance.b2d477e6.png" />
+      <img src="./assets/zoombies_head.svg" />
       <b-spinner id="spinnyboi" />
     </span>
     <span>Please confirm the transaction.</span>
