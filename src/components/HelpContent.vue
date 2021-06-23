@@ -208,7 +208,7 @@
                     of affiliate player actions that will generate a 20% ZOOM                     <img
                                           class="czxp-logo"
                                           src="https://zoombies.world/images/zoombies_coin.svg"
-                                        /> token 
+                                        /> token
                     reward for their sponsor.
                   </p>
                   <ul>
@@ -249,13 +249,13 @@
                       class="czxp-logo"
                       src="https://zoombies.world/images/zoombies_coin.svg"
                     />
-                    <strong>CZXP - CryptoZ eXPerience Tokens</strong> are BEP-20
-                    Fungible tokens. This means that any CZXP is exchangeable
-                    with any other CZXP token and none are unique.
+                    <strong>ZOOM Tokens</strong> are ERC-20
+                    Fungible tokens. This means that any ZOOM is exchangeable
+                    with any other ZOOM token and none are unique.
                     <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add ZOOM to Metamask</div>
                   </p>
                   <p>
-                    <strong>Cryptoz</strong> the cards themselves are BEP-721
+                    <strong>Zoombies</strong> the cards themselves are ERC-721
                     Non-Fungible tokens (NFTs). This means that each card is minted as a
                     unique NFT token. Even the Unlimited Booster cards that are
                     minted in an infinite supply are each unique, they have a
@@ -273,7 +273,7 @@
               role="tab"
             >
               <b-button v-b-toggle.accordion-5 block class="accordion-button">
-                How many types of Cryptoz are available?
+                How many types of Zoombies are available?
               </b-button>
             </b-card-header>
             <b-collapse
@@ -284,10 +284,10 @@
               <b-card-body>
                 <div class="card-body">
                   The <router-link to="/shop"> Shop </router-link> will show you
-                  the current total number of Cryptoz types available at the
+                  the current total number of Zoombies types available at the
                   current time. We will continue to load new sets containing
                   approx 10-20 cards every month until we reach the hard limit
-                  of a total of 5000 types. The Cryptoz contracts will not allow
+                  of a total of 5000 types. The Zoombies contracts do not allow
                   anyone to edit or overwrite a card types definition once they
                   have been loaded.
                 </div>
@@ -341,7 +341,7 @@
                   class="czxp-logo"
                   src="https://zoombies.world/images/zoombies_coin.svg"
                 />
-                CZXP tokens ?
+                ZOOM tokens ?
               </b-button>
             </b-card-header>
             <b-collapse
@@ -351,12 +351,12 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  There are multiple ways in which you can get ZOOM tokens
+                  There are multiple ways in which you can get ZOOM
                   <img
                     class="czxp-logo"
                     src="https://zoombies.world/images/zoombies_coin.svg"
                   />
-                  ZOOM tokens:
+                  tokens:
                   <ul>
                     <li>
                       <router-link to="/shop">
@@ -366,7 +366,7 @@
                     </li>
                     <li>
                       <router-link to="/shop">
-                        Mint a Limited edition Cryptoz card from the Shop
+                        Mint a Limited edition Zoombies card from the Shop
                       </router-link>
                       - Check back of card for amount
                     </li>
@@ -446,10 +446,10 @@ export default {
   },
   methods: {
     addCZXPtoMetaMask: async function() {
-      const tokenAddress = '0x2b974da27c9dd35412d71dd36e3e108486c45444';
-      const tokenSymbol = 'CZXP';
+      const tokenAddress = '';
+      const tokenSymbol = 'ZOOM';
       const tokenDecimals = 0;
-      const tokenImage = 'https://cryptoz.cards/assets/cryptokeeper_coin_binance_200_200.png';
+      const tokenImage = 'https://zoombies.world/images/zoombies_coin.svg';
 
       try {
         // wasAdded is a boolean. Like any RPC method, an error may be thrown.
