@@ -4,7 +4,7 @@
       <!-- Open Booster Modal -->
       <b-modal
         id="open-booster-modal"
-        title="Enter a CZXP burn wager amount to increase the odds of pulling a rare or epic card ( czxp gone forever ):"
+        title="Enter a ZOOM burn wager amount to increase the odds of pulling a rare or epic card ( czxp gone forever ):"
         ok-variant="danger"
         ok-title="Open Booster"
         hide-footer
@@ -29,7 +29,7 @@
           </div>
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!hasEnoughCZXP">
-          <div>You do not have enough CZXP tokens</div>
+          <div>You do not have enough ZOOM tokens</div>
         </b-form-invalid-feedback>
         <b-row>
           <b-col>
@@ -66,34 +66,34 @@
       >
         <div class="probablity-modal">
           <h4>
-            The probabilities of minting by rarity are hard coded in the Cryptoz
+            The probabilities of minting by rarity are hard coded in the Zoombies
             contract and will never change
           </h4>
           <div class="cards-image-container">
             <div class="booster-card-wrapper">
               <img
-                src="https://cryptoz.cards/assets/cryptoz_card_epic_purple.svg"
+                src="https://zoombies.world/images/dapp/zoombies_card_epic_purple.svg"
               />
               <span class="rarity-text">Epic</span>
               <span class="prob-text">0.01%</span>
             </div>
             <div class="booster-card-wrapper">
               <img
-                src="https://cryptoz.cards/assets/cryptoz_card_rare_red.svg"
+                src="https://zoombies.world/images/dapp/zoombies_card_rare_red.svg"
               />
               <span class="rarity-text">Rare</span>
-              <span class="prob-text">0.50%</span>
+              <span class="prob-text">5.0%</span>
             </div>
             <div class="booster-card-wrapper">
               <img
-                src="https://cryptoz.cards/assets/cryptoz_card_uncommon_blue.svg"
+                src="https://zoombies.world/images/dapp/zoombies_card_uncommon_blue.svg"
               />
               <span class="rarity-text uncommon">Uncommon</span>
               <span class="prob-text">26.5%</span>
             </div>
             <div class="booster-card-wrapper">
               <img
-                src="https://cryptoz.cards/assets/cryptoz_card_common_brown.svg"
+                src="https://zoombies.world/images/dapp/zoombies_card_common_brown.svg"
               />
               <span class="rarity-text common">Common</span>
               <span class="prob-text">73.0%</span>
@@ -107,9 +107,9 @@
 
         <h1>Your NFT Wallet</h1>
         <p>
-          This is where all your NFT Cryptoz tokens can be accessed. Sort,
+          This is where all your NFT Zoombies tokens can be accessed. Sort,
           search, gift and sacrifice. Sacrificing is permanent, not only in your
-          wallet but across the entire Cryptoz Universe. That unique NFT is
+          wallet but across the entire Zoombies World. That unique NFT is
           burned forever.
         </p>
 
@@ -135,12 +135,12 @@
           </div>
           <div class="buy-and-open-booster">
             <b-button
-              v-b-tooltip.hover="'Mint 1 random booster NFT +120 CZXP'"
+              v-b-tooltip.hover="'Mint 1 random booster NFT +120 ZOOM'"
               class="btn btn-danger"
               :disabled="balance < 2000000000000000"
               @click="buyAndOpenBooster"
             >
-              Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.002 BNB
+              Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.002 MOVR
             </b-button>
           </div>
         </div>
@@ -239,7 +239,7 @@ export default {
       const url =
         process.env.NODE_ENV == "development"
           ? "localhost:8080"
-          : "https://bsc.cryptoz.cards";
+          : "https://movr.zoombies.world";
       return `${url}/my-cryptoz-nfts/${this.coinbase}`;
     },
   },

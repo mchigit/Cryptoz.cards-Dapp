@@ -2,7 +2,7 @@
   <div>
     <b-modal
       id="buy-boosters-modal"
-      title="Buy Booster Minting Credits @ 0.002 BNB each"
+      title="Buy Booster Minting Credits @ 0.002 MOVR each"
     >
       <div class="booster-modal-content">
         <p class="booster-modal-title">
@@ -40,17 +40,17 @@
       <UniverseBalances />
       <h1><b-icon-tag-fill /> Minting Shop</h1>
       <p>
-        The Shop is a place to mint limited edition Cryptoz Cards NFT tokens.
+        The Shop is a place to mint limited edition Zoombies Cards NFT tokens.
         Some cards are free, some have a cost. You may also buy and
-        <router-link to="/my-cryptoz-nfts"> open a booster card </router-link>,
+        <router-link to="/my-zoombies-nfts"> open a booster card </router-link>,
         which will randomly mint an unlimited edition NFT token.
       </p>
       <p>
         To mint a FREE NFT Or buy a Limited edition NFT, you will need the
-        required minimum balance of CZXP tokens displayed on the botton of the
+        required minimum balance of ZOOM tokens displayed on the botton of the
         card to unlock the minting button. The newly minted NFT will appear in
-        <router-link to="/my-cryptoz-nfts"> Your NFT Crypt </router-link> once
-        the transaction is confirmed. CZXP is NOT burned when minting
+        <router-link to="/my-zoombies-nfts"> Your NFT Crypt </router-link> once
+        the transaction is confirmed. ZOOM is NOT burned when minting
       </p>
 
       <div v-if="isWalletConnected">
@@ -62,7 +62,7 @@
               class="btn btn-danger"
               :disabled="balance < 2000000000000000 || isBuyingBooster"
             >
-              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.002 BNB
+              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.002 MOVR
             </b-button>
           </div>
         </div>

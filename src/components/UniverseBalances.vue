@@ -8,14 +8,14 @@
           src="https://zoombies.world/images/zoombies_coin.svg"
         />tokens
       </strong>
-      {{ " " }}in the Universe
+      {{ " " }}in ZWorld
     </p>
     <p>
       <strong>{{ totalCryptozTypes }} Mintable types</strong> in shop and
       boosters
     </p>
     <p>
-      <strong>{{ totalCryptozSupply }} NFTs </strong> in the Universe
+      <strong>{{ totalCryptozSupply }} NFTs </strong> in ZWorld
     </p>
   </div>
 </template>

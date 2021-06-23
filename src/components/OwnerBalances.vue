@@ -4,10 +4,10 @@
       <strong>Your <b-icon-lightning-fill /> Booster credits :</strong>
       {{ boosters_owned }}
     </p>
-    <p><strong>Your Cryptoz NFTs :</strong> {{ cards_owned }}</p>
+    <p><strong>Your Zoombies NFTs :</strong> {{ cards_owned }}</p>
     <p>
       <strong
-        >Your ZOOM 
+        >Your ZOOM
         <img
           class="czxp-logo"
           src="https://zoombies.world/images/zoombies_coin.svg"
