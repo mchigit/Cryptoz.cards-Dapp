@@ -7,7 +7,7 @@
       'bounce-bonus-text': true
     }"
   >
-    +{{czxpAward}} <img class="bounce-coin-size" src="https://cryptoz.cards/assets/cryptokeeper_coin_binance.svg" />
+    +{{czxpAward}} <img class="bounce-coin-size" src="https://zoombies.world/images/zoombies_coin.svg" />
   </div>
 </template>
 
@@ -28,7 +28,7 @@
         this.czxpAward = value
         const czxp_bonus_sound = new Audio(require('../assets/czxp_gain.wav'));
         czxp_bonus_sound.play();
-        
+
         setTimeout(() => {
           this.playAnimation = false
         }, 3000)

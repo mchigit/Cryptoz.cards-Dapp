@@ -2,10 +2,10 @@
   <div class="row-col">
     <p>
       <strong
-        >{{ totalCzxpSupply }} CZXP {{ " "
+        >{{ totalCzxpSupply }} ZOOM {{ " "
         }}<img
           class="czxp-logo"
-          src="./assets/cryptokeeper_coin_binance.svg"
+          src="https://zoombies.world/images/zoombies_coin.svg"
         />tokens
       </strong>
       {{ " " }}in the Universe

@@ -7,10 +7,10 @@
     <p><strong>Your Cryptoz NFTs :</strong> {{ cards_owned }}</p>
     <p>
       <strong
-        >Your CZXP
+        >Your ZOOM 
         <img
           class="czxp-logo"
-          src="./assets/cryptokeeper_coin_binance.svg"
+          src="https://zoombies.world/images/zoombies_coin.svg"
           align="middle"
         />
         Balance :</strong

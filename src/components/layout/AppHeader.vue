@@ -58,7 +58,7 @@
               :title="ethBalance"
             >
               <!--img v-if="this.$store.state.web3.chainId != 0x38 || this.$store.state.web3.chainId != 0x61" src="@/assets/ethereum-symbol.png" /-->
-              <img src="@/assets/binance-coin-logo.webp" class="header-icon" />
+              <img src="https://zoombies.world/images/mr-icon.png" class="header-icon" />
               <span>{{ ethBalance.toFixed(4) }}</span>
             </div>
           </li>
@@ -171,7 +171,7 @@
         v-else
       >
         <p>
-          Automatically earn CZXP
+          Automatically earn ZOOM
           <img
             class="czxp-logo"
             src="../assets/cryptokeeper_coin_binance.svg"
