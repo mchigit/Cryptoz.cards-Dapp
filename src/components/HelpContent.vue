@@ -40,7 +40,7 @@
                       Chrome browser extension, <a href="https://trustwallet.com/" target="_blank">Trust Wallet ( mobile )</a> or other Smart Chain compatibile wallet
                     </li>
                     <li>
-                      A balance of BNB coins ( the cryptocurrency of Binance Smart Chain
+                      A balance of MOVR coins ( the cryptocurrency of Moonriver
                       )
                     </li>
                   </ul>
@@ -51,17 +51,17 @@
                     editions cards from
                     <router-link to="/shop"> the Minting Shop. </router-link>
                     You may then browse the contents of
-                    <router-link to="/my-cryptoz-nfts">
+                    <router-link to="/my-zoombies-nfts">
                       Your NFT Crypt </router-link
-                    >, sacrifice cards from your Crypt for $CZXP tokens, or gift
-                    them to other BSC accounts. If you would like to
+                    >, sacrifice cards from your Crypt for ZOOM tokens, or gift
+                    them to other Moonriver wallets. If you would like to
                     <router-link to="/market"> auction </router-link> your
-                    Cryptoz NFTs , you may list them on
+                    Zoombies NFTs , you may list them on
                     <router-link to="/market">
                       supported marketplaces </router-link
-                    >. You can also trade and sell your CZXP on supported
+                    >. You can also trade and sell your ZOOM on supported
                     <router-link to="/market">
-                      BSC token exchanges.
+                      Moonriver token exchanges.
                     </router-link>
                   </p>
                 </div>
@@ -137,7 +137,7 @@
                       >Common</span
                     >
                     - 7300 in 10000 - The editions on these will count up fairly
-                    quickly as cards get pulled
+                    quickly as NFTs get minted
                   </li>
                 </ul>
               </b-card-body>
@@ -151,7 +151,7 @@
               role="tab"
             >
               <b-button v-b-toggle.accordion-2 block class="accordion-button">
-                How can I get BNB?
+                How can I get MOVR?
               </b-button>
             </b-card-header>
             <b-collapse
@@ -161,8 +161,8 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  You will need to buy BNB or have it sent to your wallet. The
-                  quickest way to buy BNB is to:
+                  You will need to buy MOVR or have it sent to your wallet. The
+                  quickest way to buy MOVR is to:
                   <ul>
                     <li>
                       <a href="https://www.binance.com/" target="_blank"
@@ -170,15 +170,14 @@
                       >
                     </li>
                   </ul>
-                  As of this writing, the transaction cost by the Binance Smart
-                  Chain (gas) to interact with Cryptoz will cost approx $0.30 to
+                  As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
                   $25.50 USD per transaction, depending on how fast you would
                   like the transactions confirmed and what exactly you are
                   trying to do.
                   <br />
-                  This fee is not charged by the Cryptoz contract, but by the
-                  Binance Smart Chain platform to execute contract code for you
-                  by you on this massive worldscale computer.
+                  This fee is not charged by the Zoombies contract, but by the
+                  Moonriver platform to execute contract code for you
+                  by you on this massive worldscale blockchains.
                 </div>
               </b-card-body>
             </b-collapse>
@@ -202,18 +201,21 @@
               <b-card-body>
                 <div class="card-body">
                   <p>
-                    The Cryptoz universe will reward sponsors who have been
+                    The Zoombies World will reward sponsors who have been
                     associated to an affiliate. This affiliation is permanent
                     and cannot be unmade. You may only have 1 sponsor, but may
                     have any number of affiliates.<br /><br />There are a number
-                    of affiliate player actions that will generate a 20% CZXP
+                    of affiliate player actions that will generate a 20% ZOOM                     <img
+                                          class="czxp-logo"
+                                          src="https://zoombies.world/images/zoombies_coin.svg"
+                                        /> token 
                     reward for their sponsor.
                   </p>
                   <ul>
                     <li>Buy Booster Credits</li>
-                    <li>Buy and Open a Booster Card</li>
-                    <li>Buy a limited edition card</li>
-                    <li>Claim a Free limited edition card from the Shop</li>
+                    <li>Buy and Mint a Booster NFT</li>
+                    <li>Mint a limited edition card from the Shop</li>
+                    <li>Mint a Free limited edition card from the Shop</li>
                   </ul>
                   <p>
                     Click the Sponsors link in the menu to copy your Afilliate
@@ -231,7 +233,7 @@
               role="tab"
             >
               <b-button v-b-toggle.accordion-4 block class="accordion-button">
-                What are BEP-20 and BEP-721 tokens?
+                What are ERC-20 and ERC-721 tokens?
               </b-button>
             </b-card-header>
             <b-collapse
@@ -241,16 +243,16 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  <p>Cryptoz.cards utilize 2 types of BSC tokens:</p>
+                  <p>The Zoombies World utilize 2 types of ERC type tokens:</p>
                   <p>
                     <img
                       class="czxp-logo"
-                      src="./assets/cryptokeeper_coin_binance.svg"
+                      src="https://zoombies.world/images/zoombies_coin.svg"
                     />
                     <strong>CZXP - CryptoZ eXPerience Tokens</strong> are BEP-20
                     Fungible tokens. This means that any CZXP is exchangeable
                     with any other CZXP token and none are unique.
-                    <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add CZXP to Metamask</div>
+                    <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add ZOOM to Metamask</div>
                   </p>
                   <p>
                     <strong>Cryptoz</strong> the cards themselves are BEP-721
@@ -337,7 +339,7 @@
                 How can I get more
                 <img
                   class="czxp-logo"
-                  src="./assets/cryptokeeper_coin_binance.svg"
+                  src="https://zoombies.world/images/zoombies_coin.svg"
                 />
                 CZXP tokens ?
               </b-button>
@@ -349,18 +351,18 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  There are multiple ways in which you can get CZXP
+                  There are multiple ways in which you can get ZOOM tokens
                   <img
                     class="czxp-logo"
-                    src="./assets/cryptokeeper_coin_binance.svg"
+                    src="https://zoombies.world/images/zoombies_coin.svg"
                   />
-                  CryptoZ eXPerience tokens:
+                  ZOOM tokens:
                   <ul>
                     <li>
                       <router-link to="/shop">
                         Buy Booster Credits
                       </router-link>
-                      - 120 CZXP per
+                      - 120 ZOOM per
                     </li>
                     <li>
                       <router-link to="/shop">
@@ -370,26 +372,26 @@
                     </li>
                     <li>
                       <router-link to="/shop">
-                        Mint a FREE Limited Edition Cryptoz Card from the Shop
+                        Mint a FREE Limited Edition Zoombies Card from the Shop
                       </router-link>
                       - Check back of card for amount
                     </li>
                     <li>
                       Buy and Open a Booster from Your
-                      <router-link to="/my-cryptoz-nfts">
+                      <router-link to="/my-zoombies-nfts">
                         NFT Crypt
                       </router-link>
                     </li>
                     <li>
-                      <router-link to="/my-cryptoz-nfts">
-                        Sacrifice a Cryptoz NFT card ( permanently )
+                      <router-link to="/my-zoombies-nfts">
+                        Sacrifice a Zoombies NFT card ( permanently )
                       </router-link>
                       - Check back of card for amount
                     </li>
                     <li>
-                      Buy or exchange czxp on
+                      Buy or exchange ZOOM on
                       <router-link to="/market">
-                        supported BEP-20 token exchanges
+                        supported Moonriver ERC-20 token exchanges
                       </router-link>
                     </li>
                     <li>Request them from other players</li>
@@ -399,12 +401,6 @@
                       for more information.
                     </li>
                   </ul>
-                  <p>
-                    <strong
-                      >Note : Minting a Booster Credit does NOT award you CZXP
-                      tokens.</strong
-                    >
-                  </p>
                 </div>
               </b-card-body>
             </b-collapse>
