@@ -256,7 +256,7 @@ export default {
       try {
         this.$store.dispatch("setIsTransactionPending", true);
         const res = await this.CryptozInstance.methods
-          .buyBoosterCardAndOpen()
+          .buyBoosterAndMintNFT()
           .send(
             {
               from: this.coinbase,
@@ -268,7 +268,7 @@ export default {
           );
 
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
-          cardId: res.events.LogCardCreated.returnValues.cardTokenId,
+          cardId: res.events.LogCardMinted.returnValues.tokenId,
         });
         MessageBus.$emit("boosterOpened", newCard);
       } catch (err) {
@@ -284,14 +284,18 @@ export default {
         this.$bvModal.hide("open-booster-modal");
 
         const res = await this.CryptozInstance.methods
-          .openBoosterCard(0)
+          .mintBoosterNFT(0)
           .send({ from: this.coinbase }, (err, transactionHash) => {
             this.$store.dispatch("setIsTransactionPending", false);
           });
+          console.log(res);
 
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
-          cardId: res.events.LogCardCreated.returnValues.cardTokenId,
+          cardId: res.events.LogCardMinted.returnValues.tokenId,
         });
+
+        console.log('newCard:',newCard);
+
         MessageBus.$emit("boosterOpened", newCard);
       } catch (err) {
         console.error(err);

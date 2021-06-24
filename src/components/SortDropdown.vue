@@ -63,9 +63,9 @@ export default {
         card_set: "Card Set",
         edition_number: "Edition Number",
         card_level: "Level",
-        unlock_czxp: "Unlock CZXP",
-        buy_czxp: "Buy CZXP",
-        sacrifice_czxp: "Sacrifice CZXP",
+        unlock_czxp: "Unlock ZOOM",
+        buy_czxp: "Buy ZOOM",
+        sacrifice_czxp: "Sacrifice ZOOM",
       },
     };
   },

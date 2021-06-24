@@ -48,10 +48,6 @@
             <span>{{ parseInt(buy_czxp).toLocaleString() }}</span>
           </div>
           <div class="card-txt-black">
-            <span class="attribute-name font-weight-bold">Transfer CZXP:</span>
-            <span>{{ parseInt(transfer_czxp).toLocaleString() }}</span>
-          </div>
-          <div class="card-txt-black">
             <span class="attribute-name font-weight-bold">Sacrifice CZXP:</span>
             <span>{{ parseInt(sacrifice_czxp).toLocaleString() }}</span>
           </div>
@@ -76,7 +72,6 @@ export default {
     "level",
     "cost",
     "buy_czxp",
-    "transfer_czxp",
     "sacrifice_czxp",
     "card_class",
     "in_store",
