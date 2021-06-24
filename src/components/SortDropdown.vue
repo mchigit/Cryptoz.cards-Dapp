@@ -65,7 +65,6 @@ export default {
         card_level: "Level",
         unlock_czxp: "Unlock CZXP",
         buy_czxp: "Buy CZXP",
-        transfer_czxp: "Transfer CZXP",
         sacrifice_czxp: "Sacrifice CZXP",
       },
     };

@@ -240,7 +240,7 @@ export default {
         process.env.NODE_ENV == "development"
           ? "localhost:8080"
           : "https://movr.zoombies.world";
-      return `${url}/my-cryptoz-nfts/${this.coinbase}`;
+      return `${url}/my-zoombies-nfts/${this.coinbase}`;
     },
   },
   watch: {

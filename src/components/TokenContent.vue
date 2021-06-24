@@ -9,7 +9,7 @@
         </div>
         <div v-else-if="load_state == 0" class="row">
           <div class="col">
-            <h2>Cryptoz Token #{{ token_id }} does not exist on this chain</h2>
+            <h2>Zoombies Token #{{ token_id }} does not exist on this chain</h2>
             <p>If you would like to see a token:</p>
             <button class="btn btn-primary" @click="go_genesis">
               View The CryptoKeeper - our #0 Genesis token
@@ -30,7 +30,6 @@
               :level="card.attributes.card_level"
               :unlock_czxp="card.attributes.unlock_czxp"
               :buy_czxp="card.attributes.buy_czxp"
-              :transfer_czxp="card.attributes.transfer_czxp"
               :sacrifice_czxp="card.attributes.sacrifice_czxp"
               :image="card.image"
               :card_class="card.attributes.rarity"
@@ -50,7 +49,7 @@
             </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">
-                Cryptoz Token #:
+                Zoombies Token #:
               </div>
               <div class="">
                 {{ token_id }}
@@ -212,12 +211,12 @@ export default {
   methods: {
     loadCard: async function (token_id) {
       const res = await this.CryptozInstance.methods
-        .getOwnedCard(token_id)
+        .getNFTData(token_id)
         .call()
         .catch((err) => console.log({ err }));
 
       //returns TypeId, Edition, # times transfed
-      // console.log("CardOwned results:", res);
+       console.log("CardOwned results:", res);
       let cardTypeId = parseInt(res[0]);
 
       //If the tokenId is greater than 0, we have something valid

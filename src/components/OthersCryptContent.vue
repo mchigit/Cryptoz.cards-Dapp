@@ -8,7 +8,7 @@
         {{ addressToLoad.substr(0, 6) + "..." + addressToLoad.substr(38) }}
       </h2>
       <p>
-        This is where you can see other person's NFT Cryptoz tokens. You can
+        This is where you can see other person's Zoombie NFT tokens. You can
         sort, and view them in a table. But you will not be able to perform any
         actions on the NFTs.
       </p>

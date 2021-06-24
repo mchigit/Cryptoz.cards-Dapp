@@ -84,7 +84,9 @@ const filterCards = (filterBy, cards) => {
 };
 
 const getCryptCard = async (tokenId, instance) => {
-  const ownedCard = await instance.methods.getOwnedCard(tokenId).call();
+  console.log('tokenID',tokenId);
+  const ownedCard = await instance.methods.NFTs(tokenId).call();
+  console.log('ownedCard', ownedCard);
   const cardData = await getCardType(parseInt(ownedCard[0]));
 
   cardData.id = tokenId;
@@ -211,15 +213,31 @@ const cryptStore = {
 
         const CryptozInstance = rootState.contractInstance.cryptoz;
 
-        const tokensOfOwner = await CryptozInstance.methods
-          .tokensOfOwner(addressToLoad)
+        const balanceOfOwner = await CryptozInstance.methods
+          .balanceOf(addressToLoad)
           .call();
 
-        if (tokensOfOwner.length === 0) {
+        if (balanceOfOwner === 0) {
           console.log("Current address doesn't have any cards.");
           commit(CRYPT_MUTATIONS.SET_CRYPT_CARDS, []);
           return;
         }
+
+        let tokensOfOwner = [];
+        for(let l=0; l < balanceOfOwner; l++){
+          const nftTokenId = await CryptozInstance.methods
+            .tokenOfOwnerByIndex(addressToLoad,l)
+            .call();
+
+          const nftIndex = await CryptozInstance.methods
+            .tokenByIndex(nftTokenId)
+            .call();
+
+          tokensOfOwner.push(nftIndex);
+        }
+
+
+
 
         const cryptCards = await Promise.all(
           tokensOfOwner.map((token) =>

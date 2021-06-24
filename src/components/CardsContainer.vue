@@ -126,7 +126,6 @@
                   :level="card.card_level"
                   :unlock_czxp="card.unlock_czxp"
                   :buy_czxp="card.buy_czxp"
-                  :transfer_czxp="card.transfer_czxp"
                   :sacrifice_czxp="card.sacrifice_czxp"
                   :image="card.image"
                   :card_class="card.rarity"
@@ -380,7 +379,6 @@ export default {
           "edition_number",
           "unlock_czxp",
           "sacrifice_czxp",
-          "transfer_czxp",
         ];
       } else {
         return [
@@ -389,7 +387,6 @@ export default {
           "edition_number",
           "unlock_czxp",
           "sacrifice_czxp",
-          "transfer_czxp",
           "sacrifice",
           "gift",
         ];
@@ -401,7 +398,7 @@ export default {
         process.env.NODE_ENV == "development"
           ? "localhost:8080"
           : "https://bsc.cryptoz.cards";
-      return `${url}/my-cryptoz-nfts/${this.coinbase}`;
+      return `${url}/my-zoombies-nfts/${this.coinbase}`;
     },
     isModified() {
       return {
@@ -558,7 +555,7 @@ export default {
     searchNewCrypt: function () {
       if (this.isOthersCrypt) {
         this.clearCards();
-        this.addHashToLocation(`my-cryptoz-nfts/${this.addressToSearch}`);
+        this.addHashToLocation(`my-zoombies-nfts/${this.addressToSearch}`);
         this.fetchCryptCards();
         this.$emit("cryptChanged", this.addressToSearch);
       } else {
@@ -569,11 +566,11 @@ export default {
       const h = this.$createElement;
       const titleVNode = h(
         "h5",
-        `Gift Cryptoz NFT Token #${id} to another address`,
+        `Gift Zoombies NFT Token #${id} to another address`,
         { class: ["modal-title"] }
       );
       const messageVNode = h("div", { class: ["modal-message"] }, [
-        h("p", "Enter a valid BSC wallet address to send this card to:", {
+        h("p", "Enter a valid Moonriver wallet address to send this card to:", {
           class: [""],
         }),
         h("input", {
@@ -609,7 +606,7 @@ export default {
         });
     },
     navigateToNewCrypt: function () {
-      this.$router.push(`/my-cryptoz-nfts/${this.addressToSearch}`);
+      this.$router.push(`/my-zoombies-nfts/${this.addressToSearch}`);
     },
     fetchCryptCards: async function () {
       if (!this.isOthersCrypt && !this.isWalletConnected) {
@@ -734,7 +731,7 @@ export default {
       this.modifiedPageNext = newCards.next;
     },
     goBackToMyCrypt: function () {
-      this.$router.push("/my-cryptoz-nfts");
+      this.$router.push("/my-zoombies-nfts");
     },
     copyMyCryptLink: function () {
       const textToCopy = this.$refs.myCrypt.value;
