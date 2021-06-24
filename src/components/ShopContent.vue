@@ -435,7 +435,7 @@ export default {
       var totalBoostersCost =
         2000000000000000 * parseInt(this.totalCreditsToBuy);
       this.CryptozInstance.methods
-        .buyBoosterCard(parseInt(this.totalCreditsToBuy))
+        .buyBoosterCredits(parseInt(this.totalCreditsToBuy))
         .send(
           { from: this.coinbase, value: totalBoostersCost },
           (err, txHash) => {

@@ -288,13 +288,10 @@ export default {
           .send({ from: this.coinbase }, (err, transactionHash) => {
             this.$store.dispatch("setIsTransactionPending", false);
           });
-          console.log(res);
 
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
           cardId: res.events.LogCardMinted.returnValues.tokenId,
         });
-
-        console.log('newCard:',newCard);
 
         MessageBus.$emit("boosterOpened", newCard);
       } catch (err) {

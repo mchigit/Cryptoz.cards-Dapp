@@ -117,19 +117,20 @@ const router = new Router({
       },
     },
     {
-      path: "/my-cryptoz-nfts/:address",
+      path: "/my-zoombies-nfts/:address",
       name: "OthersCrypt",
       component: lazyLoadComponents("OthersCryptContent"),
       meta: {
-        title: "Cryptoz Cards - A collection of cards",
-        metaTags: [
+          title:
+            "Zoombies Cards - Your Crypt - A collection of all the NFTs owned by this wallet",
+          metaTags: [
           {
             name: "description",
-            content: "Browse through other person's Cryptoz cards!",
+            content: "Browse through other person's Zoombies NFTs!",
           },
           {
             property: "og:url",
-            content: "https://bsc.cryptoz.cards/my-cryptoz-nfts",
+            content: "https://movr.zoombies.world/my-zoombies-nfts",
           },
           {
             property: "og:type",
@@ -137,8 +138,7 @@ const router = new Router({
           },
           {
             property: "og:title",
-            content:
-              "Cryptoz Cards - Other's Crypt - A collection of all the cards your friend owns",
+            content: "Zoombies Cards - Your Crypt - A collection of all the NFTs owned by this wallet",
           },
           {
             property: "og:image",
