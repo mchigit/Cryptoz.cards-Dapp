@@ -5,39 +5,17 @@ const typeIdsOnChain = [];
 
 
 //push Apr 22,2021
-typeIdsOnChain.push(253,250,255,254);
+typeIdsOnChain.push(3,4,8,5);
 //push Apr 20,2021
 typeIdsOnChain.push(242,239,241,237);
 //push Apr 18,2021
 typeIdsOnChain.push(230,231,229,223);
 //push Apr 16,2021
-typeIdsOnChain.push(214,215,216,213);
-//push Apr 13,2021
-typeIdsOnChain.push(197);
-//push Apr 12,2021
-typeIdsOnChain.push(195,194);
-//push Apr 11,2021
-typeIdsOnChain.push(139,193,196);
-//push Apr 8,2021
-typeIdsOnChain.push(166,165,164);
-//push Apr 7,2021
-typeIdsOnChain.push(163);
-//push Apr 4,2021
-typeIdsOnChain.push(138, 140);
-//push Apr 1,2021
-typeIdsOnChain.push(135, 136, 137);
-//push March 31,2021
-typeIdsOnChain.push(131, 132, 133, 134);
-//push March 27,2021
-typeIdsOnChain.push(64, 71, 74, 79, 84, 87, 91, 93, 95, 96, 104);
-//push March 20,2021
-typeIdsOnChain.push(47, 51, 58, 60, 61, 63);
-//push March 20,2021
-typeIdsOnChain.push(34, 38, 41, 43);
-//push March 19,2021
-typeIdsOnChain.push(13, 18, 19, 26);
-//Dirty hack until we figure this event log shite out
-typeIdsOnChain.push(4, 5, 8, 22, 29, 31, 45, 56, 81, 101, 102, 103);
+typeIdsOnChain.push(214,215,216);
+
+
+
+
 
 const DEFAULT_CARD_STATE = {
   allShopCards: [],
@@ -64,42 +42,6 @@ export const RARITY_CLASSES = {
   Epic: "card-bg card-bg-3",
   Platinum: "card-bg card-bg-2",
   Diamond: "card-bg card-bg-1"
-};
-
-/**
- * Hack for our edition bug
- * Key: card ID
- * Value: hard coded edition total
- *
- * If we need to add further hacks, just append an entry to this object
- */
-const EDITION_HACK = {
-  102: 5,
-  103: 1,
-  5: 110,
-  22: 179,
-  56: 112,
-  19: 80,
-  43: 215,
-  26: 288,
-  104: 7,
-  93: 49,
-  74: 189,
-  79: 299,
-  96: 109,
-  60: 384,
-  133: 309,
-  135: 204,
-  137: 3,
-  138: 159,
-  165: 12,
-  193: 222,
-  196: 130,
-  197: 14,
-  213: 135,
-  214: 165,
-  241: 18,
-  242: 12,
 };
 
 const getCard = async (cardId, CryptozInstance) => {
@@ -131,10 +73,6 @@ const getCard = async (cardId, CryptozInstance) => {
     .call();
 
   cardObj.edition_current = parseInt(edition);
-
-  if (EDITION_HACK[cardObj.id]) {
-    cardObj.edition_total = EDITION_HACK[cardObj.id];
-  }
 
   // Set soldOut flag first
   if (cardObj.edition_current == cardObj.edition_total) {

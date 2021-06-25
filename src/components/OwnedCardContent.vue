@@ -44,11 +44,11 @@
             <span>{{ cost }}</span>
           </div>
           <div class="card-txt-black">
-            <span class="attribute-name font-weight-bold">Buy CZXP:</span>
+            <span class="attribute-name font-weight-bold">Buy ZOOM:</span>
             <span>{{ parseInt(buy_czxp).toLocaleString() }}</span>
           </div>
           <div class="card-txt-black">
-            <span class="attribute-name font-weight-bold">Sacrifice CZXP:</span>
+            <span class="attribute-name font-weight-bold">Sacrifice ZOOM:</span>
             <span>{{ parseInt(sacrifice_czxp).toLocaleString() }}</span>
           </div>
         </div>

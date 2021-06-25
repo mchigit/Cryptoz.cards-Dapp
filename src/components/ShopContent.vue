@@ -162,7 +162,8 @@
                       czxpBalance < parseInt(card.unlock_czxp)
                     "
                   />
-                  Mint NFT for {{ card.cost }} BNB
+                  Mint NFT for {{ card.cost }}
+                  <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
               </div>
               <div
@@ -339,6 +340,8 @@ export default {
         pageStart,
         this.isCardSorted
       );
+
+      console.log(newCards);
 
       if (this.isCardSorted) {
         this.sortedPaginatedCards = [
@@ -680,5 +683,9 @@ export default {
   .booster-modal-content {
     padding: 10px 10px;
   }
+}
+
+.mr-icon {
+  height: 20px;
 }
 </style>
