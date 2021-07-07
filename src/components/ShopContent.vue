@@ -6,7 +6,7 @@
     >
       <div class="booster-modal-content">
         <p class="booster-modal-title">
-          Booster NFT cards will never be sold in the shop
+          Booster NFT cards will NEVER be sold in the shop
         </p>
         <p class="booster-modal-explain">
           Enter the number of booster NFT minting credits you would like to purchase:
@@ -43,7 +43,7 @@
         The Shop is a place to mint limited edition Zoombies Cards NFT tokens.
         Some cards are free, some have a cost. You may also buy and
         <router-link to="/my-zoombies-nfts"> open a booster card </router-link>,
-        which will randomly mint an unlimited edition NFT token.
+        which will randomly mint a booster edition NFT token.
       </p>
       <p>
         To mint a FREE NFT Or buy a Limited edition NFT, you will need the
@@ -57,12 +57,13 @@
         <div class="row">
           <div class="col">
             <b-button
-              v-b-tooltip.hover="'Earn +120 CZXP per credit'"
+              v-b-tooltip.hover="'Earn +120 ZOOM per credit'"
               v-b-modal.buy-boosters-modal
               class="btn btn-danger"
               :disabled="balance < 2000000000000000 || isBuyingBooster"
             >
-              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.002 MOVR
+              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.002
+              <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
             </b-button>
           </div>
         </div>
@@ -227,12 +228,12 @@ export default {
   },
   data() {
     return {
-      buyBtnTooltipTextContent: "Click to buy a copy of this card",
+      buyBtnTooltipTextContent: "Click to mint a limited edition NFT of this card",
       buyBtnBlockedTooltipTextContent:
-        "You do not have enough BNB or CZXP tokens to purchase this card",
+        "You do not have enough MOVR or ZOOM tokens to purchase this card",
       getBtnTooltipTextContent: "Click to mint a copy of this card at no cost",
       getBtnBlockedTooltipTextContent:
-        "You do not have enough CZXP tokens to unlock minting an NFT of this type",
+        "You do not have enough ZOOM tokens to unlock minting an NFT of this type",
       getOwnedCardToolTipText: "You can only mint 1 card of each type",
       getSoldCardToolTipText:
         "All NFTs of this type have been minted, check markets",
@@ -341,7 +342,7 @@ export default {
         this.isCardSorted
       );
 
-      console.log(newCards);
+      console.log("CARDS:",newCards);
 
       if (this.isCardSorted) {
         this.sortedPaginatedCards = [

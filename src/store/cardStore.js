@@ -4,17 +4,9 @@ import { dynamicSort, getRarity, soldOutSort } from "../helpers";
 const typeIdsOnChain = [];
 
 
+
 //push Apr 22,2021
-typeIdsOnChain.push(3,4,8,5);
-//push Apr 20,2021
-typeIdsOnChain.push(242,239,241,237);
-//push Apr 18,2021
-typeIdsOnChain.push(230,231,229,223);
-//push Apr 16,2021
-typeIdsOnChain.push(214,215,216);
-
-
-
+typeIdsOnChain.push(1,6,8,11,14,32,36,40,44,47,52,55,59,61,65,71);
 
 
 const DEFAULT_CARD_STATE = {
@@ -234,7 +226,6 @@ const cardStore = {
         const results = await Promise.all(
           typeIdsOnChain.map(async (id) => {
             const cardData = await getCard(id, CryptozInstance);
-
             if (!cardData) {
               return;
             }
