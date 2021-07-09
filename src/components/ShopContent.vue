@@ -382,7 +382,7 @@ export default {
             showErrorToast(this, "Failed to mint card");
           }
         });
-        
+
       if (result) {
         this.$store.dispatch("setCurrentEdition", {
           cardId: type_id,
@@ -424,6 +424,7 @@ export default {
       if (result) {
         this.$store.dispatch("setCurrentEdition", {
           cardId: cardAttributes.id,
+          edition: result.events.LogCardMinted.returnValues.editionNumber,
           isSorted: this.isCardSorted,
         });
       }
