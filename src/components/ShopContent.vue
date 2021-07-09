@@ -113,7 +113,6 @@
             :level="card.card_level"
             :unlock_czxp="card.unlock_czxp"
             :buy_czxp="card.buy_czxp"
-            :transfer_czxp="card.transfer_czxp"
             :sacrifice_czxp="card.sacrifice_czxp"
             :image="card.image"
             :card_class="card.rarity"
@@ -342,8 +341,6 @@ export default {
         this.isCardSorted
       );
 
-      console.log("CARDS:",newCards);
-
       if (this.isCardSorted) {
         this.sortedPaginatedCards = [
           ...this.sortedPaginatedCards,
@@ -385,10 +382,11 @@ export default {
             showErrorToast(this, "Failed to mint card");
           }
         });
-
+        
       if (result) {
         this.$store.dispatch("setCurrentEdition", {
           cardId: type_id,
+          edition: result.events.LogCardMinted.returnValues.editionNumber,
           isSorted: this.isCardSorted,
         });
       }

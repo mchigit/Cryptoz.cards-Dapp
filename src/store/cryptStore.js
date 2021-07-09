@@ -215,6 +215,8 @@ const cryptStore = {
           .balanceOf(addressToLoad)
           .call();
 
+          console.log("Card total:",balanceOfOwner);
+
         if (balanceOfOwner === 0) {
           console.log("Current address doesn't have any cards.");
           commit(CRYPT_MUTATIONS.SET_CRYPT_CARDS, []);

@@ -202,12 +202,8 @@ const cardStore = {
       try {
         const CryptozInstance = rootState.contractInstance.cryptoz;
 
-        const { cardId, isSorted } = payload;
+        const { cardId, edition, isSorted } = payload;
         const parsedId = parseInt(cardId);
-
-        const edition = await CryptozInstance.methods
-          .cardTypeToEdition(parsedId)
-          .call();
 
         commit(CARD_MUTATIONS.SET_CARD_EDITION, {
           cardId: parsedId,

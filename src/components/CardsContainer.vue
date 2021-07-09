@@ -643,7 +643,7 @@ export default {
       this.$store.dispatch("setIsTransactionPending", true);
       Vue.set(this.cardsBeingSacrificed, id, true);
       const sacrificeRes = await this.CryptozInstance.methods
-        .sacrifice(id)
+        .sacrificeNFTs([id])
         .send({ from: this.coinbase }, (err, txHash) => {
           this.$store.dispatch("setIsTransactionPending", false);
 
