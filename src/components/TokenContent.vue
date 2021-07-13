@@ -201,7 +201,7 @@ export default {
   methods: {
     loadCard: async function (token_id) {
       const res = await this.CryptozInstance.methods
-        .getNFTData(token_id)
+        .NFTs(token_id)
         .call()
         .catch((err) => console.log({ err }));
 
@@ -219,6 +219,8 @@ export default {
       const owner = await this.CryptozInstance.methods.ownerOf(token_id).call();
       this.owner = owner;
       this.owner_url = "https://etherscan.io/addowners/" + owner;
+      const releaseTime = await this.CryptozInstance.methods.storeReleaseTime(cardTypeId).call();
+      this.released_date = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(releaseTime*1000);
     },
     getCardData: function (card_id) {
       axios
