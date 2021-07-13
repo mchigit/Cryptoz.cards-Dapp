@@ -62,14 +62,6 @@
               </div>
             </div>
             <div class="flex-row">
-              <div class="text-right font-weight-bold label">
-                Released Date:
-              </div>
-              <div class="">
-                {{ released_date }}
-              </div>
-            </div>
-            <div class="flex-row">
               <div class="text-right font-weight-bold label">Card Name:</div>
               <div class="">
                 {{ card.name }}
@@ -79,6 +71,14 @@
               <div class="text-right font-weight-bold label">Card Set:</div>
               <div class="">
                 {{ card.attributes.card_set }}
+              </div>
+            </div>
+            <div class="flex-row">
+              <div class="text-right font-weight-bold label">
+                Type Released:
+              </div>
+              <div class="">
+                {{ released_date }}
               </div>
             </div>
             <div class="flex-row">
@@ -100,21 +100,21 @@
               </div>
             </div>
             <div class="flex-row">
-              <div class="text-right font-weight-bold label">Buy CZXP:</div>
+              <div class="text-right font-weight-bold label">Buy ZOOM:</div>
               <div class="">
                 {{ card.attributes.buy_czxp }}
               </div>
             </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">
-                Sacrifice CZXP:
+                Sacrifice ZOOM:
               </div>
               <div class="">
                 {{ card.attributes.sacrifice_czxp }}
               </div>
             </div>
             <div class="flex-row">
-              <div class="text-right font-weight-bold label">Unlock CZXP:</div>
+              <div class="text-right font-weight-bold label">Unlock ZOOM:</div>
               <div class="">
                 {{ card.attributes.unlock_czxp }}
               </div>
@@ -166,7 +166,7 @@ export default {
       rarity: "",
       released_date: "Loading..",
       edition_current: "Loading...",
-      etherscan_token_id: "https://etherscan.com/contract/token/",
+      etherscan_token_id: "https://blockscout.moonriver.moonbeam.network/tokens/",
     };
   },
   computed: {
@@ -205,7 +205,7 @@ export default {
         .call()
         .catch((err) => console.log({ err }));
 
-      //returns TypeId, Edition, # times transfed
+      //returns TypeId, Edition #
       let cardTypeId = parseInt(res[0]);
 
       //If the tokenId is greater than 0, we have something valid
@@ -218,7 +218,7 @@ export default {
       this.getCardData(cardTypeId);
       const owner = await this.CryptozInstance.methods.ownerOf(token_id).call();
       this.owner = owner;
-      this.owner_url = "https://etherscan.io/addowners/" + owner;
+      this.owner_url = "https://blockscout.moonriver.moonbeam.network/address/" + owner;
       const releaseTime = await this.CryptozInstance.methods.storeReleaseTime(cardTypeId).call();
       this.released_date = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(releaseTime*1000);
     },
@@ -279,7 +279,7 @@ export default {
       }
 
       if (res.data.attributes.edition_total === 0) {
-        res.data.attributes.cost = "Booster Only";
+        res.data.attributes.cost = "Booster";
       }
 
       this.card = res.data;

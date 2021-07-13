@@ -287,7 +287,6 @@ const cryptStore = {
     },
     async addBoosterCard({ commit, rootState }, payload) {
       const { cardId, cardTypeId, edition } = payload;
-      console.log("addBoosterCard:",  cardId, cardTypeId, edition);
       try {
         const CryptozInstance = rootState.contractInstance.cryptoz;
 
