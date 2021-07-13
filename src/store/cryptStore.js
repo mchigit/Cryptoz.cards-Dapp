@@ -117,6 +117,39 @@ const getCryptCard = async (tokenId, instance) => {
   return newAttr;
 };
 
+const getMintedCard = async (tokenId, cardTypeId, edition, instance) => {
+  const cardData = await getCardType(parseInt(cardTypeId));
+
+  cardData.id = tokenId;
+  let newAttr = {};
+
+  cardData.attributes.forEach((attribute) => {
+    newAttr[attribute.trait_type] = attribute.value;
+  });
+
+  cardData.attributes = newAttr;
+  cardData.attributes.edition_current = parseInt(edition);
+  if (cardData.attributes.edition_total == 0) {
+    //unlimited
+    cardData.attributes.edition_label =
+      "#" + cardData.attributes.edition_current;
+  } else {
+    cardData.attributes.edition_label =
+      "#" +
+      cardData.attributes.edition_current +
+      " of " +
+      cardData.attributes.edition_total;
+  }
+
+  cardData.attributes.rarityValue = cardData.attributes.rarity;
+  cardData.attributes.rarity = RARITY_CLASSES[cardData.attributes.rarity];
+
+  newAttr = { ...newAttr, ...cardData };
+  delete newAttr.attributes;
+
+  return newAttr;
+};
+
 const cryptStore = {
   namespaced: true,
   state: DEFAULT_CRYPT_STATE,
@@ -215,8 +248,6 @@ const cryptStore = {
           .balanceOf(addressToLoad)
           .call();
 
-          console.log("Card total:",balanceOfOwner);
-
         if (balanceOfOwner === 0) {
           console.log("Current address doesn't have any cards.");
           commit(CRYPT_MUTATIONS.SET_CRYPT_CARDS, []);
@@ -235,9 +266,6 @@ const cryptStore = {
 
           tokensOfOwner.push(nftIndex);
         }
-
-
-
 
         const cryptCards = await Promise.all(
           tokensOfOwner.map((token) =>
@@ -258,12 +286,12 @@ const cryptStore = {
       }
     },
     async addBoosterCard({ commit, rootState }, payload) {
-      const { cardId } = payload;
-
+      const { cardId, cardTypeId, edition } = payload;
+      console.log("addBoosterCard:",  cardId, cardTypeId, edition);
       try {
         const CryptozInstance = rootState.contractInstance.cryptoz;
 
-        const cardData = await getCryptCard(cardId, CryptozInstance);
+        const cardData = await getMintedCard(cardId, cardTypeId, edition, CryptozInstance);
 
         commit(CRYPT_MUTATIONS.ADD_BOOSTER_CARD, cardData);
 

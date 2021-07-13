@@ -267,8 +267,12 @@ export default {
             }
           );
 
+          console.log("buyAndOpenBooster res",res);
+
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
           cardId: res.events.LogCardMinted.returnValues.tokenId,
+          cardTypeId: res.events.LogCardMinted.returnValues.cardTypeId,
+          edition: res.events.LogCardMinted.returnValues.editionNumber,
         });
         MessageBus.$emit("boosterOpened", newCard);
       } catch (err) {
@@ -291,6 +295,8 @@ export default {
 
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
           cardId: res.events.LogCardMinted.returnValues.tokenId,
+          cardTypeId: res.events.LogCardMinted.returnValues.cardTypeId,
+          edition: res.events.LogCardMinted.returnValues.editionNumber
         });
 
         MessageBus.$emit("boosterOpened", newCard);

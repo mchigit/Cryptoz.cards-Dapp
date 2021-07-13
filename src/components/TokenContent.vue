@@ -63,10 +63,10 @@
             </div>
             <div class="flex-row">
               <div class="text-right font-weight-bold label">
-                Times Transferred:
+                Released Date:
               </div>
               <div class="">
-                {{ times_transferred }}
+                {{ released_date }}
               </div>
             </div>
             <div class="flex-row">
@@ -103,14 +103,6 @@
               <div class="text-right font-weight-bold label">Buy CZXP:</div>
               <div class="">
                 {{ card.attributes.buy_czxp }}
-              </div>
-            </div>
-            <div class="flex-row">
-              <div class="text-right font-weight-bold label">
-                Transfer CZXP:
-              </div>
-              <div class="">
-                {{ card.attributes.transfer_czxp }}
               </div>
             </div>
             <div class="flex-row">
@@ -165,7 +157,6 @@ export default {
           card_set: "Loading...",
           zombie_type: "Loading...",
           buy_czxp: "Loading...",
-          transfer_czxp: "Loading...",
           sacrifice_czxp: "Loading...",
           unlock_czxp: "Loading...",
           card_level: "Loading...",
@@ -173,7 +164,7 @@ export default {
       },
       owner_url: "",
       rarity: "",
-      times_transferred: "Loading..",
+      released_date: "Loading..",
       edition_current: "Loading...",
       etherscan_token_id: "https://etherscan.com/contract/token/",
     };
@@ -204,7 +195,6 @@ export default {
     this.token_id = parseInt(this.$route.params.token_id);
 
     if (this.isDAppConnected) {
-      console.log("from mount");
       this.loadCard(this.token_id);
     }
   },
@@ -216,7 +206,6 @@ export default {
         .catch((err) => console.log({ err }));
 
       //returns TypeId, Edition, # times transfed
-       console.log("CardOwned results:", res);
       let cardTypeId = parseInt(res[0]);
 
       //If the tokenId is greater than 0, we have something valid
@@ -226,7 +215,6 @@ export default {
       }
 
       this.edition_current = parseInt(res[1]);
-      this.times_transferred = parseInt(res[2]);
       this.getCardData(cardTypeId);
       const owner = await this.CryptozInstance.methods.ownerOf(token_id).call();
       this.owner = owner;
@@ -235,7 +223,7 @@ export default {
     getCardData: function (card_id) {
       axios
         .get(
-          "https://cryptoz.cards/services/getCardData.php?card_id=" + card_id
+          "https://zoombies.world/services/getCardData.php?card_id=" + card_id
         )
         .then(this.handleGotCardData);
     },
