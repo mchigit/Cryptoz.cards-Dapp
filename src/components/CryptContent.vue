@@ -267,8 +267,6 @@ export default {
             }
           );
 
-          console.log("buyAndOpenBooster res",res);
-
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
           cardId: res.events.LogCardMinted.returnValues.tokenId,
           cardTypeId: res.events.LogCardMinted.returnValues.cardTypeId,

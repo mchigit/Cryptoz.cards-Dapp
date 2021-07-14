@@ -6,7 +6,7 @@ const typeIdsOnChain = [];
 
 
 //push Apr 22,2021
-typeIdsOnChain.push(1,6,8,11,14,32,36,40,44,47,52,55,59,61,65,71);
+typeIdsOnChain.push(1,6,8,11,14,32,36,40,44,47,52,55,59,61,65,71,73);
 
 
 const DEFAULT_CARD_STATE = {
@@ -73,6 +73,9 @@ const getCard = async (cardId, CryptozInstance) => {
     cardObj.soldOut = 0;
   }
 
+  const t =  await CryptozInstance.methods.storeReleaseTime(cardObj.id).call();
+console.log("get:", cardObj.id, t);
+  cardObj.release_time = t;
   return cardObj;
 };
 
@@ -225,7 +228,7 @@ const cardStore = {
             if (!cardData) {
               return;
             }
-
+console.log("cardData",cardData);
             return rootState.web3.coinbase
               ? await addIsOwnedProp(
                   cardData,

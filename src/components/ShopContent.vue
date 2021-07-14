@@ -131,6 +131,27 @@
                 SOLD OUT!
               </button>
             </div>
+
+            <div
+              v-else-if="parseInt(card.release_time*1000) > +new Date()"
+              id="unreleased-button-wrapper"
+              class="disabled-btn"
+            >
+              <div
+                v-b-tooltip.hover="getBtnTooltipTextUnreleased"
+              >
+                <button
+                  id="unreleased-button"
+                  class="btn btn-primary"
+                  :disabled="parseInt(card.release_time*1000) > +new Date()"
+                >
+                  <b-icon-lock-fill />
+                   {{card.release_time*1000}} {{+new Date()}}
+                </button>
+                {{card.release_time*1000}} {{+new Date()}}
+              </div>
+            </div>
+
             <div
               v-else-if="!card.isOwned"
               id="buy-get-button-wrapper"
@@ -184,6 +205,7 @@
                 </button>
               </div>
             </div>
+
             <div
               v-else
               id="owned-button-wrapper"
@@ -236,6 +258,7 @@ export default {
       getOwnedCardToolTipText: "You can only mint 1 card of each type",
       getSoldCardToolTipText:
         "All NFTs of this type have been minted, check markets",
+      getBtnTooltipTextUnreleased: "This type has not been released for NFT minting yet",
       totalCreditsToBuy: 1,
       isBuyingBooster: false,
       isCardSorted: false,
