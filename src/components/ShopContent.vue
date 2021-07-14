@@ -133,7 +133,7 @@
             </div>
 
             <div
-              v-else-if="parseInt(card.release_time*1000) > +new Date()"
+              v-else-if="parseInt(card.release_time*1000) > getNowTimeStamp"
               id="unreleased-button-wrapper"
               class="disabled-btn"
             >
@@ -143,12 +143,11 @@
                 <button
                   id="unreleased-button"
                   class="btn btn-primary"
-                  :disabled="parseInt(card.release_time*1000) > +new Date()"
+                  disabled
                 >
                   <b-icon-lock-fill />
-                   {{card.release_time*1000}} {{+new Date()}}
+                   {{getFormattedReleasedLabel(card.release_time*1000 - getNowTimeStamp)}}
                 </button>
-                {{card.release_time*1000}} {{+new Date()}}
               </div>
             </div>
 
@@ -268,10 +267,12 @@ export default {
       pageNext: 0,
       sortedPageNext: 0,
       observer: null,
+      nowTimeStamp: 0,
     };
   },
   beforeDestroy() {
     this.observer.disconnect();
+    clearInterval(window.nowTimer);
   },
   created() {
     this.observer = new IntersectionObserver(this.onElementObserved, {
@@ -309,6 +310,7 @@ export default {
     if (this.CryptozInstance) {
       this.fetchStoreCards();
     }
+    window.nowTimer = setInterval(this.setNow, 1000);
   },
   computed: {
     dAppState() {
@@ -325,6 +327,9 @@ export default {
     },
     balance() {
       return this.$store.state.web3.balance;
+    },
+    getNowTimeStamp() {
+      return this.nowTimeStamp;
     },
     coinbase() {
       return this.$store.state.web3.coinbase;
@@ -374,6 +379,15 @@ export default {
         this.paginatedCards = [...this.paginatedCards, ...newCards.cards];
         this.pageNext = newCards.next;
       }
+    },
+    setNow() {
+      this.nowTimeStamp = Date.now();
+    },
+    getFormattedReleasedLabel(timeRemaining){
+      var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+      return hours + "h " + minutes + "m " + seconds + "s ";
     },
     getBtnTooltipText(unlock_czxp) {
       if (this.czxpBalance < parseInt(unlock_czxp)) {
