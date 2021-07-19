@@ -170,19 +170,21 @@
                 <b-button
                   id="buy-button"
                   :disabled="
-                    balance <= card.cost ||
-                    czxpBalance < parseInt(card.unlock_czxp)
+                    (balance <= card.cost*2 &&
+                    czxpBalance < parseInt(card.unlock_czxp)) ||
+                    balance <= card.cost
                   "
                   variant="primary"
                   @click="buyCard(card)"
                 >
                   <b-icon-lock-fill
                     v-if="
-                      balance <= card.cost ||
-                      czxpBalance < parseInt(card.unlock_czxp)
+                    (balance <= card.cost*2 &&
+                    czxpBalance < parseInt(card.unlock_czxp)) ||
+                    balance <= card.cost
                     "
                   />
-                  Mint NFT for {{ card.cost }}
+                  Mint NFT for {{ czxpBalance < parseInt(card.unlock_czxp) ? card.cost*2 : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
               </div>
@@ -250,7 +252,7 @@ export default {
     return {
       buyBtnTooltipTextContent: "Click to mint a limited edition NFT of this card",
       buyBtnBlockedTooltipTextContent:
-        "You do not have enough MOVR or ZOOM tokens to purchase this card",
+        "You do not have enough MOVR or ZOOM tokens to unlock minting",
       getBtnTooltipTextContent: "Click to mint a copy of this card at no cost",
       getBtnBlockedTooltipTextContent:
         "You do not have enough ZOOM tokens to unlock minting an NFT of this type",
@@ -435,13 +437,18 @@ export default {
       });
 
       this.showTransactionModal();
+      
+      let costMult = 1;
+      if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
+        costMult = 2;
+      }
 
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)
         .send(
           {
             from: this.coinbase,
-            value: cardAttributes.cost * 1000000000000000000,
+            value: cardAttributes.cost * costMult * 1000000000000000000,
           },
           (err, transactionHash) => {
             this.hideTransactionModal();
@@ -492,7 +499,9 @@ export default {
         });
     },
     buyBtnTooltipText(cost, unlock_czxp) {
-      if (this.balance <= cost || this.czxpBalance < parseInt(unlock_czxp)) {
+      if (this.balance <= 2*cost && this.czxpBalance < parseInt(unlock_czxp) ||
+          this.balance <= cost)
+      {
         return this.buyBtnBlockedTooltipTextContent;
       } else {
         return this.buyBtnTooltipTextContent;
