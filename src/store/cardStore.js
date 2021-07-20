@@ -74,7 +74,6 @@ const getCard = async (cardId, CryptozInstance) => {
   }
 
   const t =  await CryptozInstance.methods.storeReleaseTime(cardObj.id).call();
-console.log("get:", cardObj.id, t);
   cardObj.release_time = t;
   return cardObj;
 };

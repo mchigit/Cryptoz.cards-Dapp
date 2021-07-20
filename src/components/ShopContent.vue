@@ -196,13 +196,19 @@
                 <button
                   id="get-button"
                   class="btn btn-primary"
-                  :disabled="czxpBalance < parseInt(card.unlock_czxp)"
-                  @click="getCardForFree(card.type_id)"
+                  :disabled="
+                  czxpBalance < parseInt(card.unlock_czxp) &&
+                  balance <= parseInt(100000000000 * 10 * card.unlock_czxp)
+                  "
+                  @click="getCardForFree(card)"
                 >
                   <b-icon-lock-fill
-                    v-if="czxpBalance < parseInt(card.unlock_czxp)"
+                    v-if="
+                    czxpBalance < parseInt(card.unlock_czxp) &&
+                    balance <= parseInt(100000000000 * 10 * card.unlock_czxp)
+                    "
                   />
-                  Mint for FREE
+                  Mint for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 10 * card.unlock_czxp).toFixed(5)  : 'FREE' }}
                 </button>
               </div>
             </div>
@@ -398,21 +404,30 @@ export default {
         return this.getBtnTooltipTextContent;
       }
     },
-    getCardForFree: async function (type_id) {
+    getCardForFree: async function (cardAttributes) {
       this.showTransactionModal();
       this.$store.dispatch("setCardAsBought", {
-        cardId: type_id,
+        cardId: cardAttributes.type_id,
         isSorted: this.isCardSorted,
       });
 
+      let freeCost = 0;
+      if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
+        freeCost = 100000000000 * 10 * unlock_czxp;
+      }
+
       const result = await this.CryptozInstance.methods
-        .getFreeCard(type_id)
-        .send({ from: this.coinbase }, (err, txHash) => {
+        .getFreeCard(cardAttributes.type_id)
+        .send(
+          {
+            from : this.coinbase,
+            value: freeCost
+          }, (err, txHash) => {
           this.hideTransactionModal();
         })
         .catch((err) => {
           this.$store.dispatch("setCardAsNotBought", {
-            cardId: type_id,
+            cardId: cardAttributes.type_id,
             isSorted: this.isCardSorted,
           });
 
@@ -424,7 +439,7 @@ export default {
 
       if (result) {
         this.$store.dispatch("setCurrentEdition", {
-          cardId: type_id,
+          cardId: cardAttributes.type_id,
           edition: result.events.LogCardMinted.returnValues.editionNumber,
           isSorted: this.isCardSorted,
         });
@@ -437,8 +452,8 @@ export default {
       });
 
       this.showTransactionModal();
-      
-      let costMult = 1;
+
+      let costMult = 1; // as per contract
       if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
         costMult = 2;
       }
