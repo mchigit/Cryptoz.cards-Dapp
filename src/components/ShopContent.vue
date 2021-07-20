@@ -208,7 +208,7 @@
                     balance <= parseInt(100000000000 * 10 * card.unlock_czxp)
                     "
                   />
-                  Mint for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 10 * card.unlock_czxp).toFixed(5)  : 'FREE' }}
+                  Mint for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 10 * card.unlock_czxp).toFixed(5) + '<img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />'  : 'FREE' }}
                 </button>
               </div>
             </div>
@@ -413,7 +413,7 @@ export default {
 
       let freeCost = 0;
       if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
-        freeCost = 100000000000 * 10 * unlock_czxp;
+        freeCost = 100000000000 * 10 * cardAttributes.unlock_czxp;
       }
 
       const result = await this.CryptozInstance.methods
