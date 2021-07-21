@@ -2,7 +2,7 @@
   <div>
     <b-modal
       id="buy-boosters-modal"
-      title="Buy Booster Minting Credits @ 0.002 MOVR each"
+      title="Buy Booster Minting Credits @ 0.007 MOVR each"
     >
       <div class="booster-modal-content">
         <p class="booster-modal-title">
@@ -62,7 +62,7 @@
               class="btn btn-danger"
               :disabled="balance < 2000000000000000 || isBuyingBooster"
             >
-              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.002
+              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.007
               <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
             </b-button>
           </div>
@@ -208,7 +208,7 @@
                     balance <= parseInt(100000000000 * 10 * card.unlock_czxp)
                     "
                   />
-                  Mint for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 10 * card.unlock_czxp).toFixed(5) + '<img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />'  : 'FREE' }}
+                  Mint {{czxpBalance}} for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 10 * card.unlock_czxp).toFixed(5)  : 'FREE' }}
                 </button>
               </div>
             </div>
@@ -495,7 +495,7 @@ export default {
       this.showTransactionModal();
 
       var totalBoostersCost =
-        2000000000000000 * parseInt(this.totalCreditsToBuy);
+        7000000000000000 * parseInt(this.totalCreditsToBuy);
       this.CryptozInstance.methods
         .buyBoosterCredits(parseInt(this.totalCreditsToBuy))
         .send(

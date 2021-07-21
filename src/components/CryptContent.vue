@@ -137,10 +137,11 @@
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT +120 ZOOM'"
               class="btn btn-danger"
-              :disabled="balance < 2000000000000000"
+              :disabled="balance < 7000000000000000"
               @click="buyAndOpenBooster"
             >
-              Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.002 MOVR
+              Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.007
+              <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
             </b-button>
           </div>
         </div>
@@ -260,7 +261,7 @@ export default {
           .send(
             {
               from: this.coinbase,
-              value: 2000000000000000,
+              value: 7000000000000000,
             },
             (err, txHash) => {
               this.$store.dispatch("setIsTransactionPending", false);
@@ -443,5 +444,9 @@ export default {
 
 .mint-booster-btn {
   min-height:62px;
+}
+
+.mr-icon {
+  height: 20px;
 }
 </style>
