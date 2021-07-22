@@ -227,7 +227,7 @@ const cardStore = {
             if (!cardData) {
               return;
             }
-console.log("cardData",cardData);
+
             return rootState.web3.coinbase
               ? await addIsOwnedProp(
                   cardData,

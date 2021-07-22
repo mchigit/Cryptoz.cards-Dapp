@@ -11,7 +11,7 @@
       >
         <div>Enter 0 for no wager</div>
         <div>
-          <b>To wager:</b> Minimum = 2,000,000,000, Maximum =
+          <b>To wager:</b> Minimum = 2,600,000, Maximum =
           1,649,267,441,667,000
         </div>
         <router-link to="/help?read-cards"> Random odds explained </router-link>
@@ -24,7 +24,7 @@
         />
         <b-form-invalid-feedback v-if="isWagerValid">
           <div>
-            You need to enter a number between 2,000,000,000 and
+            You need to enter a number between 2,600,000 and
             1,649,267,441,667,000 to wager.
           </div>
         </b-form-invalid-feedback>
@@ -66,7 +66,7 @@
       >
         <div class="probablity-modal">
           <h4>
-            The probabilities of minting by rarity are hard coded in the Zoombies
+            The base probabilities of minting by rarity are hard coded in the Zoombies
             contract and will never change
           </h4>
           <div class="cards-image-container">
@@ -82,21 +82,21 @@
                 src="https://zoombies.world/images/dapp/zoombies_card_rare_red.svg"
               />
               <span class="rarity-text">Rare</span>
-              <span class="prob-text">5.0%</span>
+              <span class="prob-text">4.98%</span>
             </div>
             <div class="booster-card-wrapper">
               <img
                 src="https://zoombies.world/images/dapp/zoombies_card_uncommon_blue.svg"
               />
               <span class="rarity-text uncommon">Uncommon</span>
-              <span class="prob-text">26.5%</span>
+              <span class="prob-text">29.9%</span>
             </div>
             <div class="booster-card-wrapper">
               <img
                 src="https://zoombies.world/images/dapp/zoombies_card_common_brown.svg"
               />
               <span class="rarity-text common">Common</span>
-              <span class="prob-text">73.0%</span>
+              <span class="prob-text">64.9%</span>
             </div>
           </div>
         </div>
@@ -120,7 +120,8 @@
               v-b-tooltip.hover="'Mint 1 random booster NFT'"
               class="mint-booster-btn btn btn-danger"
               :disabled="boostersOwned < 1"
-              @click="openBooster"
+              v-b-modal="'open-booster-modal'"
+
               >Mint <b-icon-lightning-fill /> Booster NFT
             </b-button>
           </div>
@@ -223,7 +224,7 @@ export default {
         return false;
       }
 
-      return wagerAmount >= 2000000000 && wagerAmount <= 1649267441667000;
+      return wagerAmount >= 2600000 && wagerAmount <= 1649267441667000;
     },
     hasEnoughCZXP() {
       const wagerAmount = parseInt(this.wagerAmount);
@@ -286,8 +287,10 @@ export default {
         this.$store.dispatch("setIsTransactionPending", true);
         this.$bvModal.hide("open-booster-modal");
 
+        console.log(this.wagerAmount);
+
         const res = await this.CryptozInstance.methods
-          .mintBoosterNFT(0)
+          .mintBoosterNFT(this.wagerAmount)
           .send({ from: this.coinbase }, (err, transactionHash) => {
             this.$store.dispatch("setIsTransactionPending", false);
           });
