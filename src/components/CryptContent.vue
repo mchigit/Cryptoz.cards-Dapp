@@ -136,12 +136,12 @@
           </div>
           <div class="buy-and-open-booster">
             <b-button
-              v-b-tooltip.hover="'Mint 1 random booster NFT +120 ZOOM'"
+              v-b-tooltip.hover="'Mint 1 random booster NFT +220 ZOOM'"
               class="btn btn-danger"
-              :disabled="balance < 7000000000000000"
+              :disabled="balance < 10000000000000000"
               @click="buyAndOpenBooster"
             >
-              Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.007
+              Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.01
               <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
             </b-button>
           </div>
@@ -224,7 +224,7 @@ export default {
         return false;
       }
 
-      return wagerAmount >= 2600000 && wagerAmount <= 1649267441667000;
+      return wagerAmount >= 2600000 && wagerAmount <= 5000000;
     },
     hasEnoughCZXP() {
       const wagerAmount = parseInt(this.wagerAmount);
@@ -262,7 +262,7 @@ export default {
           .send(
             {
               from: this.coinbase,
-              value: 7000000000000000,
+              value: 10000000000000000,
             },
             (err, txHash) => {
               this.$store.dispatch("setIsTransactionPending", false);

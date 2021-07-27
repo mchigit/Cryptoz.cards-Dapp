@@ -2,7 +2,7 @@
   <div>
     <b-modal
       id="buy-boosters-modal"
-      title="Buy Booster Minting Credits @ 0.007 MOVR each"
+      title="Buy Booster Minting Credits @ 0.01 MOVR each"
     >
       <div class="booster-modal-content">
         <p class="booster-modal-title">
@@ -57,12 +57,12 @@
         <div class="row">
           <div class="col">
             <b-button
-              v-b-tooltip.hover="'Earn +120 ZOOM per credit'"
+              v-b-tooltip.hover="'Earn +220 ZOOM per credit'"
               v-b-modal.buy-boosters-modal
               class="btn btn-danger"
-              :disabled="balance < 2000000000000000 || isBuyingBooster"
+              :disabled="balance < 100000000000000 || isBuyingBooster"
             >
-              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.007
+              Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.01
               <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
             </b-button>
           </div>
@@ -170,7 +170,7 @@
                 <b-button
                   id="buy-button"
                   :disabled="
-                    (balance <= card.cost*2 &&
+                    (balance <= card.cost*3 &&
                     czxpBalance < parseInt(card.unlock_czxp)) ||
                     balance <= card.cost
                   "
@@ -179,12 +179,12 @@
                 >
                   <b-icon-lock-fill
                     v-if="
-                    (balance <= card.cost*2 &&
+                    (balance <= card.cost*3 &&
                     czxpBalance < parseInt(card.unlock_czxp)) ||
                     balance <= card.cost
                     "
                   />
-                  Mint NFT for {{ czxpBalance < parseInt(card.unlock_czxp) ? card.cost*2 : card.cost }}
+                  Mint NFT for {{ czxpBalance < parseInt(card.unlock_czxp) ? (card.cost*3).toFixed(3) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
               </div>
@@ -208,7 +208,7 @@
                     balance <= parseInt(100000000000 * 10 * card.unlock_czxp)
                     "
                   />
-                  Mint {{czxpBalance}} for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 10 * card.unlock_czxp).toFixed(5)  : 'FREE' }}
+                  Mint for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 1000 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
                 </button>
               </div>
             </div>
@@ -455,15 +455,18 @@ export default {
 
       let costMult = 1; // as per contract
       if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
-        costMult = 2;
+        costMult = 3;
       }
+
+      let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost))
+      cardBNValue.imul(new web3.utils.BN(costMult));
 
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)
         .send(
           {
             from: this.coinbase,
-            value: cardAttributes.cost * costMult * 1000000000000000000,
+            value: cardBNValue.toString(),
           },
           (err, transactionHash) => {
             this.hideTransactionModal();
@@ -495,7 +498,7 @@ export default {
       this.showTransactionModal();
 
       var totalBoostersCost =
-        7000000000000000 * parseInt(this.totalCreditsToBuy);
+        10000000000000000 * parseInt(this.totalCreditsToBuy);
       this.CryptozInstance.methods
         .buyBoosterCredits(parseInt(this.totalCreditsToBuy))
         .send(
