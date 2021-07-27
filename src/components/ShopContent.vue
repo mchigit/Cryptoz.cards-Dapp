@@ -413,9 +413,15 @@ export default {
 
       let freeCost = 0;
       if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
-        freeCost = 100000000000 * 10 * cardAttributes.unlock_czxp;
-      }
+        console.log(cardAttributes.unlock_czxp);
+        let cardBNValue = new web3.utils.BN(cardAttributes.unlock_czxp)
+        cardBNValue.imul(new web3.utils.BN("100000000000000"));
 
+        console.log(cardBNValue.toString());
+        freeCost = cardBNValue.toString();
+        //freeCost = 100000000000 * 10 * cardAttributes.unlock_czxp;
+      }
+console.log("FC:",freeCost);
       const result = await this.CryptozInstance.methods
         .getFreeCard(cardAttributes.type_id)
         .send(
@@ -460,8 +466,6 @@ export default {
 
       let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost))
       cardBNValue.imul(new web3.utils.BN(costMult));
-
-      console.log(cardBNValue.toString());
 
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)
