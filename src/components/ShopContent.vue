@@ -461,6 +461,8 @@ export default {
       let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost))
       cardBNValue.imul(new web3.utils.BN(costMult));
 
+      console.log(cardBNValue.toString());
+
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)
         .send(
