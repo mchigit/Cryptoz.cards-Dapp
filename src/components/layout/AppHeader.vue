@@ -120,7 +120,7 @@
       <b-jumbotron class="jumbo" :lead="sponsorTitle">
         <p>
           By linking your sponsor's wallet address, you will mint a
-          <b>Free Platinum Sponsored NFT Card AND earn ZOOM tokens!</b>
+          <b>Free Platinum Sponsored NFT Card AND earn 500 ZOOM tokens!</b>
         </p>
         <p class="sponsor-warning" variant="info">
           Note: You can only link sponsor once
@@ -183,7 +183,7 @@
         <p>Copy the link by clicking the button below.</p>
         <p>
           Send the link to your friends so they can mint a
-          <b>Free Platinum Sponsored Card!</b>
+          <b>Free Platinum Sponsored Card</b>
         </p>
         <input
           id="sponsor-link"

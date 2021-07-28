@@ -261,7 +261,7 @@ export default {
         "You do not have enough MOVR or ZOOM tokens to unlock minting",
       getBtnTooltipTextContent: "Click to mint a copy of this card at no cost",
       getBtnBlockedTooltipTextContent:
-        "You do not have enough ZOOM tokens to unlock minting an NFT of this type",
+        "You do not have enough ZOOM tokens to unlock FREE minting an NFT of this type, but can pay to mint the NFT",
       getOwnedCardToolTipText: "You can only mint 1 card of each type",
       getSoldCardToolTipText:
         "All NFTs of this type have been minted, check markets",
@@ -413,15 +413,11 @@ export default {
 
       let freeCost = 0;
       if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
-        console.log(cardAttributes.unlock_czxp);
         let cardBNValue = new web3.utils.BN(cardAttributes.unlock_czxp)
         cardBNValue.imul(new web3.utils.BN("100000000000000"));
-
-        console.log(cardBNValue.toString());
         freeCost = cardBNValue.toString();
-        //freeCost = 100000000000 * 10 * cardAttributes.unlock_czxp;
       }
-console.log("FC:",freeCost);
+
       const result = await this.CryptozInstance.methods
         .getFreeCard(cardAttributes.type_id)
         .send(

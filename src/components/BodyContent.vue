@@ -16,15 +16,16 @@
           <p>Zoombies is deployed on
             <img src="https://zoombies.world/images/moonriver-logo-500.png" style="max-width:7em" />
           </p>
-          <h2>Time to have some fun</h2>
+          <h2>Time to have some fun !</h2>
           <p>
             The goal is to collect the rare and unique undead NFT cards, earn or
-            trade ERC-20 ZOOM tokens to unlock new levels.
-            Each minted NFT Zoombies card is a unique token on the Moonriver blockchain.
+            trade ERC-20 ZOOM tokens to unlock FREE shop minting and reduced shop pricing.</p>
+          <p>Each minted NFT Zoombies card is a unique token on the Moonriver blockchain.
             Collectors can buy, sell, and exchange both their Zoombies NFT
             cards and ZOOM tokens through any standards compliant wallets,
             markets, game engines, exchanges, DeFi and other future inventions.
           </p>
+          <p>The most profitable strategy is to <strong>grow your Affiliate network early</strong> and earn ZOOM tokens for Free :). Click the Affiliate link in the header to Share and earn</p>
           <div>
             <h2>Get Started</h2>
             <span
@@ -59,7 +60,7 @@
             </li>
           </ul>
           <p>
-            <router-link to="/help"> Visit the Help section </router-link> of our
+            <router-link to="/help"> Visit the Help section </router-link> of the
             website to read more
           </p>
         </b-card-text>

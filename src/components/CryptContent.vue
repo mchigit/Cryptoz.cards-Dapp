@@ -4,15 +4,15 @@
       <!-- Open Booster Modal -->
       <b-modal
         id="open-booster-modal"
-        title="Enter a ZOOM burn wager amount to increase the odds of pulling a rare or epic card ( czxp gone forever ):"
+        title="Enter a ZOOM burn wager amount to increase the odds of pulling an epic card:"
         ok-variant="danger"
         ok-title="Open Booster"
         hide-footer
       >
         <div>Enter 0 for no wager</div>
         <div>
-          <b>To wager:</b> Minimum = 2,600,000, Maximum =
-          1,649,267,441,667,000
+          <b>To wager:</b> Minimum = 1,000,000, Maximum =
+          5,000,000
         </div>
         <router-link to="/help?read-cards"> Random odds explained </router-link>
         <b-form-input
@@ -24,8 +24,8 @@
         />
         <b-form-invalid-feedback v-if="isWagerValid">
           <div>
-            You need to enter a number between 2,600,000 and
-            1,649,267,441,667,000 to wager.
+            You need to enter a number between 1,000,000 and
+            5,000,000 to wager.
           </div>
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!hasEnoughCZXP">
@@ -215,7 +215,7 @@ export default {
     },
     isWagerValid() {
       const wagerAmount = parseInt(this.wagerAmount);
-
+      console.log("isValidWager",wagerAmount,wagerAmount >= 1000000 && wagerAmount <= 5000000);
       if (wagerAmount === 0) {
         return true;
       }
@@ -224,12 +224,14 @@ export default {
         return false;
       }
 
-      return wagerAmount >= 2600000 && wagerAmount <= 5000000;
+      return wagerAmount >= 1000000 && wagerAmount <= 5000000;
     },
     hasEnoughCZXP() {
       const wagerAmount = parseInt(this.wagerAmount);
       if (wagerAmount > 0) {
-        return this.czxp_balance < wagerAmount;
+        console.log("tokens:",this.czxp_balance);
+        console.log(this.czxp_balance > wagerAmount);
+        return this.czxp_balance > wagerAmount;
       }
 
       return true;

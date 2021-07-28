@@ -5,8 +5,8 @@ const typeIdsOnChain = [];
 
 
 
-//push Apr 22,2021
-typeIdsOnChain.push(1,6,8,11,14,32,36,40,44,47,52,55,59,61,65,71,73);
+//push 2021
+typeIdsOnChain.push(1,6,8,11,14,32,36,40,44,47,52,55,59,61,65,71);
 
 
 const DEFAULT_CARD_STATE = {
