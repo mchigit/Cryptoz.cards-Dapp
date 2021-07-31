@@ -43,9 +43,9 @@
                 <a
                   class="twitter-follow-button"
                   data-show-count="false"
-                  href="https://twitter.com/"
+                  href="https://twitter.com/CryptozNFT"
                 >
-                  Follow @ZoombiesNFT
+                  Follow Cardinal Entertainment on Twitter
                 </a>
               </li>
               <li>

@@ -359,6 +359,11 @@
                   tokens:
                   <ul>
                     <li>
+                      <span class="text-success"><strong>MOST PROFITABLE</strong></span> - Earn 20% of the amount earned by your affiliates
+                      actions, resulting in passive earnings. Click the Affiliate link in the header
+                      for more information.
+                    </li>
+                    <li>
                       <router-link to="/shop">
                         Buy Booster Credits
                       </router-link>
@@ -395,11 +400,6 @@
                       </router-link>
                     </li>
                     <li>Request them from other players</li>
-                    <li>
-                      Receive 20% of the amount earned by your affiliates
-                      purchase actions. Click the Affiliate link in the header
-                      for more information.
-                    </li>
                   </ul>
                 </div>
               </b-card-body>

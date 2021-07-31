@@ -13,9 +13,10 @@
             class="img-responsive card-demo-group"
             src="@/assets/zoombies_card_types.png"
           />
-          <p>Zoombies is deployed on
+          <h1 class="text-danger">OPEN BETA ON MOONBASE ALPHA TESTNET</h1>
+          <!--p>Zoombies is deployed on
             <img src="https://zoombies.world/images/moonriver-logo-500.png" style="max-width:7em" />
-          </p>
+          </p-->
           <h2>Time to have some fun !</h2>
           <p>
             The goal is to collect the rare and unique undead NFT cards, earn or
@@ -33,9 +34,9 @@
               <a
                 href="https://docs.moonbeam.network/getting-started/moonbase/metamask/"
                 target="_blank"
-                >install Metamask configured for Moonriver</a
+                >install Metamask configured for Moonbase alpha</a
               >
-              and have a small amount of MOVR in your account.</span
+              and have a small amount of DEV in your account.</span
             >
           </div>
           <p>

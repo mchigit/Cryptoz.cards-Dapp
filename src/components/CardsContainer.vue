@@ -640,6 +640,7 @@ export default {
       }
     },
     sacrificeCard: async function (id) {
+      console.log('Sac id:',id);
       this.$store.dispatch("setIsTransactionPending", true);
       Vue.set(this.cardsBeingSacrificed, id, true);
       const sacrificeRes = await this.CryptozInstance.methods

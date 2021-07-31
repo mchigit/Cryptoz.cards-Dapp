@@ -260,11 +260,7 @@ const cryptStore = {
             .tokenOfOwnerByIndex(addressToLoad,l)
             .call();
 
-          const nftIndex = await CryptozInstance.methods
-            .tokenByIndex(nftTokenId)
-            .call();
-
-          tokensOfOwner.push(nftIndex);
+            tokensOfOwner.push(nftTokenId);
         }
 
         const cryptCards = await Promise.all(
