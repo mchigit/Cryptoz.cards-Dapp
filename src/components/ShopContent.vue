@@ -142,7 +142,7 @@
               >
                 <button
                   id="unreleased-button"
-                  class="btn btn-primary"
+                  class="btn btn-warning"
                   disabled
                 >
                   <b-icon-lock-fill />
