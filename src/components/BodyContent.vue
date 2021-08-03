@@ -32,12 +32,13 @@
                 <b-col></b-col>
               </b-row>
               <br/>
-              <b-row>
-                <b-col>Total to purchase: {{pendingPurchase}}</b-col>
-                <b-col><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="8" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input></b-col>
+              <b-row align-h="center">
+                <b-col class="text-right" style="padding-top:6px"><strong>Total to purchase:</strong> <span class="text-success">{{pendingPurchase}}</span></b-col>
+                <b-col cols="2"><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="8" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input></b-col>
                 <b-col><input type="submit" class="btn btn-primary" @click="buyCzxp" :disabled="!buyCzxpBtnEnabled"></b-col>
               </b-row>
             </b-container>
+            <hr />
           </p>
           <h2>Time to have some fun !</h2>
           <p>
@@ -116,8 +117,8 @@ export default {
   },
   data() {
     return {
-      zoomSold: 0,
-      zoomWalletsRemaining: 500,
+      zoomSold: "Loading..",
+      zoomWalletsRemaining: "Loading..",
       totalCzxpToBuy: "",
       movrCost: 0,
     };
@@ -155,6 +156,7 @@ export default {
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
+      this.movrCost = this.totalCzxpToBuy / 1000000;
     },
   },
 };
