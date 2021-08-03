@@ -17,6 +17,28 @@
           <!--p>Zoombies is deployed on
             <img src="https://zoombies.world/images/moonriver-logo-500.png" style="max-width:7em" />
           </p-->
+          <p>
+            <h2>(Test) Token Liquidity Sale Event</h2>
+            <br/>
+            <b-container fluid>
+              <b-row>
+                <b-col><strong>Max. 500 wallets</strong></b-col>
+                <b-col><strong>1 ZOOM = 0.000001 MOVR</strong></b-col>
+                <b-col><strong>Max sale: 5 Billion ZOOM</strong></b-col>
+              </b-row>
+              <b-row>
+                <b-col class="text-success">{{zoomWalletsRemaining}} slots remaining</b-col>
+                <b-col class="text-success">{{zoomSold}} ZOOM sold</b-col>
+                <b-col></b-col>
+              </b-row>
+              <br/>
+              <b-row>
+                <b-col>Total to purchase: {{pendingPurchase}}</b-col>
+                <b-col><input v-model="totalCzxpToBuy" type="text" class=""></b-col>
+                <b-col><input type="submit" class="btn btn-primary" @click="buyCzxp"></b-col>
+              </b-row>
+            </b-container>
+          </p>
           <h2>Time to have some fun !</h2>
           <p>
             The goal is to collect the rare and unique undead NFT cards, earn or
@@ -75,18 +97,25 @@
 import {
   BCard,
   BButton,
-  BCardText
+  BCardText,
+  BContainer,
+  BRow,
+  BCol
 } from "bootstrap-vue";
 export default {
   name: "BodyContent",
   components: {
     BCard,
     BButton,
-    BCardText
+    BCardText,
+    BContainer,
+    BRow,
+    BCol
   },
   data() {
     return {
-      msg: "Here we go, here we go",
+      zoomSold: 0,
+      zoomWalletsRemaining: 500,
       totalCzxpToBuy: "",
     };
   },
@@ -94,8 +123,8 @@ export default {
     buyCzxpBtnEnabled() {
       if (
         this.totalCzxpToBuy !== "" &&
-        this.totalCzxpToBuy >= 0.00001 &&
-        this.totalCzxpToBuy <= 1
+        this.totalCzxpToBuy >= 1 &&
+        this.totalCzxpToBuy <= 10000000
       ) {
         return true;
       } else {
@@ -108,14 +137,17 @@ export default {
     CzxpInstance() {
       return this.$store.state.contractInstance.czxp;
     },
+    pendingPurchase() {
+      return `10 MOVR = `
+    }
   },
   methods: {
-    buyCzxp: function () {
-      CzxpInstance.buy({
+    buyCzxp: async function () {
+      await this.CzxpInstance.methods.buy().send({
         from: this.coinbase,
-        value: this.totalCzxpToBuy * 1000000000000000000,
+        value: this.totalCzxpToBuy * 1000000000000,
       }).then((res) => {
-        // console.log(res);
+         console.log(res);
       });
     },
     filterCzxpInput: function () {

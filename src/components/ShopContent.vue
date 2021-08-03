@@ -43,14 +43,14 @@
         The Shop is a place to mint limited edition Zoombies Cards NFT tokens.
         Some cards are free, some have a cost. You may also buy and
         <router-link to="/my-zoombies-nfts"> open a booster card </router-link>,
-        which will randomly mint a booster edition NFT token.
+        which will mint a random booster edition NFT token.
       </p>
       <p>
-        To mint a FREE NFT Or buy a Limited edition NFT, you will need the
+        To mint a FREE NFT Or buy a Limited edition NFT at the reduced cost, you will need the
         required minimum balance of ZOOM tokens displayed on the botton of the
-        card to unlock the minting button. The newly minted NFT will appear in
+        card to update the minting button. The newly minted NFT will appear in
         <router-link to="/my-zoombies-nfts"> Your NFT Crypt </router-link> once
-        the transaction is confirmed. ZOOM is NOT burned when minting
+        the transaction is confirmed. ZOOM is NOT burned when minting.
       </p>
 
       <div v-if="isWalletConnected">
