@@ -34,8 +34,8 @@
               <br/>
               <b-row>
                 <b-col>Total to purchase: {{pendingPurchase}}</b-col>
-                <b-col><input v-model="totalCzxpToBuy" type="text" class=""></b-col>
-                <b-col><input type="submit" class="btn btn-primary" @click="buyCzxp"></b-col>
+                <b-col><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="8" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input></b-col>
+                <b-col><input type="submit" class="btn btn-primary" @click="buyCzxp" :disabled="!buyCzxpBtnEnabled"></b-col>
               </b-row>
             </b-container>
           </p>
@@ -100,7 +100,8 @@ import {
   BCardText,
   BContainer,
   BRow,
-  BCol
+  BCol,
+  BFormInput
 } from "bootstrap-vue";
 export default {
   name: "BodyContent",
@@ -110,13 +111,15 @@ export default {
     BCardText,
     BContainer,
     BRow,
-    BCol
+    BCol,
+    BFormInput
   },
   data() {
     return {
       zoomSold: 0,
       zoomWalletsRemaining: 500,
       totalCzxpToBuy: "",
+      movrCost: 0,
     };
   },
   computed: {
@@ -138,7 +141,7 @@ export default {
       return this.$store.state.contractInstance.czxp;
     },
     pendingPurchase() {
-      return `10 MOVR = `
+      return this.movrCost + " MOVR =";
     }
   },
   methods: {
@@ -151,7 +154,7 @@ export default {
       });
     },
     filterCzxpInput: function () {
-      this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^0-9\.]/g, "");
+      this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
     },
   },
 };
