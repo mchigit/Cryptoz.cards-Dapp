@@ -171,13 +171,13 @@
                     </li>
                   </ul>
                   As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
-                  $25.50 USD per transaction, depending on how fast you would
+                  ?? USD per transaction, depending on how fast you would
                   like the transactions confirmed and what exactly you are
                   trying to do.
                   <br />
                   This fee is not charged by the Zoombies contract, but by the
                   Moonriver platform to execute contract code for you
-                  by you on this massive worldscale blockchains.
+                  by you on this massive worldscale blockchain.
                 </div>
               </b-card-body>
             </b-collapse>
@@ -219,7 +219,7 @@
                   </ul>
                   <p>
                     Click the Sponsors link in the menu to copy your Afilliate
-                    URL to send to other players.
+                    URL to share with others and start earning ZOOM tokens today !
                   </p>
                 </div>
               </b-card-body>
@@ -233,7 +233,7 @@
               role="tab"
             >
               <b-button v-b-toggle.accordion-4 block class="accordion-button">
-                What are ERC-20 and ERC-721 tokens?
+                What are ZOOM and NFT tokens?
               </b-button>
             </b-card-header>
             <b-collapse
@@ -251,7 +251,9 @@
                     />
                     <strong>ZOOM Tokens</strong> are ERC-20
                     Fungible tokens. This means that any ZOOM is exchangeable
-                    with any other ZOOM token and none are unique.
+                    with any other ZOOM token and none are unique. If your wallet contains a sufficient amount of ZOOM tokens
+                    each Shop card will automatically determine if it will unlock and display the FREE minting button and reduced pricing values.
+                    Each Shop card displays the amount of ZOOM required to unlock this feature in the bottom left
                     <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add ZOOM to Metamask</div>
                   </p>
                   <p>
@@ -319,8 +321,7 @@
                       edition number starting at #1 and count up infinitely.
                     </li>
                     <li>
-                      A <strong>limited edition</strong> NFT card is minted from
-                      the Shop and have a finite amount that will ever be
+                      A <strong>limited edition</strong> NFT card have a finite amount that will ever be
                       created. You will see the current edition number on the
                       NFT in a format like : #2 of 6
                     </li>

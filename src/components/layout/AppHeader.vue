@@ -104,7 +104,7 @@
               variant="warning"
               @click="$emit('connect')"
             >
-              Connect To Moonriver
+              Connect To Moonbase (testnet)
             </b-button>
           </li>
         </b-navbar-nav>

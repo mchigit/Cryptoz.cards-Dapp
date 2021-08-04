@@ -4,8 +4,9 @@
       <b-card bg-variant="dark" text-variant="white" border-variant="info">
         <b-card-text>
           <br/>
+          <br/>
           <h1>
-            Zoombies is an NFT collectibles trade game built on scarcity, rarity
+            Zoombies is the play-to-earn NFT collectibles trade game built on scarcity, rarity
             and community
           </h1>
           <br/>
@@ -18,18 +19,21 @@
             <img src="https://zoombies.world/images/moonriver-logo-500.png" style="max-width:7em" />
           </p-->
           <p>
-            <h2>(Test) Token Liquidity Sale Event</h2>
+            <h2>ZOOM Token Liquidity Sale Event !</h2>
+            <p>Holding a sufficient ZOOM token balance will unlock FREE and 1/3 reduced Shop NFT minting costs</p>
             <br/>
             <b-container fluid>
               <b-row>
                 <b-col><strong>Max. 500 wallets</strong></b-col>
+                <b-col><strong>Max Total sale: 5 Billion ZOOM</strong></b-col>
                 <b-col><strong>1 ZOOM = 0.000001 MOVR</strong></b-col>
-                <b-col><strong>Max sale: 5 Billion ZOOM</strong></b-col>
+                <b-col><strong>Max purchase: 10 MOVR</strong></b-col>
               </b-row>
               <b-row>
-                <b-col class="text-success">{{zoomWalletsRemaining}} slots remaining</b-col>
-                <b-col class="text-success">{{zoomSold}} ZOOM sold</b-col>
-                <b-col><strong>Max purchase: 10 MOVR</strong></b-col>
+                <b-col class="text-warning">{{zoomWalletsRemaining}} slots remaining</b-col>
+                <b-col class="text-warning">{{zoomSold}} ZOOM sold</b-col>
+                <b-col class="text-success">Your ZOOM Purchase Total: {{myPurchaseTotal}}</b-col>
+                <b-col></b-col>
               </b-row>
               <br/>
               <b-row align-h="center">
@@ -121,6 +125,7 @@ export default {
       zoomWalletsRemaining: "Loading..",
       totalCzxpToBuy: "",
       movrCost: 0,
+      myPurchaseTotal: 0,
     };
   },
   computed: {
@@ -169,9 +174,10 @@ export default {
     },
     updateSale: async function () {
       this.zoomWalletsRemaining = 500 - await this.CzxpInstance.methods.totalContributors().call();
-      this.zoomSold = await this.CzxpInstance.methods.totalZoomPurchased().call();
+      this.zoomSold = parseInt(await this.CzxpInstance.methods.totalZoomPurchased().call()).toLocaleString();
       this.totalCzxpToBuy = "";
       this.movrCost = 0;
+      this.myPurchaseTotal = parseInt(await this.CzxpInstance.methods.contributions(this.coinbase).call() /1000000000000).toString() ;
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
