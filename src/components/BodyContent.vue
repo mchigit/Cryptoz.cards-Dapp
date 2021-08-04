@@ -29,12 +29,12 @@
               <b-row>
                 <b-col class="text-success">{{zoomWalletsRemaining}} slots remaining</b-col>
                 <b-col class="text-success">{{zoomSold}} ZOOM sold</b-col>
-                <b-col></b-col>
+                <b-col><strong>Max purchase: 10 MOVR</strong></b-col>
               </b-row>
               <br/>
               <b-row align-h="center">
                 <b-col class="text-right" style="padding-top:6px"><strong>Total to purchase:</strong> <span class="text-success">{{pendingPurchase}}</span></b-col>
-                <b-col cols="2"><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="8" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input></b-col>
+                <b-col cols="2"><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="8" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input> ZOOM tokens</b-col>
                 <b-col><input type="submit" class="btn btn-primary" @click="buyCzxp" :disabled="!buyCzxpBtnEnabled"></b-col>
               </b-row>
             </b-container>
@@ -149,11 +149,9 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(async function () {
-      //console.log(await this.CzxpInstance.methods.totalContributors.call());
-      //console.log(await this.CzxpInstance.methods.totalContributors().call());
-      this.zoomWalletsRemaining = 500 - await this.CzxpInstance.methods.totalContributors().call();
-    })
+    this.$nextTick(function () {
+      this.updateSale();
+    });
   },
   methods: {
     buyCzxp: async function () {
@@ -161,11 +159,25 @@ export default {
         from: this.coinbase,
         value: this.totalCzxpToBuy * 1000000000000,
       }).then((res) => {
-         console.log(res);
+         //console.log(res.status);
+         if(res.status){
+           this.updateSale();
+         }
+      }).catch((e) => {
+        console.error(e);
       });
+    },
+    updateSale: async function () {
+      this.zoomWalletsRemaining = 500 - await this.CzxpInstance.methods.totalContributors().call();
+      this.zoomSold = await this.CzxpInstance.methods.totalZoomPurchased().call();
+      this.totalCzxpToBuy = "";
+      this.movrCost = 0;
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
+      if(this.totalCzxpToBuy > 10000000){
+        this.totalCzxpToBuy = 10000000;
+      }
       this.movrCost = this.totalCzxpToBuy / 1000000;
     },
   },
