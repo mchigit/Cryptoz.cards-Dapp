@@ -141,9 +141,19 @@ export default {
     CzxpInstance() {
       return this.$store.state.contractInstance.czxp;
     },
+    ZoombiesInstance() {
+      return this.$store.state.contractInstance.cryptoz;
+    },
     pendingPurchase() {
       return this.movrCost + " MOVR =";
     }
+  },
+  mounted() {
+    this.$nextTick(async function () {
+      //console.log(await this.CzxpInstance.methods.totalContributors.call());
+      //console.log(await this.CzxpInstance.methods.totalContributors().call());
+      this.zoomWalletsRemaining = 500 - await this.CzxpInstance.methods.totalContributors().call();
+    })
   },
   methods: {
     buyCzxp: async function () {
