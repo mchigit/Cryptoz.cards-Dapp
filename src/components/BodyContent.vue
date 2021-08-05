@@ -31,8 +31,8 @@
               </b-row>
               <b-row>
                 <b-col class="text-warning">{{zoomWalletsRemaining}} slots remaining</b-col>
-                <b-col class="text-warning">{{zoomSold}} ZOOM sold</b-col>
-                <b-col class="text-success">Your ZOOM Purchase Total: {{myPurchaseTotal}}</b-col>
+                <b-col class="text-warning">{{zoomSold}} World sold</b-col>
+                <b-col class="text-success">Your Purchases: {{myPurchaseTotal}}</b-col>
                 <b-col></b-col>
               </b-row>
               <br/>
@@ -133,7 +133,8 @@ export default {
       if (
         this.totalCzxpToBuy !== "" &&
         this.totalCzxpToBuy >= 1 &&
-        this.totalCzxpToBuy <= 10000000
+        this.totalCzxpToBuy <= 10000000 &&
+        this.myPurchaseTotal < 10000000
       ) {
         return true;
       } else {
@@ -151,6 +152,13 @@ export default {
     },
     pendingPurchase() {
       return this.movrCost + " MOVR =";
+    },
+    buyEnabled() {
+      if(this.myPurchaseTotal < 10000000){
+        return true;
+      }else{
+        return false;
+      }
     }
   },
   mounted() {
@@ -177,12 +185,12 @@ export default {
       this.zoomSold = parseInt(await this.CzxpInstance.methods.totalZoomPurchased().call()).toLocaleString();
       this.totalCzxpToBuy = "";
       this.movrCost = 0;
-      this.myPurchaseTotal = parseInt(await this.CzxpInstance.methods.contributions(this.coinbase).call() /1000000000000).toString() ;
+      this.myPurchaseTotal = parseInt(await this.CzxpInstance.methods.contributions(this.coinbase).call() /1000000000000).toLocaleString() ;
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
-      if(this.totalCzxpToBuy > 10000000){
-        this.totalCzxpToBuy = 10000000;
+      if( (parseInt(this.myPurchaseTotal)+this.totalCzxpToBuy) >= 10000000 ){
+        this.totalCzxpToBuy = parseInt(10000000 - parseInt(this.myPurchaseTotal.replace(/,/g, '')));
       }
       this.movrCost = this.totalCzxpToBuy / 1000000;
     },
