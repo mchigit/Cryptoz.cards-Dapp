@@ -170,7 +170,7 @@
                 <b-button
                   id="buy-button"
                   :disabled="
-                    (balance <= card.cost*3 &&
+                    (balance <= parseInt(100000000000 * 10 * card.unlock_czxp) &&
                     czxpBalance < parseInt(card.unlock_czxp)) ||
                     balance <= card.cost
                   "
@@ -184,7 +184,7 @@
                     balance <= card.cost
                     "
                   />
-                  Mint NFT for {{ czxpBalance < parseInt(card.unlock_czxp) ? (card.cost*3).toFixed(3) : card.cost }}
+                  Mint NFT for {{ czxpBalance < parseInt(card.unlock_czxp) ? (parseFloat(0.0000001 * 1000 * card.unlock_czxp)).toFixed(4) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
               </div>
@@ -455,13 +455,11 @@ export default {
 
       this.showTransactionModal();
 
-      let costMult = 1; // as per contract
+      let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost)).toString()
       if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
-        costMult = 3;
+        cardBNValue = 100000000000 * 1000 * cardAttributes.unlock_czxp;
       }
 
-      let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost))
-      cardBNValue.imul(new web3.utils.BN(costMult));
 
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)
