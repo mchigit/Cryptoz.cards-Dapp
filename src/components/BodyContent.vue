@@ -131,7 +131,6 @@ export default {
   },
   computed: {
     buyCzxpBtnEnabled() {
-      console.log("btn purchTotal:",this.myPurchaseTotal);
       if (
         this.totalCzxpToBuy !== "" &&
         this.totalCzxpToBuy >= 1000000 &&
@@ -192,8 +191,8 @@ export default {
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
-      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy) > 10000000000000000000 ){
-        this.totalCzxpToBuy = (10000000000000000000 - this.myPurchaseTotal) /100000000000000000;
+      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy * 1000000000000) > 10000000000000000000 ){
+        this.totalCzxpToBuy = (10000000000000000000 - this.myPurchaseTotal) /1000000000000;
       }
 
       this.movrCost = this.totalCzxpToBuy / 1000000;
