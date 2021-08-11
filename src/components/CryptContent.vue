@@ -136,7 +136,7 @@
           </div>
           <div class="buy-and-open-booster">
             <b-button
-              v-b-tooltip.hover="'Mint 1 random booster NFT +220 ZOOM'"
+              v-b-tooltip.hover="'Mint 1 random booster NFT +500 ZOOM'"
               class="btn btn-danger"
               :disabled="balance < 10000000000000000"
               @click="buyAndOpenBooster"

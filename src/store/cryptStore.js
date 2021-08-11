@@ -84,7 +84,7 @@ const filterCards = (filterBy, cards) => {
 };
 
 const getCryptCard = async (tokenId, instance) => {
-  const ownedCard = await instance.methods.NFTs(tokenId).call();
+  const ownedCard = await instance.methods.nfts(tokenId).call();
   const cardData = await getCardType(parseInt(ownedCard[0]));
 
   cardData.id = tokenId;

@@ -26,7 +26,7 @@ export default {
   name: "UniverseBalances",
   computed: {
     totalCzxpSupply() {
-      return this.$store.state.totalCzxpSupply.toLocaleString();
+      return (this.$store.state.totalCzxpSupply/1000000000000000000).toLocaleString();
     },
     totalCryptozSupply() {
       return this.$store.state.totalCryptozSupply.toLocaleString();

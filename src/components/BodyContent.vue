@@ -20,14 +20,14 @@
           </p-->
           <p>
             <h2>ZOOM Token Liquidity Sale Event !</h2>
-            <p>Holding a sufficient ZOOM token balance will unlock FREE and 1/3 reduced Shop NFT minting costs</p>
+            <p>Holding a sufficient ZOOM token balance for a card type will unlock FREE and reduced Shop NFT minting costs</p>
             <br/>
             <b-container fluid>
               <b-row>
                 <b-col sm="12" md="3" lg="3"><strong>Max. 500 wallets</strong></b-col>
                 <b-col sm="12" md="3" lg="3"><strong>Max Total sale: 5 Billion ZOOM</strong></b-col>
                 <b-col sm="12" md="3" lg="3"><strong>1 ZOOM = 0.000001 MOVR</strong></b-col>
-                <b-col sm="12" md="3" lg="3"><strong>Max purchase: 10 MOVR</strong></b-col>
+                <b-col sm="12" md="3" lg="3"><strong>Min/Max purchase: 1/10 MOVR</strong></b-col>
               </b-row>
               <br/>
               <b-row>
@@ -131,11 +131,12 @@ export default {
   },
   computed: {
     buyCzxpBtnEnabled() {
+      console.log("btn purchTotal:",this.myPurchaseTotal);
       if (
         this.totalCzxpToBuy !== "" &&
-        this.totalCzxpToBuy >= 1 &&
+        this.totalCzxpToBuy >= 1000000 &&
         this.totalCzxpToBuy <= 10000000 &&
-        this.myPurchaseTotal < 10000000
+        this.myPurchaseTotal < 10000000000000000000
       ) {
         return true;
       } else {
@@ -155,7 +156,7 @@ export default {
       return this.movrCost + " MOVR =";
     },
     myPurchaseTotalLabel() {
-      return parseInt(this.myPurchaseTotal).toLocaleString();
+      return parseInt(this.myPurchaseTotal/1000000000000).toLocaleString();
     }
   },
   mounted() {
@@ -165,9 +166,12 @@ export default {
   },
   methods: {
     buyCzxp: async function () {
+      console.log( new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString() );
+      let buyinWei = new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString();
+
       await this.CzxpInstance.methods.buy().send({
         from: this.coinbase,
-        value: this.totalCzxpToBuy * 1000000000000,
+        value: buyinWei,
       }).then((res) => {
          //console.log(res.status);
          if(res.status){
@@ -178,16 +182,18 @@ export default {
       });
     },
     updateSale: async function () {
+      //console.log(await this.CzxpInstance.methods.totalSupply().call());
       this.zoomWalletsRemaining = 500 - await this.CzxpInstance.methods.totalContributors().call();
-      this.zoomSold = parseInt(await this.CzxpInstance.methods.totalZoomPurchased().call()).toLocaleString();
+      this.zoomSold = parseInt(await this.CzxpInstance.methods.totalZoomPurchased().call()/1000000000000000000).toLocaleString();
       this.totalCzxpToBuy = "";
       this.movrCost = 0;
-      this.myPurchaseTotal = parseInt(await this.CzxpInstance.methods.contributions(this.coinbase).call() /1000000000000);
+      console.log("contr.total:",await this.CzxpInstance.methods.contributions(this.coinbase).call());
+      this.myPurchaseTotal = parseInt(await this.CzxpInstance.methods.contributions(this.coinbase).call());
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
-      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy) > 10000000 ){
-        this.totalCzxpToBuy = 10000000 - this.myPurchaseTotal;
+      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy) > 10000000000000000000 ){
+        this.totalCzxpToBuy = (10000000000000000000 - this.myPurchaseTotal) /100000000000000000;
       }
 
       this.movrCost = this.totalCzxpToBuy / 1000000;

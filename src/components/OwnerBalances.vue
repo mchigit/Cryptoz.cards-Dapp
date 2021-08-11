@@ -38,7 +38,7 @@ export default {
       return this.$store.state.cardsOwned.toLocaleString();
     },
     czxp_balance() {
-      return this.$store.state.czxpBalance.toLocaleString();
+      return (this.$store.state.czxpBalance/1000000000000000000).toLocaleString();
     },
     coinbase() {
       return this.$store.state.web3.coinbase;

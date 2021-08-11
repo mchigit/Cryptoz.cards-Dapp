@@ -25,7 +25,7 @@
     methods: {
       animate: function(value) {
         this.playAnimation = true
-        this.czxpAward = value
+        this.czxpAward = parseInt(value/1000000000000000000)
         const czxp_bonus_sound = new Audio(require('../assets/czxp_gain.wav'));
         czxp_bonus_sound.play();
 

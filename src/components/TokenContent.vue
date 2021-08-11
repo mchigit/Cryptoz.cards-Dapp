@@ -201,7 +201,7 @@ export default {
   methods: {
     loadCard: async function (token_id) {
       const res = await this.CryptozInstance.methods
-        .NFTs(token_id)
+        .nfts(token_id)
         .call()
         .catch((err) => console.log({ err }));
 
