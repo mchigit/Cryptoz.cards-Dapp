@@ -57,7 +57,7 @@
         <div class="row">
           <div class="col">
             <b-button
-              v-b-tooltip.hover="'Earn +220 ZOOM per credit'"
+              v-b-tooltip.hover="'Earn +500 ZOOM per credit'"
               v-b-modal.buy-boosters-modal
               class="btn btn-danger"
               :disabled="balance < 100000000000000 || isBuyingBooster"
