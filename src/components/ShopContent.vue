@@ -60,7 +60,7 @@
               v-b-tooltip.hover="'Earn +500 ZOOM per credit'"
               v-b-modal.buy-boosters-modal
               class="btn btn-danger"
-              :disabled="balance < 100000000000000 || isBuyingBooster"
+              :disabled="balance < 10000000000000000 || isBuyingBooster"
             >
               Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.01
               <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
@@ -155,7 +155,7 @@
               v-else-if="!card.isOwned"
               id="buy-get-button-wrapper"
               :class="
-                balance <= card.cost || czxpBalance < parseInt(card.unlock_czxp)
+                balance < getBN(card.cost) || czxpBalance < parseInt(card.unlock_czxp)
                   ? 'disabled-btn'
                   : ''
               "
@@ -169,24 +169,24 @@
               >
                 <b-button
                   id="buy-button"
-                  :disabled="
-                    (balance <= parseInt(100000000000 * 10 * card.unlock_czxp) &&
-                    czxpBalance < parseInt(card.unlock_czxp)) ||
-                    balance <= card.cost
-                  "
+                  :disabled="buyBtnDisabled(card)"
                   variant="primary"
                   @click="buyCard(card)"
                 >
                   <b-icon-lock-fill
-                    v-if="
-                    (balance <= card.cost*3 &&
-                    czxpBalance < parseInt(card.unlock_czxp)) ||
-                    balance <= card.cost
-                    "
+                    v-if="buyBtnDisabled(card)"
                   />
-                  Mint NFT for {{ czxpBalance < parseInt(card.unlock_czxp) ? (parseFloat(0.0000001 * 1000 * card.unlock_czxp)).toFixed(4) : card.cost }}
+                  Mint NFT for {{ czxpBalance < getBN(card.unlock_czxp) ? (parseFloat(0.000001 * 100 * card.unlock_czxp)).toFixed(4) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
+                <br>
+                {{ weiToEther(balance) < card.cost }}  {{czxpBalance < getBN(card.unlock_czxp)}}
+                <br>
+                CardCost: {{card.cost}}
+                <br>
+                balance : {{weiToEther(balance)}}<br>
+                czxpBal: {{czxpBalance}}<br>
+                getBuyZoom: {{getBuyZoom(parseInt(card.unlock_czxp).toString())}}
               </div>
               <div
                 v-else
@@ -196,17 +196,11 @@
                 <button
                   id="get-button"
                   class="btn btn-primary"
-                  :disabled="
-                  czxpBalance < parseInt(card.unlock_czxp) &&
-                  balance <= parseInt(100000000000 * 10 * card.unlock_czxp)
-                  "
+                  :disabled="buyBtnDisabled(card)"
                   @click="getCardForFree(card)"
                 >
                   <b-icon-lock-fill
-                    v-if="
-                    czxpBalance < parseInt(card.unlock_czxp) &&
-                    balance <= parseInt(100000000000 * 10 * card.unlock_czxp)
-                    "
+                    v-if="buyBtnDisabled(card)"
                   />
                   Mint for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 1000 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
                 </button>
@@ -319,6 +313,7 @@ export default {
       this.fetchStoreCards();
     }
     window.nowTimer = setInterval(this.setNow, 1000);
+    //console.log(new web3.utils.BN("8").mul(new web3.utils.BN("1000000000000000000")).toString());
   },
   computed: {
     dAppState() {
@@ -391,6 +386,31 @@ export default {
     setNow() {
       this.nowTimeStamp = Date.now();
     },
+    getBN(val) {
+      return web3.utils.toWei(val);
+    },
+    weiToEther(wei) {
+      return web3.utils.fromWei(wei, 'ether');
+    },
+    buyBtnDisabled(card) {
+      if ( this.czxpBalance < this.getBN(card.unlock_czxp) ) {
+        if( this.weiToEther(this.balance) < this.getBuyZoom(card.unlock_czxp) ) {
+          return true;
+        }else{
+          return false;
+        }
+      } else {
+        if(this.weiToEther(this.balance) < card.cost){
+          return true;
+        }else{
+          return false;
+        }
+      }
+    },
+    getBuyZoom(val) { //unlock * 100 * baseCost   =    val * 100 * 100000000000000
+      //console.log("BuyZoom:",val,new web3.utils.BN("100000000000000").mul(new web3.utils.BN(val)).toString());
+      return new web3.utils.BN("100000000000000").mul(new web3.utils.BN(val)).toString();
+    },
     getFormattedReleasedLabel(timeRemaining){
       var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
@@ -456,7 +476,7 @@ export default {
       this.showTransactionModal();
 
       let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost)).toString()
-      if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
+      if(this.czxpBalance < this.getBN(cardAttributes.unlock_czxp)){
         cardBNValue = 100000000000 * 1000 * cardAttributes.unlock_czxp;
       }
 

@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     buyCzxp: async function () {
-      console.log( new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString() );
+      //console.log( new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString() );
       let buyinWei = new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString();
 
       await this.CzxpInstance.methods.buy().send({

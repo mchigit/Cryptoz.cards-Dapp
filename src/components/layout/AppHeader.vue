@@ -204,6 +204,9 @@
           <b-button class="affiliate-button" @click="copySponsorLink">
             Copy Link To Clipboard
           </b-button>
+        <!-- Open in Metamask mobile
+          <a href="https://metamask.app.link/dapp/movr.zoombies.world">Open in Metamask</a>
+        -->
         </div>
       </b-jumbotron>
 
