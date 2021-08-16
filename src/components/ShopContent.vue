@@ -176,17 +176,9 @@
                   <b-icon-lock-fill
                     v-if="buyBtnDisabled(card)"
                   />
-                  Mint NFT for {{ czxpBalance < card.unlock_czxp ? (parseFloat(0.000001 * 100 * card.unlock_czxp)).toFixed(4) : card.cost }}
+                  Mint NFT for {{ czxpBalance < card.unlock_czxp ? (parseFloat(0.000001  * card.unlock_czxp)).toFixed(4) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
-                <br>
-                {{ weiToEther(balance) < card.cost }}  {{czxpBalance < getBN(card.unlock_czxp)}}
-                <br>
-                CardCost: {{card.cost}}
-                <br>
-                balance : {{weiToEther(balance)}}<br>
-                czxpBal: {{czxpBalance}}<br>
-                getBuyZoom: {{getBuyZoom(parseInt(card.unlock_czxp).toString())}}
               </div>
               <div
                 v-else
@@ -202,7 +194,7 @@
                   <b-icon-lock-fill
                     v-if="buyBtnDisabled(card)"
                   />
-                  Mint for {{ czxpBalance < card.unlock_czxp ? (0.0000001 * 1000 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
+                  Mint for {{ czxpBalance < card.unlock_czxp ? (0.000001 * 10 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
                 </button>
               </div>
             </div>
@@ -396,8 +388,8 @@ export default {
       return web3.utils.fromWei(wei, 'ether');
     },
     buyBtnDisabled(card) {
-      if ( this.czxpBalance < card.unlock_czxp ) {
-        if( this.balance < this.getBuyZoom(card.unlock_czxp) ) {
+      if ( this.czxpBalance < parseInt(card.unlock_czxp) ) {
+        if( this.weiToEther(this.balance) < this.getBuyZoom(card.unlock_czxp) ) {
           return true;
         }else{
           return false;
@@ -410,9 +402,10 @@ export default {
         }
       }
     },
-    getBuyZoom(val) { //unlock * 100 * baseCost   =    val * 100 * 100000000000000
+    getBuyZoom(val) { //unlock * 10 * baseCost   =    val * 10 * 100000000000000
       //console.log("BuyZoom:",val,new web3.utils.BN("100000000000000").mul(new web3.utils.BN(val)).toString());
-      return new web3.utils.BN("100000000000000").mul(new web3.utils.BN(val)).toString();
+      //return new web3.utils.BN("100000000000000").mul(new web3.utils.BN(val)).toString();
+      return parseFloat(0.000001 * 10 * val);
     },
     getFormattedReleasedLabel(timeRemaining){
       var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -480,9 +473,15 @@ export default {
 
       let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost)).toString()
       if ( this.czxpBalance < cardAttributes.unlock_czxp ) {
-        cardBNValue = 100000000000 * 1000 * cardAttributes.unlock_czxp;
-      }
+        cardBNValue = parseFloat(0.000001 * cardAttributes.unlock_czxp);
 
+        if ( cardBNValue < parseFloat(cardAttributes.cost) ) {
+          let tmp = cardAttributes.cost*3;
+          cardBNValue = web3.utils.toWei(parseFloat(cardAttributes.cost*3).toString());
+        }else{
+          cardBNValue = web3.utils.toWei(cardBNValue.toString());
+        }
+      }
 
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)
