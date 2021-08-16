@@ -108,7 +108,7 @@ export const store = new Vuex.Store({
       commit("updateOwnerBalances", {
         coinbase,
         balance,
-        czxpBalance: parseInt(czxpBalance),
+        czxpBalance: parseInt(web3.utils.fromWei(czxpBalance)),
         cryptozBalance: parseInt(cryptozBalance),
         boosterPacksOwned: parseInt(boosterPacksOwned),
       });
@@ -125,7 +125,7 @@ export const store = new Vuex.Store({
         totalTypesPromise,
         totalCryptozPromise,
       ]);
-      commit("updateCZXPTotal", parseInt(totalCzxp));
+      commit("updateCZXPTotal", totalCzxp);
       commit("updateTypesTotal", parseInt(totalTypes));
       commit("updateCryptozTotal", parseInt(totalCryptoz));
     },

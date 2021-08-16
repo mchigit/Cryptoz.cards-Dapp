@@ -176,7 +176,7 @@
                   <b-icon-lock-fill
                     v-if="buyBtnDisabled(card)"
                   />
-                  Mint NFT for {{ czxpBalance < getBN(card.unlock_czxp) ? (parseFloat(0.000001 * 100 * card.unlock_czxp)).toFixed(4) : card.cost }}
+                  Mint NFT for {{ czxpBalance < card.unlock_czxp ? (parseFloat(0.000001 * 100 * card.unlock_czxp)).toFixed(4) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
                 <br>
@@ -202,7 +202,7 @@
                   <b-icon-lock-fill
                     v-if="buyBtnDisabled(card)"
                   />
-                  Mint for {{ czxpBalance < parseInt(card.unlock_czxp) ? (0.0000001 * 1000 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
+                  Mint for {{ czxpBalance < card.unlock_czxp ? (0.0000001 * 1000 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
                 </button>
               </div>
             </div>
@@ -322,6 +322,9 @@ export default {
     isWalletConnected() {
       return this.$store.state.dAppState === dAppStates.WALLET_CONNECTED;
     },
+    web3() {
+      return web3;
+    },
     CryptozInstance() {
       return this.$store.state.contractInstance.cryptoz;
     },
@@ -393,16 +396,27 @@ export default {
       return web3.utils.fromWei(wei, 'ether');
     },
     buyBtnDisabled(card) {
-      if ( this.czxpBalance < this.getBN(card.unlock_czxp) ) {
-        if( this.weiToEther(this.balance) < this.getBuyZoom(card.unlock_czxp) ) {
+console.log("CZXP:", this.czxpBalance, card.unlock_czxp,"bal:", this.balance ,"BuyZoom:",this.getBuyZoom(card.unlock_czxp));
+      console.log(this.czxpBalance < card.unlock_czxp );
+      if ( this.czxpBalance < card.unlock_czxp ) {
+console.log("1 czxp < unlock");
+        //if( web3.utils.toBN(this.balance).lt(this.getBuyZoom(card.unlock_czxp)) ) {
+        if( this.balance < this.getBuyZoom(card.unlock_czxp) ) {
+console.log("1.1 czxp < unlock AND bal < buyZoom");
           return true;
         }else{
+console.log("1.2 czxp < unlock AND bal > buyZoom");
           return false;
         }
       } else {
-        if(this.weiToEther(this.balance) < card.cost){
+  //console.log( "COST:",web3.utils.toBN(this.balance).toString() ,this.getBN(card.cost).toString() );
+  //console.log( "COST2:", web3.utils.toBN(this.balance).lt(this.getBN(card.cost)) );
+console.log("4 czxp > unlock");
+        if( web3.utils.toBN(this.balance).lt(this.getBN(card.cost)) ){
+console.log("4.1 czxp > unlock  AND bal < card.cost");
           return true;
         }else{
+console.log("4.2 czxp > unlock AND bal > card.cost");
           return false;
         }
       }
@@ -476,7 +490,7 @@ export default {
       this.showTransactionModal();
 
       let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost)).toString()
-      if(this.czxpBalance < this.getBN(cardAttributes.unlock_czxp)){
+      if ( this.czxpBalance < cardAttributes.unlock_czxp ) {
         cardBNValue = 100000000000 * 1000 * cardAttributes.unlock_czxp;
       }
 
