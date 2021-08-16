@@ -396,27 +396,16 @@ export default {
       return web3.utils.fromWei(wei, 'ether');
     },
     buyBtnDisabled(card) {
-console.log("CZXP:", this.czxpBalance, card.unlock_czxp,"bal:", this.balance ,"BuyZoom:",this.getBuyZoom(card.unlock_czxp));
-      console.log(this.czxpBalance < card.unlock_czxp );
       if ( this.czxpBalance < card.unlock_czxp ) {
-console.log("1 czxp < unlock");
-        //if( web3.utils.toBN(this.balance).lt(this.getBuyZoom(card.unlock_czxp)) ) {
         if( this.balance < this.getBuyZoom(card.unlock_czxp) ) {
-console.log("1.1 czxp < unlock AND bal < buyZoom");
           return true;
         }else{
-console.log("1.2 czxp < unlock AND bal > buyZoom");
           return false;
         }
       } else {
-  //console.log( "COST:",web3.utils.toBN(this.balance).toString() ,this.getBN(card.cost).toString() );
-  //console.log( "COST2:", web3.utils.toBN(this.balance).lt(this.getBN(card.cost)) );
-console.log("4 czxp > unlock");
         if( web3.utils.toBN(this.balance).lt(this.getBN(card.cost)) ){
-console.log("4.1 czxp > unlock  AND bal < card.cost");
           return true;
         }else{
-console.log("4.2 czxp > unlock AND bal > card.cost");
           return false;
         }
       }
