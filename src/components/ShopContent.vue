@@ -176,7 +176,7 @@
                   <b-icon-lock-fill
                     v-if="buyBtnDisabled(card)"
                   />
-                  Mint NFT for {{ czxpBalance < card.unlock_czxp ? (parseFloat(0.000001  * card.unlock_czxp)).toFixed(4) : card.cost }}
+                  Mint NFT for {{ czxpBalance < card.unlock_czxp ? (card.cost*3).toFixed(3) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
               </div>
@@ -403,8 +403,6 @@ export default {
       }
     },
     getBuyZoom(val) { //unlock * 10 * baseCost   =    val * 10 * 100000000000000
-      //console.log("BuyZoom:",val,new web3.utils.BN("100000000000000").mul(new web3.utils.BN(val)).toString());
-      //return new web3.utils.BN("100000000000000").mul(new web3.utils.BN(val)).toString();
       return parseFloat(0.000001 * 10 * val);
     },
     getFormattedReleasedLabel(timeRemaining){
@@ -473,14 +471,8 @@ export default {
 
       let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost)).toString()
       if ( this.czxpBalance < cardAttributes.unlock_czxp ) {
-        cardBNValue = parseFloat(0.000001 * cardAttributes.unlock_czxp);
-
-        if ( cardBNValue < parseFloat(cardAttributes.cost) ) {
-          let tmp = cardAttributes.cost*3;
-          cardBNValue = web3.utils.toWei(parseFloat(cardAttributes.cost*3).toString());
-        }else{
-          cardBNValue = web3.utils.toWei(cardBNValue.toString());
-        }
+          cardBNValue = web3.utils.toWei( (cardAttributes.cost*3).toFixed(5) );
+          console.log(cardBNValue.toString());
       }
 
       const result = await this.CryptozInstance.methods
