@@ -155,7 +155,8 @@
               v-else-if="!card.isOwned"
               id="buy-get-button-wrapper"
               :class="
-                balance < getBN(card.cost) || czxpBalance < parseInt(card.unlock_czxp)
+                ( parseFloat(weiToEther(balance)) <= parseFloat(3*card.cost) && czxpBalance < parseInt(card.unlock_czxp) ) ||
+                parseFloat(weiToEther(balance)) <= card.cost
                   ? 'disabled-btn'
                   : ''
               "
@@ -169,12 +170,18 @@
               >
                 <b-button
                   id="buy-button"
-                  :disabled="buyBtnDisabled(card)"
+                  :disabled="
+                    ( parseFloat(weiToEther(balance)) <= parseFloat(3*card.cost) && czxpBalance < parseInt(card.unlock_czxp) ) ||
+                    balance <= card.cost
+                  "
                   variant="primary"
                   @click="buyCard(card)"
                 >
                   <b-icon-lock-fill
-                    v-if="buyBtnDisabled(card)"
+                    v-if="
+                      ( parseFloat(weiToEther(balance)) <= parseFloat(3*card.cost) && czxpBalance < parseInt(card.unlock_czxp) ) ||
+                      balance <= card.cost
+                    "
                   />
                   Mint NFT for {{ czxpBalance < card.unlock_czxp ? (card.cost*3).toFixed(3) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
@@ -188,11 +195,17 @@
                 <button
                   id="get-button"
                   class="btn btn-primary"
-                  :disabled="buyBtnDisabled(card)"
+                  :disabled="
+                    czxpBalance < parseInt(card.unlock_czxp) &&
+                    parseFloat(weiToEther(balance)) <= parseFloat(0.000001 * 10 * card.unlock_czxp).toFixed(5)
+                  "
                   @click="getCardForFree(card)"
                 >
                   <b-icon-lock-fill
-                    v-if="buyBtnDisabled(card)"
+                    v-if="
+                      czxpBalance < parseInt(card.unlock_czxp) &&
+                      parseFloat(weiToEther(balance)) <= parseFloat(0.000001 * 10 * card.unlock_czxp).toFixed(5)
+                    "
                   />
                   Mint for {{ czxpBalance < card.unlock_czxp ? (0.000001 * 10 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
                 </button>
@@ -387,21 +400,6 @@ export default {
     weiToEther(wei) {
       return web3.utils.fromWei(wei, 'ether');
     },
-    buyBtnDisabled(card) {
-      if ( this.czxpBalance < parseInt(card.unlock_czxp) ) {
-        if( this.weiToEther(this.balance) < this.getBuyZoom(card.unlock_czxp) ) {
-          return true;
-        }else{
-          return false;
-        }
-      } else {
-        if( web3.utils.toBN(this.balance).lt(this.getBN(card.cost)) ){
-          return true;
-        }else{
-          return false;
-        }
-      }
-    },
     getBuyZoom(val) { //unlock * 10 * baseCost   =    val * 10 * 100000000000000
       return parseFloat(0.000001 * 10 * val);
     },
@@ -428,7 +426,7 @@ export default {
       let freeCost = 0;
       if(this.czxpBalance < parseInt(cardAttributes.unlock_czxp)){
         let cardBNValue = new web3.utils.BN(cardAttributes.unlock_czxp)
-        cardBNValue.imul(new web3.utils.BN("100000000000000"));
+        cardBNValue.imul(new web3.utils.BN("10000000000000"));
         freeCost = cardBNValue.toString();
       }
 
@@ -531,7 +529,7 @@ export default {
         });
     },
     buyBtnTooltipText(cost, unlock_czxp) {
-      if (this.balance <= 2*cost && this.czxpBalance < parseInt(unlock_czxp) ||
+      if (this.balance <= 3*cost && this.czxpBalance < parseInt(unlock_czxp) ||
           this.balance <= cost)
       {
         return this.buyBtnBlockedTooltipTextContent;
