@@ -172,7 +172,7 @@
                   id="buy-button"
                   :disabled="
                     ( parseFloat(weiToEther(balance)) <= parseFloat(3*card.cost) && czxpBalance < parseInt(card.unlock_czxp) ) ||
-                    balance <= card.cost
+                    parseFloat(weiToEther(balance)) <= card.cost
                   "
                   variant="primary"
                   @click="buyCard(card)"
@@ -180,7 +180,7 @@
                   <b-icon-lock-fill
                     v-if="
                       ( parseFloat(weiToEther(balance)) <= parseFloat(3*card.cost) && czxpBalance < parseInt(card.unlock_czxp) ) ||
-                      balance <= card.cost
+                      parseFloat(weiToEther(balance)) <= card.cost
                     "
                   />
                   Mint NFT for {{ czxpBalance < card.unlock_czxp ? (card.cost*3).toFixed(3) : card.cost }}
@@ -257,7 +257,7 @@ export default {
     return {
       buyBtnTooltipTextContent: "Click to mint a limited edition NFT of this card",
       buyBtnBlockedTooltipTextContent:
-        "You do not have enough MOVR or ZOOM tokens to unlock minting",
+        "You do not have enough MOVR or ZOOM tokens to unlock reduced cost minting",
       getBtnTooltipTextContent: "Click to mint a copy of this card at no cost",
       getBtnBlockedTooltipTextContent:
         "You do not have enough ZOOM tokens to unlock FREE minting an NFT of this type, but can pay to mint the NFT",
@@ -529,8 +529,8 @@ export default {
         });
     },
     buyBtnTooltipText(cost, unlock_czxp) {
-      if (this.balance <= 3*cost && this.czxpBalance < parseInt(unlock_czxp) ||
-          this.balance <= cost)
+      if (  parseFloat(this.weiToEther(this.balance)) <= parseFloat(3*cost) && parseInt(this.czxpBalance) < parseInt(unlock_czxp) ||
+          parseFloat(this.weiToEther(this.balance)) <= parseFloat(3*cost))
       {
         return this.buyBtnBlockedTooltipTextContent;
       } else {
