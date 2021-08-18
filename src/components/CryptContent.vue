@@ -12,7 +12,7 @@
         <div>Enter 0 for no wager</div>
         <div>
           <b>To wager:</b> Minimum = 1,000,000, Maximum =
-          5,000,000
+          20,000,000
         </div>
         <router-link to="/help?read-cards"> Random odds explained </router-link>
         <b-form-input
@@ -25,7 +25,7 @@
         <b-form-invalid-feedback v-if="isWagerValid">
           <div>
             You need to enter a number between 1,000,000 and
-            5,000,000 to wager.
+            20,000,000 to wager.
           </div>
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!hasEnoughCZXP">
@@ -224,7 +224,7 @@ export default {
         return false;
       }
 
-      return wagerAmount >= 1000000 && wagerAmount <= 5000000;
+      return wagerAmount >= 1000000 && wagerAmount <= 20000000;
     },
     hasEnoughCZXP() {
       const wagerAmount = parseInt(this.wagerAmount);
