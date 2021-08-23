@@ -9,7 +9,15 @@
         ok-title="Open Booster"
         hide-footer
       >
-        <div>Enter 0 for no wager</div>
+        <div>Enter 0 for no wager (base probability)</div>
+
+        <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
+          <b-progress-bar variant="primary" :value="pBarDefaultValues[0]"></b-progress-bar>
+          <b-progress-bar variant="danger" :value="pBarDefaultValues[1]"></b-progress-bar>
+          <b-progress-bar variant="primary" :value="pBarDefaultValues[2]"></b-progress-bar>
+          <b-progress-bar variant="secondary" :value="pBarDefaultValues[3]"></b-progress-bar>
+        </b-progress>
+
         <div>
           <b>To wager:</b> Minimum = 1,000,000, Maximum =
           20,000,000
@@ -19,6 +27,7 @@
           v-model="wagerAmount"
           class="form-control"
           :state="isWagerValid"
+          @keydown="calculateProbability"
           required
           type="number"
         />
@@ -31,6 +40,18 @@
         <b-form-invalid-feedback v-if="!hasEnoughCZXP">
           <div>You do not have enough ZOOM tokens</div>
         </b-form-invalid-feedback>
+
+        <b-row>
+          <b-col>
+                <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
+                  <b-progress-bar variant="primary" :value="pBarWagerValues[0]"></b-progress-bar>
+                  <b-progress-bar variant="danger" :value="pBarWagerValues[1]"></b-progress-bar>
+                  <b-progress-bar variant="primary" :value="pBarWagerValues[2]"></b-progress-bar>
+                  <b-progress-bar variant="secondary" :value="pBarWagerValues[3]"></b-progress-bar>
+                </b-progress>
+            </b-col>
+          </b-row>
+
         <b-row>
           <b-col>
             <b-button
@@ -172,6 +193,8 @@ import {
   BButton,
   BImg,
   BContainer,
+  BProgress,
+  BProgressBar
 } from "bootstrap-vue";
 import { showErrorToast } from "../util/showToast";
 import dAppStates from "@/dAppStates";
@@ -190,11 +213,16 @@ export default {
     BButton,
     BImg,
     BContainer,
+    BProgress,
+    BProgressBar
   },
   data() {
     return {
       wagerAmount: 0,
       receivingWallet: "",
+      pBarDefaultValues: [1,5,25,69],
+      pBarWagerValues: [1,5,25,69],
+      pBarMax: 100,
     };
   },
   computed: {
@@ -308,6 +336,9 @@ export default {
         console.error(err);
         showErrorToast(this, "Failed to open booster");
       }
+    },
+    calculateProbability: function () {
+      console.log("redo probs baby...");
     },
     openProbabilityModal: function () {
       console.log("Hey hey");

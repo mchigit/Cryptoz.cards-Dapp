@@ -161,15 +161,9 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  You will need to buy MOVR or have it sent to your wallet. The
-                  quickest way to buy MOVR is to:
-                  <ul>
-                    <li>
-                      <a href="https://www.binance.com/" target="_blank"
-                        >Trade at Binance</a
-                      >
-                    </li>
-                  </ul>
+                  <p>You will need to buy MOVR ( once it has been officially released) or have it sent to your wallet. For more information, follow the offical Announcements
+                  from the <a href="https://moonbeam.foundation/" target="_blank">Moonbeam Foundation</a>. 
+                  The Moonbase Alpha BETA test, uses free no value <a href="https://docs.moonbeam.network/networks/moonbase/" target="_blank">testnet DEV token, request that here.</a></p>
                   As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
                   ?? USD per transaction, depending on how fast you would
                   like the transactions confirmed and what exactly you are
