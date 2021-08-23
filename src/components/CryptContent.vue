@@ -27,7 +27,7 @@
           v-model="wagerAmount"
           class="form-control"
           :state="isWagerValid"
-          @keydown="calculateProbability"
+          @input="calculateProbability"
           required
           type="number"
         />
@@ -338,7 +338,29 @@ export default {
       }
     },
     calculateProbability: function () {
-      console.log("redo probs baby...");
+
+      if(this.wagerAmount < 1000000 || this.wagerAmount > 20000000){return}
+
+      let e = 1 + this.wagerAmount/20000 ;
+      let r = 500 + e + (this.wagerAmount/5500);
+      let u = 3500 + r + (this.wagerAmount/8000);
+
+      console.log(this.wagerAmount, e, r, u);
+
+      let eP = (e/10000)*100;
+      let rP = Math.floor(((r-e)/10000)*100);
+      let uP = Math.floor(((u-r)/10000)*100);
+      let cP = 100 - (eP + rP + uP);
+      if (cP < 0){
+          cP = 0;
+          uP = 100 - (eP + rP);
+      }
+
+
+      console.log(eP, rP, uP, cP);
+
+
+      this.pBarWagerValues = [ eP, rP, uP, cP ];
     },
     openProbabilityModal: function () {
       console.log("Hey hey");
