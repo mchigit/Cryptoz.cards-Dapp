@@ -4,7 +4,7 @@
       <!-- Open Booster Modal -->
       <b-modal
         id="open-booster-modal"
-        title="Enter a ZOOM burn wager amount to increase the odds of pulling an epic card:"
+        title="Enter a ZOOM burn wager amount to increase the probabilty of pulling better rarity:"
         ok-variant="danger"
         ok-title="Open Booster"
         hide-footer
@@ -19,10 +19,11 @@
         </b-progress>
 
         <div>
-          <b>To wager:</b> Minimum = 1,000,000, Maximum =
+          <b>To wager:</b>
+          <br/>Minimum = 1,000,000<br/>
+          Maximum =
           20,000,000
         </div>
-        <router-link to="/help?read-cards"> Random odds explained </router-link>
         <b-form-input
           v-model="wagerAmount"
           class="form-control"
@@ -137,7 +138,7 @@
       <div class="jumbotron">
         <UniverseBalances />
 
-        <h1>Your NFT Wallet</h1>
+        <h1>Your NFT Crypt</h1>
         <p>
           This is where all your NFT Zoombies tokens can be accessed. Sort,
           search, gift and sacrifice. Sacrificing is permanent, not only in your
@@ -327,8 +328,6 @@ export default {
       try {
         this.$store.dispatch("setIsTransactionPending", true);
         this.$bvModal.hide("open-booster-modal");
-
-        console.log(this.wagerAmount);
 
         const res = await this.CryptozInstance.methods
           .mintBoosterNFT(this.wagerAmount)

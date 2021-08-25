@@ -24,10 +24,10 @@
             <br/>
             <b-container fluid>
               <b-row>
-                <b-col sm="12" md="3" lg="3"><strong>Max. 500 wallets</strong></b-col>
-                <b-col sm="12" md="3" lg="3"><strong>Max Total sale: 5 Billion ZOOM</strong></b-col>
+                <b-col sm="12" md="3" lg="3"><strong>Max. 1000 wallets</strong></b-col>
+                <b-col sm="12" md="3" lg="3"><strong>Max Total sale: 20 Billion ZOOM</strong></b-col>
                 <b-col sm="12" md="3" lg="3"><strong>1 ZOOM = 0.000001 MOVR</strong></b-col>
-                <b-col sm="12" md="3" lg="3"><strong>Min/Max purchase: 1/10 MOVR</strong></b-col>
+                <b-col sm="12" md="3" lg="3"><strong>Min/Max purchase: 1/20 MOVR</strong></b-col>
               </b-row>
               <br/>
               <b-row>
@@ -134,8 +134,8 @@ export default {
       if (
         this.totalCzxpToBuy !== "" &&
         this.totalCzxpToBuy >= 1000000 &&
-        this.totalCzxpToBuy <= 10000000 &&
-        this.myPurchaseTotal < 10000000000000000000
+        this.totalCzxpToBuy <= 20000000 &&
+        this.myPurchaseTotal < 20000000000000000000
       ) {
         return true;
       } else {
@@ -182,7 +182,7 @@ export default {
     },
     updateSale: async function () {
       //console.log(await this.CzxpInstance.methods.totalSupply().call());
-      this.zoomWalletsRemaining = 500 - await this.CzxpInstance.methods.totalContributors().call();
+      this.zoomWalletsRemaining = 1000 - await this.CzxpInstance.methods.totalContributors().call();
       this.zoomSold = parseInt(await this.CzxpInstance.methods.totalZoomPurchased().call()/1000000000000000000).toLocaleString();
       this.totalCzxpToBuy = "";
       this.movrCost = 0;
@@ -191,8 +191,8 @@ export default {
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
-      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy * 1000000000000) > 10000000000000000000 ){
-        this.totalCzxpToBuy = (10000000000000000000 - this.myPurchaseTotal) /1000000000000;
+      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy * 1000000000000) > 20000000000000000000 ){
+        this.totalCzxpToBuy = (20000000000000000000 - this.myPurchaseTotal) /1000000000000;
       }
 
       this.movrCost = this.totalCzxpToBuy / 1000000;

@@ -89,9 +89,9 @@
                   <img src="./assets/cryptoz_legend_binance.png" />
                 </div>
                 <p />
-                <h2>Rarity Distribution</h2>
+                <h2>Default Mint Booster NFT Rarity Distribution</h2>
                 <p>
-                  The rarity distribution for each Booster card pull is as
+                  The default rarity distribution for each Booster card pull is as
                   follows:
                 </p>
                 <ul>
@@ -118,7 +118,7 @@
                       style="background-color: #ca3c2c"
                       >Rare</span
                     >
-                    - 49 in 10000 - These red cards are still very rare and
+                    - 499 in 10000 - These red cards are still very rare and
                     should be handled with care
                   </li>
                   <li>
@@ -127,7 +127,7 @@
                       style="background-color: #2ba4fa"
                       >Uncommon</span
                     >
-                    - 2650 in 10000 - These when they occur, they are a nice
+                    - 2999 in 10000 - These when they occur, they are a nice
                     little surprise
                   </li>
                   <li>
@@ -136,10 +136,30 @@
                       style="background-color: #545161"
                       >Common</span
                     >
-                    - 7300 in 10000 - The editions on these will count up fairly
+                    - 6501 in 10000 - The editions on these will count up fairly
                     quickly as NFTs get minted
                   </li>
                 </ul>
+                <br/>
+                <h2>Wager Mint Booster NFT Rarity Distribution</h2>
+                You may wager to burn ZOOM tokens to increase the probability of minting a more rare NFT.<br/>
+                The minimum wager is 1,000,000 ZOOM tokens<br/>
+                The maximum wager is 20,000,000 ZOOM tokens<br/>
+                Using the Probability slider, you can review the change before confirming the wager.<br/><br/>
+                <p>
+                  <b-form-input
+                      v-model="wagerSample"
+                      class="form-control"
+                      required
+                      type="range"
+                      min="0"
+                      max="20000000"
+                      step="1"
+                  />
+                  Example ZOOM token burn wager: {{parseInt(wagerSample).toLocaleString()}}
+                </p>
+                <strong>NOTE: The ZOOM tokens used in the wager are permanently burned with no chance to return.</strong>
+
               </b-card-body>
             </b-collapse>
           </b-card>
@@ -162,7 +182,7 @@
               <b-card-body>
                 <div class="card-body">
                   <p>You will need to buy MOVR ( once it has been officially released) or have it sent to your wallet. For more information, follow the offical Announcements
-                  from the <a href="https://moonbeam.foundation/" target="_blank">Moonbeam Foundation</a>. 
+                  from the <a href="https://moonbeam.foundation/" target="_blank">Moonbeam Foundation</a>.
                   The Moonbase Alpha BETA test, uses free no value <a href="https://docs.moonbeam.network/networks/moonbase/" target="_blank">testnet DEV token, request that here.</a></p>
                   As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
                   ?? USD per transaction, depending on how fast you would
@@ -413,6 +433,7 @@ import {
   BButton,
   BCollapse,
   BCardBody,
+  BFormInput
 } from "bootstrap-vue";
 export default {
   name: "HelpContent",
@@ -422,11 +443,13 @@ export default {
     BButton,
     BCollapse,
     BCardBody,
+    BFormInput
   },
   props: ["query"],
   data() {
     return {
       msg: "Here we go, here we go",
+      wagerSample: 0,
     };
   },
   mounted() {
