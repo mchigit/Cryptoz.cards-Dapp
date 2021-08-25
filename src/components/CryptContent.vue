@@ -29,6 +29,17 @@
           :state="isWagerValid"
           @input="calculateProbability"
           required
+          type="range"
+          min="0"
+          max="20000000"
+          step="1"
+        />
+        <b-form-input
+          v-model="wagerAmount"
+          class="form-control"
+          :state="isWagerValid"
+          @input="calculateProbability"
+          required
           type="number"
         />
         <b-form-invalid-feedback v-if="isWagerValid">
