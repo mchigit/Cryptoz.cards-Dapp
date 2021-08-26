@@ -12,7 +12,7 @@
         <div>Enter 0 for no wager (base probability)</div>
 
         <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
-          <b-progress-bar variant="primary" :value="pBarDefaultValues[0]"></b-progress-bar>
+          <b-progress-bar class="p-bar-purple" :value="pBarDefaultValues[0]"></b-progress-bar>
           <b-progress-bar variant="danger" :value="pBarDefaultValues[1]"></b-progress-bar>
           <b-progress-bar variant="primary" :value="pBarDefaultValues[2]"></b-progress-bar>
           <b-progress-bar variant="secondary" :value="pBarDefaultValues[3]"></b-progress-bar>
@@ -56,7 +56,7 @@
         <b-row>
           <b-col>
                 <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
-                  <b-progress-bar variant="primary" :value="pBarWagerValues[0]"></b-progress-bar>
+                  <b-progress-bar class="p-bar-purple" :value="pBarWagerValues[0]"></b-progress-bar>
                   <b-progress-bar variant="danger" :value="pBarWagerValues[1]"></b-progress-bar>
                   <b-progress-bar variant="primary" :value="pBarWagerValues[2]"></b-progress-bar>
                   <b-progress-bar variant="secondary" :value="pBarWagerValues[3]"></b-progress-bar>
@@ -508,5 +508,13 @@ export default {
 
 .mr-icon {
   height: 20px;
+}
+
+.b-progress-bar-purple{
+  background-color: #b92ee4;
+  color:red;
+}
+.p-bar-purple {
+  background-color: var(--purple);
 }
 </style>
