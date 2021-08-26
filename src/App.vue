@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import detectEthereumProvider from '@metamask/detect-provider';
 import axios from "axios";
 import debounce from "lodash/debounce";
 import watchEvents from "./util/watchEvents";
@@ -155,11 +156,45 @@ export default {
     })(document, "script", "twitter-wjs");
   },
   methods: {
+    configureMoonbaseAlpha: async function() {
+      const provider = await detectEthereumProvider({ mustBeMetaMask: true });
+      if (provider) {
+          try {
+              await provider.request({ method: "eth_requestAccounts"});
+              await provider.request({
+                  method: "wallet_addEthereumChain",
+                  params: [
+                      {
+                          chainId: "0x507", // Moonbase Alpha's chainId is 1287, which is 0x507 in hex
+                          chainName: "Moonbase Alpha",
+                          nativeCurrency: {
+                              name: 'DEV',
+                              symbol: 'DEV',
+                              decimals: 18
+                          },
+                         rpcUrls: ["https://rpc.testnet.moonbeam.network"],
+                         blockExplorerUrls: ["https://moonbase-blockscout.testnet.moonbeam.network/"]
+                      },
+                  ]
+              })
+          } catch(e) {
+              console.error(e);
+          }
+      } else {
+          console.error("Please install MetaMask");
+      }
+    },
     initializeApp: async function () {
       const [accounts, networkId] = await Promise.all([
         web3.eth.getAccounts(),
         web3.eth.net.getId(),
       ]);
+
+      if(networkId !== 1287){
+        await this.configureMoonbaseAlpha();
+        return;
+      }
+
       this.$store.dispatch("chainChanged", networkId);
       await this.loadContracts(accounts, networkId);
       this.$store.dispatch("setDAppState", dAppStates.CONNECTED);
@@ -249,11 +284,11 @@ export default {
         this.$store.dispatch("chainChanged", chainId);
         // without this check it auto-reloads to infinity
         const previousChainId = localStorage.getItem("ethChainId");
-        if (previousChainId !== chainId) {
+      //  if (previousChainId !== chainId) {
           localStorage.setItem("ethChainId", chainId);
           window.location.reload();
           return;
-        }
+      //  }
       });
       provider.on("disconnect", () => {
         this.disconnectWallet();

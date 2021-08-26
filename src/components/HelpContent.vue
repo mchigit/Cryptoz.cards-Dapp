@@ -464,7 +464,7 @@ export default {
   },
   methods: {
     addCZXPtoMetaMask: async function() {
-      const tokenAddress = '0xEddaf26BC2501562FE154b4240D347B8916a5F94';
+      const tokenAddress = '0xbf1fd2064006AE1F85008ce64a60E392eC9E6Cb7';
       const tokenSymbol = 'ZOOM';
       const tokenDecimals = 18;
       const tokenImage = 'https://zoombies.world/images/zoombies_coin.svg';
