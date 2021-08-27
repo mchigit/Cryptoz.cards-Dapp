@@ -46,9 +46,12 @@
         which will mint a random booster edition NFT token.
       </p>
       <p>
-        To mint a FREE NFT Or buy a Limited edition NFT at the reduced cost, you will need the
+        To mint a FREE NFT Or buy a Limited edition NFT at cost, you will need the
         required minimum balance of ZOOM tokens displayed on the botton of the
-        card to update the minting button. The newly minted NFT will appear in
+        card to update the minting button.<br/>
+        You will automatically see a <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-fp-icon" /> Fast Pass price to bypass the ZOOM requirement and may buy immediately.</p>
+
+        <p>The newly minted NFT will appear in
         <router-link to="/my-zoombies-nfts"> Your NFT Crypt </router-link> once
         the transaction is confirmed. ZOOM is NOT burned when minting.
       </p>
@@ -186,6 +189,10 @@
                   Mint NFT for {{ czxpBalance < card.unlock_czxp ? (card.cost*3).toFixed(3) : card.cost }}
                   <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
                 </b-button>
+                <img
+                  v-if="czxpBalance < parseInt(card.unlock_czxp)"
+                  src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-icon"
+                />
               </div>
               <div
                 v-else
@@ -209,6 +216,10 @@
                   />
                   Mint for {{ czxpBalance < card.unlock_czxp ? (0.000001 * 10 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
                 </button>
+                <img
+                  v-if="czxpBalance < parseInt(card.unlock_czxp)"
+                  src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-icon"
+                />
               </div>
             </div>
 
@@ -257,10 +268,12 @@ export default {
     return {
       buyBtnTooltipTextContent: "Click to mint a limited edition NFT of this card",
       buyBtnBlockedTooltipTextContent:
-        "You do not have enough MOVR or ZOOM tokens to unlock reduced cost minting",
+        "You do not have enough MOVR tokens to unlock minting",
+        buyBtnFastPassTooltipTextContent:
+         "Fast Pass the ZOOM requirement and mint the NFT now",
       getBtnTooltipTextContent: "Click to mint a copy of this card at no cost",
       getBtnBlockedTooltipTextContent:
-        "You do not have enough ZOOM tokens to unlock FREE minting an NFT of this type, but can pay to mint the NFT",
+        "Fast Pass the ZOOM requirement and mint the NFT now",
       getOwnedCardToolTipText: "You can only mint 1 card of each type",
       getSoldCardToolTipText:
         "All NFTs of this type have been minted, check markets",
@@ -533,6 +546,8 @@ export default {
           parseFloat(this.weiToEther(this.balance)) <= parseFloat(3*cost))
       {
         return this.buyBtnBlockedTooltipTextContent;
+      } else if ( parseFloat(this.weiToEther(this.balance)) > parseFloat(3*cost) && parseInt(this.czxpBalance) < parseInt(unlock_czxp) ) {
+        return this.buyBtnFastPassTooltipTextContent;
       } else {
         return this.buyBtnTooltipTextContent;
       }
@@ -763,5 +778,16 @@ export default {
 
 .mr-icon {
   height: 20px;
+}
+
+.rocket-icon {
+  max-height:2.2em;
+  position: absolute;
+  top: -4px;
+  left: -16px;
+}
+
+.rocket-fp-icon {
+  max-height: 30px;
 }
 </style>
