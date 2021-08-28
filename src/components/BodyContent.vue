@@ -14,7 +14,8 @@
             class="img-responsive card-demo-group"
             src="@/assets/zoombies_card_types.png"
           />
-          <h1 class="text-danger">OPEN BETA ON MOONBASE ALPHA TESTNET</h1>
+          <h1><span id="countdown" class="text-warning"></span> until Moonriver mainnet launch Sept 1, 14:00 UTC</h1>
+          <h3 class="text-danger">You are on the no value trial on MOONBASE ALPHA TESTNET</h3>
           <!--p>Zoombies is deployed on
             <img src="https://zoombies.world/images/moonriver-logo-500.png" style="max-width:7em" />
           </p-->
@@ -158,10 +159,43 @@ export default {
       return parseInt(this.myPurchaseTotal/1000000000000).toLocaleString();
     }
   },
+  beforeDestroy() {
+    clearInterval(window.countdownTimer);
+  },
   mounted() {
     this.$nextTick(function () {
       this.updateSale();
     });
+
+    // Set the date we're counting down to
+    var countDownDate = new Date(Date.UTC(2021,8,1,14,0,0)).getTime();
+
+    // Update the count down every 1 second
+    window.countdownTimer = setInterval(function() {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(countdownTimer);
+      document.getElementById("countdown").innerHTML = "Refresh every minute for LIVE..";
+    }
+    }, 1000);
+
   },
   methods: {
     buyCzxp: async function () {
