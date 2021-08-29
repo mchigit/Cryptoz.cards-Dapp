@@ -67,7 +67,7 @@
             variant="warning"
             @click="() => goBackToMyCrypt()"
           >
-            Go To My Crypt
+            Go To My NFT Crypt
           </b-button>
           <b-button
             v-else
@@ -75,7 +75,7 @@
             variant="warning"
             @click="() => copyMyCryptLink()"
           >
-            Copy My Crypt Link
+            Copy My NFT Crypt Link
           </b-button>
           <b-input-group class="crypt-search-input-group">
             <b-form-input
@@ -202,8 +202,8 @@
 
         <div v-if="(isWalletConnected || isOthersCrypt) && !ownsCards">
           <h2 v-if="!isOthersCrypt">
-            You do not own any Cryptoz<br /><router-link to="/shop">
-              To get Free Cryptoz NFTs or Buy one, visit the Minting Shop
+            You do not own any Zoombies NFTs<br /><router-link to="/shop">
+              To mint Free Zoombies NFTs or to Buy, visit the Minting Shop
             </router-link>
           </h2>
           <h2 v-else>No Avaliable NFTs</h2>
