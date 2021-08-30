@@ -191,8 +191,8 @@ export default {
       ]);
 
       if(networkId !== 1287){
-        await this.configureMoonbaseAlpha();
-        return;
+      //  await this.configureMoonbaseAlpha();
+      //  return;
       }
 
       this.$store.dispatch("chainChanged", networkId);

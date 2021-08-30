@@ -15,16 +15,16 @@
             <div class="col-md-6 mt-md-0 mt-3">
               <a
                 :class="classObject"
-                href="https://moonbase-blockscout.testnet.moonbeam.network/address/0xbf1fd2064006AE1F85008ce64a60E392eC9E6Cb7/transactions"
+                href="https://moonbase-blockscout.testnet.moonbeam.network/address/0xA5F47784445767731e99eF8D048b8C3Fa2789B83/transactions"
                 target="_blank"
-                >ZOOM token Contract - 0xbf1fd2064006AE1F85008ce64a60E392eC9E6Cb7</a
+                >ZOOM token Contract - 0xA5F47784445767731e99eF8D048b8C3Fa2789B83</a
               >
               <br />
               <a
                 :class="classObject"
-                href="https://moonbase-blockscout.testnet.moonbeam.network/address/0xd59f8961440D00c7004782C033c09ddB134a7a8b/transactions"
+                href="https://moonbase-blockscout.testnet.moonbeam.network/address/0x4Eb9C3E8E83EFa27a27Aaedd56BF22eD87F89046/transactions"
                 target="_blank"
-                >Zoombies NFT Contract - 0xd59f8961440D00c7004782C033c09ddB134a7a8b
+                >Zoombies NFT Contract - 0x4Eb9C3E8E83EFa27a27Aaedd56BF22eD87F89046
                 </a
               >
             </div>
