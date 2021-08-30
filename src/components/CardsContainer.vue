@@ -397,7 +397,7 @@ export default {
       const url =
         process.env.NODE_ENV == "development"
           ? "localhost:8080"
-          : "https://bsc.cryptoz.cards";
+          : "https://movr.zoombies.world";
       return `${url}/my-zoombies-nfts/${this.coinbase}`;
     },
     isModified() {

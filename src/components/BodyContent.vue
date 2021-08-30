@@ -163,9 +163,7 @@ export default {
     clearInterval(window.countdownTimer);
   },
   mounted() {
-    this.$nextTick(function () {
-      this.updateSale();
-    });
+
 
     // Set the date we're counting down to
     var countDownDate = new Date(Date.UTC(2021,8,1,14,0,0)).getTime();
@@ -196,6 +194,11 @@ export default {
     }
     }, 1000);
 
+    if (this.CryptozInstance && this.coinbase) {
+      this.$nextTick(function () {
+        this.updateSale();
+      });
+    }
   },
   methods: {
     buyCzxp: async function () {
