@@ -55,7 +55,8 @@
             cards and ZOOM tokens through any standards compliant wallets,
             markets, game engines, exchanges, DeFi and other future inventions.
           </p>
-          <p>The most profitable strategy is to <strong>grow your Affiliate network early</strong> and earn ZOOM tokens for Free :). Click the Affiliate link in the header to Share and earn</p>
+          <p>The most profitable strategy is to <strong>grow your Affiliate network early</strong> and earn ZOOM tokens for Free :).<br/>
+             Click the <strong>Affiliate link in the header</strong> to Share and earn</p>
           <div>
             <h2>Get Started</h2>
             <span
@@ -194,11 +195,13 @@ export default {
     }
     }, 1000);
 
-    if (this.CryptozInstance && this.coinbase) {
+
       this.$nextTick(function () {
-        this.updateSale();
+         if (this.CzxpInstance) {
+           this.updateSale();
+         }
       });
-    }
+
   },
   methods: {
     buyCzxp: async function () {
@@ -223,7 +226,7 @@ export default {
       this.zoomSold = parseInt(await this.CzxpInstance.methods.totalZoomPurchased().call()/1000000000000000000).toLocaleString();
       this.totalCzxpToBuy = "";
       this.movrCost = 0;
-      console.log("contr.total:",await this.CzxpInstance.methods.contributions(this.coinbase).call());
+      //console.log("contr.total:",await this.CzxpInstance.methods.contributions(this.coinbase).call());
       this.myPurchaseTotal = parseInt(await this.CzxpInstance.methods.contributions(this.coinbase).call());
     },
     filterCzxpInput: function () {
