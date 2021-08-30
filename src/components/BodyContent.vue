@@ -66,7 +66,7 @@
                 target="_blank"
                 >install Metamask configured for Moonbase alpha</a
               >
-              and have a small amount of DEV in your account.</span
+              and have a small amount of DEV in your wallet.</span
             >
           </div>
           <p>

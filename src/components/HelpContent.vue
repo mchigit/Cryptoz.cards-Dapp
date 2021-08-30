@@ -33,15 +33,15 @@
                     <li>
                       The
                       <a
-                        href="https://docs.binance.org/smart-chain/wallet/metamask.html"
+                        href="https://metamask.io/"
                         target="_blank"
                         >Metamask</a
                       >
-                      Chrome browser extension, <a href="https://trustwallet.com/" target="_blank">Trust Wallet ( mobile )</a> or other Smart Chain compatibile wallet
+                      Chrome browser extension, <a href="https://trustwallet.com/" target="_blank">Trust Wallet ( mobile )</a> or other Moonriver compatibile wallet
                     </li>
                     <li>
-                      A balance of MOVR coins ( the cryptocurrency of Moonriver
-                      )
+                      A balance of <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" /> MOVR coins ( the cryptocurrency of Moonriver
+                      ) from <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
                     </li>
                   </ul>
                   <p>
@@ -382,7 +382,7 @@
                       <router-link to="/shop">
                         Buy Booster Credits
                       </router-link>
-                      - 120 ZOOM per
+                      - +500 ZOOM per
                     </li>
                     <li>
                       <router-link to="/shop">
@@ -414,7 +414,7 @@
                         supported Moonriver ERC-20 token exchanges
                       </router-link>
                     </li>
-                    <li>Request them from other players</li>
+                    <li>Request tokens from other players</li>
                   </ul>
                 </div>
               </b-card-body>
@@ -513,5 +513,9 @@ export default {
 .rarity-labels {
   color: white;
   padding: 2px 4px;
+}
+
+.mr-icon {
+  height: 20px;
 }
 </style>
