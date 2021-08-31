@@ -181,7 +181,7 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  <p>You will need to buy MOVR ( once it has been officially released) or have it sent to your wallet. For more information, follow the offical Announcements
+                  <p>You will need to buy MOVR or have it sent to your wallet. For more information, follow the offical Announcements
                   from the <a href="https://moonbeam.foundation/" target="_blank">Moonbeam Foundation</a>.
                   The Moonbase Alpha BETA test, uses free no value <a href="https://docs.moonbeam.network/networks/moonbase/" target="_blank">testnet DEV token, request that here.</a></p>
                   As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
@@ -289,7 +289,7 @@
               role="tab"
             >
               <b-button v-b-toggle.accordion-5 block class="accordion-button">
-                How many types of Zoombies are available?
+                How many types of Zoombies are available and how do they release ?
               </b-button>
             </b-card-header>
             <b-collapse
@@ -299,13 +299,20 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  The <router-link to="/shop"> Shop </router-link> will show you
+                  <p>The <router-link to="/shop"> Shop </router-link> will show you
                   the current total number of Zoombies types available at the
                   current time. We will continue to load new sets containing
                   approx 10-20 cards every month until we reach the hard limit
                   of a total of 5000 types. The Zoombies contracts do not allow
                   anyone to edit or overwrite a card types definition once they
-                  have been loaded.
+                  have been loaded.</p>
+                  <p>New types released to the Shop will appear immediately. New types loaded in the boosters, will only be indicated by a type count increase, but are available to be randonly minted immediately.</p>
+                  <h3>Shop card release countdown</h3>
+                  <p>
+                    When new types are released to the Shop, the minting button will display a countdown timer to the moment the card
+                    will be unlocked for minting. Please note the timer you see on the screen may be off by a few seconds due to differences in your device load and memory.
+                    We advise that you browse away and back to the Shop about 10 seconds before they release to re-sync your browser timing. The actual moment a card type is released for minting is determined by the smart contract, this website is giving you the best approximation of that moment.
+                  </p>
                 </div>
               </b-card-body>
             </b-collapse>
@@ -337,7 +344,8 @@
                     <li>
                       A <strong>limited edition</strong> NFT card have a finite amount that will ever be
                       created. You will see the current edition number on the
-                      NFT in a format like : #2 of 6
+                      NFT in a format like : #2 of 6. All Shop cards are limited edition. 
+                      <p>The boosters contain a number of limited edition cards, If you pull one of these, count yourself lucky !</p>
                     </li>
                   </ul>
                 </div>
