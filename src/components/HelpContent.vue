@@ -2,10 +2,10 @@
   <div>
     <main role="main" class="container">
       <!--
-        brown       - 545161
-        light blue  - 2BA4FA
-        red         - CA3C2C
-        purple      - 5745E5
+        brown       - 585858
+        light blue  - 03c1e8
+        red         - d5005a
+        purple      - b92ee4
     -->
       <div class="jumbotron">
         <h1>Frequently Asked Questions</h1>
@@ -86,7 +86,7 @@
             >
               <b-card-body>
                 <div class="card-body">
-                  <img src="./assets/cryptoz_legend_binance.png" />
+                  <img src="./assets/legend_zoombies.jpg" />
                 </div>
                 <p />
                 <h2>Default Mint Booster NFT Rarity Distribution</h2>
@@ -107,7 +107,7 @@
                   <li>
                     <span
                       class="rarity-labels"
-                      style="background-color: #5745e5"
+                      style="background-color: #b92ee4"
                       >Epic</span
                     >
                     - 1 in 10000 - This is like pulling a unicorn.
@@ -115,7 +115,7 @@
                   <li>
                     <span
                       class="rarity-labels"
-                      style="background-color: #ca3c2c"
+                      style="background-color: #d5005a"
                       >Rare</span
                     >
                     - 499 in 10000 - These red cards are still very rare and
@@ -124,7 +124,7 @@
                   <li>
                     <span
                       class="rarity-labels"
-                      style="background-color: #2ba4fa"
+                      style="background-color: #03c1e8"
                       >Uncommon</span
                     >
                     - 2999 in 10000 - These when they occur, they are a nice
@@ -133,7 +133,7 @@
                   <li>
                     <span
                       class="rarity-labels"
-                      style="background-color: #545161"
+                      style="background-color: #585858"
                       >Common</span
                     >
                     - 6501 in 10000 - The editions on these will count up fairly
