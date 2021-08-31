@@ -26,8 +26,8 @@
             <b-container fluid>
               <b-row>
                 <b-col sm="12" md="3" lg="3"><strong>Max. 1000 wallets</strong></b-col>
-                <b-col sm="12" md="3" lg="3"><strong>Max Total sale: 20 Billion ZOOM</strong></b-col>
-                <b-col sm="12" md="3" lg="3"><strong>1 ZOOM = 0.000001 MOVR</strong></b-col>
+                <b-col sm="12" md="3" lg="3"><strong>Hard Cap: 200 Billion ZOOM</strong></b-col>
+                <b-col sm="12" md="3" lg="3"><strong>1 ZOOM = 0.0000001 MOVR</strong></b-col>
                 <b-col sm="12" md="3" lg="3"><strong>Min/Max purchase: 1/20 MOVR</strong></b-col>
               </b-row>
               <br/>
@@ -40,7 +40,7 @@
               <br/>
               <b-row align-h="center">
                 <b-col sm="12" md="6" lg="4" class="text-right" style="padding-top:6px"><strong>Total to purchase:</strong> <span class="text-success">{{pendingPurchase}}</span></b-col>
-                <b-col sm="12" md="4" lg="2"><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="8" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input> ZOOM tokens</b-col>
+                <b-col sm="12" md="4" lg="2"><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="9" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input> ZOOM tokens</b-col>
                 <b-col sm="12" md="2" lg="4"><input type="submit" class="btn btn-primary" @click="buyCzxp" :disabled="!buyCzxpBtnEnabled"></b-col>
               </b-row>
             </b-container>
@@ -135,9 +135,9 @@ export default {
     buyCzxpBtnEnabled() {
       if (
         this.totalCzxpToBuy !== "" &&
-        this.totalCzxpToBuy >= 1000000 &&
-        this.totalCzxpToBuy <= 20000000 &&
-        this.myPurchaseTotal < 20000000000000000000
+        this.totalCzxpToBuy >= 10000000 &&
+        this.totalCzxpToBuy <= 200000000 &&
+        this.myPurchaseTotal < 200000000000000000000
       ) {
         return true;
       } else {
@@ -157,7 +157,7 @@ export default {
       return this.movrCost + " MOVR =";
     },
     myPurchaseTotalLabel() {
-      return parseInt(this.myPurchaseTotal/1000000000000).toLocaleString();
+      return parseInt(this.myPurchaseTotal/100000000000).toLocaleString();
     }
   },
   beforeDestroy() {
@@ -206,7 +206,7 @@ export default {
   methods: {
     buyCzxp: async function () {
       //console.log( new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString() );
-      let buyinWei = new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString();
+      let buyinWei = new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('100000000000')).toString();
 
       await this.CzxpInstance.methods.buy().send({
         from: this.coinbase,
@@ -231,11 +231,11 @@ export default {
     },
     filterCzxpInput: function () {
       this.totalCzxpToBuy = this.totalCzxpToBuy.replace(/[^\d]/g, "");
-      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy * 1000000000000) > 20000000000000000000 ){
-        this.totalCzxpToBuy = (20000000000000000000 - this.myPurchaseTotal) /1000000000000;
+      if( this.myPurchaseTotal + parseInt(this.totalCzxpToBuy * 100000000000) > 20000000000000000000 ){
+        this.totalCzxpToBuy = (20000000000000000000 - this.myPurchaseTotal) /100000000000;
       }
 
-      this.movrCost = this.totalCzxpToBuy / 1000000;
+      this.movrCost = parseFloat(this.totalCzxpToBuy / 10000000).toFixed(7);
     },
   },
 };

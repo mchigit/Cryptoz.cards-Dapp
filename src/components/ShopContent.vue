@@ -63,7 +63,7 @@
               v-b-tooltip.hover="'Earn +500 ZOOM per credit'"
               v-b-modal.buy-boosters-modal
               class="btn btn-danger"
-              :disabled="balance < 10000000000000000 || isBuyingBooster"
+              :disabled="balance < 10000000100000000 || isBuyingBooster"
             >
               Buy <b-icon-lightning-fill /> Booster NFT Minting Credits @ 0.01
               <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" />
@@ -414,7 +414,7 @@ export default {
       return web3.utils.fromWei(wei, 'ether');
     },
     getBuyZoom(val) { //unlock * 10 * baseCost   =    val * 10 * 100000000000000
-      return parseFloat(0.000001 * 10 * val);
+      return parseFloat(0.0000001 * 10 * val);
     },
     getFormattedReleasedLabel(id,releaseTime){
       var timeRemaining = new Date(releaseTime - new Date().getTime()).getTime();

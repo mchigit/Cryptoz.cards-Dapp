@@ -33,6 +33,15 @@
 
           <hr class="clearfix w-100 d-md-none pb-3" />
 
+          <b-modal id="terms-of-use" title="Zoombies.world Terms of Use">
+            <p class="my-4">
+              By using this site you Agree and understand the following Terms of Use:
+              <ul>
+                <li></li>
+              </ul>
+            </p>
+          </b-modal>
+
           <!-- Grid column -->
           <div class="col-md-3 mb-md-0 mb-3">
             <!-- Links -->
@@ -90,9 +99,10 @@
                   >Cool Swag</a
                 >
               </li>
-              <!--li>
-                <a href="#!">Link 3</a>
+              <li>
+                <a href="#!" v-b-modal.terms-of-use>Terms of Use</a>
               </li>
+              <!--
               <li>
                 <a href="#!">Link 4</a>
               </li-->
