@@ -9,6 +9,7 @@
     -->
       <div class="jumbotron">
         <h1>Frequently Asked Questions</h1>
+        <p><span class="text-danger"><strong>NOTE:</strong></span> Please read all of the information below in detail, there are inherent risks with Cryptocurrency, NFTs and tokenomics. Know your limits and don't risk more than you are willing to lose.</p>
         <div class="accordion" role="tablist">
           <b-card no-body class="mb-1">
             <b-card-header
@@ -269,7 +270,8 @@
                     <strong>ZOOM Tokens</strong> are ERC-20
                     Fungible tokens. This means that any ZOOM is exchangeable
                     with any other ZOOM token and none are unique. If your wallet contains a sufficient amount of ZOOM tokens
-                    each Shop card will automatically determine if it will unlock and display the FREE minting button and reduced pricing values.
+                    each Shop card will automatically determine if it will unlock and display the FREE minting button and cost pricing values.<br/>
+                    If you do Not have the required Zoom token balance a <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-fp-icon" /> Fast Pass icon will appear on the minting button, as a way to bypass the Zoom requirement to mint NFT at 3x the base cost.
                     Each Shop card displays the amount of ZOOM required to unlock this feature in the bottom left
                     <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add ZOOM to Metamask</div>
                   </p>
@@ -528,5 +530,9 @@ export default {
 
 .mr-icon {
   height: 20px;
+}
+
+.rocket-fp-icon {
+  max-height: 30px;
 }
 </style>
