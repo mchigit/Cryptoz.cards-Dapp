@@ -24,19 +24,14 @@
           {{ row.item.edition_label }}
         </div>
       </template>
-      <template #cell(unlock_czxp)="row">
+      <template #cell(unlock_zoom)="row">
         <div class="cell">
           {{ parseInt(row.item.unlock_czxp).toLocaleString() }}
         </div>
       </template>
-      <template #cell(sacrifice_czxp)="row">
+      <template #cell(sacrifice_zoom)="row">
         <div class="cell">
           {{ parseInt(row.item.sacrifice_czxp).toLocaleString() }}
-        </div>
-      </template>
-      <template #cell(transfer_czxp)="row">
-        <div class="cell">
-          {{ parseInt(row.item.transfer_czxp).toLocaleString() }}
         </div>
       </template>
       <template #cell(sacrifice)="row">

@@ -182,6 +182,7 @@ export default {
           }
       } else {
           console.error("Please install MetaMask");
+          //window.alert("Please go to metamask.io, follow the instructions carefully and then return.");
       }
     },
     initializeApp: async function () {
@@ -191,8 +192,8 @@ export default {
       ]);
 
       if(networkId !== 1287){
-      //  await this.configureMoonbaseAlpha();
-      //  return;
+        await this.configureMoonbaseAlpha();
+        return;
       }
 
       this.$store.dispatch("chainChanged", networkId);

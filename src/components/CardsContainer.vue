@@ -377,16 +377,16 @@ export default {
           "name",
           "card_level",
           "edition_number",
-          "unlock_czxp",
-          "sacrifice_czxp",
+          "unlock_zoom",
+          "sacrifice_zoom",
         ];
       } else {
         return [
           "name",
           "card_level",
           "edition_number",
-          "unlock_czxp",
-          "sacrifice_czxp",
+          "unlock_zoom",
+          "sacrifice_zoom",
           "sacrifice",
           "gift",
         ];

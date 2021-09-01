@@ -8,6 +8,7 @@ export const NETWORKS = {
   "0x38": "Binance Smart Chain",
   "0x61": "Binance Smart Chain Test Net",
   "0x507": "Moonbase Alpha",
+  "0x505": "Moonriver",
   4447: "Truffle Develop Network",
   5777: "Ganache Blockchain",
   0: "Internal testing network",
