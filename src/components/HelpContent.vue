@@ -185,9 +185,8 @@
                   <p>You will need to buy MOVR or have it sent to your wallet. For more information, follow the offical Announcements
                   from the <a href="https://moonbeam.foundation/" target="_blank">Moonbeam Foundation</a>.
                   <br/>
-                  from <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
-
-                  The Moonbase Alpha BETA test, uses free no value <a href="https://docs.moonbeam.network/networks/moonbase/" target="_blank">testnet DEV token, request that here.</a></p>
+                  You can trade for MOVR tokens at these exchanges <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
+                  </p>
                   As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
                   ?? USD per transaction, depending on how fast you would
                   like the transactions confirmed and what exactly you are

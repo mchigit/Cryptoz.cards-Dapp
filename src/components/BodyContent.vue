@@ -20,7 +20,8 @@
           <p>
             <h2>ZOOM Token Liquidity Sale Event !</h2>
             <p><span class="text-danger">NOTE:</span> the ZOOM ERC20 token in a game utility token for the Zoombies NFT World, <router-link to="/help">please read and understand the mint and burn operations of this token</router-link> before purchase.<br />
-              <br/>Holding a sufficient ZOOM token balance for a card type will unlock FREE and reduced Shop NFT minting costs</p>
+              <br/>Holding a sufficient ZOOM token balance for a card type will unlock FREE and reduced Shop NFT minting costs
+            <div class="btn btn-primary" @click="addZOOMtoMetaMask">Add ZOOM asset to Metamask</div></p>
               <br/>
             <b-container fluid>
               <b-row>
@@ -40,7 +41,8 @@
               <b-row align-h="center">
                 <b-col sm="12" md="6" lg="4" class="text-right" style="padding-top:6px"><strong>Total to purchase:</strong> <span class="text-success">{{pendingPurchase}}</span></b-col>
                 <b-col sm="12" md="4" lg="2"><b-form-input v-model="totalCzxpToBuy" size="10" maxlength="9" placeholder="enter amount" @keyup="filterCzxpInput" class=""></b-form-input> ZOOM tokens</b-col>
-                <b-col sm="12" md="2" lg="4"><input type="submit" class="btn btn-primary" @click="buyCzxp" :disabled="!buyCzxpBtnEnabled"></b-col>
+                <b-col sm="12" md="2" lg="4"><input type="submit" class="btn btn-primary" @click="buyCzxp" :disabled="!buyCzxpBtnEnabled">
+                </b-col>
               </b-row>
             </b-container>
             <br/>
@@ -175,6 +177,30 @@ export default {
 
   },
   methods: {
+    addZOOMtoMetaMask: async function() {
+      const tokenAddress = '0x8bd5180Ccdd7AE4aF832c8C03e21Ce8484A128d4';
+      const tokenSymbol = 'ZOOM';
+      const tokenDecimals = 18;
+      const tokenImage = 'https://zoombies.world/images/zoombies_coin.svg';
+
+      try {
+        // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+        const wasAdded = await ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+            options: {
+              address: tokenAddress, // The address that the token is at.
+              symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+              decimals: tokenDecimals, // The number of decimals in the token
+              image: tokenImage, // A string url of the token logo
+            },
+          },
+        });
+      } catch (error) {
+        console.log('addCZXPtoMetaMask error:',error);
+      }
+    },
     buyCzxp: async function () {
       //console.log( new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('1000000000000')).toString() );
       let buyinWei = new web3.utils.BN(this.totalCzxpToBuy).mul(new web3.utils.BN('100000000000')).toString();
