@@ -41,8 +41,8 @@
                       Chrome browser extension, <a href="https://trustwallet.com/" target="_blank">Trust Wallet ( mobile )</a> or other Moonriver compatibile wallet
                     </li>
                     <li>
-                      A balance of <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" /> MOVR coins ( the cryptocurrency of Moonriver
-                      ) from <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
+                      A balance of MOVR ( the cryptocurrency of Moonriver
+                      ) from KuCoin or Kraken U.S</a>.
                     </li>
                   </ul>
                   <p>
