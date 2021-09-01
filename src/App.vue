@@ -192,8 +192,8 @@ export default {
       ]);
 
       if(networkId !== 1285){
-        //await this.configureMoonriver();
-        //return;
+        await this.configureMoonriver();
+        return;
       }
 
       this.$store.dispatch("chainChanged", networkId);

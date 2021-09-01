@@ -65,11 +65,11 @@
             <span
               >To interact with Zoombies you will need to
               <a
-                href="https://docs.moonbeam.network/getting-started/moonbase/metamask/"
+                href="https://docs.moonbeam.network/getting-started/moonriver/integrate-metamask/"
                 target="_blank"
-                >install Metamask configured for Moonbase alpha</a
+                >install Metamask configured for Moonriver</a
               >
-              and have a small amount of DEV in your wallet.</span
+              and have a small amount of MOVR in your wallet.</span
             >
           </div>
           <p>
@@ -164,7 +164,7 @@ export default {
     }
   },
   beforeDestroy() {
-  
+
   },
   mounted() {
       this.$nextTick(function () {
