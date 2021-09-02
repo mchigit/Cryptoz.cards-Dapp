@@ -156,7 +156,7 @@ export default {
     })(document, "script", "twitter-wjs");
   },
   methods: {
-    configureMoonbaseAlpha: async function() {
+    configureMoonriver: async function() {
       const provider = await detectEthereumProvider({ mustBeMetaMask: true });
       if (provider) {
           try {
@@ -165,15 +165,15 @@ export default {
                   method: "wallet_addEthereumChain",
                   params: [
                       {
-                          chainId: "0x507", // Moonbase Alpha's chainId is 1287, which is 0x507 in hex
-                          chainName: "Moonbase Alpha",
+                          chainId: "0x505", // Moonbase Alpha's chainId is 1287, which is 0x507 in hex
+                          chainName: "Moonriver",
                           nativeCurrency: {
-                              name: 'DEV',
-                              symbol: 'DEV',
+                              name: 'MOVR',
+                              symbol: 'MOVR',
                               decimals: 18
                           },
-                         rpcUrls: ["https://rpc.testnet.moonbeam.network"],
-                         blockExplorerUrls: ["https://moonbase-blockscout.testnet.moonbeam.network/"]
+                         rpcUrls: ["https://rpc.moonriver.moonbeam.network"],
+                         blockExplorerUrls: ["https://blockscout.moonriver.moonbeam.network/"]
                       },
                   ]
               })
@@ -191,8 +191,8 @@ export default {
         web3.eth.net.getId(),
       ]);
 
-      if(networkId !== 1287){
-        await this.configureMoonbaseAlpha();
+      if(networkId !== 1285){
+        await this.configureMoonriver();
         return;
       }
 

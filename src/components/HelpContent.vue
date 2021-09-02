@@ -9,6 +9,7 @@
     -->
       <div class="jumbotron">
         <h1>Frequently Asked Questions</h1>
+        <p><span class="text-danger"><strong>NOTE:</strong></span> Please read all of the information below in detail, there are inherent risks with Cryptocurrency, NFTs and tokenomics. Know your limits and don't risk more than you are willing to lose.</p>
         <div class="accordion" role="tablist">
           <b-card no-body class="mb-1">
             <b-card-header
@@ -40,8 +41,8 @@
                       Chrome browser extension, <a href="https://trustwallet.com/" target="_blank">Trust Wallet ( mobile )</a> or other Moonriver compatibile wallet
                     </li>
                     <li>
-                      A balance of <img src="https://zoombies.world/images/mr-icon.png" class="mr-icon" /> MOVR coins ( the cryptocurrency of Moonriver
-                      ) from <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
+                      A balance of MOVR ( the cryptocurrency of Moonriver
+                      ) from KuCoin or Kraken U.S</a>.
                     </li>
                   </ul>
                   <p>
@@ -184,9 +185,8 @@
                   <p>You will need to buy MOVR or have it sent to your wallet. For more information, follow the offical Announcements
                   from the <a href="https://moonbeam.foundation/" target="_blank">Moonbeam Foundation</a>.
                   <br/>
-                  from <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
-
-                  The Moonbase Alpha BETA test, uses free no value <a href="https://docs.moonbeam.network/networks/moonbase/" target="_blank">testnet DEV token, request that here.</a></p>
+                  You can trade for MOVR tokens at these exchanges <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
+                  </p>
                   As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
                   ?? USD per transaction, depending on how fast you would
                   like the transactions confirmed and what exactly you are
@@ -269,7 +269,8 @@
                     <strong>ZOOM Tokens</strong> are ERC-20
                     Fungible tokens. This means that any ZOOM is exchangeable
                     with any other ZOOM token and none are unique. If your wallet contains a sufficient amount of ZOOM tokens
-                    each Shop card will automatically determine if it will unlock and display the FREE minting button and reduced pricing values.
+                    each Shop card will automatically determine if it will unlock and display the FREE minting button and cost pricing values.<br/>
+                    If you do Not have the required Zoom token balance a <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-fp-icon" /> Fast Pass icon will appear on the minting button, as a way to bypass the Zoom requirement to mint NFT at 3x the base cost.
                     Each Shop card displays the amount of ZOOM required to unlock this feature in the bottom left
                     <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add ZOOM to Metamask</div>
                   </p>
@@ -475,7 +476,7 @@ export default {
   },
   methods: {
     addCZXPtoMetaMask: async function() {
-      const tokenAddress = '0xf7A59411a574003091f92777166688202AF1ebf1';
+      const tokenAddress = '0x8bd5180Ccdd7AE4aF832c8C03e21Ce8484A128d4';
       const tokenSymbol = 'ZOOM';
       const tokenDecimals = 18;
       const tokenImage = 'https://zoombies.world/images/zoombies_coin.svg';
@@ -528,5 +529,9 @@ export default {
 
 .mr-icon {
   height: 20px;
+}
+
+.rocket-fp-icon {
+  max-height: 30px;
 }
 </style>
