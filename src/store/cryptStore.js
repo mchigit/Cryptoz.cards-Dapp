@@ -1,6 +1,7 @@
 import getCardType from "../util/getCardType";
 import { dynamicSort, getRarity } from "../helpers";
 import { RARITY_CLASSES } from "./cardStore";
+import _ from "lodash";
 
 export const ORIGIN_CRITERIA = {
   STORE: "STORE",
@@ -332,15 +333,14 @@ const cryptStore = {
           endIndex = pageSize;
         }
       }
-
       if (!!pageStart) {
         return {
-          cards: cardsToReturn.slice(pageStart, endIndex),
+          cards: _.uniqBy(cardsToReturn.slice(pageStart, endIndex), 'id'),
           next: pageNext,
         };
       } else {
         return {
-          cards: cardsToReturn.slice(0, endIndex),
+          cards: _.uniqBy(cardsToReturn.slice(0, endIndex), 'id'),
           next: pageNext,
         };
       }

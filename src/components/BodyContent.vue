@@ -165,17 +165,6 @@ export default {
       return parseInt(this.myPurchaseTotal/100000000000).toLocaleString();
     }
   },
-  beforeDestroy() {
-
-  },
-  mounted() {
-      this.$nextTick(function () {
-         if (this.CzxpInstance) {
-           this.updateSale();
-         }
-      });
-
-  },
   methods: {
     addZOOMtoMetaMask: async function() {
       const tokenAddress = '0x8bd5180Ccdd7AE4aF832c8C03e21Ce8484A128d4';
@@ -235,6 +224,13 @@ export default {
       this.movrCost = parseFloat(this.totalCzxpToBuy / 10000000).toFixed(7);
     },
   },
+  watch: {
+    ZoombiesInstance(newVal) {
+      if (newVal) {
+        this.updateSale();
+      }
+    },
+  }
 };
 </script>
 

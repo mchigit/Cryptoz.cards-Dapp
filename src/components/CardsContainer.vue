@@ -285,16 +285,16 @@ export default {
         );
 
         if (this.isCardModified) {
-          this.modifiedPaginatedCryptCards = [
+          this.modifiedPaginatedCryptCards = _.uniqBy([
             ...this.modifiedPaginatedCryptCards,
             ...newCards.cards,
-          ];
+          ], 'id');
           this.modifiedPageNext = newCards.next;
         } else {
-          this.paginatedCryptCards = [
+          this.paginatedCryptCards = _.uniqBy([
             ...this.paginatedCryptCards,
             ...newCards.cards,
-          ];
+          ], 'id');
           this.pageNext = newCards.next;
         }
       },
