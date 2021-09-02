@@ -164,8 +164,6 @@ export default {
     clearInterval(window.countdownTimer);
   },
   mounted() {
-
-
     // Set the date we're counting down to
     var countDownDate = new Date(Date.UTC(2021,8,1,14,0,0)).getTime();
 
@@ -194,14 +192,6 @@ export default {
       document.getElementById("countdown").innerHTML = "Refresh every minute for LIVE..";
     }
     }, 1000);
-
-
-      this.$nextTick(function () {
-         if (this.CzxpInstance) {
-           this.updateSale();
-         }
-      });
-
   },
   methods: {
     buyCzxp: async function () {
@@ -238,6 +228,13 @@ export default {
       this.movrCost = parseFloat(this.totalCzxpToBuy / 10000000).toFixed(7);
     },
   },
+  watch: {
+    ZoombiesInstance(newVal) {
+      if (newVal) {
+        this.updateSale();
+      }
+    },
+  }
 };
 </script>
 
