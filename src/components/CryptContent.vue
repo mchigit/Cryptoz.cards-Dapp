@@ -87,6 +87,7 @@
             </b-button>
           </b-col>
         </b-row>
+        <span class="text-danger"><strong>NOTE:</strong></span> ZOOM is burned permanently when you wager
       </b-modal>
 
       <b-modal

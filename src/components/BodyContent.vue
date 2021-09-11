@@ -20,7 +20,7 @@
           <p>
             <h2>ZOOM Token Liquidity Sale Event !</h2>
             <p><span class="text-danger">NOTE:</span> the ZOOM ERC20 token in a game utility token for the Zoombies NFT World, <router-link to="/help">please read and understand the mint and burn operations of this token</router-link> before purchase.<br />
-              <br/>Holding a sufficient ZOOM token balance for a card type will unlock FREE and reduced Shop NFT minting costs
+              <br/>Holding a sufficient ZOOM token balance for a card type will unlock FREE and reduced Shop NFT minting costs, and provide a burn option to increase chance of rarity when minting booster NFTs. Future utility will include ZOOM tokens as a form of health points.
             <div class="btn btn-primary" @click="addZOOMtoMetaMask">Add ZOOM asset to Metamask</div></p>
               <br/>
             <b-container fluid>
@@ -45,8 +45,10 @@
                 </b-col>
               </b-row>
             </b-container>
+            <br/><br/><br/>
+            <span class="text-warning">Zombies will provision up to a maximum of 2 Billion Zoom to a MOVR-ZOOM swap pool upon sale of equivalent MOVR.</span>
             <br/>
-            Zombies will provision up to a maximum of 2 Billion Zoom to a MOVR-ZOOM swap pool upon sale of equivalent MOVR.
+            <span class="text-success">Thank you community, you have met this requirement!</span> we have launched the ZOOM token <router-link to="/market">pool on SushiSwap</router-link>.
           <br/>
             <hr />
           </p>
@@ -175,6 +177,13 @@ export default {
          }
       });
 
+  },
+  watch: {
+   ZoombiesInstance(newVal) {
+     if (newVal) {
+       this.updateSale();
+     }
+   },
   },
   methods: {
     addZOOMtoMetaMask: async function() {
