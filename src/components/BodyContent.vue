@@ -167,9 +167,6 @@ export default {
       return parseInt(this.myPurchaseTotal/100000000000).toLocaleString();
     }
   },
-  beforeDestroy() {
-
-  },
   mounted() {
       this.$nextTick(function () {
          if (this.CzxpInstance) {
@@ -244,6 +241,13 @@ export default {
       this.movrCost = parseFloat(this.totalCzxpToBuy / 10000000).toFixed(7);
     },
   },
+  watch: {
+    ZoombiesInstance(newVal) {
+      if (newVal) {
+        this.updateSale();
+      }
+    },
+  }
 };
 </script>
 

@@ -33,8 +33,8 @@ import "./main.css";
 
 // import dev_cryptoz_artifacts from './dev/contracts/Cryptoz.json';
 // import dev_cryptoz_token_artifacts from './dev/contracts/CzxpToken.json';
-import cryptozContractResp from './contracts/Zoombies.json';
-import czxpContractResp from './contracts/ZoomToken.json';
+import zoombiesContractJSON from './contracts/Zoombies.json';
+import zoomTokenContractJSON from './contracts/ZoomToken.json';
 
 // import bsc_cryptoz_artifacts from'./bsc/contracts/Cryptoz.json';
 // import bsc_cryptoz_token_artifacts from './bsc/contracts/CzxpToken.json';
@@ -224,31 +224,19 @@ export default {
       }
     },
     loadContracts: async function (accounts, networkId) {
-/*
-      const cryptozContractResp = await axios.get(
-        `${contractBaseUrl}/Zoombies.json`
+      const zoombiesContractAddress = zoombiesContractJSON.networks[networkId].address;
+      const zoomTokenContractAddress = zoomTokenContractJSON.networks[networkId].address;
+      const zoombiesContract = new web3.eth.Contract(
+        zoombiesContractJSON.abi,
+        zoombiesContractAddress
       );
-      const czxpContractResp = await axios.get(
-        `${contractBaseUrl}/ZoomToken.json`
-      );
-*/
-
-      const cryptozArtifact = cryptozContractResp;
-      const czxpArtifact = czxpContractResp;
-      const cryptozContractAddress =
-        cryptozArtifact.networks[networkId].address;
-      const czxpContractAddress = czxpArtifact.networks[networkId].address;
-      const cryptozContract = new web3.eth.Contract(
-        cryptozArtifact.abi,
-        cryptozContractAddress
-      );
-      const czxpContract = new web3.eth.Contract(
-        czxpArtifact.abi,
-        czxpContractAddress
+      const zoomTokenContract = new web3.eth.Contract(
+        zoomTokenContractJSON.abi,
+        zoomTokenContractAddress
       );
       return this.$store.dispatch("setContractInstance", {
-        cryptoz: cryptozContract,
-        czxp: czxpContract,
+        cryptoz: zoombiesContract,
+        czxp: zoomTokenContract,
       });
     },
     handleConnect: async function () {

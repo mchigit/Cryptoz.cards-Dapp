@@ -379,16 +379,6 @@ export default {
     },
   },
 };
-
-/*
-  Ok we need to track the state of the Crypt
-  LoggedIn true or false
-  ownsCards true or false
-  Sorted By
-    Name
-    Date Type loaded
-    Limited Edition
-*/
 </script>
 
 <style scoped lang="scss">
