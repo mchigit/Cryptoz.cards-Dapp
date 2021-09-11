@@ -146,6 +146,10 @@
           wallet but across the entire Zoombies World. That unique NFT is
           burned forever.
         </p>
+        <p v-if="throttle"
+        >
+          <b-alert show variant="danger"><strong>MAINTENANCE:</strong> Moonbeam Foundation is upgrading the Moonriver network, minting will resume when complete. Please check back in 1 hour.</b-alert>
+        </p>
 
         <!-- Loads cards here -->
         <div v-if="isWalletConnected" class="action-buttons">
@@ -153,7 +157,7 @@
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT'"
               class="mint-booster-btn btn btn-danger"
-              :disabled="boostersOwned < 1"
+              :disabled="boostersOwned < 1 || throttle"
               v-b-modal="'open-booster-modal'"
 
               >Mint <b-icon-lightning-fill /> Booster NFT
@@ -172,7 +176,7 @@
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT +500 ZOOM'"
               class="btn btn-danger"
-              :disabled="balance < 10000001000000000"
+              :disabled="balance < 10000001000000000 || throttle"
               @click="buyAndOpenBooster"
             >
               Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.01
@@ -207,7 +211,8 @@ import {
   BImg,
   BContainer,
   BProgress,
-  BProgressBar
+  BProgressBar,
+  BAlert
 } from "bootstrap-vue";
 import { showErrorToast } from "../util/showToast";
 import dAppStates from "@/dAppStates";
@@ -227,7 +232,8 @@ export default {
     BImg,
     BContainer,
     BProgress,
-    BProgressBar
+    BProgressBar,
+    BAlert
   },
   data() {
     return {
@@ -239,6 +245,9 @@ export default {
     };
   },
   computed: {
+    throttle() {
+      return this.$store.state.throttle;
+    },
     balance() {
       return this.$store.state.web3.balance;
     },
