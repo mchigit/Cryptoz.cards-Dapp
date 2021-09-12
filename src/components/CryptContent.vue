@@ -146,10 +146,6 @@
           wallet but across the entire Zoombies World. That unique NFT is
           burned forever.
         </p>
-        <p v-if="throttle"
-        >
-          <b-alert show variant="danger"><strong>MAINTENANCE:</strong> Moonbeam Foundation is upgrading the Moonriver network, minting will resume when complete. Please check back in 1 hour.</b-alert>
-        </p>
 
         <!-- Loads cards here -->
         <div v-if="isWalletConnected" class="action-buttons">
@@ -157,9 +153,8 @@
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT'"
               class="mint-booster-btn btn btn-danger"
-              :disabled="boostersOwned < 1 || throttle"
+              :disabled="boostersOwned < 1"
               v-b-modal="'open-booster-modal'"
-
               >Mint <b-icon-lightning-fill /> Booster NFT
             </b-button>
           </div>
@@ -176,7 +171,7 @@
             <b-button
               v-b-tooltip.hover="'Mint 1 random booster NFT +500 ZOOM'"
               class="btn btn-danger"
-              :disabled="balance < 10000001000000000 || throttle"
+              :disabled="balance < 10000001000000000"
               @click="buyAndOpenBooster"
             >
               Buy and Mint <b-icon-lightning-fill /> Booster NFT 0.01
@@ -306,9 +301,26 @@ export default {
     },
   },
   methods: {
+    checkThrottleStatus() {
+      const nowSec = Date.now() / 1000
+      const lastMintTime = localStorage.getItem('lastMintTime')
+
+      if (!lastMintTime) return true
+      if (parseInt(lastMintTime) + 60 < nowSec) {
+        return true
+      }
+      showErrorToast(this, "The Moonriver network is currently being upgraded. Try minting again in a minute.");
+      return false
+    },
+    setLastMintTime() {
+      const nowSec = Date.now() / 1000
+      localStorage.setItem('lastMintTime', nowSec)
+    },
     buyAndOpenBooster: async function () {
+      if (!this.checkThrottleStatus()) return
       try {
         this.$store.dispatch("setIsTransactionPending", true);
+        this.setLastMintTime()
         const res = await this.CryptozInstance.methods
           .buyBoosterAndMintNFT()
           .send(
@@ -320,6 +332,7 @@ export default {
               this.$store.dispatch("setIsTransactionPending", false);
             }
           );
+
 
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
           cardId: res.events.LogCardMinted.returnValues.tokenId,
@@ -335,6 +348,8 @@ export default {
       }
     },
     openBooster: async function () {
+      if (!this.checkThrottleStatus()) return
+      this.setLastMintTime()
       try {
         this.$store.dispatch("setIsTransactionPending", true);
         this.$bvModal.hide("open-booster-modal");

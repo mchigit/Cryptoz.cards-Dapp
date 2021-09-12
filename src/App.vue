@@ -121,15 +121,6 @@ export default {
       showSuccessToast(this, "Balance Updated!");
     }, 1000);
 
-    //Create the throttle state for the rest of the session
-    if (Math.random() <= 0.3333) {
-      console.log('throttle on');
-      this.$store.state.throttle = true;
-    } else {
-      console.log('throttle off');
-      this.$store.state.throttle = false;
-    }
-
     // this needs to be set in beforeCreate because vue lifecycle
     // is Parent create -> child create -> child mount -> parent mount
     // and we need provider to be set in child components
@@ -200,10 +191,10 @@ export default {
         web3.eth.net.getId(),
       ]);
 
-      if(networkId !== 1285){
-        await this.configureMoonriver();
-        return;
-      }
+      // if(networkId !== 1285){
+      //   await this.configureMoonriver();
+      //   return;
+      // }
 
       this.$store.dispatch("chainChanged", networkId);
       await this.loadContracts(accounts, networkId);
