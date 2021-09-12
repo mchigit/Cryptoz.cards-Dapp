@@ -271,13 +271,9 @@ export default {
       });
       provider.on("chainChanged", (chainId) => {
         this.$store.dispatch("chainChanged", chainId);
-        // without this check it auto-reloads to infinity
         const previousChainId = localStorage.getItem("ethChainId");
-      //  if (previousChainId !== chainId) {
-          localStorage.setItem("ethChainId", chainId);
-          window.location.reload();
-          return;
-      //  }
+        localStorage.setItem("ethChainId", chainId);
+        window.location.reload();
       });
       provider.on("disconnect", () => {
         this.disconnectWallet();
