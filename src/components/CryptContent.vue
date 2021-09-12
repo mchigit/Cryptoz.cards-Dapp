@@ -87,6 +87,7 @@
             </b-button>
           </b-col>
         </b-row>
+        <span class="text-danger"><strong>NOTE:</strong></span> ZOOM is burned permanently when you wager
       </b-modal>
 
       <b-modal
@@ -154,7 +155,6 @@
               class="mint-booster-btn btn btn-danger"
               :disabled="boostersOwned < 1"
               v-b-modal="'open-booster-modal'"
-
               >Mint <b-icon-lightning-fill /> Booster NFT
             </b-button>
           </div>
@@ -206,7 +206,8 @@ import {
   BImg,
   BContainer,
   BProgress,
-  BProgressBar
+  BProgressBar,
+  BAlert
 } from "bootstrap-vue";
 import { showErrorToast } from "../util/showToast";
 import dAppStates from "@/dAppStates";
@@ -226,7 +227,8 @@ export default {
     BImg,
     BContainer,
     BProgress,
-    BProgressBar
+    BProgressBar,
+    BAlert
   },
   data() {
     return {
@@ -238,6 +240,9 @@ export default {
     };
   },
   computed: {
+    throttle() {
+      return this.$store.state.throttle;
+    },
     balance() {
       return this.$store.state.web3.balance;
     },
@@ -296,9 +301,26 @@ export default {
     },
   },
   methods: {
+    checkThrottleStatus() {
+      const nowSec = Date.now() / 1000
+      const lastMintTime = localStorage.getItem('lastMintTime')
+
+      if (!lastMintTime) return true
+      if (parseInt(lastMintTime) + 60 < nowSec) {
+        return true
+      }
+      showErrorToast(this, "The Moonriver network is currently being upgraded. Try minting again in a minute.");
+      return false
+    },
+    setLastMintTime() {
+      const nowSec = Date.now() / 1000
+      localStorage.setItem('lastMintTime', nowSec)
+    },
     buyAndOpenBooster: async function () {
+      if (!this.checkThrottleStatus()) return
       try {
         this.$store.dispatch("setIsTransactionPending", true);
+        this.setLastMintTime()
         const res = await this.CryptozInstance.methods
           .buyBoosterAndMintNFT()
           .send(
@@ -310,6 +332,7 @@ export default {
               this.$store.dispatch("setIsTransactionPending", false);
             }
           );
+
 
         const newCard = await this.$store.dispatch("crypt/addBoosterCard", {
           cardId: res.events.LogCardMinted.returnValues.tokenId,
@@ -325,6 +348,8 @@ export default {
       }
     },
     openBooster: async function () {
+      if (!this.checkThrottleStatus()) return
+      this.setLastMintTime()
       try {
         this.$store.dispatch("setIsTransactionPending", true);
         this.$bvModal.hide("open-booster-modal");

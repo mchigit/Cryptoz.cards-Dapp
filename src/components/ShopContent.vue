@@ -485,10 +485,30 @@ export default {
       this.showTransactionModal();
 
       let cardBNValue = new web3.utils.BN(web3.utils.toWei(cardAttributes.cost)).toString()
-      if ( this.czxpBalance < cardAttributes.unlock_czxp ) {
-          cardBNValue = web3.utils.toWei( (cardAttributes.cost*3).toFixed(5) );
-          console.log(cardBNValue.toString());
+      //HAck for cemetary wolf
+      if(cardAttributes.type_id == 147){
+        cardBNValue =  "8999999999999999";
       }
+
+      if(cardAttributes.type_id == 149 || cardAttributes.type_id == 151){
+        cardBNValue =  "70000000000000008";
+      }
+
+      if ( this.czxpBalance < cardAttributes.unlock_czxp  ) {
+          cardBNValue = web3.utils.toWei( (cardAttributes.cost*3).toFixed(5) );
+          //console.log(cardBNValue.toString());
+          if(cardAttributes.type_id == 147){//HAck for cemetary wolf
+            cardBNValue =  "26999999999999997";
+          }
+
+          if(cardAttributes.type_id == 149 || cardAttributes.type_id == 151){
+            cardBNValue =  "210000000000000024";
+          }
+      }
+
+
+
+      //console.log(cardBNValue.toString());
 
       const result = await this.CryptozInstance.methods
         .buyCard(cardAttributes.type_id)

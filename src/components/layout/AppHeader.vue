@@ -11,6 +11,11 @@
       <b-navbar-toggle target="nav-collapse" />
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav id="cryptoz-nav">
+          <b-nav-item v-if="isWalletConnected" id="affiliate">
+            <b-link v-b-modal.sponsor-modal :class="classObject" href="#">
+              Affiliate
+            </b-link>
+          </b-nav-item>
           <b-nav-item id="shop">
             <router-link :class="classObject" to="/shop"> Shop </router-link>
           </b-nav-item>
@@ -30,10 +35,10 @@
           <b-nav-item id="help">
             <router-link :class="classObject" to="/help"> Help </router-link>
           </b-nav-item>
-          <b-nav-item v-if="isWalletConnected" id="affiliate">
-            <b-link v-b-modal.sponsor-modal :class="classObject" href="#">
-              Affiliate
-            </b-link>
+          <b-nav-item id="feedback">
+            <router-link :class="classObject" to="/feedback">
+              Feedback
+            </router-link>
           </b-nav-item>
 <!-- DISABLED FOR NOW
           <b-nav-item>
