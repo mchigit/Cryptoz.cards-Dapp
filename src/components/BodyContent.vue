@@ -167,14 +167,6 @@ export default {
       return parseInt(this.myPurchaseTotal/100000000000).toLocaleString();
     }
   },
-  mounted() {
-      this.$nextTick(function () {
-         if (this.CzxpInstance) {
-           this.updateSale();
-         }
-      });
-
-  },
   watch: {
    ZoombiesInstance(newVal) {
      if (newVal) {
