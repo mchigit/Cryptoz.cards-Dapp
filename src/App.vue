@@ -191,10 +191,10 @@ export default {
         web3.eth.net.getId(),
       ]);
 
-      // if(networkId !== 1285){
-      //   await this.configureMoonriver();
-      //   return;
-      // }
+      if(networkId !== 1285){
+        await this.configureMoonriver();
+        return;
+      }
 
       this.$store.dispatch("chainChanged", networkId);
       await this.loadContracts(accounts, networkId);
