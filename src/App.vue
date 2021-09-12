@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import detectEthereumProvider from '@metamask/detect-provider';
+import detectEthereumProvider from "@metamask/detect-provider";
 import axios from "axios";
 import debounce from "lodash/debounce";
 import watchEvents from "./util/watchEvents";
@@ -33,13 +33,38 @@ import "./main.css";
 
 // import dev_cryptoz_artifacts from './dev/contracts/Cryptoz.json';
 // import dev_cryptoz_token_artifacts from './dev/contracts/CzxpToken.json';
-import zoombiesContractJSON from './contracts/Zoombies.json';
-import zoomTokenContractJSON from './contracts/ZoomToken.json';
+import zoombiesContractJSON from "./contracts/Zoombies.json";
+import zoomTokenContractJSON from "./contracts/ZoomToken.json";
 
 // import bsc_cryptoz_artifacts from'./bsc/contracts/Cryptoz.json';
 // import bsc_cryptoz_token_artifacts from './bsc/contracts/CzxpToken.json';
 
-const testEnv = true;
+const isLocal = process.env.NODE_ENV === "development";
+const ethChainParam = isLocal
+  ? {
+      chainId: "0x507", // Moonbase Alpha's chainId is 1287, which is 0x507 in hex
+      chainName: "Moonbase Alpha",
+      nativeCurrency: {
+        name: "DEV",
+        symbol: "DEV",
+        decimals: 18,
+      },
+      rpcUrls: ["https://rpc.testnet.moonbeam.network"],
+      blockExplorerUrls: [
+        "https://moonbase-blockscout.testnet.moonbeam.network/",
+      ],
+    }
+  : {
+      chainId: "0x505", // Moonbase Alpha's chainId is 1287, which is 0x507 in hex
+      chainName: "Moonriver",
+      nativeCurrency: {
+        name: "MOVR",
+        symbol: "MOVR",
+        decimals: 18,
+      },
+      rpcUrls: ["https://rpc.moonriver.moonbeam.network"],
+      blockExplorerUrls: ["https://blockscout.moonriver.moonbeam.network/"],
+    };
 
 // const providerOptions = {
 // torus: {
@@ -156,33 +181,21 @@ export default {
     })(document, "script", "twitter-wjs");
   },
   methods: {
-    configureMoonriver: async function() {
+    configureMoonriver: async function () {
       const provider = await detectEthereumProvider({ mustBeMetaMask: true });
       if (provider) {
-          try {
-              await provider.request({ method: "eth_requestAccounts"});
-              await provider.request({
-                  method: "wallet_addEthereumChain",
-                  params: [
-                      {
-                          chainId: "0x505", // Moonbase Alpha's chainId is 1287, which is 0x507 in hex
-                          chainName: "Moonriver",
-                          nativeCurrency: {
-                              name: 'MOVR',
-                              symbol: 'MOVR',
-                              decimals: 18
-                          },
-                         rpcUrls: ["https://rpc.moonriver.moonbeam.network"],
-                         blockExplorerUrls: ["https://blockscout.moonriver.moonbeam.network/"]
-                      },
-                  ]
-              })
-          } catch(e) {
-              console.error(e);
-          }
+        try {
+          await provider.request({ method: "eth_requestAccounts" });
+          await provider.request({
+            method: "wallet_addEthereumChain",
+            params: [ethChainParam],
+          });
+        } catch (e) {
+          console.error(e);
+        }
       } else {
-          console.error("Please install MetaMask");
-          //window.alert("Please go to metamask.io, follow the instructions carefully and then return.");
+        console.error("Please install MetaMask");
+        //window.alert("Please go to metamask.io, follow the instructions carefully and then return.");
       }
     },
     initializeApp: async function () {
@@ -191,9 +204,8 @@ export default {
         web3.eth.net.getId(),
       ]);
 
-      if(networkId !== 1285){
+      if (networkId !== 1285) {
         await this.configureMoonriver();
-        return;
       }
 
       this.$store.dispatch("chainChanged", networkId);
@@ -208,15 +220,26 @@ export default {
         watchEvents(this.CzxpInstance, this.CryptozInstance, {
           onCardMinted: this.onCardMinted,
           onBalanceUpdated: this.onBalanceUpdated,
-          onSponsorEvent: (czxpReward) => {
+          onSponsorEvent: (czxpReward, event) => {
             MessageBus.$emit("czxpReward", czxpReward);
+            const affiliate = event.returnValues.affiliate.toLowerCase();
+            const shortendAffiliate = `${affiliate.substring(
+              0,
+              5
+            )}....${affiliate.substring(affiliate.length - 4)}`;
+            showSuccessToast(
+              this,
+              `${shortendAffiliate} just used your sponsor link and became an affiliate!`
+            );
           },
         });
       }
     },
     loadContracts: async function (accounts, networkId) {
-      const zoombiesContractAddress = zoombiesContractJSON.networks[networkId].address;
-      const zoomTokenContractAddress = zoomTokenContractJSON.networks[networkId].address;
+      const zoombiesContractAddress =
+        zoombiesContractJSON.networks[networkId].address;
+      const zoomTokenContractAddress =
+        zoomTokenContractJSON.networks[networkId].address;
       const zoombiesContract = new web3.eth.Contract(
         zoombiesContractJSON.abi,
         zoombiesContractAddress

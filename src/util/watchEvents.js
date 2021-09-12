@@ -47,7 +47,7 @@ let watchEvents = function (
           break;
         case 'LogSponsorReward':
           if (coinbase.toLowerCase() === event.returnValues.sponsor.toLowerCase()) {
-            onSponsorEvent(parseInt(event.returnValues.CzxpReward))
+            onSponsorEvent(parseInt(event.returnValues.CzxpReward), event)
           }
           break;
         default:
