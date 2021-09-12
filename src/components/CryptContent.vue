@@ -266,7 +266,7 @@ export default {
     return {
       wagerAmount: 0,
       receivingWallet: "",
-      pBarDefaultValues: [1,5,25,69],
+      pBarDefaultValues: [0.01,4.98,29.9,64.9],
       pBarWagerValues: [1,5,25,69],
       pBarMax: 100,
     };
