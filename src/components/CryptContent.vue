@@ -13,7 +13,7 @@
 
         <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
           <b-progress-bar
-            v-b-tooltip.hover="`${pBarDefaultValues[0]}% chance to pull a Epic`"
+            v-b-tooltip.hover="`${pBarDefaultValues[0]}% chance to pull an Epic`"
             class="p-bar-purple"
             :value="pBarDefaultValues[0]"
           ></b-progress-bar>
@@ -23,7 +23,7 @@
             :value="pBarDefaultValues[1]"
           ></b-progress-bar>
           <b-progress-bar
-            v-b-tooltip.hover="`${pBarDefaultValues[2]}% chance to pull a Uncommon`"
+            v-b-tooltip.hover="`${pBarDefaultValues[2]}% chance to pull an Uncommon`"
             variant="primary"
             :value="pBarDefaultValues[2]"
           ></b-progress-bar>
@@ -75,7 +75,7 @@
                   <b-progress-bar
                     class="p-bar-purple"
                     :value="pBarWagerValues[0]"
-                    v-b-tooltip.hover="`${pBarWagerValues[0].toFixed(2)/1}% chance to pull a Epic`"
+                    v-b-tooltip.hover="`${pBarWagerValues[0].toFixed(2)/1}% chance to pull an Epic`"
                   ></b-progress-bar>
                   <b-progress-bar
                     variant="danger"
@@ -85,7 +85,7 @@
                   <b-progress-bar
                     variant="primary"
                     :value="pBarWagerValues[2]"
-                    v-b-tooltip.hover="`${pBarWagerValues[2].toFixed(2)/1}% chance to pull a Uncommon`"
+                    v-b-tooltip.hover="`${pBarWagerValues[2].toFixed(2)/1}% chance to pull an Uncommon`"
                   ></b-progress-bar>
                   <b-progress-bar
                     variant="secondary"
