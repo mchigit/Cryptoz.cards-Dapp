@@ -167,8 +167,14 @@ export default {
       return parseInt(this.myPurchaseTotal/100000000000).toLocaleString();
     }
   },
+  mounted() {
+    if (this.ZoombiesInstance) {
+      this.updateSale();
+    }
+  },
   watch: {
    ZoombiesInstance(newVal) {
+     console.log({newVal})
      if (newVal) {
        this.updateSale();
      }
