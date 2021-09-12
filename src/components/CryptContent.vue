@@ -12,10 +12,26 @@
         <div>Enter 0 for no wager (base probability)</div>
 
         <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
-          <b-progress-bar class="p-bar-purple" :value="pBarDefaultValues[0]"></b-progress-bar>
-          <b-progress-bar variant="danger" :value="pBarDefaultValues[1]"></b-progress-bar>
-          <b-progress-bar variant="primary" :value="pBarDefaultValues[2]"></b-progress-bar>
-          <b-progress-bar variant="secondary" :value="pBarDefaultValues[3]"></b-progress-bar>
+          <b-progress-bar
+            v-b-tooltip.hover="`${pBarDefaultValues[0]}% chance to pull a Epic`"
+            class="p-bar-purple"
+            :value="pBarDefaultValues[0]"
+          ></b-progress-bar>
+          <b-progress-bar
+            v-b-tooltip.hover="`${pBarDefaultValues[1]}% chance to pull a Rare`"
+            variant="danger"
+            :value="pBarDefaultValues[1]"
+          ></b-progress-bar>
+          <b-progress-bar
+            v-b-tooltip.hover="`${pBarDefaultValues[2]}% chance to pull a Uncommon`"
+            variant="primary"
+            :value="pBarDefaultValues[2]"
+          ></b-progress-bar>
+          <b-progress-bar
+            v-b-tooltip.hover="`${pBarDefaultValues[3]}% chance to pull a Common`"
+            variant="secondary"
+            :value="pBarDefaultValues[3]"
+          ></b-progress-bar>
         </b-progress>
 
         <div>
@@ -56,10 +72,26 @@
         <b-row>
           <b-col>
                 <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
-                  <b-progress-bar class="p-bar-purple" :value="pBarWagerValues[0]"></b-progress-bar>
-                  <b-progress-bar variant="danger" :value="pBarWagerValues[1]"></b-progress-bar>
-                  <b-progress-bar variant="primary" :value="pBarWagerValues[2]"></b-progress-bar>
-                  <b-progress-bar variant="secondary" :value="pBarWagerValues[3]"></b-progress-bar>
+                  <b-progress-bar
+                    class="p-bar-purple"
+                    :value="pBarWagerValues[0]"
+                    v-b-tooltip.hover="`${pBarWagerValues[0].toFixed(2)/1}% chance to pull a Epic`"
+                  ></b-progress-bar>
+                  <b-progress-bar
+                    variant="danger"
+                    :value="pBarWagerValues[1]"
+                    v-b-tooltip.hover="`${pBarWagerValues[1].toFixed(2)/1}% chance to pull a Rare`"
+                  ></b-progress-bar>
+                  <b-progress-bar
+                    variant="primary"
+                    :value="pBarWagerValues[2]"
+                    v-b-tooltip.hover="`${pBarWagerValues[2].toFixed(2)/1}% chance to pull a Uncommon`"
+                  ></b-progress-bar>
+                  <b-progress-bar
+                    variant="secondary"
+                    :value="pBarWagerValues[3]"
+                    v-b-tooltip.hover="`${pBarWagerValues[3].toFixed(2)/1}% chance to pull a Common`"
+                  ></b-progress-bar>
                 </b-progress>
             </b-col>
           </b-row>
