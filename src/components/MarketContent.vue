@@ -8,16 +8,17 @@
       <b-card class="market-card" no-body>
         <b-tabs fill card>
           <b-tab title="Zoombies NFT Cards" active>
-            <h3>Zoombies NFT Cards</h3>
+            <h3>Zoombies NFT Collectible Cards</h3>
             <h5>
               ERC-721 NFT tokens are supported on the following auction
-              marketplaces
+              marketplaces:<br/>
             </h5>
+            Zoombies NFT Contract - 0x08716e418e68564C96b68192E985762740728018
             <br/><br/><br/>
-            Check back for market integrations
+            We are working with partner NFT markets for integration.
             <br/><br/><br/>
 
-  
+
           </b-tab>
           <b-tab title="ZOOM token">
             <h3>
@@ -29,10 +30,32 @@
               token
             </h3>
             <h5>
-              ERC-20 compliant ZOOM tokens are supported on the following token exchanges
+              The ERC-20 compliant ZOOM Moonriver tokens are supported on the following token exchanges :<br/>
             </h5>
+            ZOOM token Contract - 0x8bd5180Ccdd7AE4aF832c8C03e21Ce8484A128d4
             <br/><br/><br/>
-            Check back for market integrations
+            <b-card class="market" no-body>
+              <a
+                class="market-btn"
+                href="https://app.sushi.com/swap?inputCurrency=&outputCurrency=0x8bd5180Ccdd7AE4aF832c8C03e21Ce8484A128d4"
+                target="_blank"
+              >
+                <div class="market-info">
+                  <div class="">
+                    <img
+                      src="https://app.sushi.com/_next/image?url=%2Flogo.png&w=32&q=75"
+                      align="absmiddle"
+                    />
+                  </div>
+                  <div class="market-detail">
+                    <h2>SushiSwap - ZOOM-MOVR pool</h2>
+                    <p>
+                      Sushi is the home of DeFi. Our community is building a comprehensive, decentralized trading platform for the future of finance. Join us!
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </b-card>
             <br/><br/><br/>
 
 

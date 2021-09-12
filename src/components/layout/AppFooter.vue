@@ -37,7 +37,8 @@
             <p class="my-4">
               By using this site you Agree and understand the following Terms of Use:
               <ul>
-                <li></li>
+                <li>Smart contracts, blockchain decentralized applications are all new experimental technology. While Cardinal Entertainment will take every reasonable measure to provide the highest quality experience.<br/>
+                   By the continued use of this website you accept and assume all risk release Cardinal Entertainment, and all persons associated with it from any legal recourse.</li>
               </ul>
             </p>
           </b-modal>
@@ -54,7 +55,7 @@
                   data-show-count="false"
                   href="https://twitter.com/CryptozNFT"
                 >
-                  Follow Cardinal Entertainment on Twitter
+                  Twitter
                 </a>
               </li>
               <li>
@@ -68,9 +69,17 @@
               <li>
                 <a
                   :class="classObject"
+                  href="https://t.me/zoombiesnews"
+                  target="_blank"
+                  >Telegram Announcements</a
+                >
+              </li>
+              <li>
+                <a
+                  :class="classObject"
                   href="https://t.me/zoombiesworld"
                   target="_blank"
-                  >Telegram</a
+                  >Zoombies Telegram Group</a
                 >
               </li>
             </ul>

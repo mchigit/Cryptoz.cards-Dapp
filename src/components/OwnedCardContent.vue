@@ -39,6 +39,9 @@
       </div>
       <div class="back card-bg card-bg-back-bsc">
         <div class="back-container">
+          <div v-if="!!id"  class="card-txt-black font-weight-bold" title="Copy link to token" @click="onCopyLink">
+            <h5 id="share">Token #{{id}} <b-icon-link-45deg /></b-icon-link-45deg></h5>
+          </div>
           <div class="card-txt-black">
             <span class="attribute-name font-weight-bold">Cost:</span>
             <span>{{ cost }}</span>
@@ -58,6 +61,9 @@
 </template>
 
 <script>
+import { BButton, BIcon, BIconLink45deg } from 'bootstrap-vue'
+import { showSuccessToast } from "../util/showToast";
+
 export default {
   name: "OwnedCardContent",
   props: [
@@ -80,6 +86,11 @@ export default {
     "index",
     "observer",
   ],
+  components: {
+    BButton,
+    BIconLink45deg,
+    BIcon,
+  },
   data() {
     return {
       isFlipped: false,
@@ -114,15 +125,26 @@ export default {
     }
   },
   methods: {
+    getTokenLink(tokenId) {
+      const url =
+        process.env.NODE_ENV == "development"
+          ? "http://localhost:8080"
+          : "https://movr.zoombies.world";
+      return `${url}/view/${tokenId}`;
+    },
     toggleFlipped() {
       this.isFlipped = !this.isFlipped;
+    },
+    onCopyLink() {
+      navigator.clipboard.writeText(this.getTokenLink(this.id))
+      showSuccessToast(this, "Link to Token copied to clipboard");
     },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 /* Layout */
 
 .card-bg {
@@ -288,6 +310,11 @@ export default {
     font-size: 10px;
   }
 
+  #share {
+    font-size: 12px!important;
+    margin: 0;
+  }
+
   .fullsize {
     height: 410px !important;
     width: 260px !important;
@@ -339,9 +366,18 @@ export default {
 /* back, initially hidden pane */
 .back {
   transform: rotateY(180deg);
+  position: relative;
 }
 
 .attribute-name {
   padding-right: 5px;
+}
+
+#share {
+  cursor: pointer;
+  
+  &:hover {
+    color: #0645AD;
+  }
 }
 </style>

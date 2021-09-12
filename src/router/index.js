@@ -215,6 +215,40 @@ const router = new Router({
       },
     },
     {
+      path: "/feedback",
+      name: "Feedback",
+      props: (route) => ({ query: route.query.t }),
+      component: lazyLoadComponents("Feedback"),
+      meta: {
+        title:
+          "Cryptoz Cards - Help - Answers to all your Frequently Asked Questions",
+        metaTags: [
+          {
+            name: "description",
+            content:
+              "While we do our best to make the Cryptoz Cards Experience as seamless as possible, this page offers answers and examples for most questions people have when getting started and even for the experienced player",
+          },
+          {
+            property: "og:url",
+            content: "https://bsc.cryptoz.cards/help",
+          },
+          {
+            property: "og:type",
+            content: "website",
+          },
+          {
+            property: "og:title",
+            content:
+              "Cryptoz NFT Cards - Help - Answers to all your Frequently Asked Questions",
+          },
+          {
+            property: "og:image",
+            content: "https://movr.zoombies.world/assets/zoombies_logo.svg",
+          },
+        ],
+      },
+    },
+    {
       path: "/view/:token_id",
       name: "TokenContent",
       component: lazyLoadComponents("TokenContent"),

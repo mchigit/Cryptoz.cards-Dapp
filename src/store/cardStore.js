@@ -6,8 +6,10 @@ const typeIdsOnChain = [];
 
 
 //push 2021
-typeIdsOnChain.push(1,6,8,11,14,32,36,40,44,47,52,55,59,61,65,71,74,76,77,84,87,89);
-
+typeIdsOnChain.push(1,6,8,11,14,32,36,40,44,47,52,55,59,61,65,71,74,76,77,84,87,89,112,113,114,115);
+typeIdsOnChain.push(146,147,148,149,150,151,152,153,154,155);
+typeIdsOnChain.push(202,203,204,205,206);
+typeIdsOnChain.push(217,218,219,220,221,222,223,224);
 
 const DEFAULT_CARD_STATE = {
   allShopCards: [],

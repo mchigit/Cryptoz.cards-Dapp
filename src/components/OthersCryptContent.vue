@@ -5,7 +5,10 @@
       <h1>NFT Wallet</h1>
       <h2 class="text-danger">
         Viewing <img src="@/assets/metamask-face.png" class="header-icon" />
-        {{ addressToLoad.substr(0, 6) + "..." + addressToLoad.substr(38) }}
+        <a class="text-danger moonbeam-link" :href="moonbeamURL" target="_blank">
+          {{ addressToLoad.substr(0, 6) + "..." + addressToLoad.substr(38) }}
+          <b-icon-box-arrow-up-right class="icon"></b-icon-box-arrow-up-right>
+        </a>
       </h2>
       <p>
         This is where you can see other person's Zoombie NFT tokens. You can
@@ -25,12 +28,15 @@
 <script>
 import CardsContainer from "@/components/CardsContainer.vue";
 import UniverseBalances from "./UniverseBalances.vue";
+import { BIcon, BIconBoxArrowUpRight } from 'bootstrap-vue';
 
 export default {
   name: "OthersCryptContent",
   components: {
     CardsContainer,
     UniverseBalances,
+    BIcon,
+    BIconBoxArrowUpRight,
   },
   data() {
     return {
@@ -41,6 +47,9 @@ export default {
     coinbase() {
       return this.$store.state.web3.coinbase;
     },
+    moonbeamURL() {
+      return this.addressToLoad ? `https://blockscout.moonriver.moonbeam.network/address/${this.addressToLoad}` : "";
+    }
   },
   created() {
     this.addressToLoad = this.$route.params.address;
@@ -53,7 +62,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .jumbotron {
   margin: auto;
   width: 95%;
@@ -65,5 +74,16 @@ export default {
 
 .header-icon {
   height: 20px;
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+}
+
+.moonbeam-link {
+  display: inline-flex;
+  align-items: center;
 }
 </style>

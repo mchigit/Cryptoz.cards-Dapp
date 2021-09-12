@@ -187,8 +187,8 @@
                   <br/>
                   You can trade for MOVR tokens at these exchanges <a href="https://www.kucoin.com/" target="_blank">KuCoin</a> or <a href="https://www.kraken.com/" target="_blank">Kraken</a>.
                   </p>
-                  As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.30 to
-                  ?? USD per transaction, depending on how fast you would
+                  As of this writing, the transaction cost (gas) by Moonriver blockchain to interact with Zoombies will cost approx $0.002 to
+                  $0.30 USD per transaction, depending on how fast you would
                   like the transactions confirmed and what exactly you are
                   trying to do.
                   <br />
@@ -270,8 +270,10 @@
                     Fungible tokens. This means that any ZOOM is exchangeable
                     with any other ZOOM token and none are unique. If your wallet contains a sufficient amount of ZOOM tokens
                     each Shop card will automatically determine if it will unlock and display the FREE minting button and cost pricing values.<br/>
-                    If you do Not have the required Zoom token balance a <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-fp-icon" /> Fast Pass icon will appear on the minting button, as a way to bypass the Zoom requirement to mint NFT at 3x the base cost.
-                    Each Shop card displays the amount of ZOOM required to unlock this feature in the bottom left
+                    If you do Not have the required Zoom token balance a <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-fp-icon" />
+                    Fast Pass icon will appear on the minting button, as a way to bypass the Zoom requirement to mint NFT at 3x the base cost.
+                    Each Shop card displays the amount of ZOOM required to unlock this feature in the bottom left.</p>
+                    <p>A future utility will include ZOOM as something like health points in battle for example.</p>
                     <div class="btn btn-primary" @click="addCZXPtoMetaMask">Add ZOOM to Metamask</div>
                   </p>
                   <p>

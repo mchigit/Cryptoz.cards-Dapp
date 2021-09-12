@@ -31,6 +31,9 @@ let state = {
   shop: {
     cards: [],
   },
+
+  //Control booster Minting
+  throttle: true
 };
 
 export default state;
