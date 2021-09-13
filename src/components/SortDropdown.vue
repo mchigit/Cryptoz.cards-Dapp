@@ -66,6 +66,7 @@ export default {
         unlock_czxp: "Unlock ZOOM",
         buy_czxp: "Buy ZOOM",
         sacrifice_czxp: "Sacrifice ZOOM",
+        release_time: "Date Released",
       },
     };
   },
