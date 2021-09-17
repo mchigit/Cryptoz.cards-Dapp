@@ -1,6 +1,24 @@
 <template>
   <div id="app">
     <AppHeader @connect="handleConnect" />
+    <b-modal id="no-web3-modal" hide-footer>
+      <template #modal-title> Web3 Not Detected! </template>
+      <div class="d-block text-center">
+        <p>
+          <a target="_blank" href="https://metamask.io/download.html"
+            >Metamask</a
+          >
+          is required to connect to the Zoombies NFT World on the Moonriver
+          blockchain.
+        </p>
+        <p>
+          Please install it from this link:
+          <a target="_blank" href="https://metamask.io/download.html"
+            >Metamask Downloads</a
+          >
+        </p>
+      </div>
+    </b-modal>
     <transition name="component-fade" mode="out-in">
       <router-view />
     </transition>
@@ -139,6 +157,15 @@ export default {
     },
   },
   async created() {
+    if (window.web3 && window.ethereum) {
+      // this needs to be set in beforeCreate because vue lifecycle
+      // is Parent create -> child create -> child mount -> parent mount
+      // and we need provider to be set in child components
+      const web3 = new Web3(window.ethereum);
+      window.web3 = web3;
+      this.initializeApp();
+    }
+
     // set this here to be able to debounce it..
     // debounce prevents this from showing the "Balance Updated" twice
     // when both Cryptoz and Czxp contracts emit an event
@@ -146,16 +173,6 @@ export default {
       showSuccessToast(this, "Balance Updated!");
     }, 1000);
 
-    // this needs to be set in beforeCreate because vue lifecycle
-    // is Parent create -> child create -> child mount -> parent mount
-    // and we need provider to be set in child components
-    if (window.ethereum) {
-      const web3 = new Web3(window.ethereum);
-      window.web3 = web3;
-      this.initializeApp();
-    } else {
-      console.log("non web3 browser detected");
-    }
     MessageBus.$on("connect", () => {
       this.handleConnect();
     });
@@ -179,6 +196,10 @@ export default {
 
       return t;
     })(document, "script", "twitter-wjs");
+
+    if (window.web3 === undefined || window.ethereum === undefined) {
+      this.$bvModal.show("no-web3-modal");
+    }
   },
   methods: {
     configureMoonriver: async function () {
