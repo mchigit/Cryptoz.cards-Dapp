@@ -114,7 +114,7 @@
                 </div>
               </div>
               <div class="flex-row">
-                <div class="text-right font-weight-bold label">Buy ZOOM:</div>
+                <div class="text-right font-weight-bold label">Earn ZOOM:</div>
                 <div class="">
                   {{ card.attributes.buy_czxp }}
                 </div>
@@ -140,6 +140,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="description">
+            {{ card.attributes.description }}
           </div>
         </div>
       </div>
@@ -175,7 +178,6 @@ export default {
       card: {
         id: null,
         name: "Loading...",
-        description: "Loading...",
         attributes: {
           rarity: "Loading...",
           edition_total: "Loading...",
@@ -186,6 +188,7 @@ export default {
           sacrifice_czxp: "Loading...",
           unlock_czxp: "Loading...",
           card_level: "Loading...",
+          description: "Loading...",
         },
       },
       owner_url: "",
@@ -278,18 +281,6 @@ export default {
       //Overwrite our JSON reponse with vue friendly card binding data
       res.data.attributes = newAttr;
 
-      //Set human readable edition number and total
-      // if (res.data.attributes.edition_total == 0) {
-      //   //unlimited
-      //   res.data.attributes.edition_total = "#" + this.edition_current;
-      // } else {
-      //   res.data.attributes.edition_total =
-      //     "#" +
-      //     this.edition_current +
-      //     " of " +
-      //     res.data.attributes.edition_total;
-      // }
-
       //Get the human label for rarity
       this.rarity = res.data.attributes.rarity;
 
@@ -324,7 +315,8 @@ export default {
       this.load_state = 1;
     },
     searchToken() {
-      this.$router.replace(this.tokenToSearch)
+      const tokenId = this.tokenToSearch.replace('#', '')
+      this.$router.replace(tokenId)
     }
   },
 };
@@ -384,5 +376,11 @@ export default {
   width: 50%;
   min-width: 300px;
   margin-bottom: 20px;
+}
+
+.description {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
 }
 </style>
