@@ -9,7 +9,7 @@
         ok-title="Open Booster"
         hide-footer
       >
-        <div>Enter 0 for no wager (base probability)</div>
+        <div>Default probability for a 0 ZOOM wager</div>
 
         <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
           <b-progress-bar
@@ -266,8 +266,8 @@ export default {
     return {
       wagerAmount: 0,
       receivingWallet: "",
-      pBarDefaultValues: [1,4.98,29.9,64.9],
-      pBarWagerValues: [1,4.98,29.9,64.9],
+      pBarDefaultValues: [1,4.999,29.999,64.999],
+      pBarWagerValues: [1,4.99,29.9,64.9],
       pBarMax: 100,
     };
   },
