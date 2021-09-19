@@ -267,7 +267,7 @@ export default {
       wagerAmount: 0,
       receivingWallet: "",
       pBarDefaultValues: [1,4.98,29.9,64.9],
-      pBarWagerValues: [1,5,25,69],
+      pBarWagerValues: [1,4.98,29.9,64.9],
       pBarMax: 100,
     };
   },
