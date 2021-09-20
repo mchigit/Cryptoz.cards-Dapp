@@ -9,11 +9,11 @@
         ok-title="Open Booster"
         hide-footer
       >
-        <div>Enter 0 for no wager (base probability)</div>
+        <div>Default probability for a 0 ZOOM wager</div>
 
         <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
           <b-progress-bar
-            v-b-tooltip.hover="`${pBarDefaultValues[0]}% chance to pull an Epic`"
+            v-b-tooltip.hover="`0.01% chance to pull an Epic`"
             class="p-bar-purple"
             :value="pBarDefaultValues[0]"
           ></b-progress-bar>
@@ -74,8 +74,8 @@
                 <b-progress show-progress :max="pBarMax" height="30px" class="mb-3">
                   <b-progress-bar
                     class="p-bar-purple"
-                    :value="pBarWagerValues[0]"
-                    v-b-tooltip.hover="`${pBarWagerValues[0].toFixed(2)/1}% chance to pull an Epic`"
+                    :value="(wagerAmount == 0) ? 1 : pBarWagerValues[0]"
+                    v-b-tooltip.hover="(wagerAmount == 0) ? `0.01% chance to pull an Epic` : `${pBarWagerValues[0].toFixed(2)/1}% chance to pull an Epic`"
                   ></b-progress-bar>
                   <b-progress-bar
                     variant="danger"
@@ -266,8 +266,8 @@ export default {
     return {
       wagerAmount: 0,
       receivingWallet: "",
-      pBarDefaultValues: [0.01,4.98,29.9,64.9],
-      pBarWagerValues: [1,5,25,69],
+      pBarDefaultValues: [1,4.999,29.999,64.999],
+      pBarWagerValues: [1,4.99,29.9,64.9],
       pBarMax: 100,
     };
   },
@@ -406,7 +406,11 @@ export default {
     },
     calculateProbability: function () {
 
-      if(this.wagerAmount < 1000000 || this.wagerAmount > 20000000){return}
+      if(this.wagerAmount < 1000000 || this.wagerAmount > 20000000){
+        this.wagerAmount = 0;
+        this.pBarWagerValues = this.pBarDefaultValues;
+        return
+      }
 
       let e = 1 + this.wagerAmount/20000 ;
       let r = 500 + e + (this.wagerAmount/5500);
