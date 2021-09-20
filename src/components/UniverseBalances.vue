@@ -7,7 +7,7 @@
           :from="fromZoomBalance"
           :to="toZoomBalance"
           :format="formatNumber"
-          :duration="2"
+          :duration="3.5"
         />
         ZOOM {{ " " }}
         <img
@@ -25,7 +25,7 @@
           :from="fromNftTypes"
           :to="toNftTypes"
           :format="formatNumber"
-          :duration="2"
+          :duration="3.5"
         />
         Mintable types
       </strong>
@@ -38,7 +38,7 @@
           :from="fromNftSupply"
           :to="toNftSupply"
           :format="formatNumber"
-          :duration="2"
+          :duration="3.5"
         />
         NFTs
       </strong>
@@ -109,7 +109,6 @@ export default {
     zoomBalance(newVal, oldVal) {
       this.newZoomBalance = newVal
       this.prevZoomBalance = oldVal
-      console.log({newVal, oldVal})
       if (oldVal > 0) {
         this.pulsateText(this.$refs.zoomBal)
       }
