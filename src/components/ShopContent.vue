@@ -202,24 +202,14 @@
                 <button
                   id="get-button"
                   class="btn btn-primary"
-                  :disabled="
-                    czxpBalance < parseInt(card.unlock_czxp) &&
-                    parseFloat(weiToEther(balance)) <= parseFloat(0.000001 * 10 * card.unlock_czxp).toFixed(5)
-                  "
+                  :disabled="czxpBalance < parseInt(card.unlock_czxp)"
                   @click="getCardForFree(card)"
                 >
                   <b-icon-lock-fill
-                    v-if="
-                      czxpBalance < parseInt(card.unlock_czxp) &&
-                      parseFloat(weiToEther(balance)) <= parseFloat(0.000001 * 10 * card.unlock_czxp).toFixed(5)
-                    "
+                    v-if="czxpBalance < parseInt(card.unlock_czxp)"
                   />
-                  Mint for {{ czxpBalance < card.unlock_czxp ? (0.000001 * 10 * card.unlock_czxp).toFixed(3)  : 'FREE' }}
+                  Mint for FREE
                 </button>
-                <img
-                  v-if="czxpBalance < parseInt(card.unlock_czxp)"
-                  src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Emojione_1F680.svg" class="rocket-icon"
-                />
               </div>
             </div>
 
@@ -273,7 +263,7 @@ export default {
          "Fast Pass the ZOOM requirement and mint the NFT now",
       getBtnTooltipTextContent: "Click to mint a copy of this card at no cost",
       getBtnBlockedTooltipTextContent:
-        "Fast Pass the ZOOM requirement and mint the NFT now",
+        "You do Not have the required ZOOM to claim this for FREE",
       getOwnedCardToolTipText: "You can only mint 1 card of each type",
       getSoldCardToolTipText:
         "All NFTs of this type have been minted, check markets",
