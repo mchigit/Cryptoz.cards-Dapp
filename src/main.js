@@ -16,6 +16,7 @@ import {
 import { store } from "./store/";
 
 import LogRocket from "logrocket";
+import VueNumber from 'vue-number-animation'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -34,6 +35,7 @@ Vue.use(VBTogglePlugin);
 Vue.use(ToastPlugin);
 Vue.use(IconsPlugin);
 Vue.use(SpinnerPlugin);
+Vue.use(VueNumber);
 Vue.use(VueGtm, {
   id: "GTM-KPK6R7R", // Your GTM single container ID or array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy']
   /*

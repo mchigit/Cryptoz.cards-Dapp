@@ -47,7 +47,7 @@
             <span>{{ cost }}</span>
           </div>
           <div class="card-txt-black">
-            <span class="attribute-name font-weight-bold">Buy ZOOM:</span>
+            <span class="attribute-name font-weight-bold">Earn ZOOM:</span>
             <span>{{ parseInt(buy_czxp).toLocaleString() }}</span>
           </div>
           <div class="card-txt-black">

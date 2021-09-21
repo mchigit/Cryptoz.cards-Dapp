@@ -64,7 +64,7 @@ export default {
         edition_number: "Edition Number",
         card_level: "Level",
         unlock_czxp: "Unlock ZOOM",
-        buy_czxp: "Buy ZOOM",
+        buy_czxp: "Earn ZOOM",
         sacrifice_czxp: "Sacrifice ZOOM",
         release_time: "Date Released",
       },
