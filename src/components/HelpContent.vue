@@ -464,9 +464,15 @@ export default {
     return {
       msg: "Here we go, here we go",
       wagerSample: 0,
+      onMainNet: false,
     };
   },
   mounted() {
+    if(this.$store.state.web3.chainId == "0x505") {
+      this.onMainNet = true;
+    } else{
+      this.onMainNet = false;
+    }
     //console.log('hello:',this.query);
     if (this.query !== "") {
       switch (this.query) {
@@ -478,8 +484,8 @@ export default {
   },
   methods: {
     addCZXPtoMetaMask: async function() {
-      const tokenAddress = '0x8bd5180Ccdd7AE4aF832c8C03e21Ce8484A128d4';
-      const tokenSymbol = 'ZOOM';
+      const tokenAddress = this.onMainNet ? '0x8e21404bAd3A1d2327cc6D2B2118f47911a1f316' : '0x8bd5180Ccdd7AE4aF832c8C03e21Ce8484A128d4';
+      const tokenSymbol = this.onMainNet ? 'ZOOM' : 'DEV';
       const tokenDecimals = 18;
       const tokenImage = 'https://zoombies.world/images/zoombies_coin.svg';
 

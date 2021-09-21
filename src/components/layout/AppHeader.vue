@@ -64,8 +64,8 @@
               :title="ethBalance"
             >
               <!--img v-if="this.$store.state.web3.chainId != 0x38 || this.$store.state.web3.chainId != 0x61" src="@/assets/ethereum-symbol.png" /-->
-              <img src="https://zoombies.world/images/mr-icon.png" class="header-icon" />
-              <span>{{ ethBalance.toFixed(4) }}</span>
+              <img v-if="isMainNet" src="https://zoombies.world/images/mr-icon.png" class="header-icon" />
+              <span>{{ isMainNet ? ethBalance.toFixed(4) : ethBalance.toFixed(3)+' DEV'}} </span>
             </div>
           </li>
 
@@ -109,7 +109,7 @@
               variant="warning"
               @click="$emit('connect')"
             >
-              Connect To Moonriver
+              Connect To {{ (isDevelopmentURL) ? 'Moonbase (testnet)' : 'Moonriver'}}
             </b-button>
           </li>
         </b-navbar-nav>
@@ -297,13 +297,20 @@ export default {
   computed: {
     classObject: function () {
       //Style the link colours
-      const chainId = this.$store.state.web3.chainId;
-      switch (chainId) {
-        case 0x38:
-        case 0x61:
-          return "bsc-link";
-        default:
+      //const chainId = getChainId();
+      //switch (this.chainId) {
+    //    case 0x38:
+      //  case 0x61:
+    //      return "bsc-link";
+    //    default:
           return "eth-link";
+    //  }
+    },
+    isMainNet() {
+      if(this.$store.state.web3.chainId == "0x505") {
+        return true;
+      } else{
+        return false;
       }
     },
     CryptozInstance() {

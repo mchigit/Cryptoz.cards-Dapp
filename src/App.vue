@@ -54,10 +54,7 @@ import "./main.css";
 import zoombiesContractJSON from "./contracts/Zoombies.json";
 import zoomTokenContractJSON from "./contracts/ZoomToken.json";
 
-// import bsc_cryptoz_artifacts from'./bsc/contracts/Cryptoz.json';
-// import bsc_cryptoz_token_artifacts from './bsc/contracts/CzxpToken.json';
-
-const isLocal = process.env.NODE_ENV === "development";
+const isLocal = (process.env.NODE_ENV === "development" || window.location.host !== 'movr.zoombies.world');
 const ethChainParam = isLocal
   ? {
       chainId: "0x507", // Moonbase Alpha's chainId is 1287, which is 0x507 in hex
@@ -147,6 +144,9 @@ export default {
     },
     CzxpInstance() {
       return this.$store.state.contractInstance.czxp;
+    },
+    getChainId() {
+      return this.$store.state.web3.chainId;
     },
   },
   watch: {
