@@ -1,6 +1,8 @@
 <template>
   <div id="app-header" class="headerComponent">
-    <b-navbar border-variant="info" type="warning"
+    <b-navbar
+      border-variant="info"
+      type="warning"
       toggleable="lg"
       class="navbar navbar-expand-md navbar-dark fixed-top zoombies-purple-bg text-warning"
     >
@@ -40,7 +42,7 @@
               Feedback
             </router-link>
           </b-nav-item>
-<!-- DISABLED FOR NOW
+          <!-- DISABLED FOR NOW
           <b-nav-item>
             <router-link :class="classObject" to="/data-indicators"
               ><b-icon-bar-chart-line-fill
@@ -63,8 +65,18 @@
               v-b-tooltip.hover="{ customClass: 'tooltip-2' }"
               :title="ethBalance"
             >
-              <img v-if="onMainNet" src="https://zoombies.world/images/mr-icon.png" class="header-icon" />
-              <span>{{ onMainNet ? ethBalance.toFixed(4) : ethBalance.toFixed(3)+' DEV'}} </span>
+              <img
+                v-if="onMainNet"
+                src="https://zoombies.world/images/mr-icon.png"
+                class="header-icon"
+              />
+              <span
+                >{{
+                  onMainNet
+                    ? ethBalance.toFixed(4)
+                    : ethBalance.toFixed(3) + " DEV"
+                }}
+              </span>
             </div>
           </li>
 
@@ -108,7 +120,7 @@
               variant="warning"
               @click="$emit('connect')"
             >
-              Connect To {{ (onMainNet) ? 'Moonriver' : 'Moonbase (testnet)' }}
+              Connect To {{ onMainNet ? "Moonriver" : "Moonbase (testnet)" }}
             </b-button>
           </li>
         </b-navbar-nav>
@@ -160,20 +172,22 @@
         </b-alert>
       </b-jumbotron>
 
-      <div class="platinum-card" v-if="queryHasSponsor && !showShareMyLink">
+      <div v-if="queryHasSponsor && !showShareMyLink" class="platinum-card">
         <b-jumbotron class="platinum-jumbotron">
           <div class="platinum-card-wrapper">
-            <img src="https://zoombies.world/images/dapp/zoombies_card_platinum.svg" />
+            <img
+              src="https://zoombies.world/images/dapp/zoombies_card_platinum.svg"
+            />
             <span class="question-mark">?</span>
           </div>
         </b-jumbotron>
       </div>
 
       <b-jumbotron
+        v-else
         id="sponsor-link-wrapper"
         class="jumbo"
         lead="Your Affiliate Link"
-        v-else
       >
         <p>
           Automatically earn ZOOM
@@ -208,13 +222,22 @@
           <b-button class="affiliate-button" @click="copySponsorLink">
             Copy Link To Clipboard
           </b-button>
-        <!-- Open in Metamask mobile
+          <div class="telegram-link">
+            <script
+              async
+              type="application/javascript"
+              src="https://telegram.org/js/telegram-widget.js?15"
+              :data-telegram-share-url="getTelegramLink"
+              data-comment="Click my Zoombies Moonriver sponsor link to claim your Free Platinum NFT now!"
+              data-size="large"
+            ></script>
+          </div>
+          <!-- Open in Metamask mobile
           <a href="https://metamask.app.link/dapp/movr.zoombies.world">Open in Metamask</a>
-        -->
-        </div>
+        --></div>
       </b-jumbotron>
 
-      <div class="prev-next-buttons" v-if="queryHasSponsor">
+      <div v-if="queryHasSponsor" class="prev-next-buttons">
         <b-button
           :style="{ visibility: showShareMyLink ? 'visible' : 'hidden' }"
           size="lg"
@@ -223,10 +246,10 @@
           >Previous</b-button
         >
         <b-button
-          @click="nextSponsorModalAction"
           :style="{ visibility: showShareMyLink ? 'hidden' : 'visible' }"
           size="lg"
           variant="link"
+          @click="nextSponsorModalAction"
           >Skip</b-button
         >
       </div>
@@ -299,12 +322,12 @@ export default {
       //Style the link colours
       //const chainId = getChainId();
       //switch (this.chainId) {
-    //    case 0x38:
+      //    case 0x38:
       //  case 0x61:
-    //      return "bsc-link";
-    //    default:
-          return "eth-link";
-    //  }
+      //      return "bsc-link";
+      //    default:
+      return "eth-link";
+      //  }
     },
     CryptozInstance() {
       return this.$store.state.contractInstance.cryptoz;
@@ -343,6 +366,9 @@ export default {
     },
     getTweet() {
       return `https://twitter.com/intent/tweet?text=Click%20my%20sponsor%20link%20to%20claim%20Your%20Free%20Platinum%20Zoombies%20NFT%20Now!%0D%0A%0D%0A&hashtags=moonriver,nft,ZWorldNFT,NFTCommunity,nftcollectors,nftart,cryptoart&url=${this.getSponsorRoute}%0D%0A%0D%0A&related=CryptozNFT&via=CryptozNFT`;
+    },
+    getTelegramLink() {
+      return `https://movr.zoombies.world/?sponsor=${this.coinbase}`;
     },
     isSponsorValid() {
       if (this.sponsorAddress === "") {
@@ -388,9 +414,9 @@ export default {
     },
   },
   mounted() {
-    if(this.$store.state.web3.chainId == "0x505") {
+    if (this.$store.state.web3.chainId == "0x505") {
       this.onMainNet = true;
-    } else{
+    } else {
       this.onMainNet = false;
     }
     this.getDailyBonusTime();
@@ -504,9 +530,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
-.zoombies-purple-bg{
-    background-color: #301748;
+.zoombies-purple-bg {
+  background-color: #301748;
 }
 
 .navbar {
@@ -516,7 +541,7 @@ export default {
 .button-wrapper {
   display: flex;
 
-  @media (max-width: 500px) {
+  @media (max-width: 922px) {
     flex-direction: column;
   }
 
@@ -524,7 +549,7 @@ export default {
     height: 40px;
     margin-right: 16px;
 
-    @media (max-width: 500px) {
+    @media (max-width: 922px) {
       width: 100%;
       margin-top: 16px;
     }
@@ -695,6 +720,12 @@ export default {
 
   .tooltip-2 {
     top: 0 !important;
+  }
+}
+
+.telegram-link {
+  @media screen and (max-width: 922px) {
+    margin-top: 16px;
   }
 }
 
