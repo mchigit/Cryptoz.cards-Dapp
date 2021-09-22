@@ -63,9 +63,8 @@
               v-b-tooltip.hover="{ customClass: 'tooltip-2' }"
               :title="ethBalance"
             >
-              <!--img v-if="this.$store.state.web3.chainId != 0x38 || this.$store.state.web3.chainId != 0x61" src="@/assets/ethereum-symbol.png" /-->
-              <img src="https://zoombies.world/images/mr-icon.png" class="header-icon" />
-              <span>{{ ethBalance.toFixed(4) }}</span>
+              <img v-if="onMainNet" src="https://zoombies.world/images/mr-icon.png" class="header-icon" />
+              <span>{{ onMainNet ? ethBalance.toFixed(4) : ethBalance.toFixed(3)+' DEV'}} </span>
             </div>
           </li>
 
@@ -109,7 +108,7 @@
               variant="warning"
               @click="$emit('connect')"
             >
-              Connect To Moonriver
+              Connect To {{ (onMainNet) ? 'Moonriver' : 'Moonbase (testnet)' }}
             </b-button>
           </li>
         </b-navbar-nav>
@@ -292,19 +291,20 @@ export default {
       mySponsor: null,
       queryHasSponsor: false,
       showShareMyLink: false,
+      onMainNet: false,
     };
   },
   computed: {
     classObject: function () {
       //Style the link colours
-      const chainId = this.$store.state.web3.chainId;
-      switch (chainId) {
-        case 0x38:
-        case 0x61:
-          return "bsc-link";
-        default:
+      //const chainId = getChainId();
+      //switch (this.chainId) {
+    //    case 0x38:
+      //  case 0x61:
+    //      return "bsc-link";
+    //    default:
           return "eth-link";
-      }
+    //  }
     },
     CryptozInstance() {
       return this.$store.state.contractInstance.cryptoz;
@@ -388,6 +388,11 @@ export default {
     },
   },
   mounted() {
+    if(this.$store.state.web3.chainId == "0x505") {
+      this.onMainNet = true;
+    } else{
+      this.onMainNet = false;
+    }
     this.getDailyBonusTime();
   },
   methods: {

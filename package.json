@@ -1,7 +1,7 @@
 {
-  "name": "cryptoz-cards-final",
+  "name": "zoombies-world-final",
   "version": "1.0.0",
-  "description": "Final Vue enabled version of Cryptoz.cards dApp",
+  "description": "Final Vue enabled version of Zoombies.world dApp",
   "author": "Ryan Price <ryanprice@users.noreply.github.com>",
   "private": true,
   "scripts": {
